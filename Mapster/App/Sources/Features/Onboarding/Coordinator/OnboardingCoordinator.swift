@@ -1,0 +1,31 @@
+//
+//  OnboardingCoordinator.swift
+//  Mapster
+//
+//  Created by Adilkhan Medeuyev on 17.02.2024.
+//
+
+import Foundation
+
+protocol OnboardingCoordinatorDelegate: AnyObject {
+    func didFinish(_ coordinator: OnboardingCoordinator)
+}
+
+final class OnboardingCoordinator: Coordinator {
+    private weak var delegate: OnboardingCoordinatorDelegate?
+    private let moduleFactory = OnboardingModuleFactory()
+    
+    init(router: Router, delegate: OnboardingCoordinatorDelegate) {
+        self.delegate = delegate
+        super.init(router: router)
+    }
+    
+    override func start() {
+        showOnboarding()
+    }
+    
+    private func showOnboarding() {
+        let module = moduleFactory.makeOnboarding()
+        router.setRootModule(module)
+    }
+}
