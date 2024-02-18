@@ -7,23 +7,47 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C511A81E2B811D95002DB0E4 /* Mulish-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C511A81D2B811D95002DB0E4 /* Mulish-ExtraBold.ttf */; };
+		C511A8202B811D9F002DB0E4 /* Mulish-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C511A81F2B811D9B002DB0E4 /* Mulish-Light.ttf */; };
+		C511A8222B811DAA002DB0E4 /* Mulish-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C511A8212B811DAA002DB0E4 /* Mulish-Regular.ttf */; };
+		C511A8252B811DDC002DB0E4 /* Mulish-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C511A8232B811DDC002DB0E4 /* Mulish-SemiBold.ttf */; };
+		C511A8262B811DDC002DB0E4 /* Mulish-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C511A8242B811DDC002DB0E4 /* Mulish-Bold.ttf */; };
+		C511A8292B811ED9002DB0E4 /* Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = C511A8282B811ED9002DB0E4 /* Font.swift */; };
+		C511A82B2B81246B002DB0E4 /* OnboardingCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C511A82A2B81246B002DB0E4 /* OnboardingCoordinator.swift */; };
+		C511A82D2B812474002DB0E4 /* OnboardingModuleFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = C511A82C2B812474002DB0E4 /* OnboardingModuleFactory.swift */; };
 		C53BD2592B7E217D0078D28E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C53BD2582B7E217D0078D28E /* AppDelegate.swift */; };
-		C53BD25B2B7E217D0078D28E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C53BD25A2B7E217D0078D28E /* SceneDelegate.swift */; };
-		C53BD25D2B7E217D0078D28E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C53BD25C2B7E217D0078D28E /* ViewController.swift */; };
-		C53BD2602B7E217D0078D28E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C53BD25E2B7E217D0078D28E /* Main.storyboard */; };
 		C53BD2622B7E217F0078D28E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C53BD2612B7E217F0078D28E /* Assets.xcassets */; };
 		C53BD2652B7E217F0078D28E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C53BD2632B7E217F0078D28E /* LaunchScreen.storyboard */; };
+		C53BD2752B7E24E30078D28E /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C53BD2742B7E24E30078D28E /* AppCoordinator.swift */; };
+		C53BD2772B7E253D0078D28E /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C53BD2762B7E253D0078D28E /* Coordinator.swift */; };
+		C53BD2792B7E258C0078D28E /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = C53BD2782B7E258C0078D28E /* Router.swift */; };
+		C53BD27F2B7E27850078D28E /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C53BD27E2B7E27850078D28E /* OnboardingViewController.swift */; };
+		C53BD2822B7E28720078D28E /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = C53BD2812B7E28720078D28E /* SnapKit */; };
+		C53BD2842B7E28720078D28E /* SnapKit-Dynamic in Frameworks */ = {isa = PBXBuildFile; productRef = C53BD2832B7E28720078D28E /* SnapKit-Dynamic */; };
+		C53BD2872B7E2EE80078D28E /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C53BD2862B7E2EE80078D28E /* OnboardingView.swift */; };
+		C53BD28A2B7E335F0078D28E /* OnboardingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C53BD2892B7E335F0078D28E /* OnboardingViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		C511A81D2B811D95002DB0E4 /* Mulish-ExtraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Mulish-ExtraBold.ttf"; sourceTree = "<group>"; };
+		C511A81F2B811D9B002DB0E4 /* Mulish-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Mulish-Light.ttf"; sourceTree = "<group>"; };
+		C511A8212B811DAA002DB0E4 /* Mulish-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Mulish-Regular.ttf"; sourceTree = "<group>"; };
+		C511A8232B811DDC002DB0E4 /* Mulish-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Mulish-SemiBold.ttf"; sourceTree = "<group>"; };
+		C511A8242B811DDC002DB0E4 /* Mulish-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Mulish-Bold.ttf"; sourceTree = "<group>"; };
+		C511A8282B811ED9002DB0E4 /* Font.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Font.swift; sourceTree = "<group>"; };
+		C511A82A2B81246B002DB0E4 /* OnboardingCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingCoordinator.swift; sourceTree = "<group>"; };
+		C511A82C2B812474002DB0E4 /* OnboardingModuleFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingModuleFactory.swift; sourceTree = "<group>"; };
 		C53BD2552B7E217D0078D28E /* Mapster.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Mapster.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C53BD2582B7E217D0078D28E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		C53BD25A2B7E217D0078D28E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		C53BD25C2B7E217D0078D28E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		C53BD25F2B7E217D0078D28E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		C53BD2612B7E217F0078D28E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C53BD2642B7E217F0078D28E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C53BD2662B7E217F0078D28E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C53BD2742B7E24E30078D28E /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
+		C53BD2762B7E253D0078D28E /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
+		C53BD2782B7E258C0078D28E /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
+		C53BD27E2B7E27850078D28E /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
+		C53BD2862B7E2EE80078D28E /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
+		C53BD2892B7E335F0078D28E /* OnboardingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,12 +55,34 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C53BD2822B7E28720078D28E /* SnapKit in Frameworks */,
+				C53BD2842B7E28720078D28E /* SnapKit-Dynamic in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C511A7FC2B811D24002DB0E4 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				C511A8242B811DDC002DB0E4 /* Mulish-Bold.ttf */,
+				C511A81D2B811D95002DB0E4 /* Mulish-ExtraBold.ttf */,
+				C511A81F2B811D9B002DB0E4 /* Mulish-Light.ttf */,
+				C511A8212B811DAA002DB0E4 /* Mulish-Regular.ttf */,
+				C511A8232B811DDC002DB0E4 /* Mulish-SemiBold.ttf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
+		C511A8272B811ECB002DB0E4 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				C511A8282B811ED9002DB0E4 /* Font.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
 		C53BD24C2B7E217D0078D28E = {
 			isa = PBXGroup;
 			children = (
@@ -56,15 +102,134 @@
 		C53BD2572B7E217D0078D28E /* Mapster */ = {
 			isa = PBXGroup;
 			children = (
-				C53BD2582B7E217D0078D28E /* AppDelegate.swift */,
-				C53BD25A2B7E217D0078D28E /* SceneDelegate.swift */,
-				C53BD25C2B7E217D0078D28E /* ViewController.swift */,
-				C53BD25E2B7E217D0078D28E /* Main.storyboard */,
-				C53BD2612B7E217F0078D28E /* Assets.xcassets */,
-				C53BD2632B7E217F0078D28E /* LaunchScreen.storyboard */,
-				C53BD2662B7E217F0078D28E /* Info.plist */,
+				C53BD26E2B7E232F0078D28E /* App */,
 			);
 			path = Mapster;
+			sourceTree = "<group>";
+		};
+		C53BD26C2B7E22F20078D28E /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				C53BD2722B7E24CD0078D28E /* App */,
+				C53BD2702B7E24760078D28E /* Features */,
+			);
+			path = Sources;
+			sourceTree = "<group>";
+		};
+		C53BD26D2B7E23250078D28E /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				C511A7FC2B811D24002DB0E4 /* Fonts */,
+				C53BD2612B7E217F0078D28E /* Assets.xcassets */,
+				C53BD2662B7E217F0078D28E /* Info.plist */,
+				C53BD2632B7E217F0078D28E /* LaunchScreen.storyboard */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		C53BD26E2B7E232F0078D28E /* App */ = {
+			isa = PBXGroup;
+			children = (
+				C53BD26D2B7E23250078D28E /* Resources */,
+				C53BD26C2B7E22F20078D28E /* Sources */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		C53BD26F2B7E24690078D28E /* AppDelegate */ = {
+			isa = PBXGroup;
+			children = (
+				C53BD2582B7E217D0078D28E /* AppDelegate.swift */,
+			);
+			path = AppDelegate;
+			sourceTree = "<group>";
+		};
+		C53BD2702B7E24760078D28E /* Features */ = {
+			isa = PBXGroup;
+			children = (
+				C53BD2712B7E24C20078D28E /* Onboarding */,
+			);
+			path = Features;
+			sourceTree = "<group>";
+		};
+		C53BD2712B7E24C20078D28E /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				C53BD27A2B7E27280078D28E /* Coordinator */,
+				C53BD27B2B7E272E0078D28E /* Modules */,
+			);
+			path = Onboarding;
+			sourceTree = "<group>";
+		};
+		C53BD2722B7E24CD0078D28E /* App */ = {
+			isa = PBXGroup;
+			children = (
+				C53BD26F2B7E24690078D28E /* AppDelegate */,
+				C511A8272B811ECB002DB0E4 /* Helpers */,
+				C53BD2732B7E24D30078D28E /* Navigation */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		C53BD2732B7E24D30078D28E /* Navigation */ = {
+			isa = PBXGroup;
+			children = (
+				C53BD2742B7E24E30078D28E /* AppCoordinator.swift */,
+				C53BD2762B7E253D0078D28E /* Coordinator.swift */,
+				C53BD2782B7E258C0078D28E /* Router.swift */,
+			);
+			path = Navigation;
+			sourceTree = "<group>";
+		};
+		C53BD27A2B7E27280078D28E /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+				C511A82A2B81246B002DB0E4 /* OnboardingCoordinator.swift */,
+				C511A82C2B812474002DB0E4 /* OnboardingModuleFactory.swift */,
+			);
+			path = Coordinator;
+			sourceTree = "<group>";
+		};
+		C53BD27B2B7E272E0078D28E /* Modules */ = {
+			isa = PBXGroup;
+			children = (
+				C53BD27C2B7E276A0078D28E /* Onboarding */,
+			);
+			path = Modules;
+			sourceTree = "<group>";
+		};
+		C53BD27C2B7E276A0078D28E /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				C53BD27D2B7E27750078D28E /* Controller */,
+				C53BD2882B7E33530078D28E /* Model */,
+				C53BD2852B7E2EE10078D28E /* View */,
+			);
+			path = Onboarding;
+			sourceTree = "<group>";
+		};
+		C53BD27D2B7E27750078D28E /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				C53BD27E2B7E27850078D28E /* OnboardingViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		C53BD2852B7E2EE10078D28E /* View */ = {
+			isa = PBXGroup;
+			children = (
+				C53BD2862B7E2EE80078D28E /* OnboardingView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		C53BD2882B7E33530078D28E /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				C53BD2892B7E335F0078D28E /* OnboardingViewModel.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -83,6 +248,10 @@
 			dependencies = (
 			);
 			name = Mapster;
+			packageProductDependencies = (
+				C53BD2812B7E28720078D28E /* SnapKit */,
+				C53BD2832B7E28720078D28E /* SnapKit-Dynamic */,
+			);
 			productName = Mapster;
 			productReference = C53BD2552B7E217D0078D28E /* Mapster.app */;
 			productType = "com.apple.product-type.application";
@@ -111,6 +280,9 @@
 				Base,
 			);
 			mainGroup = C53BD24C2B7E217D0078D28E;
+			packageReferences = (
+				C53BD2802B7E28720078D28E /* XCRemoteSwiftPackageReference "SnapKit" */,
+			);
 			productRefGroup = C53BD2562B7E217D0078D28E /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -125,9 +297,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C511A81E2B811D95002DB0E4 /* Mulish-ExtraBold.ttf in Resources */,
 				C53BD2652B7E217F0078D28E /* LaunchScreen.storyboard in Resources */,
+				C511A8202B811D9F002DB0E4 /* Mulish-Light.ttf in Resources */,
+				C511A8262B811DDC002DB0E4 /* Mulish-Bold.ttf in Resources */,
+				C511A8252B811DDC002DB0E4 /* Mulish-SemiBold.ttf in Resources */,
+				C511A8222B811DAA002DB0E4 /* Mulish-Regular.ttf in Resources */,
 				C53BD2622B7E217F0078D28E /* Assets.xcassets in Resources */,
-				C53BD2602B7E217D0078D28E /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -138,23 +314,22 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C53BD25D2B7E217D0078D28E /* ViewController.swift in Sources */,
+				C53BD2752B7E24E30078D28E /* AppCoordinator.swift in Sources */,
+				C511A82D2B812474002DB0E4 /* OnboardingModuleFactory.swift in Sources */,
+				C511A8292B811ED9002DB0E4 /* Font.swift in Sources */,
+				C53BD2772B7E253D0078D28E /* Coordinator.swift in Sources */,
 				C53BD2592B7E217D0078D28E /* AppDelegate.swift in Sources */,
-				C53BD25B2B7E217D0078D28E /* SceneDelegate.swift in Sources */,
+				C53BD28A2B7E335F0078D28E /* OnboardingViewModel.swift in Sources */,
+				C53BD27F2B7E27850078D28E /* OnboardingViewController.swift in Sources */,
+				C53BD2872B7E2EE80078D28E /* OnboardingView.swift in Sources */,
+				C511A82B2B81246B002DB0E4 /* OnboardingCoordinator.swift in Sources */,
+				C53BD2792B7E258C0078D28E /* Router.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		C53BD25E2B7E217D0078D28E /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				C53BD25F2B7E217D0078D28E /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		C53BD2632B7E217F0078D28E /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -292,11 +467,11 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 9RSGP9843T;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = Mapster/Info.plist;
+				INFOPLIST_FILE = Mapster/App/Resources/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -306,6 +481,10 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = kz.mapster.Mapster;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -319,11 +498,11 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 9RSGP9843T;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = Mapster/Info.plist;
+				INFOPLIST_FILE = Mapster/App/Resources/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -333,6 +512,10 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = kz.mapster.Mapster;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -361,6 +544,30 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		C53BD2802B7E28720078D28E /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.7.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		C53BD2812B7E28720078D28E /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C53BD2802B7E28720078D28E /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
+		C53BD2832B7E28720078D28E /* SnapKit-Dynamic */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C53BD2802B7E28720078D28E /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = "SnapKit-Dynamic";
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = C53BD24D2B7E217D0078D28E /* Project object */;
 }
