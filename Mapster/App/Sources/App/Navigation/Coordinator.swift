@@ -2,35 +2,41 @@
 //  Coordinator.swift
 //  Mapster
 //
-//  Created by Адиль Медеуев on 15.02.2024.
+//  Created by User on 15.02.2024.
 //
 
 import Foundation
 
 class Coordinator {
+    // Дочерние координаторы
     private(set) var childCoordinators: [Coordinator] = []
-    public let router: Router
+    // Роутер для навигации
+    let router: Router
+    // Родительский координатор
     private weak var parentCoordinator: Coordinator?
     
-    public init(router: Router) {
+    init(router: Router) {
         self.router = router
     }
 
-    open func start() {}
+    func start() {}
 
-    public func addDependency(_ coordinator: Coordinator) {
+    // Добавить зависимость координатора
+    func addDependency(_ coordinator: Coordinator) {
         guard !childCoordinators.contains(where: { $0 === coordinator }) else { return }
         coordinator.parentCoordinator = self
         childCoordinators.append(coordinator)
     }
-
-    public func removeDependency(_ coordinator: Coordinator) {
+    
+    // Удалить зависимость координатора
+    func removeDependency(_ coordinator: Coordinator) {
         guard !childCoordinators.isEmpty else { return }
         coordinator.childCoordinators.filter { $0 !== coordinator }.forEach { coordinator.removeDependency($0) }
         childCoordinators.removeAll { $0 === coordinator }
     }
 
-    public func clearChildCoordinators() {
+    // Очистить зависимости координатора
+    func clearChildCoordinators() {
         childCoordinators.forEach { removeDependency($0) }
     }
 }

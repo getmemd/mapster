@@ -2,26 +2,26 @@
 //  AppCoordinator.swift
 //  Mapster
 //
-//  Created by Адиль Медеуев on 15.02.2024.
+//  Created by User on 15.02.2024.
 //
 
 import Foundation
 
 final class AppCoordinator: Coordinator {
     override func start() {
-        runOnboardingFlow()
+        runOnboardingFlow() // Запускаем процесс онбординга
     }
     
     private func runOnboardingFlow() {
-        let coordinator = OnboardingCoordinator(router: router, delegate: self)
-        addDependency(coordinator)
-        coordinator.start()
+        let coordinator = OnboardingCoordinator(router: router, delegate: self) // Создаем координатор онбординга
+        addDependency(coordinator) // Добавляем зависимость от координатора онбординга
+        coordinator.start() // Запускаем процесс онбординга
     }
     
     private func runAuthorizationFlow() {
-        let coordinator = AuthorizationCoordinator(router: router, delegate: self)
-        addDependency(coordinator)
-        coordinator.start()
+        let coordinator = AuthorizationCoordinator(router: router, delegate: self) // Создаем координатор авторизации
+        addDependency(coordinator) // Добавляем зависимость от координатора авторизации
+        coordinator.start() // Запускаем процесс авторизации
     }
 }
 
@@ -29,8 +29,8 @@ final class AppCoordinator: Coordinator {
 
 extension AppCoordinator: OnboardingCoordinatorDelegate {
     func didFinish(_ coordinator: OnboardingCoordinator) {
-        removeDependency(coordinator)
-        runAuthorizationFlow()
+        removeDependency(coordinator) // Удаляем зависимость от завершившегося координатора онбординга
+        runAuthorizationFlow() // Запускаем процесс авторизации
     }
 }
 
@@ -38,7 +38,6 @@ extension AppCoordinator: OnboardingCoordinatorDelegate {
 
 extension AppCoordinator: AuthorizationCoordinatorDelegate {
     func didFinish(_ coordinator: AuthorizationCoordinator) {
-        removeDependency(coordinator)
-        
+        removeDependency(coordinator) // Удаляем зависимость от завершившегося координатора авторизации
     }
 }

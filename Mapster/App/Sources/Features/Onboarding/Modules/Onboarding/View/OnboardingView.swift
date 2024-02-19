@@ -2,27 +2,30 @@
 //  OnboardingView.swift
 //  Mapster
 //
-//  Created by Адиль Медеуев on 15.02.2024.
+//  Created by User on 15.02.2024.
 //
 
 import SnapKit
 import UIKit
 
 final class OnboardingView: UIView {
-    private var contentView = UIView()
+    private var contentView = UIView() // Контейнерное представление для компонентов
     
+    // Изображение
     private var imageView: UIImageView = {
         let imageView = UIImageView()
         return imageView
     }()
     
+    // Лейбл заголовка
     private var titleLabel: UILabel = {
         let label = UILabel()
-        label.font = Font.mulish(name: .extraBold, size: 36)
+        label.font = Font.mulish(name: .extraBold, size: 36) // Настройка шрифта для заголовка
         label.numberOfLines = 0
         return label
     }()
     
+    // Лейбл описания
     private var descriptionLabel: UILabel = {
         let label = UILabel()
         label.font = Font.mulish(name: .light, size: 24)
@@ -30,6 +33,7 @@ final class OnboardingView: UIView {
         return label
     }()
     
+    // Инициализация представления, настройка внешнего вида и ограничений
     init() {
         super.init(frame: .zero)
         setupViews()
@@ -40,17 +44,20 @@ final class OnboardingView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // Настройка компонентов с использованием данных из модели
     func configure(with viewModel: OnboardingViewModel) {
-        imageView.image = UIImage(named: viewModel.imageName)
-        titleLabel.text = viewModel.title
-        descriptionLabel.text = viewModel.description
+        imageView.image = UIImage(named: viewModel.imageName) // Установка изображения
+        titleLabel.text = viewModel.title // Установка заголовка
+        descriptionLabel.text = viewModel.description // Установка описания
     }
     
+    // Установка представлений
     private func setupViews() {
         addSubview(contentView)
         [imageView, titleLabel, descriptionLabel].forEach { contentView.addSubview($0) }
     }
     
+    // Настройка ограничений для компонентов
     private func setupConstraints() {
         contentView.snp.makeConstraints {
             $0.edges.equalToSuperview()

@@ -2,26 +2,33 @@
 //  AuthorizationViewController.swift
 //  Mapster
 //
-//  Created by Adilkhan Medeuyev on 18.02.2024.
+//  Created by User on 18.02.2024.
 //
 
 import UIKit
 import SnapKit
 
+// Протокол делегата навигации по экрану авторизации, определяющий методы для обратного вызова
 protocol AuthorizationNavigationDelegate: AnyObject {
+    // Метод вызывается после завершения операции авторизации
     func didFinishAuthorization(_ viewController: AuthorizationViewController)
+    // Метод вызывается после завершения операции регистрации
     func didFinishRegistration(_ viewController: AuthorizationViewController)
 }
 
 final class AuthorizationViewController: UIViewController {
+    // Перечисление для представления состояний экрана (авторизация или регистрация)
     enum ViewState {
         case authorization
         case registration
     }
     
+    // Слабая ссылка на делегата навигации
     weak var navigationDelegate: AuthorizationNavigationDelegate?
+    // Текущее состояние экрана
     private var viewState: ViewState = .registration
     
+    // Стек видов для отображения содержимого экрана
     private lazy var contentStackView: UIStackView = {
         let stackView = UIStackView(arrangedSubviews: [
             titleLabel,
@@ -36,6 +43,7 @@ final class AuthorizationViewController: UIViewController {
         return stackView
     }()
     
+    // Лейбл лого
     private var titleLabel: UILabel = {
         let label = UILabel()
         label.text = "Mapster"
@@ -46,6 +54,7 @@ final class AuthorizationViewController: UIViewController {
         return label
     }()
     
+    // Лейбл описания
     private var descriptionLabel: UILabel = {
         let label = UILabel()
         label.text = "Войдите в систему для доступа к своему аккаунту"
@@ -55,6 +64,7 @@ final class AuthorizationViewController: UIViewController {
         return label
     }()
     
+    // Текстовое поле для ввода имени
     private var nameTextField: UITextField = {
         let textField = UITextField()
         textField.placeholder = "Имя"
@@ -66,6 +76,7 @@ final class AuthorizationViewController: UIViewController {
         return textField
     }()
     
+    // Текстовое поле для ввода номера телефона
     private lazy var phoneTextField: UITextField = {
         let textField = UITextField()
         textField.delegate = self
@@ -79,6 +90,7 @@ final class AuthorizationViewController: UIViewController {
         return textField
     }()
     
+    // Текстовое поле для ввода пароля
     private lazy var passwordTextField: UITextField = {
         let textField = UITextField()
         textField.placeholder = "Пароль"
@@ -91,6 +103,7 @@ final class AuthorizationViewController: UIViewController {
         return textField
     }()
     
+    // Кнопка действия (вход или регистрация)
     private lazy var actionButton: ActionButton = {
         let button = ActionButton()
         button.addTarget(self, action: #selector(actionButtonDidTap), for: .touchUpInside)
@@ -99,6 +112,7 @@ final class AuthorizationViewController: UIViewController {
         return button
     }()
     
+    // Вид с чекбоксом для пользовательского соглашения
     private lazy var checkboxView: AuthorizationCheckboxView = {
         let checkboxView = AuthorizationCheckboxView()
         checkboxView.delegate = self
@@ -106,8 +120,10 @@ final class AuthorizationViewController: UIViewController {
         return checkboxView
     }()
     
+    // Вид с ссылками для авторизации или регистрации
     private let bottomTextView = UIView()
     
+    // Лейбл "Уже есть аккаунт?"
     private let accountLabel: UILabel = {
         let label = UILabel()
         label.text = "Уже есть аккаунт?"
@@ -116,6 +132,7 @@ final class AuthorizationViewController: UIViewController {
         return label
     }()
     
+    // Лейбл с текстом ссылки (Войти или Зарегистрироваться)
     private lazy var loginLabel: UILabel = {
         let label = UILabel()
         label.text = "Войти"
@@ -128,12 +145,14 @@ final class AuthorizationViewController: UIViewController {
         return label
     }()
     
+    // Метод вызывается после загрузки представления
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
         setupConstraints()
     }
     
+    // Обработчик нажатия кнопки действия (вход или регистрация)
     @objc
     private func actionButtonDidTap() {
         guard checkValidity() else { return }
@@ -147,11 +166,13 @@ final class AuthorizationViewController: UIViewController {
         }
     }
     
+    // Обработчик нажатия ссылки для переключения между режимами
     @objc
     private func loginDidTap() {
         changeViewState()
     }
     
+    // Метод изменяет текущее состояние экрана (режим авторизации или регистрации)
     private func changeViewState() {
         viewState = viewState == .authorization ? .registration : .authorization
         switch viewState {
@@ -170,10 +191,12 @@ final class AuthorizationViewController: UIViewController {
         }
     }
     
+    // Метод проверяет валидность введенных данных
     private func checkValidity() -> Bool {
         checkPhoneNumberValidity() && !(passwordTextField.text?.isEmpty ?? true) && !(nameTextField.text?.isEmpty ?? true) && checkboxView.isSelected
     }
     
+    // Метод проверяет валидность введенного номера телефона
     private func checkPhoneNumberValidity() -> Bool {
         let numericPhoneNumber = phoneTextField.text?.components(separatedBy: CharacterSet.decimalDigits.inverted).joined()
         let phoneNumberRegex = "^[0-9]{11}$"
@@ -181,6 +204,7 @@ final class AuthorizationViewController: UIViewController {
         return predicate.evaluate(with: numericPhoneNumber)
     }
     
+    // Метод проверяет валидность введенного пароля
     private func checkPasswordValidity() -> Bool {
         let password = passwordTextField.text
         let passwordRegex = "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,}$"
@@ -192,6 +216,7 @@ final class AuthorizationViewController: UIViewController {
         return status
     }
     
+    // Метод отображает алерт с предупреждением о неверном пароле
     func showPasswordAlert() {
         let alert = UIAlertController(title: "Ошибка",
                                       message: "Пароль должен содержать минимум 8 символов, хотя бы 1 букву и 1 цифру",
@@ -200,12 +225,14 @@ final class AuthorizationViewController: UIViewController {
         present(alert, animated: true, completion: nil)
     }
     
+    // Метод настраивает внешний вид экрана
     private func setupViews() {
         [contentStackView, actionButton, bottomTextView].forEach { view.addSubview($0) }
         [accountLabel, loginLabel].forEach { bottomTextView.addSubview($0) }
         view.backgroundColor = .white
     }
     
+    // Метод настраивает ограничения для элементов интерфейса
     private func setupConstraints() {
         contentStackView.snp.makeConstraints {
             $0.centerY.equalToSuperview()
@@ -242,10 +269,12 @@ final class AuthorizationViewController: UIViewController {
 // MARK: - UITextFieldDelegate
 
 extension AuthorizationViewController: UITextFieldDelegate {
+    // Метод вызывается после окончания редактирования текстового поля
     func textFieldDidEndEditing(_ textField: UITextField) {
         actionButton.isEnabled = checkValidity()
     }
     
+    // Метод форматирует введенный номер телефона
     func formattedNumber(number: String) -> String {
         let cleanPhoneNumber = number.components(separatedBy: CharacterSet.decimalDigits.inverted).joined()
         let mask = "+# (###) ### ####"
@@ -262,6 +291,7 @@ extension AuthorizationViewController: UITextFieldDelegate {
         return result
     }
     
+    // Метод определяет, разрешено ли изменение введенных символов в текстовом поле
     func textField(_ textField: UITextField,
                    shouldChangeCharactersIn range: NSRange,
                    replacementString string:  String) -> Bool {
@@ -276,10 +306,12 @@ extension AuthorizationViewController: UITextFieldDelegate {
 // MARK: - AuthorizationCheckboxViewDelegate
 
 extension AuthorizationViewController: AuthorizationCheckboxViewDelegate {
+    // Метод вызывается при нажатии на чекбокс
     func didTapCheckbox(_ view: AuthorizationCheckboxView, isSelected: Bool) {
         actionButton.isEnabled = checkValidity()
     }
     
+    // Метод вызывается при нажатии на ссылку "Забыли пароль?"
     func didTapForgotPassword(_ view: AuthorizationCheckboxView) {
         
     }

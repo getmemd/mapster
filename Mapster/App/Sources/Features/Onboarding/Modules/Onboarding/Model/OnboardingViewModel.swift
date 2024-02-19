@@ -2,7 +2,7 @@
 //  OnboardingViewModel.swift
 //  Mapster
 //
-//  Created by Адиль Медеуев on 15.02.2024.
+//  Created by User on 15.02.2024.
 //
 
 import Foundation
