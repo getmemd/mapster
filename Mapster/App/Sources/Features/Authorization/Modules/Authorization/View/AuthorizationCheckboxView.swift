@@ -8,9 +8,20 @@
 import SnapKit
 import UIKit
 
+protocol AuthorizationCheckboxViewDelegate: AnyObject {
+    func didTapCheckbox(_ view: AuthorizationCheckboxView, isSelected: Bool)
+    func didTapForgotPassword(_ view: AuthorizationCheckboxView)
+}
+
 final class AuthorizationCheckboxView: UIView {
+    weak var delegate: AuthorizationCheckboxViewDelegate?
+    
+    var isSelected: Bool {
+        checkBoxButton.isSelected
+    }
+    
     private lazy var contentStackView: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [checkBoxButton, textView])
+        let stackView = UIStackView(arrangedSubviews: [checkBoxButton, textView, forgotPasswordLabel])
         stackView.spacing = 4
         return stackView
     }()
@@ -25,10 +36,27 @@ final class AuthorizationCheckboxView: UIView {
     
     private var textView: UITextView = {
         let textView = UITextView()
+        textView.isSelectable = true
+        textView.isUserInteractionEnabled = true
         textView.isEditable = false
         textView.dataDetectorTypes = .link
-        textView.font = Font.mulish(name: .regular, size: 9)
+        textView.font = Font.mulish(name: .light, size: 12)
+        textView.isScrollEnabled = false
+        textView.textContainerInset = .zero
+        textView.tintColor = UIColor(named: "TextHighlight")
         return textView
+    }()
+    
+    private lazy var forgotPasswordLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Забыли пароль?"
+        label.textAlignment = .right
+        label.font = Font.mulish(name: .light, size: 12)
+        label.textColor = UIColor(named: "TextHighlight")
+        label.isUserInteractionEnabled = true
+        let gesture = UITapGestureRecognizer(target: self, action: #selector(forgotPasswordDidTap))
+        label.addGestureRecognizer(gesture)
+        return label
     }()
     
     init() {
@@ -41,13 +69,20 @@ final class AuthorizationCheckboxView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configure(text: String) {
-        textView.text = text
+    func configure(with viewModel: AuthorizationCheckoxViewModel) {
+        textView.attributedText = viewModel.attributedString
+        forgotPasswordLabel.isHidden = viewModel.viewState == .registration
+    }
+    
+    @objc
+    private func forgotPasswordDidTap() {
+        delegate?.didTapForgotPassword(self)
     }
     
     @objc
     private func checkBoxTapped(_ sender: UIButton) {
         sender.isSelected = !sender.isSelected
+        delegate?.didTapCheckbox(self, isSelected: sender.isSelected)
     }
     
     private func setupViews() {
@@ -59,7 +94,7 @@ final class AuthorizationCheckboxView: UIView {
             $0.edges.equalToSuperview()
         }
         checkBoxButton.snp.makeConstraints {
-            $0.size.equalTo(12)
+            $0.size.equalTo(16)
         }
     }
 }

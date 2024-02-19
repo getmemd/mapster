@@ -20,6 +20,9 @@
 		C511A8292B811ED9002DB0E4 /* Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = C511A8282B811ED9002DB0E4 /* Font.swift */; };
 		C511A82B2B81246B002DB0E4 /* OnboardingCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C511A82A2B81246B002DB0E4 /* OnboardingCoordinator.swift */; };
 		C511A82D2B812474002DB0E4 /* OnboardingModuleFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = C511A82C2B812474002DB0E4 /* OnboardingModuleFactory.swift */; };
+		C5142E082B835FE400384411 /* UITextField+ViewPadding.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5142E072B835FE400384411 /* UITextField+ViewPadding.swift */; };
+		C5142E0B2B83624800384411 /* AuthorizationCheckoxViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5142E0A2B83624800384411 /* AuthorizationCheckoxViewModel.swift */; };
+		C5142E0E2B836DD200384411 /* ActionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5142E0D2B836DD200384411 /* ActionButton.swift */; };
 		C53BD2592B7E217D0078D28E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C53BD2582B7E217D0078D28E /* AppDelegate.swift */; };
 		C53BD2622B7E217F0078D28E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C53BD2612B7E217F0078D28E /* Assets.xcassets */; };
 		C53BD2652B7E217F0078D28E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C53BD2632B7E217F0078D28E /* LaunchScreen.storyboard */; };
@@ -46,6 +49,9 @@
 		C511A8282B811ED9002DB0E4 /* Font.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Font.swift; sourceTree = "<group>"; };
 		C511A82A2B81246B002DB0E4 /* OnboardingCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingCoordinator.swift; sourceTree = "<group>"; };
 		C511A82C2B812474002DB0E4 /* OnboardingModuleFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingModuleFactory.swift; sourceTree = "<group>"; };
+		C5142E072B835FE400384411 /* UITextField+ViewPadding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+ViewPadding.swift"; sourceTree = "<group>"; };
+		C5142E0A2B83624800384411 /* AuthorizationCheckoxViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationCheckoxViewModel.swift; sourceTree = "<group>"; };
+		C5142E0D2B836DD200384411 /* ActionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionButton.swift; sourceTree = "<group>"; };
 		C53BD2552B7E217D0078D28E /* Mapster.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Mapster.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C53BD2582B7E217D0078D28E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C53BD2612B7E217F0078D28E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -103,6 +109,7 @@
 			isa = PBXGroup;
 			children = (
 				C50597A92B821C0D0058B519 /* Controller */,
+				C5142E092B83623C00384411 /* Model */,
 				C50597AA2B821C110058B519 /* View */,
 			);
 			path = Authorization;
@@ -140,8 +147,25 @@
 			isa = PBXGroup;
 			children = (
 				C511A8282B811ED9002DB0E4 /* Font.swift */,
+				C5142E072B835FE400384411 /* UITextField+ViewPadding.swift */,
 			);
 			path = Helpers;
+			sourceTree = "<group>";
+		};
+		C5142E092B83623C00384411 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				C5142E0A2B83624800384411 /* AuthorizationCheckoxViewModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		C5142E0C2B836DBF00384411 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				C5142E0D2B836DD200384411 /* ActionButton.swift */,
+			);
+			path = UI;
 			sourceTree = "<group>";
 		};
 		C53BD24C2B7E217D0078D28E = {
@@ -229,6 +253,7 @@
 				C53BD26F2B7E24690078D28E /* AppDelegate */,
 				C511A8272B811ECB002DB0E4 /* Helpers */,
 				C53BD2732B7E24D30078D28E /* Navigation */,
+				C5142E0C2B836DBF00384411 /* UI */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -378,14 +403,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C5142E0B2B83624800384411 /* AuthorizationCheckoxViewModel.swift in Sources */,
 				C53BD2752B7E24E30078D28E /* AppCoordinator.swift in Sources */,
 				C511A82D2B812474002DB0E4 /* OnboardingModuleFactory.swift in Sources */,
 				C511A8292B811ED9002DB0E4 /* Font.swift in Sources */,
 				C53BD2772B7E253D0078D28E /* Coordinator.swift in Sources */,
 				C53BD2592B7E217D0078D28E /* AppDelegate.swift in Sources */,
 				C53BD28A2B7E335F0078D28E /* OnboardingViewModel.swift in Sources */,
+				C5142E0E2B836DD200384411 /* ActionButton.swift in Sources */,
 				C53BD27F2B7E27850078D28E /* OnboardingViewController.swift in Sources */,
 				C50597B52B8235C00058B519 /* AuthorizationCheckboxView.swift in Sources */,
+				C5142E082B835FE400384411 /* UITextField+ViewPadding.swift in Sources */,
 				C50597B02B821CE90058B519 /* AuthorizationCoordinator.swift in Sources */,
 				C53BD2872B7E2EE80078D28E /* OnboardingView.swift in Sources */,
 				C50597AE2B821C9D0058B519 /* AuthorizationModuleFactory.swift in Sources */,
