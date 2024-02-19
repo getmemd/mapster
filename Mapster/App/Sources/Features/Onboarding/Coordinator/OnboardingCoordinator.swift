@@ -25,7 +25,16 @@ final class OnboardingCoordinator: Coordinator {
     }
     
     private func showOnboarding() {
-        let module = moduleFactory.makeOnboarding()
+        let module = moduleFactory.makeOnboarding(delegate: self)
         router.setRootModule(module)
+    }
+}
+
+// MARK: - OnboardingNavigationDelegate
+
+extension OnboardingCoordinator: OnboardingNavigationDelegate {
+    func didFinishOnboarding(_ viewController: OnboardingViewController) {
+        router.popModule()
+        delegate?.didFinish(self)
     }
 }

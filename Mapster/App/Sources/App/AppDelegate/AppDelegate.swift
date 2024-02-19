@@ -5,6 +5,7 @@
 //  Created by Адиль Медеуев on 15.02.2024.
 //
 
+import IQKeyboardManagerSwift
 import UIKit
 
 @main
@@ -22,6 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         _: UIApplication,
         didFinishLaunchingWithOptions _: [UIApplication.LaunchOptionsKey: Any]? = nil
     ) -> Bool {
+        IQKeyboardManager.shared.enable = true
         setupNavigation()
         return true
     }

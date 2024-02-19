@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C50597AC2B821C240058B519 /* AuthorizationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C50597AB2B821C240058B519 /* AuthorizationViewController.swift */; };
+		C50597AE2B821C9D0058B519 /* AuthorizationModuleFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = C50597AD2B821C9D0058B519 /* AuthorizationModuleFactory.swift */; };
+		C50597B02B821CE90058B519 /* AuthorizationCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C50597AF2B821CE90058B519 /* AuthorizationCoordinator.swift */; };
+		C50597B32B8233BF0058B519 /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = C50597B22B8233BF0058B519 /* IQKeyboardManagerSwift */; };
+		C50597B52B8235C00058B519 /* AuthorizationCheckboxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C50597B42B8235C00058B519 /* AuthorizationCheckboxView.swift */; };
 		C511A81E2B811D95002DB0E4 /* Mulish-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C511A81D2B811D95002DB0E4 /* Mulish-ExtraBold.ttf */; };
 		C511A8202B811D9F002DB0E4 /* Mulish-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C511A81F2B811D9B002DB0E4 /* Mulish-Light.ttf */; };
 		C511A8222B811DAA002DB0E4 /* Mulish-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C511A8212B811DAA002DB0E4 /* Mulish-Regular.ttf */; };
@@ -29,6 +34,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		C50597AB2B821C240058B519 /* AuthorizationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationViewController.swift; sourceTree = "<group>"; };
+		C50597AD2B821C9D0058B519 /* AuthorizationModuleFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationModuleFactory.swift; sourceTree = "<group>"; };
+		C50597AF2B821CE90058B519 /* AuthorizationCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationCoordinator.swift; sourceTree = "<group>"; };
+		C50597B42B8235C00058B519 /* AuthorizationCheckboxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationCheckboxView.swift; sourceTree = "<group>"; };
 		C511A81D2B811D95002DB0E4 /* Mulish-ExtraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Mulish-ExtraBold.ttf"; sourceTree = "<group>"; };
 		C511A81F2B811D9B002DB0E4 /* Mulish-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Mulish-Light.ttf"; sourceTree = "<group>"; };
 		C511A8212B811DAA002DB0E4 /* Mulish-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Mulish-Regular.ttf"; sourceTree = "<group>"; };
@@ -57,12 +66,64 @@
 			files = (
 				C53BD2822B7E28720078D28E /* SnapKit in Frameworks */,
 				C53BD2842B7E28720078D28E /* SnapKit-Dynamic in Frameworks */,
+				C50597B32B8233BF0058B519 /* IQKeyboardManagerSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C50597A52B821BC20058B519 /* Authorization */ = {
+			isa = PBXGroup;
+			children = (
+				C50597A72B821BD20058B519 /* Coordinator */,
+				C50597A62B821BC70058B519 /* Modules */,
+			);
+			path = Authorization;
+			sourceTree = "<group>";
+		};
+		C50597A62B821BC70058B519 /* Modules */ = {
+			isa = PBXGroup;
+			children = (
+				C50597A82B821BDA0058B519 /* Authorization */,
+			);
+			path = Modules;
+			sourceTree = "<group>";
+		};
+		C50597A72B821BD20058B519 /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+				C50597AF2B821CE90058B519 /* AuthorizationCoordinator.swift */,
+				C50597AD2B821C9D0058B519 /* AuthorizationModuleFactory.swift */,
+			);
+			path = Coordinator;
+			sourceTree = "<group>";
+		};
+		C50597A82B821BDA0058B519 /* Authorization */ = {
+			isa = PBXGroup;
+			children = (
+				C50597A92B821C0D0058B519 /* Controller */,
+				C50597AA2B821C110058B519 /* View */,
+			);
+			path = Authorization;
+			sourceTree = "<group>";
+		};
+		C50597A92B821C0D0058B519 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				C50597AB2B821C240058B519 /* AuthorizationViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		C50597AA2B821C110058B519 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				C50597B42B8235C00058B519 /* AuthorizationCheckboxView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		C511A7FC2B811D24002DB0E4 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
@@ -147,6 +208,7 @@
 		C53BD2702B7E24760078D28E /* Features */ = {
 			isa = PBXGroup;
 			children = (
+				C50597A52B821BC20058B519 /* Authorization */,
 				C53BD2712B7E24C20078D28E /* Onboarding */,
 			);
 			path = Features;
@@ -251,6 +313,7 @@
 			packageProductDependencies = (
 				C53BD2812B7E28720078D28E /* SnapKit */,
 				C53BD2832B7E28720078D28E /* SnapKit-Dynamic */,
+				C50597B22B8233BF0058B519 /* IQKeyboardManagerSwift */,
 			);
 			productName = Mapster;
 			productReference = C53BD2552B7E217D0078D28E /* Mapster.app */;
@@ -282,6 +345,7 @@
 			mainGroup = C53BD24C2B7E217D0078D28E;
 			packageReferences = (
 				C53BD2802B7E28720078D28E /* XCRemoteSwiftPackageReference "SnapKit" */,
+				C50597B12B8233BF0058B519 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */,
 			);
 			productRefGroup = C53BD2562B7E217D0078D28E /* Products */;
 			projectDirPath = "";
@@ -321,9 +385,13 @@
 				C53BD2592B7E217D0078D28E /* AppDelegate.swift in Sources */,
 				C53BD28A2B7E335F0078D28E /* OnboardingViewModel.swift in Sources */,
 				C53BD27F2B7E27850078D28E /* OnboardingViewController.swift in Sources */,
+				C50597B52B8235C00058B519 /* AuthorizationCheckboxView.swift in Sources */,
+				C50597B02B821CE90058B519 /* AuthorizationCoordinator.swift in Sources */,
 				C53BD2872B7E2EE80078D28E /* OnboardingView.swift in Sources */,
+				C50597AE2B821C9D0058B519 /* AuthorizationModuleFactory.swift in Sources */,
 				C511A82B2B81246B002DB0E4 /* OnboardingCoordinator.swift in Sources */,
 				C53BD2792B7E258C0078D28E /* Router.swift in Sources */,
+				C50597AC2B821C240058B519 /* AuthorizationViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -546,6 +614,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		C50597B12B8233BF0058B519 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/hackiftekhar/IQKeyboardManager";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.0.1;
+			};
+		};
 		C53BD2802B7E28720078D28E /* XCRemoteSwiftPackageReference "SnapKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
@@ -557,6 +633,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		C50597B22B8233BF0058B519 /* IQKeyboardManagerSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C50597B12B8233BF0058B519 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */;
+			productName = IQKeyboardManagerSwift;
+		};
 		C53BD2812B7E28720078D28E /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = C53BD2802B7E28720078D28E /* XCRemoteSwiftPackageReference "SnapKit" */;

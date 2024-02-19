@@ -58,7 +58,7 @@ final class OnboardingViewController: UIViewController {
     
     @objc
     private func didTapNextButton() {
-        guard Constants.numberOfPages > pageControl.currentPage else {
+        guard Constants.numberOfPages > pageControl.currentPage + 1 else {
             navigationDelegate?.didFinishOnboarding(self)
             return
         }
