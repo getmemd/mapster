@@ -34,6 +34,8 @@
 		C53BD2842B7E28720078D28E /* SnapKit-Dynamic in Frameworks */ = {isa = PBXBuildFile; productRef = C53BD2832B7E28720078D28E /* SnapKit-Dynamic */; };
 		C53BD2872B7E2EE80078D28E /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C53BD2862B7E2EE80078D28E /* OnboardingView.swift */; };
 		C53BD28A2B7E335F0078D28E /* OnboardingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C53BD2892B7E335F0078D28E /* OnboardingViewModel.swift */; };
+		C5F55BBF2B8772100053D5BB /* OTPViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5F55BBE2B8772100053D5BB /* OTPViewController.swift */; };
+		C5F55BC12B87D9810053D5BB /* OTPTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5F55BC02B87D9810053D5BB /* OTPTextField.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -63,6 +65,8 @@
 		C53BD27E2B7E27850078D28E /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		C53BD2862B7E2EE80078D28E /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		C53BD2892B7E335F0078D28E /* OnboardingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewModel.swift; sourceTree = "<group>"; };
+		C5F55BBE2B8772100053D5BB /* OTPViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTPViewController.swift; sourceTree = "<group>"; };
+		C5F55BC02B87D9810053D5BB /* OTPTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTPTextField.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,6 +96,7 @@
 			isa = PBXGroup;
 			children = (
 				C50597A82B821BDA0058B519 /* Authorization */,
+				C5F55BBB2B87718E0053D5BB /* OTP */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
@@ -319,6 +324,31 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		C5F55BBB2B87718E0053D5BB /* OTP */ = {
+			isa = PBXGroup;
+			children = (
+				C5F55BBC2B8771980053D5BB /* Controller */,
+				C5F55BBD2B87719C0053D5BB /* View */,
+			);
+			path = OTP;
+			sourceTree = "<group>";
+		};
+		C5F55BBC2B8771980053D5BB /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				C5F55BBE2B8772100053D5BB /* OTPViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		C5F55BBD2B87719C0053D5BB /* View */ = {
+			isa = PBXGroup;
+			children = (
+				C5F55BC02B87D9810053D5BB /* OTPTextField.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -408,6 +438,7 @@
 				C511A82D2B812474002DB0E4 /* OnboardingModuleFactory.swift in Sources */,
 				C511A8292B811ED9002DB0E4 /* Font.swift in Sources */,
 				C53BD2772B7E253D0078D28E /* Coordinator.swift in Sources */,
+				C5F55BC12B87D9810053D5BB /* OTPTextField.swift in Sources */,
 				C53BD2592B7E217D0078D28E /* AppDelegate.swift in Sources */,
 				C53BD28A2B7E335F0078D28E /* OnboardingViewModel.swift in Sources */,
 				C5142E0E2B836DD200384411 /* ActionButton.swift in Sources */,
@@ -415,6 +446,7 @@
 				C50597B52B8235C00058B519 /* AuthorizationCheckboxView.swift in Sources */,
 				C5142E082B835FE400384411 /* UITextField+ViewPadding.swift in Sources */,
 				C50597B02B821CE90058B519 /* AuthorizationCoordinator.swift in Sources */,
+				C5F55BBF2B8772100053D5BB /* OTPViewController.swift in Sources */,
 				C53BD2872B7E2EE80078D28E /* OnboardingView.swift in Sources */,
 				C50597AE2B821C9D0058B519 /* AuthorizationModuleFactory.swift in Sources */,
 				C511A82B2B81246B002DB0E4 /* OnboardingCoordinator.swift in Sources */,

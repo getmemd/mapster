@@ -11,6 +11,7 @@ import SnapKit
 protocol AuthorizationNavigationDelegate: AnyObject {
     func didFinishAuthorization(_ viewController: AuthorizationViewController)
     func didFinishRegistration(_ viewController: AuthorizationViewController)
+    func didTapForgotPassword(_ viewController: AuthorizationViewController)
 }
 
 final class AuthorizationViewController: UIViewController {
@@ -36,7 +37,7 @@ final class AuthorizationViewController: UIViewController {
         return stackView
     }()
     
-    private var titleLabel: UILabel = {
+    private let titleLabel: UILabel = {
         let label = UILabel()
         label.text = "Mapster"
         label.font = Font.mulish(name: .extraBold, size: 36)
@@ -46,7 +47,7 @@ final class AuthorizationViewController: UIViewController {
         return label
     }()
     
-    private var descriptionLabel: UILabel = {
+    private let descriptionLabel: UILabel = {
         let label = UILabel()
         label.text = "Войдите в систему для доступа к своему аккаунту"
         label.font = Font.mulish(name: .light, size: 14)
@@ -61,7 +62,6 @@ final class AuthorizationViewController: UIViewController {
         textField.borderStyle = .roundedRect
         textField.backgroundColor = UIColor(named: "TextField")
         textField.font = Font.mulish(name: .light, size: 14)
-        textField.textColor = .black.withAlphaComponent(50)
         textField.addPaddingAndIcon(.init(named: "user"), padding: 20, isLeftView: false)
         return textField
     }()
@@ -74,7 +74,6 @@ final class AuthorizationViewController: UIViewController {
         textField.borderStyle = .roundedRect
         textField.backgroundColor = UIColor(named: "TextField")
         textField.font = Font.mulish(name: .light, size: 14)
-        textField.textColor = .black.withAlphaComponent(50)
         textField.addPaddingAndIcon(.init(named: "phone"), padding: 20, isLeftView: false)
         return textField
     }()
@@ -85,7 +84,6 @@ final class AuthorizationViewController: UIViewController {
         textField.borderStyle = .roundedRect
         textField.backgroundColor = UIColor(named: "TextField")
         textField.font = Font.mulish(name: .light, size: 14)
-        textField.textColor = .black.withAlphaComponent(50)
         textField.addPaddingAndIcon(.init(named: "lock"), padding: 20, isLeftView: false)
         textField.isSecureTextEntry = true
         return textField
@@ -281,6 +279,6 @@ extension AuthorizationViewController: AuthorizationCheckboxViewDelegate {
     }
     
     func didTapForgotPassword(_ view: AuthorizationCheckboxView) {
-        
+        navigationDelegate?.didTapForgotPassword(self)
     }
 }

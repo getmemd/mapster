@@ -36,7 +36,6 @@ final class AuthorizationCheckboxView: UIView {
     
     private var textView: UITextView = {
         let textView = UITextView()
-        textView.isSelectable = true
         textView.isUserInteractionEnabled = true
         textView.isEditable = false
         textView.dataDetectorTypes = .link
