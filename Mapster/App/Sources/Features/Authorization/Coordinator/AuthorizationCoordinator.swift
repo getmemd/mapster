@@ -33,6 +33,11 @@ final class AuthorizationCoordinator: Coordinator {
         let module = moduleFactory.makeOTP(viewState: viewState, delegate: self)
         router.push(module)
     }
+    
+    private func showPasswordReset() {
+        let module = moduleFactory.makePasswordReset(delegate: self)
+        router.push(module)
+    }
 }
 
 // MARK: - AuthorizationNavigationDelegate
@@ -47,14 +52,26 @@ extension AuthorizationCoordinator: AuthorizationNavigationDelegate {
     }
     
     func didFinishRegistration(_ viewController: AuthorizationViewController) {
-        
+        showOTP(viewState: .registration)
     }
 }
 
 // MARK: - OTPNavigationDelegate
 
 extension AuthorizationCoordinator: OTPNavigationDelegate {
-    func didFinish(_ viewController: OTPViewController) {
+    func didConfirmForLogin(_ viewController: OTPViewController) {
         
+    }
+    
+    func didConfirmForPasswordReset(_ viewController: OTPViewController) {
+        showPasswordReset()
+    }
+}
+
+// MARK: - PasswordResetNavigationDelegate
+
+extension AuthorizationCoordinator: PasswordResetNavigationDelegate {
+    func didFinish(_ viewController: PasswordResetViewController) {
+        router.popToRootModule()
     }
 }

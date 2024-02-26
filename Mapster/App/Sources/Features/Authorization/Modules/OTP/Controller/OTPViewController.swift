@@ -9,17 +9,18 @@ import SnapKit
 import UIKit
 
 protocol OTPNavigationDelegate: AnyObject {
-    func didFinish(_ viewController: OTPViewController)
+    func didConfirmForLogin(_ viewController: OTPViewController)
+    func didConfirmForPasswordReset(_ viewController: OTPViewController)
 }
 
 final class OTPViewController: UIViewController {
     enum ViewSate {
-        case authorization
+        case registration
         case passwordReset
     }
     
     weak var navigationDelegate: OTPNavigationDelegate?
-    private var viewState: ViewSate = .authorization
+    private var viewState: ViewSate = .registration
     private var timer: Timer?
     private var countdown: Int = 61
     
@@ -111,7 +112,12 @@ final class OTPViewController: UIViewController {
     
     @objc
     private func actionButtonDidTap() {
-        navigationDelegate?.didFinish(self)
+        switch viewState {
+        case .registration:
+            navigationDelegate?.didConfirmForLogin(self)
+        case .passwordReset:
+            navigationDelegate?.didConfirmForPasswordReset(self)
+        }
     }
     
     @objc
@@ -165,7 +171,7 @@ final class OTPViewController: UIViewController {
     
     private func setupViews() {
         switch viewState {
-        case .authorization:
+        case .registration:
             titleLabel.text = "Последний шаг"
         case .passwordReset:
             titleLabel.text = "Сбросить пароль"
@@ -173,7 +179,7 @@ final class OTPViewController: UIViewController {
         [titleLabel, descriptionLabel, codeStackView, actionButton, textStackView, timerLabel].forEach {
             view.addSubview($0)
         }
-        view.backgroundColor = .systemBackground
+        view.backgroundColor = .white
     }
     
     private func setupConstraints() {

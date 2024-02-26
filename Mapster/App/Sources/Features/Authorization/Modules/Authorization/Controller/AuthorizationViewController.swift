@@ -30,6 +30,7 @@ final class AuthorizationViewController: UIViewController {
             nameTextField,
             phoneTextField,
             passwordTextField,
+            repeatPasswordTextField,
             checkboxView
         ])
         stackView.axis = .vertical
@@ -56,8 +57,9 @@ final class AuthorizationViewController: UIViewController {
         return label
     }()
     
-    private var nameTextField: UITextField = {
+    private lazy var nameTextField: UITextField = {
         let textField = UITextField()
+        textField.delegate = self
         textField.placeholder = "Имя"
         textField.borderStyle = .roundedRect
         textField.backgroundColor = UIColor(named: "TextField")
@@ -80,7 +82,20 @@ final class AuthorizationViewController: UIViewController {
     
     private lazy var passwordTextField: UITextField = {
         let textField = UITextField()
+        textField.delegate = self
         textField.placeholder = "Пароль"
+        textField.borderStyle = .roundedRect
+        textField.backgroundColor = UIColor(named: "TextField")
+        textField.font = Font.mulish(name: .light, size: 14)
+        textField.addPaddingAndIcon(.init(named: "lock"), padding: 20, isLeftView: false)
+        textField.isSecureTextEntry = true
+        return textField
+    }()
+    
+    private lazy var repeatPasswordTextField: UITextField = {
+        let textField = UITextField()
+        textField.delegate = self
+        textField.placeholder = "Повторите пароль"
         textField.borderStyle = .roundedRect
         textField.backgroundColor = UIColor(named: "TextField")
         textField.font = Font.mulish(name: .light, size: 14)
@@ -139,8 +154,15 @@ final class AuthorizationViewController: UIViewController {
         case .authorization:
             navigationDelegate?.didFinishAuthorization(self)
         case .registration:
-            if checkPasswordValidity() {
+            guard let password = passwordTextField.text,
+                  let repeatPassword = repeatPasswordTextField.text else { return }
+            do {
+                try PasswordValidator.checkPasswordValidity(password: password, repeatPassword: repeatPassword)
                 navigationDelegate?.didFinishRegistration(self)
+            } catch let error as PasswordError {
+                showPasswordAlert(message: error.failureReason)
+            } catch {
+                return
             }
         }
     }
@@ -155,12 +177,14 @@ final class AuthorizationViewController: UIViewController {
         switch viewState {
         case .authorization:
             nameTextField.isHidden = true
+            repeatPasswordTextField.isHidden = true
             checkboxView.configure(with: .init(viewState: viewState))
             actionButton.setTitle("Войти", for: .normal)
             accountLabel.text = "Нет аккаунта?"
             loginLabel.text = "Зарегистрироваться"
         case .registration:
             nameTextField.isHidden = false
+            repeatPasswordTextField.isHidden = false
             checkboxView.configure(with: .init(viewState: viewState))
             actionButton.setTitle("Зарегистрироваться", for: .normal)
             accountLabel.text = "Уже есть аккаунт?"
@@ -169,7 +193,16 @@ final class AuthorizationViewController: UIViewController {
     }
     
     private func checkValidity() -> Bool {
-        checkPhoneNumberValidity() && !(passwordTextField.text?.isEmpty ?? true) && !(nameTextField.text?.isEmpty ?? true) && checkboxView.isSelected
+        switch viewState {
+        case .authorization:
+            return checkPhoneNumberValidity() && !(passwordTextField.text?.isEmpty ?? true)
+        case .registration:
+            return checkPhoneNumberValidity() &&
+            !(passwordTextField.text?.isEmpty ?? true) &&
+            !(repeatPasswordTextField.text?.isEmpty ?? true) &&
+            !(nameTextField.text?.isEmpty ?? true) &&
+            checkboxView.isSelected
+        }
     }
     
     private func checkPhoneNumberValidity() -> Bool {
@@ -179,20 +212,9 @@ final class AuthorizationViewController: UIViewController {
         return predicate.evaluate(with: numericPhoneNumber)
     }
     
-    private func checkPasswordValidity() -> Bool {
-        let password = passwordTextField.text
-        let passwordRegex = "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,}$"
-        let predicate = NSPredicate(format: "SELF MATCHES %@", passwordRegex)
-        let status = predicate.evaluate(with: password)
-        if !status {
-            showPasswordAlert()
-        }
-        return status
-    }
-    
-    func showPasswordAlert() {
+    private func showPasswordAlert(message: String?) {
         let alert = UIAlertController(title: "Ошибка",
-                                      message: "Пароль должен содержать минимум 8 символов, хотя бы 1 букву и 1 цифру",
+                                      message: message,
                                       preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
         present(alert, animated: true, completion: nil)
@@ -216,6 +238,9 @@ final class AuthorizationViewController: UIViewController {
             $0.height.equalTo(50)
         }
         passwordTextField.snp.makeConstraints {
+            $0.height.equalTo(50)
+        }
+        repeatPasswordTextField.snp.makeConstraints {
             $0.height.equalTo(50)
         }
         actionButton.snp.makeConstraints {

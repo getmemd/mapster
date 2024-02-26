@@ -19,4 +19,10 @@ final class AuthorizationModuleFactory {
         viewController.navigationDelegate = delegate
         return viewController
     }
+    
+    func makePasswordReset(delegate: PasswordResetNavigationDelegate) -> PasswordResetViewController {
+        let viewController = PasswordResetViewController()
+        viewController.navigationDelegate = delegate
+        return viewController
+    }
 }
