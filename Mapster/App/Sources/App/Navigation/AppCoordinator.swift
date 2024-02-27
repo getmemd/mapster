@@ -12,6 +12,12 @@ final class AppCoordinator: Coordinator {
         runOnboardingFlow() // Запускаем процесс онбординга
     }
     
+    private func runMainFlow() {
+        let coordinator = MainCoordinator(router: router, delegate: self)
+        addDependency(coordinator)
+        coordinator.start()
+    }
+    
     private func runOnboardingFlow() {
         let coordinator = OnboardingCoordinator(router: router, delegate: self) // Создаем координатор онбординга
         addDependency(coordinator) // Добавляем зависимость от координатора онбординга
@@ -22,6 +28,14 @@ final class AppCoordinator: Coordinator {
         let coordinator = AuthorizationCoordinator(router: router, delegate: self) // Создаем координатор авторизации
         addDependency(coordinator) // Добавляем зависимость от координатора авторизации
         coordinator.start() // Запускаем процесс авторизации
+    }
+}
+
+// MARK: - MainCoordinatorDelegate
+
+extension AppCoordinator: MainCoordinatorDelegate {
+    func didFinish(_ coordinator: MainCoordinator) {
+        removeDependency(coordinator)
     }
 }
 
@@ -39,5 +53,6 @@ extension AppCoordinator: OnboardingCoordinatorDelegate {
 extension AppCoordinator: AuthorizationCoordinatorDelegate {
     func didFinish(_ coordinator: AuthorizationCoordinator) {
         removeDependency(coordinator) // Удаляем зависимость от завершившегося координатора авторизации
+        runMainFlow()
     }
 }

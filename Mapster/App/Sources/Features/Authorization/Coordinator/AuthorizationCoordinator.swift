@@ -36,4 +36,50 @@ final class AuthorizationCoordinator: Coordinator {
         let module = moduleFactory.makeAuthorization()
         router.setRootModule(module) // Устанавливаем экран авторизации как корневой
     }
+    
+    private func showOTP(viewState: OTPViewController.ViewSate) {
+        let module = moduleFactory.makeOTP(viewState: viewState, delegate: self)
+        router.push(module)
+    }
+    
+    private func showPasswordReset() {
+        let module = moduleFactory.makePasswordReset(delegate: self)
+        router.push(module)
+    }
+}
+
+// MARK: - AuthorizationNavigationDelegate
+
+extension AuthorizationCoordinator: AuthorizationNavigationDelegate {
+    func didTapForgotPassword(_ viewController: AuthorizationViewController) {
+        showOTP(viewState: .passwordReset)
+    }
+    
+    func didFinishAuthorization(_ viewController: AuthorizationViewController) {
+        delegate?.didFinish(self)
+    }
+    
+    func didFinishRegistration(_ viewController: AuthorizationViewController) {
+        showOTP(viewState: .registration)
+    }
+}
+
+// MARK: - OTPNavigationDelegate
+
+extension AuthorizationCoordinator: OTPNavigationDelegate {
+    func didConfirmForLogin(_ viewController: OTPViewController) {
+        delegate?.didFinish(self)
+    }
+    
+    func didConfirmForPasswordReset(_ viewController: OTPViewController) {
+        showPasswordReset()
+    }
+}
+
+// MARK: - PasswordResetNavigationDelegate
+
+extension AuthorizationCoordinator: PasswordResetNavigationDelegate {
+    func didFinish(_ viewController: PasswordResetViewController) {
+        router.popToRootModule()
+    }
 }

@@ -42,7 +42,6 @@ final class AuthorizationCheckboxView: UIView {
     // Текстовое представление для отображения текста с ссылкой
     private var textView: UITextView = {
         let textView = UITextView()
-        textView.isSelectable = true
         textView.isUserInteractionEnabled = true
         textView.isEditable = false
         textView.dataDetectorTypes = .link
