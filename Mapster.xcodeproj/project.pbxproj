@@ -38,7 +38,6 @@
 		C581908E2B8CCC53001BE36E /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C581908D2B8CCC53001BE36E /* MainCoordinator.swift */; };
 		C58190902B8CCDA6001BE36E /* MainModuleFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = C581908F2B8CCDA6001BE36E /* MainModuleFactory.swift */; };
 		C58190952B8CD27B001BE36E /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C58190942B8CD27B001BE36E /* HomeViewController.swift */; };
-		C58190972B8CF5AF001BE36E /* LocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C58190962B8CF5AF001BE36E /* LocationService.swift */; };
 		C5D9DCDB2B8B3842000B010C /* PasswordResetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5D9DCDA2B8B3842000B010C /* PasswordResetViewController.swift */; };
 		C5D9DCDD2B8B3D36000B010C /* PasswordValidatationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5D9DCDC2B8B3D36000B010C /* PasswordValidatationService.swift */; };
 		C5F55BBF2B8772100053D5BB /* OTPViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5F55BBE2B8772100053D5BB /* OTPViewController.swift */; };
@@ -76,7 +75,6 @@
 		C581908D2B8CCC53001BE36E /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
 		C581908F2B8CCDA6001BE36E /* MainModuleFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainModuleFactory.swift; sourceTree = "<group>"; };
 		C58190942B8CD27B001BE36E /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
-		C58190962B8CF5AF001BE36E /* LocationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationService.swift; sourceTree = "<group>"; };
 		C5D9DCDA2B8B3842000B010C /* PasswordResetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordResetViewController.swift; sourceTree = "<group>"; };
 		C5D9DCDC2B8B3D36000B010C /* PasswordValidatationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordValidatationService.swift; sourceTree = "<group>"; };
 		C5F55BBE2B8772100053D5BB /* OTPViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTPViewController.swift; sourceTree = "<group>"; };
@@ -167,7 +165,6 @@
 			isa = PBXGroup;
 			children = (
 				C511A8282B811ED9002DB0E4 /* Font.swift */,
-				C58190962B8CF5AF001BE36E /* LocationService.swift */,
 				C5D9DCDC2B8B3D36000B010C /* PasswordValidatationService.swift */,
 				C5142E072B835FE400384411 /* UITextField+ViewPadding.swift */,
 			);
@@ -538,7 +535,6 @@
 				C581908E2B8CCC53001BE36E /* MainCoordinator.swift in Sources */,
 				C53BD28A2B7E335F0078D28E /* OnboardingViewModel.swift in Sources */,
 				C581908B2B8CCBF0001BE36E /* ContainerController.swift in Sources */,
-				C58190972B8CF5AF001BE36E /* LocationService.swift in Sources */,
 				C5142E0E2B836DD200384411 /* ActionButton.swift in Sources */,
 				C53BD27F2B7E27850078D28E /* OnboardingViewController.swift in Sources */,
 				C50597B52B8235C00058B519 /* AuthorizationCheckboxView.swift in Sources */,

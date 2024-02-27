@@ -9,7 +9,7 @@ import Foundation
 
 final class AppCoordinator: Coordinator {
     override func start() {
-        runMainFlow()
+        runOnboardingFlow()
     }
     
     private func runMainFlow() {
@@ -53,5 +53,6 @@ extension AppCoordinator: OnboardingCoordinatorDelegate {
 extension AppCoordinator: AuthorizationCoordinatorDelegate {
     func didFinish(_ coordinator: AuthorizationCoordinator) {
         removeDependency(coordinator)
+        runMainFlow()
     }
 }

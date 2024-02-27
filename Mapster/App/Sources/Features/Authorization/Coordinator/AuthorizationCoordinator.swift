@@ -48,7 +48,7 @@ extension AuthorizationCoordinator: AuthorizationNavigationDelegate {
     }
     
     func didFinishAuthorization(_ viewController: AuthorizationViewController) {
-        
+        delegate?.didFinish(self)
     }
     
     func didFinishRegistration(_ viewController: AuthorizationViewController) {
@@ -60,7 +60,7 @@ extension AuthorizationCoordinator: AuthorizationNavigationDelegate {
 
 extension AuthorizationCoordinator: OTPNavigationDelegate {
     func didConfirmForLogin(_ viewController: OTPViewController) {
-        
+        delegate?.didFinish(self)
     }
     
     func didConfirmForPasswordReset(_ viewController: OTPViewController) {

@@ -35,6 +35,7 @@ final class HomeViewController: UIViewController {
     
     private func setupViews() {
         tabBarItem = .init(title: "Главная", image: .init(named: "home"), tag: 0)
+        tabBarController?.selectedIndex = 0
         view.addSubview(mapView)
     }
     
@@ -48,18 +49,16 @@ final class HomeViewController: UIViewController {
 // MARK: - CLLocationManagerDelegate
 
 extension HomeViewController: CLLocationManagerDelegate {
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        locationManager?.stopUpdatingLocation()
-        guard let location = locations.last else {
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        switch status {
+        case .authorizedAlways, .authorizedWhenInUse, .authorized:
+            guard let location = manager.location else { return }
+            centerToLocation(location)
+        case .notDetermined:
+            break
+        default:
             presentPermissionDeniedAlert()
-            return
         }
-        getGeoLocation(location: location)
-    }
-    
-    private func stopLocationManager() {
-        locationManager?.stopUpdatingLocation()
-        locationManager = nil
     }
     
     private func attemptLocationAccess() {
@@ -81,23 +80,16 @@ extension HomeViewController: CLLocationManagerDelegate {
     }
     
     private func presentPermissionDeniedAlert() {
-        stopLocationManager()
-        let alert = UIAlertController(title: "Ошибка",
-                                      message: "Приложению требуется доступ к геолокации",
+        let alert = UIAlertController(title: "Требуется доступ к геолокации",
+                                      message: "Для полной функциональности приложения требуется доступ к вашему местоположению.",
                                       preferredStyle: .alert)
-        present(alert, animated: true)
-    }
-    
-    private func getGeoLocation(location: CLLocation) {
-        CLGeocoder().reverseGeocodeLocation(location, preferredLocale: .current) { [weak self] placemarks, _ in
-            guard placemarks?.first?.isoCountryCode != "KZ" else {
-                self?.stopLocationManager()
-                self?.centerToLocation(location)
-                return
+        alert.addAction(UIAlertAction(title: "Открыть настройки", style: .default) { _ in
+            if let url = URL(string: UIApplication.openSettingsURLString), UIApplication.shared.canOpenURL(url) {
+                UIApplication.shared.open(url, options: [:], completionHandler: nil)
             }
-//            self?.alertCompletion()
-            print("Alert")
-        }
+        })
+        alert.addAction(UIAlertAction(title: "Отмена", style: .cancel, handler: nil))
+        present(alert, animated: true, completion: nil)
     }
 }
 
