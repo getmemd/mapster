@@ -9,7 +9,13 @@ import Foundation
 
 final class AppCoordinator: Coordinator {
     override func start() {
-        runOnboardingFlow()
+        runMainFlow()
+    }
+    
+    private func runMainFlow() {
+        let coordinator = MainCoordinator(router: router, delegate: self)
+        addDependency(coordinator)
+        coordinator.start()
     }
     
     private func runOnboardingFlow() {
@@ -22,6 +28,14 @@ final class AppCoordinator: Coordinator {
         let coordinator = AuthorizationCoordinator(router: router, delegate: self)
         addDependency(coordinator)
         coordinator.start()
+    }
+}
+
+// MARK: - MainCoordinatorDelegate
+
+extension AppCoordinator: MainCoordinatorDelegate {
+    func didFinish(_ coordinator: MainCoordinator) {
+        removeDependency(coordinator)
     }
 }
 
@@ -39,6 +53,5 @@ extension AppCoordinator: OnboardingCoordinatorDelegate {
 extension AppCoordinator: AuthorizationCoordinatorDelegate {
     func didFinish(_ coordinator: AuthorizationCoordinator) {
         removeDependency(coordinator)
-        
     }
 }

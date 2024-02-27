@@ -1,5 +1,5 @@
 //
-//  PasswordValidator.swift
+//  PasswordValidatationService.swift
 //  Mapster
 //
 //  Created by Adilkhan Medeuyev on 25.02.2024.
@@ -22,7 +22,7 @@ enum PasswordError: LocalizedError {
     }
 }
 
-final class PasswordValidator {
+final class PasswordValidatationService {
     static func checkPasswordValidity(password: String, repeatPassword: String? = nil) throws {
         let passwordRegex = "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,}$"
         let predicate = NSPredicate(format: "SELF MATCHES %@", passwordRegex)

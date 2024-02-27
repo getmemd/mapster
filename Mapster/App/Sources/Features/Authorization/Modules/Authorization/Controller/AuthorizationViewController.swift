@@ -157,7 +157,7 @@ final class AuthorizationViewController: UIViewController {
             guard let password = passwordTextField.text,
                   let repeatPassword = repeatPasswordTextField.text else { return }
             do {
-                try PasswordValidator.checkPasswordValidity(password: password, repeatPassword: repeatPassword)
+                try PasswordValidatationService.checkPasswordValidity(password: password, repeatPassword: repeatPassword)
                 navigationDelegate?.didFinishRegistration(self)
             } catch let error as PasswordError {
                 showPasswordAlert(message: error.failureReason)
