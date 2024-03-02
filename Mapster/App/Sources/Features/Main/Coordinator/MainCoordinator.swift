@@ -2,7 +2,7 @@
 //  MainCoordinator.swift
 //  Mapster
 //
-//  Created by Adilkhan Medeuyev on 26.02.2024.
+//  Created by User on 26.02.2024.
 //
 
 import Foundation
@@ -25,6 +25,7 @@ final class MainCoordinator: Coordinator {
         showTabBar()
     }
     
+    // Создает модули и присваивет их в таббар
     private func showTabBar() {
         let homeModule = moduleFactory.makeHome(delegate: self)
         let search = UIViewController()

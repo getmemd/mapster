@@ -2,14 +2,16 @@
 //  OTPTextField.swift
 //  Mapster
 //
-//  Created by Adilkhan Medeuyev on 23.02.2024.
+//  Created by User on 23.02.2024.
 //
 
 import SnapKit
 import UIKit
 
 final class OTPTextField: UITextField {
+    // Пердыдущий символ
     weak var previousTextField: OTPTextField?
+    // Следующий символ
     weak var nextTextField: OTPTextField?
     
     init() {
@@ -22,11 +24,13 @@ final class OTPTextField: UITextField {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // Метод удаления который будет переносить на предыдущий символ
     override public func deleteBackward(){
         text = ""
         previousTextField?.becomeFirstResponder()
     }
     
+    // Настройка представлений
     private func setupViews() {
         textAlignment = .center
         backgroundColor = .lightGray.withAlphaComponent(0.2)

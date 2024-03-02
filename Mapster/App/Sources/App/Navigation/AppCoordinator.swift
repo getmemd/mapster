@@ -9,25 +9,29 @@ import Foundation
 
 final class AppCoordinator: Coordinator {
     override func start() {
-        runOnboardingFlow() // Запускаем процесс онбординга
+        // Запускаем процесс онбординга
+        runOnboardingFlow()
     }
     
     private func runMainFlow() {
+        // Создаем основной координатор, добавляем зависимость от координатора, запускаем процесс
         let coordinator = MainCoordinator(router: router, delegate: self)
         addDependency(coordinator)
         coordinator.start()
     }
     
     private func runOnboardingFlow() {
-        let coordinator = OnboardingCoordinator(router: router, delegate: self) // Создаем координатор онбординга
-        addDependency(coordinator) // Добавляем зависимость от координатора онбординга
-        coordinator.start() // Запускаем процесс онбординга
+        // Создаем координатор онбординга, добавляем зависимость от координатора, запускаем процесс
+        let coordinator = OnboardingCoordinator(router: router, delegate: self)
+        addDependency(coordinator)
+        coordinator.start()
     }
     
     private func runAuthorizationFlow() {
-        let coordinator = AuthorizationCoordinator(router: router, delegate: self) // Создаем координатор авторизации
-        addDependency(coordinator) // Добавляем зависимость от координатора авторизации
-        coordinator.start() // Запускаем процесс авторизации
+        // Создаем координатор авторизации, добавляем зависимость от координатора, запускаем процесс
+        let coordinator = AuthorizationCoordinator(router: router, delegate: self)
+        addDependency(coordinator)
+        coordinator.start()
     }
 }
 
@@ -35,6 +39,7 @@ final class AppCoordinator: Coordinator {
 
 extension AppCoordinator: MainCoordinatorDelegate {
     func didFinish(_ coordinator: MainCoordinator) {
+        // Удаляем зависимость от завершившегося основного координатора
         removeDependency(coordinator)
     }
 }
@@ -43,8 +48,9 @@ extension AppCoordinator: MainCoordinatorDelegate {
 
 extension AppCoordinator: OnboardingCoordinatorDelegate {
     func didFinish(_ coordinator: OnboardingCoordinator) {
-        removeDependency(coordinator) // Удаляем зависимость от завершившегося координатора онбординга
-        runAuthorizationFlow() // Запускаем процесс авторизации
+        // Удаляем зависимость от завершившегося координатора онбординга и запускаем процесс авторизации
+        removeDependency(coordinator)
+        runAuthorizationFlow()
     }
 }
 
@@ -52,7 +58,8 @@ extension AppCoordinator: OnboardingCoordinatorDelegate {
 
 extension AppCoordinator: AuthorizationCoordinatorDelegate {
     func didFinish(_ coordinator: AuthorizationCoordinator) {
-        removeDependency(coordinator) // Удаляем зависимость от завершившегося координатора авторизации
+        // Удаляем зависимость от завершившегося координатора авторизации и запускаем основной процесс
+        removeDependency(coordinator)
         runMainFlow()
     }
 }

@@ -2,18 +2,21 @@
 //  OTPViewController.swift
 //  Mapster
 //
-//  Created by Adilkhan Medeuyev on 22.02.2024.
+//  Created by User on 22.02.2024.
 //
 
 import SnapKit
 import UIKit
 
 protocol OTPNavigationDelegate: AnyObject {
+    // Метод делегата вызывается, когда пользователь подтверждает вход
     func didConfirmForLogin(_ viewController: OTPViewController)
+    // Метод делегата вызывается, когда пользователь подтверждает сброс пароля
     func didConfirmForPasswordReset(_ viewController: OTPViewController)
 }
 
 final class OTPViewController: UIViewController {
+    // Перечисление, представляющее различные состояния экрана
     enum ViewSate {
         case registration
         case passwordReset
@@ -21,11 +24,15 @@ final class OTPViewController: UIViewController {
     
     weak var navigationDelegate: OTPNavigationDelegate?
     private var viewState: ViewSate = .registration
+    // Таймер
     private var timer: Timer?
+    // Время таймера
     private var countdown: Int = 61
     
+    // Поля для ввода OTP
     private var textFields: [OTPTextField] = []
     
+    // Главный лейбл
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.font = Font.mulish(name: .extraBold, size: 24)
@@ -33,6 +40,7 @@ final class OTPViewController: UIViewController {
         return label
     }()
     
+    // Лейбл описания
     private let descriptionLabel: UILabel = {
         let label = UILabel()
         label.text = "Для успешного подтверждения, введите  последние 4 цифры номера, с которого поступил звонок."
@@ -41,6 +49,7 @@ final class OTPViewController: UIViewController {
         return label
     }()
     
+    // Стэк для ввода OTP
     private lazy var codeStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.spacing = 14
@@ -49,6 +58,7 @@ final class OTPViewController: UIViewController {
         return stackView
     }()
     
+    // Кнопка для продолжения
     private lazy var actionButton: ActionButton = {
         let button = ActionButton()
         button.addTarget(self, action: #selector(actionButtonDidTap), for: .touchUpInside)
@@ -57,6 +67,7 @@ final class OTPViewController: UIViewController {
         return button
     }()
     
+    // Стэк для текста
     private lazy var textStackView: UIStackView = {
         let stackView = UIStackView(arrangedSubviews: [codeLabel, againLabel])
         stackView.spacing = 4
@@ -71,6 +82,7 @@ final class OTPViewController: UIViewController {
         return label
     }()
     
+    // Текст для отправления кода еще раз
     private lazy var againLabel: UILabel = {
         let label = UILabel()
         label.text = "Получить звонок еще раз"
@@ -84,6 +96,7 @@ final class OTPViewController: UIViewController {
         return label
     }()
     
+    // Лейбл с таймером
     private lazy var timerLabel: UILabel = {
         let label = UILabel()
         label.text = "Запросите новый код через 01:00"
@@ -110,6 +123,7 @@ final class OTPViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // Нажатие на кнопку продолжить
     @objc
     private func actionButtonDidTap() {
         switch viewState {
@@ -120,12 +134,14 @@ final class OTPViewController: UIViewController {
         }
     }
     
+    // Нажатие на текст получить код еще раз
     @objc
     private func againDidTap() {
         guard timer == nil else { return }
         startTimer()
     }
     
+    // Метод обновления таймера
     @objc
     private func updateTimer() {
         timerLabel.isHidden = countdown == 0
@@ -139,6 +155,7 @@ final class OTPViewController: UIViewController {
         }
     }
     
+    // Форматирование счета таймера
     private func formatSeconds(seconds: Int) -> String {
         let minutes = seconds / 61
         let remainingSeconds = seconds % 60
@@ -146,6 +163,7 @@ final class OTPViewController: UIViewController {
         return formattedTime
     }
     
+    // Настройка текстовых полей
     private func setupTextFields() {
         codeStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
         for index in 0..<4 {
@@ -160,6 +178,7 @@ final class OTPViewController: UIViewController {
         textFields[0].becomeFirstResponder()
     }
     
+    // Запуск таймера
     private func startTimer() {
         countdown = 60
         timer = Timer.scheduledTimer(timeInterval: 1,
@@ -169,6 +188,7 @@ final class OTPViewController: UIViewController {
                                      repeats: true)
     }
     
+    // Настройка представлений
     private func setupViews() {
         switch viewState {
         case .registration:
@@ -182,6 +202,7 @@ final class OTPViewController: UIViewController {
         view.backgroundColor = .white
     }
     
+    // Установка констреинтов
     private func setupConstraints() {
         titleLabel.snp.makeConstraints {
             $0.top.equalTo(view.safeAreaLayoutGuide).offset(24)
@@ -214,10 +235,12 @@ final class OTPViewController: UIViewController {
 // MARK: - UITextFieldDelegate
 
 extension OTPViewController: UITextFieldDelegate {
+    // Вызывается после завершения изменений текста в текстовых полях
     func textFieldDidEndEditing(_ textField: UITextField) {
         checkForValidity()
     }
     
+    // Вызывается до изменения символа в текстовом поле
     func textField(_ textField: UITextField, shouldChangeCharactersIn range:NSRange,
                    replacementString string: String) -> Bool {
         guard let textField = textField as? OTPTextField else { return true }
@@ -242,6 +265,7 @@ extension OTPViewController: UITextFieldDelegate {
         }
     }
     
+    // Проверка на текст во всех полях
     private func checkForValidity() {
         for fields in textFields {
             if (fields.text?.trimmingCharacters(in: CharacterSet.whitespaces) == "") {
@@ -253,6 +277,7 @@ extension OTPViewController: UITextFieldDelegate {
         actionButton.isEnabled = true
     }
     
+    // Метод для вставки текста и буфера обмена
     private final func autoFillTextField(with string: String) {
         var remainingStringStack = string.reversed().compactMap{String($0)}
         for textField in textFields {

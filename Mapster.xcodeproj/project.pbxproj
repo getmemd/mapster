@@ -394,16 +394,8 @@
 			isa = PBXGroup;
 			children = (
 				C5D9DCD92B8B3836000B010C /* Controller */,
-				C5D9DCD82B8B3833000B010C /* View */,
 			);
 			path = PasswordReset;
-			sourceTree = "<group>";
-		};
-		C5D9DCD82B8B3833000B010C /* View */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = View;
 			sourceTree = "<group>";
 		};
 		C5D9DCD92B8B3836000B010C /* Controller */ = {

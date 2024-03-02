@@ -2,7 +2,7 @@
 //  HomeViewController.swift
 //  Mapster
 //
-//  Created by Adilkhan Medeuyev on 26.02.2024.
+//  Created by User on 26.02.2024.
 //
 
 import CoreLocation
@@ -16,8 +16,10 @@ protocol HomeNavigationDelegate: AnyObject {
 
 final class HomeViewController: UIViewController {
     weak var navigationDelegate: HomeNavigationDelegate?
+    // Менеджер локации
     private var locationManager: CLLocationManager?
     
+    // Представление карты
     private lazy var mapView: MKMapView = {
         let mapView = MKMapView()
         mapView.delegate = self
@@ -49,6 +51,7 @@ final class HomeViewController: UIViewController {
 // MARK: - CLLocationManagerDelegate
 
 extension HomeViewController: CLLocationManagerDelegate {
+    // Вызывается при изменений статуса разрешения на геолокацию
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         switch status {
         case .authorizedAlways, .authorizedWhenInUse, .authorized:
@@ -61,6 +64,7 @@ extension HomeViewController: CLLocationManagerDelegate {
         }
     }
     
+    // Запросить доступ на разрешение геолокации
     private func attemptLocationAccess() {
         createLocationManager()
         DispatchQueue.global().async { [weak self] in
@@ -72,6 +76,7 @@ extension HomeViewController: CLLocationManagerDelegate {
         }
     }
     
+    // Создать менеджер локации
     private func createLocationManager() {
         let manager = CLLocationManager()
         manager.delegate = self
@@ -79,11 +84,13 @@ extension HomeViewController: CLLocationManagerDelegate {
         locationManager = manager
     }
     
+    // Уведомление о доступе на геолокацию
     private func presentPermissionDeniedAlert() {
         let alert = UIAlertController(title: "Требуется доступ к геолокации",
                                       message: "Для полной функциональности приложения требуется доступ к вашему местоположению.",
                                       preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Открыть настройки", style: .default) { _ in
+            // Открывает настройки
             if let url = URL(string: UIApplication.openSettingsURLString), UIApplication.shared.canOpenURL(url) {
                 UIApplication.shared.open(url, options: [:], completionHandler: nil)
             }
@@ -96,6 +103,7 @@ extension HomeViewController: CLLocationManagerDelegate {
 // MARK: - MKMapViewDelegate
 
 extension HomeViewController: MKMapViewDelegate {
+    // Зум на текущую локацию
     func centerToLocation(_ location: CLLocation,
                           regionRadius: CLLocationDistance = 1000) {
         let coordinateRegion = MKCoordinateRegion(

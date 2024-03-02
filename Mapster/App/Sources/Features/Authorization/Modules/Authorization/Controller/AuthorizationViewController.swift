@@ -14,6 +14,7 @@ protocol AuthorizationNavigationDelegate: AnyObject {
     func didFinishAuthorization(_ viewController: AuthorizationViewController)
     // Метод вызывается после завершения операции регистрации
     func didFinishRegistration(_ viewController: AuthorizationViewController)
+    // Метод вызывается при нажатии на Забыли пароль
     func didTapForgotPassword(_ viewController: AuthorizationViewController)
 }
 
@@ -45,6 +46,7 @@ final class AuthorizationViewController: UIViewController {
         return stackView
     }()
     
+    // Лейбл названия
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.text = "Mapster"
@@ -55,6 +57,7 @@ final class AuthorizationViewController: UIViewController {
         return label
     }()
     
+    // Лейбл описания
     private let descriptionLabel: UILabel = {
         let label = UILabel()
         label.text = "Войдите в систему для доступа к своему аккаунту"
@@ -64,6 +67,7 @@ final class AuthorizationViewController: UIViewController {
         return label
     }()
     
+    // Текстовое поле для ввода имени
     private lazy var nameTextField: UITextField = {
         let textField = UITextField()
         textField.delegate = self
@@ -101,6 +105,7 @@ final class AuthorizationViewController: UIViewController {
         return textField
     }()
     
+    // Текстовое поле для повтора пароля
     private lazy var repeatPasswordTextField: UITextField = {
         let textField = UITextField()
         textField.delegate = self
@@ -170,6 +175,7 @@ final class AuthorizationViewController: UIViewController {
         case .authorization:
             navigationDelegate?.didFinishAuthorization(self)
         case .registration:
+            // Проверка и валидация пароля
             guard let password = passwordTextField.text,
                   let repeatPassword = repeatPasswordTextField.text else { return }
             do {

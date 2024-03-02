@@ -33,15 +33,17 @@ final class AuthorizationCoordinator: Coordinator {
     
     // Метод отображает экран авторизации
     private func showAuthorization() {
-        let module = moduleFactory.makeAuthorization()
+        let module = moduleFactory.makeAuthorization(delegate: self)
         router.setRootModule(module) // Устанавливаем экран авторизации как корневой
     }
     
+    // Метод отображает экран ввода OTP
     private func showOTP(viewState: OTPViewController.ViewSate) {
         let module = moduleFactory.makeOTP(viewState: viewState, delegate: self)
         router.push(module)
     }
     
+    // Метод отображает экран сброса пароля
     private func showPasswordReset() {
         let module = moduleFactory.makePasswordReset(delegate: self)
         router.push(module)
@@ -51,14 +53,17 @@ final class AuthorizationCoordinator: Coordinator {
 // MARK: - AuthorizationNavigationDelegate
 
 extension AuthorizationCoordinator: AuthorizationNavigationDelegate {
+    // Показать экран ввода OTP после нажатия на сброс пароля
     func didTapForgotPassword(_ viewController: AuthorizationViewController) {
         showOTP(viewState: .passwordReset)
     }
     
+    // Закрыть координатор после успешной авторизации
     func didFinishAuthorization(_ viewController: AuthorizationViewController) {
         delegate?.didFinish(self)
     }
     
+    // Показать экран ввода OTP после ввода данных для регистрации
     func didFinishRegistration(_ viewController: AuthorizationViewController) {
         showOTP(viewState: .registration)
     }
@@ -67,10 +72,12 @@ extension AuthorizationCoordinator: AuthorizationNavigationDelegate {
 // MARK: - OTPNavigationDelegate
 
 extension AuthorizationCoordinator: OTPNavigationDelegate {
+    // Закрыть координатор после успешного ввода OTP
     func didConfirmForLogin(_ viewController: OTPViewController) {
         delegate?.didFinish(self)
     }
     
+    // Показать экран сброса пароля после успешного ввода OTP
     func didConfirmForPasswordReset(_ viewController: OTPViewController) {
         showPasswordReset()
     }
@@ -79,6 +86,7 @@ extension AuthorizationCoordinator: OTPNavigationDelegate {
 // MARK: - PasswordResetNavigationDelegate
 
 extension AuthorizationCoordinator: PasswordResetNavigationDelegate {
+    // Возврат к корневому модулю после сброса пароля
     func didFinish(_ viewController: PasswordResetViewController) {
         router.popToRootModule()
     }

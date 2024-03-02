@@ -2,7 +2,7 @@
 //  PasswordResetViewController.swift
 //  Mapster
 //
-//  Created by Adilkhan Medeuyev on 25.02.2024.
+//  Created by User on 25.02.2024.
 //
 
 import SnapKit
@@ -31,6 +31,7 @@ final class PasswordResetViewController: UIViewController {
         return label
     }()
     
+    // Текстовое поле пароля
     private lazy var passwordTextField: UITextField = {
         let textField = UITextField()
         textField.delegate = self
@@ -43,6 +44,7 @@ final class PasswordResetViewController: UIViewController {
         return textField
     }()
     
+    // Текстовое поле повтора пароля
     private lazy var repeatPasswordTextField: UITextField = {
         let textField = UITextField()
         textField.delegate = self
@@ -55,6 +57,7 @@ final class PasswordResetViewController: UIViewController {
         return textField
     }()
     
+    // Кнопка подтвердить
     private lazy var actionButton: ActionButton = {
         let button = ActionButton()
         button.addTarget(self, action: #selector(actionButtonDidTap), for: .touchUpInside)
@@ -69,6 +72,7 @@ final class PasswordResetViewController: UIViewController {
         setupConstraints()
     }
     
+    // Метод для проверки полей после нажатия подтвердить
     @objc
     private func actionButtonDidTap() {
         guard let password = passwordTextField.text,
@@ -84,6 +88,7 @@ final class PasswordResetViewController: UIViewController {
         navigationDelegate?.didFinish(self)
     }
     
+    // Уведомление об ошибке в пароле
     private func showPasswordAlert(message: String?) {
         let alert = UIAlertController(title: "Ошибка",
                                       message: message,
@@ -92,6 +97,7 @@ final class PasswordResetViewController: UIViewController {
         present(alert, animated: true, completion: nil)
     }
     
+    // Проверка на данные в паролях
     private func checkValidity() -> Bool {
         !(passwordTextField.text?.isEmpty ?? true) &&
         !(repeatPasswordTextField.text?.isEmpty ?? true)
@@ -132,6 +138,7 @@ final class PasswordResetViewController: UIViewController {
 // MARK: - UITextFieldDelegate
 
 extension PasswordResetViewController: UITextFieldDelegate {
+    // Вызывается после завершения изменений
     func textFieldDidEndEditing(_ textField: UITextField) {
         actionButton.isEnabled = checkValidity()
     }
