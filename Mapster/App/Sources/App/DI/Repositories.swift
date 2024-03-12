@@ -2,7 +2,7 @@
 //  Repositories.swift
 //  Mapster
 //
-//  Created by Adilkhan Medeuyev on 07.03.2024.
+//  Created by User on 07.03.2024.
 //
 
 import Factory

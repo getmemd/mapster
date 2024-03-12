@@ -2,7 +2,7 @@
 //  PasswordResetStore.swift
 //  Mapster
 //
-//  Created by Adilkhan Medeuyev on 12.03.2024.
+//  Created by User on 12.03.2024.
 //
 
 import Factory
