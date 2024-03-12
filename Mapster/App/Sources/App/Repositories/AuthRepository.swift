@@ -8,6 +8,7 @@
 import FirebaseAuth
 
 final class AuthRepository {
+    // Запрос Firebase на регистрацию/авторизацию
     func authorization(email: String, password: String, isRegistration: Bool) async throws -> AuthDataResult {
         try await withCheckedThrowingContinuation { continuation in
             let completion: ((AuthDataResult?, (any Error)?) -> Void)? = { authResult, error in
@@ -31,6 +32,7 @@ final class AuthRepository {
         }
     }
     
+    // Запрос выхода
     func signOut() {
         let firebaseAuth = Auth.auth()
         do {
@@ -40,18 +42,21 @@ final class AuthRepository {
         }
     }
     
+    // Запрос отправление письма на почту текущего пользователя
     func sendEmailVerification(completion: @escaping (Error?) -> Void) {
         Auth.auth().currentUser?.sendEmailVerification { error in
             completion(error)
         }
     }
     
+    // Запрос обновления пароля
     func updatePassword(password: String, completion: @escaping (Error?) -> Void) {
         Auth.auth().currentUser?.updatePassword(to: password) { error in
             completion(error)
         }
     }
     
+    // Запрос отправления письма на почту на сброс пароля
     func sendPasswordResetEmail(email: String, completion: @escaping (Error?) -> Void) {
         Auth.auth().sendPasswordReset(withEmail: email) { error in
             completion(error)

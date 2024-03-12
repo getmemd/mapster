@@ -11,6 +11,7 @@ final class Repositories: SharedContainer {
     var manager = ContainerManager()
     static var shared = Repositories()
     
+    // Репозиторий авторизации
     var authRepository: Dependency<AuthRepository> {
         self { AuthRepository() }
     }

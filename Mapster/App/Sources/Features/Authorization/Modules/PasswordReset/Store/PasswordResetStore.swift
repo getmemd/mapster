@@ -19,8 +19,10 @@ enum PasswordResetAction {
 }
 
 final class PasswordResetStore: Store<PasswordResetEvent, PasswordResetAction> {
+    // Введенная зависимость репозитория
     @Injected(\Repositories.authRepository) private var authRepository
     
+    // Обработка вызванных экшенов
     override func handleAction(_ action: PasswordResetAction) {
         switch action {
         case let .actionButtonDidTap(password):
@@ -28,6 +30,7 @@ final class PasswordResetStore: Store<PasswordResetEvent, PasswordResetAction> {
         }
     }
     
+    // Вызов запроса на обновление пароля
     private func updatePassword(password: String) {
         sendEvent(.loading)
         authRepository.updatePassword(password: password) { [weak self] error in

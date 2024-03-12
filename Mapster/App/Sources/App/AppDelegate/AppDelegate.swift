@@ -20,21 +20,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     ) -> Bool {
         // Включаем управление клавиатурой
         IQKeyboardManager.shared.enable = true
+        // Настраиваем Firebase
         FirebaseApp.configure()
         Auth.auth().useAppLanguage()
         setupCoordinator()
         return true
     }
     
+    // Настройка навигации
     private func setupCoordinator() {
+        // Создание контейнера
         let container = AppContainer.shared
         let navigationController = UINavigationController()
+        // Создание окна
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.makeKeyAndVisible()
         window?.rootViewController = navigationController
+        // Создание координатора в контейнере
         container.appCoordinator.register {
             AppCoordinator(router: .init(navigationController: navigationController))
         }
+        // Запуск координатора
         container.appCoordinator().start()
     }
 }

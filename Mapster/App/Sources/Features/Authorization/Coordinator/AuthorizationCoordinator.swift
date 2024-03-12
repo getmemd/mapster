@@ -53,6 +53,7 @@ final class AuthorizationCoordinator: Coordinator {
 // MARK: - AuthorizationNavigationDelegate
 
 extension AuthorizationCoordinator: AuthorizationNavigationDelegate {
+    // Закрыть координатор после авторизации
     func didFinishAuthorization(_ viewController: AuthorizationViewController) {
         delegate?.didFinish(self)
     }

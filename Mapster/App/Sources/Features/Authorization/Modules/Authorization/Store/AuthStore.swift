@@ -21,9 +21,11 @@ enum AuthAction {
 }
 
 final class AuthStore: Store<AuthEvent, AuthAction> {
+    // Введенная зависимость репозитория
     @Injected(\Repositories.authRepository) private var authRepository
     var isRegistration = true
     
+    // Обработка вызванных экшенов
     override func handleAction(_ action: AuthAction) {
         switch action {
         case let .actionButtonDidTap(email, password):
@@ -33,6 +35,7 @@ final class AuthStore: Store<AuthEvent, AuthAction> {
         }
     }
     
+    // Вызов запроса авторизации/уведомления
     private func authorization(email: String, password: String) {
         sendEvent(.loading)
         Task {
@@ -52,6 +55,7 @@ final class AuthStore: Store<AuthEvent, AuthAction> {
         }
     }
     
+    // Вызов запроса отправки подтверждения почты
     private func sendEmailVerifcation() {
         sendEvent(.loading)
         authRepository.sendEmailVerification { [weak self] error in
@@ -64,6 +68,7 @@ final class AuthStore: Store<AuthEvent, AuthAction> {
         }
     }
     
+    // Вызов запроса на сброс пароля
     private func sendPasswordReset(email: String) {
         sendEvent(.loading)
         authRepository.sendPasswordResetEmail(email: email) { [weak self] error in

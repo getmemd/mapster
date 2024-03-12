@@ -11,6 +11,7 @@ typealias AppContainer = Container
 typealias Dependency = Factory
 
 extension AppContainer {
+    // Главный координатор
     var appCoordinator: Dependency<AppCoordinator> {
         self {
             AppCoordinator(router: .init(navigationController: .init()))

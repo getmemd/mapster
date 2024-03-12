@@ -55,6 +55,7 @@ final class AuthorizationViewController: BaseViewController {
         return label
     }()
     
+    // Текстовое поле для почты
     private lazy var emailTextField: UITextField = {
         let textField = UITextField()
         textField.delegate = self
@@ -67,6 +68,7 @@ final class AuthorizationViewController: BaseViewController {
         return textField
     }()
     
+    // Текстовое поле для пароля
     private lazy var passwordTextField: UITextField = {
         let textField = UITextField()
         textField.delegate = self
@@ -191,6 +193,7 @@ final class AuthorizationViewController: BaseViewController {
         }
     }
     
+    // Проверка правильности заполнения почты
     private func isValidEmail() -> Bool {
         guard let email = emailTextField.text else { return false }
         let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
@@ -198,10 +201,12 @@ final class AuthorizationViewController: BaseViewController {
         return emailPred.evaluate(with: email)
     }
     
+    // Показ окна уведомления
     private func presentAlert(title: String, message: String?) {
         present(UIAlertController(title: title, message: message, preferredStyle: .alert), animated: true)
     }
     
+    // Настройка наблюдателей эвентов от стора
     private func configureObservers() {
         bindStore(store) { [weak self ] event in
             guard let self else { return }

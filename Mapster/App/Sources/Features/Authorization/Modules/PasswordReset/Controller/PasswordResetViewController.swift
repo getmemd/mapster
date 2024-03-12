@@ -105,6 +105,7 @@ final class PasswordResetViewController: BaseViewController {
         !(repeatPasswordTextField.text?.isEmpty ?? true)
     }
     
+    // Настройка наблюдателей эвентов от стора
     private func configureObservers() {
         bindStore(store) { [weak self ] event in
             guard let self else { return }

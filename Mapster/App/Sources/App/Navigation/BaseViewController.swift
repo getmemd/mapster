@@ -8,6 +8,7 @@
 import UIKit
 
 class BaseViewController: UIViewController {
+    // Лоадер
     let activityIndicator: UIActivityIndicatorView = {
         let indicator = UIActivityIndicatorView(style: .large)
         indicator.hidesWhenStopped = true
@@ -19,6 +20,7 @@ class BaseViewController: UIViewController {
         setupViews()
     }
     
+    // Показ уведомление об ошибке
     func showErrorAlert(message: String?) {
         let alert = UIAlertController(title: "Ошибка",
                                       message: message,
