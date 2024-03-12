@@ -12,8 +12,10 @@ protocol PasswordResetNavigationDelegate: AnyObject {
     func didFinish(_ viewController: PasswordResetViewController)
 }
 
-final class PasswordResetViewController: UIViewController {
+final class PasswordResetViewController: BaseViewController {
     weak var navigationDelegate: PasswordResetNavigationDelegate?
+    private let store = PasswordResetStore()
+    private var bag = Bag()
     
     private let titleLabel: UILabel = {
         let label = UILabel()
@@ -79,7 +81,7 @@ final class PasswordResetViewController: UIViewController {
               let repeatPassword = repeatPasswordTextField.text else { return }
         do {
             try PasswordValidatationService.checkPasswordValidity(password: password, repeatPassword: repeatPassword)
-            navigationDelegate?.didFinish(self)
+            store.sendAction(.actionButtonDidTap(password: password))
         } catch let error as PasswordError {
             showPasswordAlert(message: error.failureReason)
         } catch {
@@ -101,6 +103,23 @@ final class PasswordResetViewController: UIViewController {
     private func checkValidity() -> Bool {
         !(passwordTextField.text?.isEmpty ?? true) &&
         !(repeatPasswordTextField.text?.isEmpty ?? true)
+    }
+    
+    private func configureObservers() {
+        bindStore(store) { [weak self ] event in
+            guard let self else { return }
+            switch event {
+            case let .showError(errorMessage):
+                showErrorAlert(message: errorMessage)
+            case .loading:
+                activityIndicator.startAnimating()
+            case .loadingFinished:
+                activityIndicator.stopAnimating()
+            case .passwordUpdated:
+                navigationDelegate?.didFinish(self)
+            }
+        }
+        .store(in: &bag)
     }
     
     private func setupViews() {

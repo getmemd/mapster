@@ -53,19 +53,8 @@ final class AuthorizationCoordinator: Coordinator {
 // MARK: - AuthorizationNavigationDelegate
 
 extension AuthorizationCoordinator: AuthorizationNavigationDelegate {
-    // Показать экран ввода OTP после нажатия на сброс пароля
-    func didTapForgotPassword(_ viewController: AuthorizationViewController) {
-        showOTP(viewState: .passwordReset)
-    }
-    
-    // Закрыть координатор после успешной авторизации
     func didFinishAuthorization(_ viewController: AuthorizationViewController) {
         delegate?.didFinish(self)
-    }
-    
-    // Показать экран ввода OTP после ввода данных для регистрации
-    func didFinishRegistration(_ viewController: AuthorizationViewController) {
-        showOTP(viewState: .registration)
     }
 }
 

@@ -79,7 +79,7 @@ final class AuthorizationCheckboxView: UIView {
     // Конфигурация представления с использованием модели представления
     func configure(with viewModel: AuthorizationCheckoxViewModel) {
         textView.attributedText = viewModel.attributedString
-        forgotPasswordLabel.isHidden = viewModel.viewState == .registration
+        forgotPasswordLabel.isHidden = viewModel.isRegistration
     }
     
     // Обработка нажатия на ссылку "Забыли пароль?"
