@@ -43,16 +43,8 @@ final class AuthorizationCoordinator: Coordinator {
 // MARK: - AuthorizationNavigationDelegate
 
 extension AuthorizationCoordinator: AuthorizationNavigationDelegate {
-    func didTapForgotPassword(_ viewController: AuthorizationViewController) {
-        showOTP(viewState: .passwordReset)
-    }
-    
     func didFinishAuthorization(_ viewController: AuthorizationViewController) {
         delegate?.didFinish(self)
-    }
-    
-    func didFinishRegistration(_ viewController: AuthorizationViewController) {
-        showOTP(viewState: .registration)
     }
 }
 

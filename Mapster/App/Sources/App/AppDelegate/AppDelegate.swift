@@ -5,6 +5,8 @@
 //  Created by Адиль Медеуев on 15.02.2024.
 //
 
+import FirebaseCore
+import FirebaseAuth
 import IQKeyboardManagerSwift
 import UIKit
 
@@ -12,28 +14,26 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     
-    private lazy var applicationCoordinator: AppCoordinator = {
-        guard let navigationController = window?.rootViewController as? UINavigationController else {
-            fatalError("rootViewController must be NavigationController")
-        }
-        return AppCoordinator(router: Router(navigationController: navigationController))
-    }()
-    
     func application(
         _: UIApplication,
         didFinishLaunchingWithOptions _: [UIApplication.LaunchOptionsKey: Any]? = nil
     ) -> Bool {
         IQKeyboardManager.shared.enable = true
-        setupNavigation()
+        FirebaseApp.configure()
+        Auth.auth().useAppLanguage()
+        setupCoordinator()
         return true
     }
     
-    private func setupNavigation() {
-        let window = UIWindow(frame: UIScreen.main.bounds)
-        self.window = window
-        window.makeKeyAndVisible()
+    private func setupCoordinator() {
+        let container = AppContainer.shared
         let navigationController = UINavigationController()
-        window.rootViewController = navigationController
-        applicationCoordinator.start()
+        window = UIWindow(frame: UIScreen.main.bounds)
+        window?.makeKeyAndVisible()
+        window?.rootViewController = navigationController
+        container.appCoordinator.register {
+            AppCoordinator(router: .init(navigationController: navigationController))
+        }
+        container.appCoordinator().start()
     }
 }

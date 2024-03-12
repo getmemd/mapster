@@ -34,6 +34,20 @@
 		C53BD2842B7E28720078D28E /* SnapKit-Dynamic in Frameworks */ = {isa = PBXBuildFile; productRef = C53BD2832B7E28720078D28E /* SnapKit-Dynamic */; };
 		C53BD2872B7E2EE80078D28E /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C53BD2862B7E2EE80078D28E /* OnboardingView.swift */; };
 		C53BD28A2B7E335F0078D28E /* OnboardingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C53BD2892B7E335F0078D28E /* OnboardingViewModel.swift */; };
+		C57523242B98EC4D00ECCDE3 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = C57523232B98EC4D00ECCDE3 /* FirebaseAuth */; };
+		C57523262B98EC4D00ECCDE3 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = C57523252B98EC4D00ECCDE3 /* FirebaseDatabase */; };
+		C57523292B98EE8A00ECCDE3 /* AuthStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = C57523282B98EE8A00ECCDE3 /* AuthStore.swift */; };
+		C575232D2B98EEEB00ECCDE3 /* UIViewController+bindStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = C575232B2B98EEEB00ECCDE3 /* UIViewController+bindStore.swift */; };
+		C575232E2B98EEEB00ECCDE3 /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = C575232C2B98EEEB00ECCDE3 /* Store.swift */; };
+		C57523312B98EF2600ECCDE3 /* Bag.swift in Sources */ = {isa = PBXBuildFile; fileRef = C57523302B98EF2600ECCDE3 /* Bag.swift */; };
+		C57523332B98EF4D00ECCDE3 /* Combine.swift in Sources */ = {isa = PBXBuildFile; fileRef = C57523322B98EF4D00ECCDE3 /* Combine.swift */; };
+		C57523362B98F65900ECCDE3 /* AuthRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = C57523352B98F65900ECCDE3 /* AuthRepository.swift */; };
+		C57523392B98F79E00ECCDE3 /* Factory in Frameworks */ = {isa = PBXBuildFile; productRef = C57523382B98F79E00ECCDE3 /* Factory */; };
+		C575233C2B98F85100ECCDE3 /* AppContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C575233B2B98F85100ECCDE3 /* AppContainer.swift */; };
+		C575233E2B98F95A00ECCDE3 /* Repositories.swift in Sources */ = {isa = PBXBuildFile; fileRef = C575233D2B98F95A00ECCDE3 /* Repositories.swift */; };
+		C57523402B990A7700ECCDE3 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C575233F2B990A7700ECCDE3 /* GoogleService-Info.plist */; };
+		C57523442B99F33600ECCDE3 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C57523432B99F33600ECCDE3 /* BaseViewController.swift */; };
+		C57523472B9FA69800ECCDE3 /* PasswordResetStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = C57523462B9FA69800ECCDE3 /* PasswordResetStore.swift */; };
 		C581908B2B8CCBF0001BE36E /* ContainerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C581908A2B8CCBF0001BE36E /* ContainerController.swift */; };
 		C581908E2B8CCC53001BE36E /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C581908D2B8CCC53001BE36E /* MainCoordinator.swift */; };
 		C58190902B8CCDA6001BE36E /* MainModuleFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = C581908F2B8CCDA6001BE36E /* MainModuleFactory.swift */; };
@@ -71,6 +85,17 @@
 		C53BD27E2B7E27850078D28E /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		C53BD2862B7E2EE80078D28E /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		C53BD2892B7E335F0078D28E /* OnboardingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewModel.swift; sourceTree = "<group>"; };
+		C57523282B98EE8A00ECCDE3 /* AuthStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthStore.swift; sourceTree = "<group>"; };
+		C575232B2B98EEEB00ECCDE3 /* UIViewController+bindStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+bindStore.swift"; sourceTree = "<group>"; };
+		C575232C2B98EEEB00ECCDE3 /* Store.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Store.swift; sourceTree = "<group>"; };
+		C57523302B98EF2600ECCDE3 /* Bag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bag.swift; sourceTree = "<group>"; };
+		C57523322B98EF4D00ECCDE3 /* Combine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Combine.swift; sourceTree = "<group>"; };
+		C57523352B98F65900ECCDE3 /* AuthRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthRepository.swift; sourceTree = "<group>"; };
+		C575233B2B98F85100ECCDE3 /* AppContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppContainer.swift; sourceTree = "<group>"; };
+		C575233D2B98F95A00ECCDE3 /* Repositories.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Repositories.swift; sourceTree = "<group>"; };
+		C575233F2B990A7700ECCDE3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		C57523432B99F33600ECCDE3 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		C57523462B9FA69800ECCDE3 /* PasswordResetStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordResetStore.swift; sourceTree = "<group>"; };
 		C581908A2B8CCBF0001BE36E /* ContainerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerController.swift; sourceTree = "<group>"; };
 		C581908D2B8CCC53001BE36E /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
 		C581908F2B8CCDA6001BE36E /* MainModuleFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainModuleFactory.swift; sourceTree = "<group>"; };
@@ -86,9 +111,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C57523262B98EC4D00ECCDE3 /* FirebaseDatabase in Frameworks */,
 				C53BD2822B7E28720078D28E /* SnapKit in Frameworks */,
 				C53BD2842B7E28720078D28E /* SnapKit-Dynamic in Frameworks */,
+				C57523392B98F79E00ECCDE3 /* Factory in Frameworks */,
 				C50597B32B8233BF0058B519 /* IQKeyboardManagerSwift in Frameworks */,
+				C57523242B98EC4D00ECCDE3 /* FirebaseAuth in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -128,6 +156,7 @@
 			children = (
 				C50597A92B821C0D0058B519 /* Controller */,
 				C5142E092B83623C00384411 /* Model */,
+				C57523272B98EE8000ECCDE3 /* Store */,
 				C50597AA2B821C110058B519 /* View */,
 			);
 			path = Authorization;
@@ -225,6 +254,7 @@
 			children = (
 				C511A7FC2B811D24002DB0E4 /* Fonts */,
 				C53BD2612B7E217F0078D28E /* Assets.xcassets */,
+				C575233F2B990A7700ECCDE3 /* GoogleService-Info.plist */,
 				C53BD2662B7E217F0078D28E /* Info.plist */,
 				C53BD2632B7E217F0078D28E /* LaunchScreen.storyboard */,
 			);
@@ -271,8 +301,12 @@
 			isa = PBXGroup;
 			children = (
 				C53BD26F2B7E24690078D28E /* AppDelegate */,
+				C575233A2B98F84900ECCDE3 /* DI */,
+				C575232F2B98EF1400ECCDE3 /* Extensions */,
 				C511A8272B811ECB002DB0E4 /* Helpers */,
 				C53BD2732B7E24D30078D28E /* Navigation */,
+				C57523342B98F64A00ECCDE3 /* Repositories */,
+				C575232A2B98EED700ECCDE3 /* Store */,
 				C5142E0C2B836DBF00384411 /* UI */,
 			);
 			path = App;
@@ -284,6 +318,7 @@
 				C53BD2742B7E24E30078D28E /* AppCoordinator.swift */,
 				C53BD2762B7E253D0078D28E /* Coordinator.swift */,
 				C53BD2782B7E258C0078D28E /* Router.swift */,
+				C57523432B99F33600ECCDE3 /* BaseViewController.swift */,
 			);
 			path = Navigation;
 			sourceTree = "<group>";
@@ -337,6 +372,57 @@
 				C53BD2892B7E335F0078D28E /* OnboardingViewModel.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		C57523272B98EE8000ECCDE3 /* Store */ = {
+			isa = PBXGroup;
+			children = (
+				C57523282B98EE8A00ECCDE3 /* AuthStore.swift */,
+			);
+			path = Store;
+			sourceTree = "<group>";
+		};
+		C575232A2B98EED700ECCDE3 /* Store */ = {
+			isa = PBXGroup;
+			children = (
+				C575232C2B98EEEB00ECCDE3 /* Store.swift */,
+				C575232B2B98EEEB00ECCDE3 /* UIViewController+bindStore.swift */,
+			);
+			path = Store;
+			sourceTree = "<group>";
+		};
+		C575232F2B98EF1400ECCDE3 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				C57523302B98EF2600ECCDE3 /* Bag.swift */,
+				C57523322B98EF4D00ECCDE3 /* Combine.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		C57523342B98F64A00ECCDE3 /* Repositories */ = {
+			isa = PBXGroup;
+			children = (
+				C57523352B98F65900ECCDE3 /* AuthRepository.swift */,
+			);
+			path = Repositories;
+			sourceTree = "<group>";
+		};
+		C575233A2B98F84900ECCDE3 /* DI */ = {
+			isa = PBXGroup;
+			children = (
+				C575233B2B98F85100ECCDE3 /* AppContainer.swift */,
+				C575233D2B98F95A00ECCDE3 /* Repositories.swift */,
+			);
+			path = DI;
+			sourceTree = "<group>";
+		};
+		C57523452B9FA68E00ECCDE3 /* Store */ = {
+			isa = PBXGroup;
+			children = (
+				C57523462B9FA69800ECCDE3 /* PasswordResetStore.swift */,
+			);
+			path = Store;
 			sourceTree = "<group>";
 		};
 		C58190882B8CCBCB001BE36E /* Main */ = {
@@ -394,16 +480,9 @@
 			isa = PBXGroup;
 			children = (
 				C5D9DCD92B8B3836000B010C /* Controller */,
-				C5D9DCD82B8B3833000B010C /* View */,
+				C57523452B9FA68E00ECCDE3 /* Store */,
 			);
 			path = PasswordReset;
-			sourceTree = "<group>";
-		};
-		C5D9DCD82B8B3833000B010C /* View */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = View;
 			sourceTree = "<group>";
 		};
 		C5D9DCD92B8B3836000B010C /* Controller */ = {
@@ -459,6 +538,9 @@
 				C53BD2812B7E28720078D28E /* SnapKit */,
 				C53BD2832B7E28720078D28E /* SnapKit-Dynamic */,
 				C50597B22B8233BF0058B519 /* IQKeyboardManagerSwift */,
+				C57523232B98EC4D00ECCDE3 /* FirebaseAuth */,
+				C57523252B98EC4D00ECCDE3 /* FirebaseDatabase */,
+				C57523382B98F79E00ECCDE3 /* Factory */,
 			);
 			productName = Mapster;
 			productReference = C53BD2552B7E217D0078D28E /* Mapster.app */;
@@ -491,6 +573,8 @@
 			packageReferences = (
 				C53BD2802B7E28720078D28E /* XCRemoteSwiftPackageReference "SnapKit" */,
 				C50597B12B8233BF0058B519 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */,
+				C57523222B98EC4D00ECCDE3 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				C57523372B98F79E00ECCDE3 /* XCRemoteSwiftPackageReference "Factory" */,
 			);
 			productRefGroup = C53BD2562B7E217D0078D28E /* Products */;
 			projectDirPath = "";
@@ -507,6 +591,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C511A81E2B811D95002DB0E4 /* Mulish-ExtraBold.ttf in Resources */,
+				C57523402B990A7700ECCDE3 /* GoogleService-Info.plist in Resources */,
 				C53BD2652B7E217F0078D28E /* LaunchScreen.storyboard in Resources */,
 				C511A8202B811D9F002DB0E4 /* Mulish-Light.ttf in Resources */,
 				C511A8262B811DDC002DB0E4 /* Mulish-Bold.ttf in Resources */,
@@ -526,10 +611,14 @@
 				C58190952B8CD27B001BE36E /* HomeViewController.swift in Sources */,
 				C5142E0B2B83624800384411 /* AuthorizationCheckoxViewModel.swift in Sources */,
 				C53BD2752B7E24E30078D28E /* AppCoordinator.swift in Sources */,
+				C57523332B98EF4D00ECCDE3 /* Combine.swift in Sources */,
 				C511A82D2B812474002DB0E4 /* OnboardingModuleFactory.swift in Sources */,
 				C511A8292B811ED9002DB0E4 /* Font.swift in Sources */,
 				C53BD2772B7E253D0078D28E /* Coordinator.swift in Sources */,
+				C57523442B99F33600ECCDE3 /* BaseViewController.swift in Sources */,
 				C5F55BC12B87D9810053D5BB /* OTPTextField.swift in Sources */,
+				C575233E2B98F95A00ECCDE3 /* Repositories.swift in Sources */,
+				C575232E2B98EEEB00ECCDE3 /* Store.swift in Sources */,
 				C53BD2592B7E217D0078D28E /* AppDelegate.swift in Sources */,
 				C5D9DCDD2B8B3D36000B010C /* PasswordValidatationService.swift in Sources */,
 				C581908E2B8CCC53001BE36E /* MainCoordinator.swift in Sources */,
@@ -538,6 +627,8 @@
 				C5142E0E2B836DD200384411 /* ActionButton.swift in Sources */,
 				C53BD27F2B7E27850078D28E /* OnboardingViewController.swift in Sources */,
 				C50597B52B8235C00058B519 /* AuthorizationCheckboxView.swift in Sources */,
+				C575233C2B98F85100ECCDE3 /* AppContainer.swift in Sources */,
+				C57523472B9FA69800ECCDE3 /* PasswordResetStore.swift in Sources */,
 				C5D9DCDB2B8B3842000B010C /* PasswordResetViewController.swift in Sources */,
 				C5142E082B835FE400384411 /* UITextField+ViewPadding.swift in Sources */,
 				C50597B02B821CE90058B519 /* AuthorizationCoordinator.swift in Sources */,
@@ -545,9 +636,13 @@
 				C53BD2872B7E2EE80078D28E /* OnboardingView.swift in Sources */,
 				C50597AE2B821C9D0058B519 /* AuthorizationModuleFactory.swift in Sources */,
 				C511A82B2B81246B002DB0E4 /* OnboardingCoordinator.swift in Sources */,
+				C57523362B98F65900ECCDE3 /* AuthRepository.swift in Sources */,
 				C58190902B8CCDA6001BE36E /* MainModuleFactory.swift in Sources */,
+				C57523292B98EE8A00ECCDE3 /* AuthStore.swift in Sources */,
+				C575232D2B98EEEB00ECCDE3 /* UIViewController+bindStore.swift in Sources */,
 				C53BD2792B7E258C0078D28E /* Router.swift in Sources */,
 				C50597AC2B821C240058B519 /* AuthorizationViewController.swift in Sources */,
+				C57523312B98EF2600ECCDE3 /* Bag.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -694,6 +789,7 @@
 				DEVELOPMENT_TEAM = 9RSGP9843T;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Mapster/App/Resources/Info.plist;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Разрешить приложению использовать вашу геолокацию?";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -725,6 +821,7 @@
 				DEVELOPMENT_TEAM = 9RSGP9843T;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Mapster/App/Resources/Info.plist;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Разрешить приложению использовать вашу геолокацию?";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -786,6 +883,22 @@
 				minimumVersion = 5.7.0;
 			};
 		};
+		C57523222B98EC4D00ECCDE3 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 10.22.0;
+			};
+		};
+		C57523372B98F79E00ECCDE3 /* XCRemoteSwiftPackageReference "Factory" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/hmlongco/Factory";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.3.1;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -803,6 +916,21 @@
 			isa = XCSwiftPackageProductDependency;
 			package = C53BD2802B7E28720078D28E /* XCRemoteSwiftPackageReference "SnapKit" */;
 			productName = "SnapKit-Dynamic";
+		};
+		C57523232B98EC4D00ECCDE3 /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C57523222B98EC4D00ECCDE3 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+		C57523252B98EC4D00ECCDE3 /* FirebaseDatabase */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C57523222B98EC4D00ECCDE3 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseDatabase;
+		};
+		C57523382B98F79E00ECCDE3 /* Factory */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C57523372B98F79E00ECCDE3 /* XCRemoteSwiftPackageReference "Factory" */;
+			productName = Factory;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

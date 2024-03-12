@@ -9,7 +9,7 @@ import Foundation
 
 final class AppCoordinator: Coordinator {
     override func start() {
-        runOnboardingFlow()
+        runAuthorizationFlow()
     }
     
     private func runMainFlow() {

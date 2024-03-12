@@ -70,7 +70,7 @@ final class AuthorizationCheckboxView: UIView {
     
     func configure(with viewModel: AuthorizationCheckoxViewModel) {
         textView.attributedText = viewModel.attributedString
-        forgotPasswordLabel.isHidden = viewModel.viewState == .registration
+        forgotPasswordLabel.isHidden = viewModel.isRegistration
     }
     
     @objc
