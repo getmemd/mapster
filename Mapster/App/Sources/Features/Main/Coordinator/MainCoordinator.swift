@@ -13,7 +13,7 @@ protocol MainCoordinatorDelegate: AnyObject {
 }
 
 final class MainCoordinator: Coordinator {
-    private weak var delegate: MainCoordinatorDelegate?
+    private let delegate: MainCoordinatorDelegate?
     private let moduleFactory = MainModuleFactory()
     
     init(router: Router, delegate: MainCoordinatorDelegate?) {
@@ -28,15 +28,14 @@ final class MainCoordinator: Coordinator {
     // Создает модули и присваивет их в таббар
     private func showTabBar() {
         let homeModule = moduleFactory.makeHome(delegate: self)
-        let search = UIViewController()
+        let search = moduleFactory.makeSearch(delegate: self)
         search.tabBarItem = .init(title: "Поиск", image: .init(named: "search"), tag: 1)
         let add = UIViewController()
         add.tabBarItem = .init(title: "Создать", image: .init(named: "create"), tag: 2)
-        let bookmark = UIViewController()
+        let bookmark = moduleFactory.makeFavourites(delegate: self)
         bookmark.tabBarItem = .init(title: "Избранные", image: .init(named: "bookmark"), tag: 3)
         let profile = UIViewController()
         profile.tabBarItem = .init(title: "Профиль", image: .init(named: "profile"), tag: 4)
-        
         let module = moduleFactory.makeTabBar(viewControllers: [homeModule, search, add, bookmark, profile])
         router.setRootModule(module)
     }
@@ -45,5 +44,17 @@ final class MainCoordinator: Coordinator {
 // MARK: - HomeNavigationDelegate
 
 extension MainCoordinator: HomeNavigationDelegate {
+    
+}
+
+// MARK: - FavouritesNavigationDelegate
+
+extension MainCoordinator: FavouritesNavigationDelegate {
+    
+}
+
+// MARK: - SearchNavigationDelegate
+
+extension MainCoordinator: SearchNavigationDelegate {
     
 }

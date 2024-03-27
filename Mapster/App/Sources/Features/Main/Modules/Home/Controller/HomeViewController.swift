@@ -15,8 +15,7 @@ protocol HomeNavigationDelegate: AnyObject {
 }
 
 final class HomeViewController: UIViewController {
-    weak var navigationDelegate: HomeNavigationDelegate?
-    // Менеджер локации
+    var navigationDelegate: HomeNavigationDelegate?
     private var locationManager: CLLocationManager?
     
     // Представление карты

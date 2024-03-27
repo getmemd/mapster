@@ -15,9 +15,7 @@ protocol AuthorizationCoordinatorDelegate: AnyObject {
 
 // Координатор для управления процессом авторизации
 final class AuthorizationCoordinator: Coordinator {
-    // Слабая ссылка на делегата координатора авторизации
-    private weak var delegate: AuthorizationCoordinatorDelegate?
-    // Фабрика модулей авторизации
+    private let delegate: AuthorizationCoordinatorDelegate?
     private let moduleFactory = AuthorizationModuleFactory()
     
     // Инициализатор координатора авторизации

@@ -17,7 +17,7 @@ final class OnboardingViewController: UIViewController {
         static let numberOfPages = 3 // Количество страниц в онбординге
     }
     
-    weak var navigationDelegate: OnboardingNavigationDelegate? // Делегат навигации
+    var navigationDelegate: OnboardingNavigationDelegate?
     
     // UIScrollView для прокрутки страниц
     private lazy var scrollView: UIScrollView = {

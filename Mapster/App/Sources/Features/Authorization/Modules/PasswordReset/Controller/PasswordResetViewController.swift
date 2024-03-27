@@ -13,7 +13,7 @@ protocol PasswordResetNavigationDelegate: AnyObject {
 }
 
 final class PasswordResetViewController: BaseViewController {
-    weak var navigationDelegate: PasswordResetNavigationDelegate?
+    var navigationDelegate: PasswordResetNavigationDelegate?
     private let store = PasswordResetStore()
     private var bag = Bag()
     

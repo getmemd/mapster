@@ -20,4 +20,16 @@ final class MainModuleFactory {
         viewController.navigationDelegate = delegate
         return viewController
     }
+    
+    func makeSearch(delegate: SearchNavigationDelegate) -> SearchViewController {
+        let viewController = SearchViewController()
+        viewController.navigationDelegate = delegate
+        return viewController
+    }
+    
+    func makeFavourites(delegate: FavouritesNavigationDelegate) -> FavouritesViewController {
+        let viewController = FavouritesViewController()
+        viewController.navigationDelegate = delegate
+        return viewController
+    }
 }

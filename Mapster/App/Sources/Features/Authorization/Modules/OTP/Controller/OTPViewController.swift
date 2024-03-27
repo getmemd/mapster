@@ -22,7 +22,7 @@ final class OTPViewController: UIViewController {
         case passwordReset
     }
     
-    weak var navigationDelegate: OTPNavigationDelegate?
+    var navigationDelegate: OTPNavigationDelegate?
     private var viewState: ViewSate = .registration
     // Таймер
     private var timer: Timer?

@@ -15,9 +15,7 @@ protocol OnboardingCoordinatorDelegate: AnyObject {
 
 // Координатор для управления процессом онбординга
 final class OnboardingCoordinator: Coordinator {
-    // Слабая ссылка на делегата координатора онбординга
-    private weak var delegate: OnboardingCoordinatorDelegate?
-    // Фабрика модулей онбординга
+    private let delegate: OnboardingCoordinatorDelegate?
     private let moduleFactory = OnboardingModuleFactory()
     
     // Инициализатор координатора онбординга
