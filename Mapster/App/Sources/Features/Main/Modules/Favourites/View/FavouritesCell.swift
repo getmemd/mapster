@@ -2,11 +2,12 @@
 //  FavouritesCell.swift
 //  Mapster
 //
-//  Created by Adilkhan Medeuyev on 27.03.2024.
+//  Created by User on 27.03.2024.
 //
 
 import UIKit
 
+// Ячейка объявления в таблице избранного
 final class FavouritesCell: UITableViewCell {
     private let contentBackgroundView: UIView = {
         let view = UIView()

@@ -2,7 +2,7 @@
 //  SearchStore.swift
 //  Mapster
 //
-//  Created by Adilkhan Medeuyev on 27.03.2024.
+//  Created by User on 27.03.2024.
 //
 
 import Foundation
@@ -23,6 +23,7 @@ final class SearchStore: Store<SearchEvent, SearchAction> {
         }
     }
     
+    // Настройка данных для таблицы
     private func configureRows() {
         let cellModels: [SearchCellModel] = [
             .init(iconName: "wrench.and.screwdriver.fill", title: "Сантехника"),

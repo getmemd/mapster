@@ -2,7 +2,7 @@
 //  SearchViewController.swift
 //  Mapster
 //
-//  Created by Adilkhan Medeuyev on 27.03.2024.
+//  Created by User on 27.03.2024.
 //
 
 import UIKit
@@ -15,9 +15,12 @@ final class SearchViewController: BaseViewController {
     var navigationDelegate: SearchNavigationDelegate?
     private lazy var store = SearchStore()
     private var bag = Bag()
+    // Настройка данных для таблицы
     private lazy var tableViewDataSourceImpl = SearchTableViewDataSourceImpl(store: store)
+    // Настройка делегатов для таблицы
     private lazy var tableViewDelegateImpl = SearchTableViewDelegateImpl(store: store)
     
+    // Поле поиска
     private lazy var searchBar: UISearchBar = {
         let searchBar = UISearchBar()
         searchBar.delegate = self
@@ -26,6 +29,7 @@ final class SearchViewController: BaseViewController {
         return searchBar
     }()
     
+    // Таблица категорий в поиске
     private lazy var tableView: UITableView = {
         let tableView = UITableView()
         tableView.dataSource = tableViewDataSourceImpl
@@ -45,6 +49,7 @@ final class SearchViewController: BaseViewController {
         store.handleAction(.viewDidLoad)
     }
     
+    // Настройка наблюдателей эвентов от стора
     private func configureObservers() {
         bindStore(store) { [weak self ] event in
             guard let self else { return }
@@ -78,6 +83,7 @@ final class SearchViewController: BaseViewController {
 // MARK: - UISearchBarDelegate
 
 extension SearchViewController: UISearchBarDelegate {
+    // Делегат срабатывает при изменении текста в строке поиска
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         
     }

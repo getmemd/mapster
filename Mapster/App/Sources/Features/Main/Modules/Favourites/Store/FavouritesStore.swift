@@ -2,7 +2,7 @@
 //  FavouritesStore.swift
 //  Mapster
 //
-//  Created by Adilkhan Medeuyev on 27.03.2024.
+//  Created by User on 27.03.2024.
 //
 
 import Foundation
@@ -40,6 +40,7 @@ final class FavouritesStore: Store<FavouritesEvent, FavouritesAction> {
         }
     }
     
+    // Настройка данных для таблицы
     private func configureRows() {
         var rows: [FavouritesRows] = []
         if advertisements.isEmpty {

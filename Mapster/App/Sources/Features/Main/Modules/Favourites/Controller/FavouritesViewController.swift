@@ -2,7 +2,7 @@
 //  FavouritesViewController.swift
 //  Mapster
 //
-//  Created by Adilkhan Medeuyev on 27.03.2024.
+//  Created by User on 27.03.2024.
 //
 
 import UIKit
@@ -15,7 +15,9 @@ final class FavouritesViewController: BaseViewController {
     var navigationDelegate: FavouritesNavigationDelegate?
     private lazy var store = FavouritesStore()
     private var bag = Bag()
+    // Настройка данных для таблицы
     private lazy var tableViewDataSourceImpl = FavouritesTableViewDataSourceImpl(store: store)
+    // Настройка делегатов для таблицы
     private lazy var tableViewDelegateImpl = FavouritesTableViewDelegateImpl(store: store)
     
     private let titleLabel: UILabel = {
@@ -25,6 +27,7 @@ final class FavouritesViewController: BaseViewController {
         return label
     }()
     
+    // Таблица избранных ячеек
     private lazy var tableView: UITableView = {
         let tableView = UITableView()
         tableView.dataSource = tableViewDataSourceImpl
@@ -44,6 +47,7 @@ final class FavouritesViewController: BaseViewController {
         store.handleAction(.viewDidLoad)
     }
     
+    // Настройка наблюдателей эвентов от стора
     private func configureObservers() {
         bindStore(store) { [weak self ] event in
             guard let self else { return }

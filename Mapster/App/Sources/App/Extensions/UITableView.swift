@@ -2,11 +2,12 @@
 //  UITableView.swift
 //  Mapster
 //
-//  Created by Adilkhan Medeuyev on 27.03.2024.
+//  Created by User on 27.03.2024.
 //
 
 import UIKit
 
+// Вспомогательные функции для TableView
 extension UITableView {
     func register(bridgingCellClasses: AnyClass...) {
         bridgingCellClasses.forEach { cell in

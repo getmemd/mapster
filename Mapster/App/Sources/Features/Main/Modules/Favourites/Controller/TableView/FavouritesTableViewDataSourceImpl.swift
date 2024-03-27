@@ -2,12 +2,13 @@
 //  FavouritesTableViewDataSourceImpl.swift
 //  Mapster
 //
-//  Created by Adilkhan Medeuyev on 27.03.2024.
+//  Created by User on 27.03.2024.
 //
 
 import UIKit
 
 final class FavouritesTableViewDataSourceImpl: NSObject {
+    // Ряды которые хранят данные
     var rows: [FavouritesRows] = []
     private let store: FavouritesStore
 
@@ -17,10 +18,12 @@ final class FavouritesTableViewDataSourceImpl: NSObject {
 }
 
 extension FavouritesTableViewDataSourceImpl: UITableViewDataSource {
+    // Колличество рядов в секции
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         rows.count
     }
     
+    // Настройка ячеек
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch rows[indexPath.row] {
         case .empty:
@@ -32,6 +35,7 @@ extension FavouritesTableViewDataSourceImpl: UITableViewDataSource {
         }
     }
     
+    // Удаление ячеек из таблицы
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             store.handleAction(.didDeleteRow(index: indexPath.row))
@@ -40,6 +44,7 @@ extension FavouritesTableViewDataSourceImpl: UITableViewDataSource {
         }
     }
     
+    // Настройка удаления ячеек из таблицы
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         switch rows[indexPath.row] {
         case .advertisement:
