@@ -12,7 +12,7 @@ protocol AuthorizationCoordinatorDelegate: AnyObject {
 }
 
 final class AuthorizationCoordinator: Coordinator {
-    private weak var delegate: AuthorizationCoordinatorDelegate?
+    private let delegate: AuthorizationCoordinatorDelegate?
     private let moduleFactory = AuthorizationModuleFactory()
     
     init(router: Router, delegate: AuthorizationCoordinatorDelegate) {

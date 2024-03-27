@@ -15,7 +15,7 @@ protocol HomeNavigationDelegate: AnyObject {
 }
 
 final class HomeViewController: UIViewController {
-    weak var navigationDelegate: HomeNavigationDelegate?
+    var navigationDelegate: HomeNavigationDelegate?
     private var locationManager: CLLocationManager?
     
     private lazy var mapView: MKMapView = {

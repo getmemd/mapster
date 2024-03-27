@@ -13,7 +13,7 @@ protocol AuthorizationNavigationDelegate: AnyObject {
 }
 
 final class AuthorizationViewController: BaseViewController {
-    weak var navigationDelegate: AuthorizationNavigationDelegate?
+    var navigationDelegate: AuthorizationNavigationDelegate?
     private let store = AuthStore()
     private var bag = Bag()
     
@@ -55,6 +55,7 @@ final class AuthorizationViewController: BaseViewController {
         textField.delegate = self
         textField.placeholder = "Email"
         textField.keyboardType = .emailAddress
+        textField.autocapitalizationType = .none
         textField.borderStyle = .roundedRect
         textField.backgroundColor = UIColor(named: "TextField")
         textField.font = Font.mulish(name: .light, size: 14)

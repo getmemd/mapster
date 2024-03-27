@@ -12,7 +12,7 @@ protocol OnboardingCoordinatorDelegate: AnyObject {
 }
 
 final class OnboardingCoordinator: Coordinator {
-    private weak var delegate: OnboardingCoordinatorDelegate?
+    private let delegate: OnboardingCoordinatorDelegate?
     private let moduleFactory = OnboardingModuleFactory()
     
     init(router: Router, delegate: OnboardingCoordinatorDelegate) {
