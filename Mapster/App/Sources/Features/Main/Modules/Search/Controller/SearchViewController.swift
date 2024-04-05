@@ -33,7 +33,8 @@ final class SearchViewController: BaseViewController {
         tableView.separatorStyle = .none
         tableView.allowsSelection = false
         tableView.estimatedRowHeight = 50
-        tableView.register(bridgingCellClass: SearchCell.self)
+        tableView.register(bridgingCellClass: TableViewItemCell.self)
+        tableView.clipsToBounds = false
         return tableView
     }()
     

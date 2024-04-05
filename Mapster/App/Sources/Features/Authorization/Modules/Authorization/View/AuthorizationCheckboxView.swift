@@ -43,6 +43,12 @@ final class AuthorizationCheckboxView: UIView {
         textView.isScrollEnabled = false
         textView.textContainerInset = .zero
         textView.tintColor = UIColor(named: "TextHighlight")
+        let attributedString = NSMutableAttributedString()
+        attributedString.mutableString.setString("Я ознакомлен и согласен с условиями использования.")
+        attributedString.addAttribute(.link,
+                                      value: "https://www.apple.com",
+                                      range: NSRange(location: 26, length: 23))
+        textView.attributedText = attributedString
         return textView
     }()
     
@@ -69,7 +75,8 @@ final class AuthorizationCheckboxView: UIView {
     }
     
     func configure(with viewModel: AuthorizationCheckoxViewModel) {
-        textView.attributedText = viewModel.attributedString
+        textView.isHidden = !viewModel.isRegistration
+        checkBoxButton.isHidden = !viewModel.isRegistration
         forgotPasswordLabel.isHidden = viewModel.isRegistration
     }
     

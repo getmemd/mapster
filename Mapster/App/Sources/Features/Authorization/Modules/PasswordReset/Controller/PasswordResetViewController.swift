@@ -104,7 +104,7 @@ final class PasswordResetViewController: BaseViewController {
             guard let self else { return }
             switch event {
             case let .showError(errorMessage):
-                showErrorAlert(message: errorMessage)
+                showAlert(message: errorMessage)
             case .loading:
                 activityIndicator.startAnimating()
             case .loadingFinished:

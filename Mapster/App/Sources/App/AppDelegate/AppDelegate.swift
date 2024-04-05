@@ -5,8 +5,9 @@
 //  Created by Адиль Медеуев on 15.02.2024.
 //
 
-import FirebaseCore
 import FirebaseAuth
+import FirebaseCore
+import FirebaseFirestore
 import IQKeyboardManagerSwift
 import UIKit
 

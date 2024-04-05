@@ -33,6 +33,7 @@ final class FavouritesViewController: BaseViewController {
         tableView.allowsSelection = false
         tableView.estimatedRowHeight = 160
         tableView.register(bridgingCellClasses: FavouritesCell.self, FavouritesEmptyCell.self)
+        tableView.clipsToBounds = false
         return tableView
     }()
     
@@ -52,6 +53,12 @@ final class FavouritesViewController: BaseViewController {
                 tableViewDataSourceImpl.rows = rows
                 tableViewDelegateImpl.rows = rows
                 tableView.reloadData()
+            case let .showError(message):
+                showAlert(message: message)
+            case .loading:
+                activityIndicator.startAnimating()
+            case .loadingFinished:
+                activityIndicator.stopAnimating()
             }
         }
         .store(in: &bag)

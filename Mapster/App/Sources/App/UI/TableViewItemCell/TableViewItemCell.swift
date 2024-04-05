@@ -1,5 +1,5 @@
 //
-//  SearchCell.swift
+//  TableViewItemCell.swift
 //  Mapster
 //
 //  Created by Adilkhan Medeuyev on 27.03.2024.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class SearchCell: UITableViewCell {
+final class TableViewItemCell: UITableViewCell {
     private let contentBackgroundView: UIView = {
         let view = UIView()
         view.backgroundColor = UIColor(named: "CellGray")
@@ -54,9 +54,11 @@ final class SearchCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configure(with cellModel: SearchCellModel) {
+    func configure(with cellModel: TableViewItemCellModel) {
         if let iconName = cellModel.iconName {
             iconImageView.image = UIImage(systemName: iconName)
+        } else {
+            iconImageView.isHidden = cellModel.iconName == nil
         }
         titleLabel.text = cellModel.title
     }

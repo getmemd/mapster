@@ -31,13 +31,9 @@ final class AuthRepository {
         }
     }
     
-    func signOut() {
+    func signOut() throws {
         let firebaseAuth = Auth.auth()
-        do {
-            try firebaseAuth.signOut()
-        } catch let signOutError as NSError {
-            print("Error signing out: %@", signOutError)
-        }
+        try firebaseAuth.signOut()
     }
     
     func sendEmailVerification(completion: @escaping (Error?) -> Void) {

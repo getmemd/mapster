@@ -5,6 +5,7 @@
 //  Created by Adilkhan Medeuyev on 27.03.2024.
 //
 
+import Kingfisher
 import UIKit
 
 final class FavouritesCell: UITableViewCell {
@@ -20,6 +21,8 @@ final class FavouritesCell: UITableViewCell {
         let imageView = UIImageView()
         imageView.backgroundColor = .gray
         imageView.layer.cornerRadius = 5
+        imageView.contentMode = .scaleAspectFill
+        imageView.clipsToBounds = true
         return imageView
     }()
     
@@ -58,6 +61,7 @@ final class FavouritesCell: UITableViewCell {
         titleLabel.text = cellModel.title
         priceLabel.text = cellModel.priceFormatted
         descriptionLabel.text = cellModel.description
+        itemImageView.kf.setImage(with: cellModel.imageUrl)
     }
     
     private func setupViews() {

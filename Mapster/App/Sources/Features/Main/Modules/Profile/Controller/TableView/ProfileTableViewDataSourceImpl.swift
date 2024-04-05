@@ -1,24 +1,25 @@
 //
-//  SearchTableViewDataSourceImpl.swift
+//  ProfileTableViewDataSourceImpl.swift
 //  Mapster
 //
-//  Created by Adilkhan Medeuyev on 27.03.2024.
+//  Created by Adilkhan Medeuyev on 05.04.2024.
 //
 
 import UIKit
 
-final class SearchTableViewDataSourceImpl: NSObject {
-    var cellModels: [SearchCellModel] = []
-    private let store: SearchStore
+final class ProfileTableViewDataSourceImpl: NSObject {
+    var rows: [ProfileRows] = []
+    
+    private let store: ProfileStore
 
-    init(store: SearchStore) {
+    init(store: ProfileStore) {
         self.store = store
     }
 }
 
-extension SearchTableViewDataSourceImpl: UITableViewDataSource {
+extension ProfileTableViewDataSourceImpl: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        cellModels.count
+        rows.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

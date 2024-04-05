@@ -9,7 +9,7 @@ import Foundation
 
 struct FavouritesCellModel {
     var title: String {
-        advertisement.title
+        advertisement.name
     }
     
     var priceFormatted: String {
@@ -18,6 +18,11 @@ struct FavouritesCellModel {
     
     var description: String {
         advertisement.description
+    }
+    
+    var imageUrl: URL? {
+        guard let image = advertisement.images.first else { return nil }
+        return .init(string: image)
     }
     
     private let advertisement: Advertisement

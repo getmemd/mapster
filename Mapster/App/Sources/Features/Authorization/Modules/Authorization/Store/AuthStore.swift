@@ -8,8 +8,7 @@
 import Factory
 
 enum AuthEvent {
-    case showError(errorMessage: String)
-    case showAlert(title: String, message: String?)
+    case showAlert(title: String?, message: String?)
     case loading
     case loadingFinished
     case success
@@ -46,7 +45,7 @@ final class AuthStore: Store<AuthEvent, AuthAction> {
                 sendEvent(.success)
                 sendEvent(.loadingFinished)
             } catch let error {
-                sendEvent(.showError(errorMessage: error.localizedDescription))
+                sendEvent(.showAlert(title: nil, message: error.localizedDescription))
                 sendEvent(.loadingFinished)
             }
         }
@@ -56,7 +55,7 @@ final class AuthStore: Store<AuthEvent, AuthAction> {
         sendEvent(.loading)
         authRepository.sendEmailVerification { [weak self] error in
             if let error {
-                self?.sendEvent(.showError(errorMessage: error.localizedDescription))
+                self?.sendEvent(.showAlert(title: nil, message: error.localizedDescription))
             }
             self?.sendEvent(.loadingFinished)
             self?.sendEvent(.showAlert(title: "Подтвердите Вашу почту",
@@ -68,7 +67,7 @@ final class AuthStore: Store<AuthEvent, AuthAction> {
         sendEvent(.loading)
         authRepository.sendPasswordResetEmail(email: email) { [weak self] error in
             if let error {
-                self?.sendEvent(.showError(errorMessage: error.localizedDescription))
+                self?.sendEvent(.showAlert(title: nil, message: error.localizedDescription))
             }
             self?.sendEvent(.loadingFinished)
             self?.sendEvent(.showAlert(title: "Восстановите пароль",

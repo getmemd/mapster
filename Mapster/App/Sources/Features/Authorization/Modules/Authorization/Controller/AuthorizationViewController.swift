@@ -69,6 +69,7 @@ final class AuthorizationViewController: BaseViewController {
         textField.placeholder = "Пароль"
         textField.borderStyle = .roundedRect
         textField.backgroundColor = UIColor(named: "TextField")
+        textField.textContentType = .password
         textField.font = Font.mulish(name: .light, size: 14)
         textField.addPaddingAndIcon(.init(named: "lock"), padding: 20, isLeftView: false)
         textField.isSecureTextEntry = true
@@ -81,6 +82,7 @@ final class AuthorizationViewController: BaseViewController {
         textField.placeholder = "Повторите пароль"
         textField.borderStyle = .roundedRect
         textField.backgroundColor = UIColor(named: "TextField")
+        textField.textContentType = .password
         textField.font = Font.mulish(name: .light, size: 14)
         textField.addPaddingAndIcon(.init(named: "lock"), padding: 20, isLeftView: false)
         textField.isSecureTextEntry = true
@@ -142,7 +144,7 @@ final class AuthorizationViewController: BaseViewController {
                 try PasswordValidatationService.checkPasswordValidity(password: password, repeatPassword: repeatPassword)
                 store.handleAction(.actionButtonDidTap(email: email, password: password))
             } catch let error as PasswordError {
-                showErrorAlert(message: error.failureReason)
+                showAlert(message: error.failureReason)
             } catch {
                 return
             }
@@ -183,22 +185,16 @@ final class AuthorizationViewController: BaseViewController {
         return emailPred.evaluate(with: email)
     }
     
-    private func presentAlert(title: String, message: String?) {
-        present(UIAlertController(title: title, message: message, preferredStyle: .alert), animated: true)
-    }
-    
     private func configureObservers() {
         bindStore(store) { [weak self ] event in
             guard let self else { return }
             switch event {
-            case let .showError(errorMessage):
-                showErrorAlert(message: errorMessage)
             case .loading:
                 activityIndicator.startAnimating()
             case .loadingFinished:
                 activityIndicator.stopAnimating()
             case let .showAlert(title, message):
-                presentAlert(title: title, message: message)
+                showAlert(title: title, message: message)
             case .success:
                 navigationDelegate?.didFinishAuthorization(self)
             }
@@ -262,7 +258,7 @@ extension AuthorizationViewController: AuthorizationCheckboxViewDelegate {
     
     func didTapForgotPassword(_ view: AuthorizationCheckboxView) {
         guard let email = emailTextField.text, isValidEmail() else {
-            showErrorAlert(message: "Введите свой email")
+            showAlert(message: "Введите свой email")
             return
         }
         store.sendAction(.resetPasswordDidTap(email: email))
