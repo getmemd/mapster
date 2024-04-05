@@ -34,7 +34,7 @@ final class MainCoordinator: Coordinator {
         add.tabBarItem = .init(title: "Создать", image: .init(named: "create"), tag: 2)
         let bookmark = moduleFactory.makeFavourites(delegate: self)
         bookmark.tabBarItem = .init(title: "Избранные", image: .init(named: "bookmark"), tag: 3)
-        let profile = UIViewController()
+        let profile = moduleFactory.makeProfile(delegate: self)
         profile.tabBarItem = .init(title: "Профиль", image: .init(named: "profile"), tag: 4)
         let module = moduleFactory.makeTabBar(viewControllers: [homeModule, search, add, bookmark, profile])
         router.setRootModule(module)
@@ -57,4 +57,12 @@ extension MainCoordinator: FavouritesNavigationDelegate {
 
 extension MainCoordinator: SearchNavigationDelegate {
     
+}
+
+// MARK: - ProfileNavigationDelegate
+
+extension MainCoordinator: ProfileNavigationDelegate {
+    func didSignOut(_ viewController: ProfileViewController) {
+        delegate?.didFinish(self)
+    }
 }

@@ -6,6 +6,7 @@
 //
 
 import Factory
+import FirebaseFirestore
 
 typealias AppContainer = Container
 typealias Dependency = Factory
@@ -15,6 +16,12 @@ extension AppContainer {
     var appCoordinator: Dependency<AppCoordinator> {
         self {
             AppCoordinator(router: .init(navigationController: .init()))
+        }
+    }
+    
+    var db: Dependency<Firestore> {
+        self {
+            Firestore.firestore()
         }
     }
 }

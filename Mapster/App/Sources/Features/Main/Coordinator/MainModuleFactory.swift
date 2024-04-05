@@ -32,4 +32,10 @@ final class MainModuleFactory {
         viewController.navigationDelegate = delegate
         return viewController
     }
+    
+    func makeProfile(delegate: ProfileNavigationDelegate) -> ProfileViewController {
+        let viewController = ProfileViewController()
+        viewController.navigationDelegate = delegate
+        return viewController
+    }
 }

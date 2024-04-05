@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct SearchCellModel {
+struct SearchCellModel: TableViewItemCellModel {
     var iconName: String?
     var title: String
     

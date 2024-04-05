@@ -5,12 +5,31 @@
 //  Created by User on 15.02.2024.
 //
 
-import Foundation
+import FirebaseAuth
 
 final class AppCoordinator: Coordinator {
     override func start() {
-        // Запускаем процесс онбординга
-        runOnboardingFlow()
+        if isFirstLaunch() {
+            runOnboardingFlow()
+        } else if isUserAuthorized() {
+            runMainFlow()
+        } else {
+            runAuthorizationFlow()
+        }
+    }
+    
+    private func isFirstLaunch() -> Bool {
+        let hasLaunchedBefore = UserDefaults.standard.bool(forKey: "hasLaunchedBefore")
+        if hasLaunchedBefore {
+            return false
+        } else {
+            UserDefaults.standard.set(true, forKey: "hasLaunchedBefore")
+            return true
+        }
+    }
+    
+    private func isUserAuthorized() -> Bool {
+        return Auth.auth().currentUser != nil
     }
     
     private func runMainFlow() {
@@ -41,6 +60,8 @@ extension AppCoordinator: MainCoordinatorDelegate {
     func didFinish(_ coordinator: MainCoordinator) {
         // Удаляем зависимость от завершившегося основного координатора
         removeDependency(coordinator)
+        UserDefaults.standard.set(false, forKey: "hasLaunchedBefore")
+        runOnboardingFlow()
     }
 }
 

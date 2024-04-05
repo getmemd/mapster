@@ -25,7 +25,7 @@ extension SearchTableViewDataSourceImpl: UITableViewDataSource {
     
     // Настройка ячеек
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell: SearchCell = tableView.dequeueReusableCell(for: indexPath)
+        let cell: TableViewItemCell = tableView.dequeueReusableCell(for: indexPath)
         return cell
     }
 }

@@ -26,7 +26,7 @@ extension SearchTableViewDelegateImpl: UITableViewDelegate {
     // Настройка отображения ячейки
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         guard let cellModel = cellModels[safe: indexPath.row],
-              let cell = cell as? SearchCell else { return }
+              let cell = cell as? TableViewItemCell else { return }
         cell.configure(with: cellModel)
     }
 }

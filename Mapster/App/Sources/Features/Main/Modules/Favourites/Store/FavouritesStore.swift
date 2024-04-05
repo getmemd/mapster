@@ -5,10 +5,13 @@
 //  Created by User on 27.03.2024.
 //
 
-import Foundation
+import Factory
 
 enum FavouritesEvent {
     case rows(rows: [FavouritesRows])
+    case showError(message: String)
+    case loading
+    case loadingFinished
 }
 
 enum FavouritesAction {
@@ -23,12 +26,13 @@ enum FavouritesRows {
 }
 
 final class FavouritesStore: Store<FavouritesEvent, FavouritesAction> {
+    @Injected(\Repositories.advertisementRepository) private var advertisementRepository
     private var advertisements: [Advertisement] = []
     
     override func handleAction(_ action: FavouritesAction) {
         switch action {
         case .viewDidLoad:
-            advertisements = []
+            getAdvertisements()
             configureRows()
         case let .didSelectRow(row):
             break
@@ -40,7 +44,17 @@ final class FavouritesStore: Store<FavouritesEvent, FavouritesAction> {
         }
     }
     
-    // Настройка данных для таблицы
+    private func getAdvertisements() {
+        Task {
+            do {
+                advertisements = try await advertisementRepository.getAdvertisements()
+                configureRows()
+            } catch {
+                sendEvent(.showError(message: error.localizedDescription))
+            }
+        }
+    }
+    
     private func configureRows() {
         var rows: [FavouritesRows] = []
         if advertisements.isEmpty {

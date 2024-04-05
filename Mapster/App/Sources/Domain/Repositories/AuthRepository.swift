@@ -32,14 +32,9 @@ final class AuthRepository {
         }
     }
     
-    // Запрос выхода
-    func signOut() {
+    func signOut() throws {
         let firebaseAuth = Auth.auth()
-        do {
-            try firebaseAuth.signOut()
-        } catch let signOutError as NSError {
-            print("Error signing out: %@", signOutError)
-        }
+        try firebaseAuth.signOut()
     }
     
     // Запрос отправление письма на почту текущего пользователя
