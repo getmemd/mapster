@@ -42,6 +42,7 @@ final class ProfileStore: Store<ProfileEvent, ProfileAction> {
         }
     }
     
+    // Запрос выхода
     private func signOut() {
         do {
             try authRepository.signOut()
@@ -51,6 +52,7 @@ final class ProfileStore: Store<ProfileEvent, ProfileAction> {
         }
     }
     
+    // Настройка данных для таблицы
     private func configureRows() {
         sendEvent(.rows(rows: [.editProfile, .policy, .faq, .signOut]))
     }

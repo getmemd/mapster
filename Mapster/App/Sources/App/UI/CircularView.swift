@@ -8,6 +8,7 @@
 import UIKit
 
 final class CircularView: UIView {
+    // Полукруглый фон
     override func layoutSubviews() {
         super.layoutSubviews()
         let radius = bounds.width * 2

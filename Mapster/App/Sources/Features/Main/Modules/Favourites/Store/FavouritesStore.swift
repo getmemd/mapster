@@ -44,6 +44,7 @@ final class FavouritesStore: Store<FavouritesEvent, FavouritesAction> {
         }
     }
     
+    // Запрос получения (пока что) всех объявлений
     private func getAdvertisements() {
         Task {
             do {
@@ -55,6 +56,7 @@ final class FavouritesStore: Store<FavouritesEvent, FavouritesAction> {
         }
     }
     
+    // Настройка данных для отображения в таблице
     private func configureRows() {
         var rows: [FavouritesRows] = []
         if advertisements.isEmpty {

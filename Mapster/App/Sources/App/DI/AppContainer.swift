@@ -19,6 +19,7 @@ extension AppContainer {
         }
     }
     
+    // Облачная база данных
     var db: Dependency<Firestore> {
         self {
             Firestore.firestore()

@@ -9,6 +9,7 @@ import FirebaseAuth
 
 final class AppCoordinator: Coordinator {
     override func start() {
+        // Проверям на появление онбординга и авторизацию
         if isFirstLaunch() {
             runOnboardingFlow()
         } else if isUserAuthorized() {
@@ -18,6 +19,7 @@ final class AppCoordinator: Coordinator {
         }
     }
     
+    // Проверка на первый запуск
     private func isFirstLaunch() -> Bool {
         let hasLaunchedBefore = UserDefaults.standard.bool(forKey: "hasLaunchedBefore")
         if hasLaunchedBefore {
@@ -28,6 +30,7 @@ final class AppCoordinator: Coordinator {
         }
     }
     
+    // Проверка на авторизацию
     private func isUserAuthorized() -> Bool {
         return Auth.auth().currentUser != nil
     }

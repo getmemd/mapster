@@ -18,8 +18,10 @@ final class ProfileViewController: BaseViewController {
     private lazy var tableViewDataSourceImpl = ProfileTableViewDataSourceImpl(store: store)
     private lazy var tableViewDelegateImpl = ProfileTableViewDelegateImpl(store: store)
     
+    // Полукруглый фон
     private let circularView = CircularView()
     
+    // Фото профиля
     private let profileImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.layer.cornerRadius = 60

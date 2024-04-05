@@ -18,10 +18,12 @@ final class ProfileTableViewDataSourceImpl: NSObject {
 }
 
 extension ProfileTableViewDataSourceImpl: UITableViewDataSource {
+    // Количество рядов в таблице
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         rows.count
     }
     
+    // Настройка ячейки
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: TableViewItemCell = tableView.dequeueReusableCell(for: indexPath)
         return cell
