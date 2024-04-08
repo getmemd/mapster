@@ -66,8 +66,8 @@ final class ProfileViewController: BaseViewController {
     }
     
     private func setupViews() {
-        navigationController?.navigationBar.topItem?.title = "Мой профиль"
-        circularView.backgroundColor = UIColor(named: "AccentColor")?.withAlphaComponent(0.4)
+//        navigationController?.navigationBar.topItem?.title = "Мой профиль"
+        circularView.backgroundColor = UIColor.accent.withAlphaComponent(0.4)
         [circularView, profileImageView, tableView].forEach { view.addSubview($0) }
         view.backgroundColor = .white
     }

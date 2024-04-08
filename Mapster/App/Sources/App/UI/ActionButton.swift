@@ -12,7 +12,7 @@ final class ActionButton: UIButton {
     // Переопределяем переменную isEnabled для изменения фона кнопки в зависимости от ее доступности
     public override var isEnabled: Bool {
         didSet {
-            backgroundColor = isEnabled ? UIColor(named: "AccentColor") : .darkGray
+            backgroundColor = isEnabled ? .accent : .darkGray
         }
     }
     
@@ -29,9 +29,9 @@ final class ActionButton: UIButton {
     
     // Приватный метод для настройки внешнего вида кнопки
     private func setupUI() {
-        layer.cornerRadius = 10 // Устанавливаем скругленные углы
-        backgroundColor = UIColor(named: "AccentColor") // Устанавливаем фон кнопки
-        setTitleColor(.white, for: .normal) // Устанавливаем цвет текста для состояния normal
-        titleLabel?.font = Font.mulish(name: .semiBold, size: 20) // Устанавливаем шрифт и размер текста
+        layer.cornerRadius = 10
+        backgroundColor = .accent
+        setTitleColor(.white, for: .normal)
+        titleLabel?.font = Font.mulish(name: .semiBold, size: 20)
     }
 }

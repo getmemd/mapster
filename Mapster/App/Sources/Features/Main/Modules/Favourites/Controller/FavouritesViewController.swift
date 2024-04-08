@@ -20,14 +20,6 @@ final class FavouritesViewController: BaseViewController {
     // Настройка делегатов для таблицы
     private lazy var tableViewDelegateImpl = FavouritesTableViewDelegateImpl(store: store)
     
-    private let titleLabel: UILabel = {
-        let label = UILabel()
-        label.text = "Избранное"
-        label.font = Font.mulish(name: .bold, size: 22)
-        return label
-    }()
-    
-    // Таблица избранных ячеек
     private lazy var tableView: UITableView = {
         let tableView = UITableView()
         tableView.dataSource = tableViewDataSourceImpl
@@ -35,7 +27,7 @@ final class FavouritesViewController: BaseViewController {
         tableView.separatorStyle = .none
         tableView.allowsSelection = false
         tableView.estimatedRowHeight = 160
-        tableView.register(bridgingCellClasses: FavouritesCell.self, FavouritesEmptyCell.self)
+        tableView.register(bridgingCellClasses: TitleCell.self, FavouritesCell.self, FavouritesEmptyCell.self)
         tableView.clipsToBounds = false
         return tableView
     }()
@@ -69,18 +61,13 @@ final class FavouritesViewController: BaseViewController {
     }
     
     private func setupViews() {
-        [titleLabel, tableView].forEach { view.addSubview($0) }
+        view.addSubview(tableView)
         view.backgroundColor = .white
     }
     
     private func setupConstraints() {
-        titleLabel.snp.makeConstraints {
-            $0.top.equalTo(view.safeAreaLayoutGuide)
-            $0.leading.trailing.equalToSuperview().inset(24)
-        }
         tableView.snp.makeConstraints {
-            $0.top.equalTo(titleLabel.snp.bottom).offset(32)
-            $0.leading.trailing.bottom.equalToSuperview()
+            $0.edges.equalToSuperview()
         }
     }
 }

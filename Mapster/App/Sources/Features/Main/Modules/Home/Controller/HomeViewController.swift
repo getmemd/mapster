@@ -14,9 +14,10 @@ protocol HomeNavigationDelegate: AnyObject {
     
 }
 
-final class HomeViewController: UIViewController {
+final class HomeViewController: BaseViewController {
     var navigationDelegate: HomeNavigationDelegate?
-    private var locationManager: CLLocationManager?
+    private lazy var store = HomeStore()
+    private var bag = Bag()
     
     // Представление карты
     private lazy var mapView: MKMapView = {
@@ -31,13 +32,77 @@ final class HomeViewController: UIViewController {
         super.viewDidLoad()
         setupViews()
         setupConstraints()
-        attemptLocationAccess()
+        configureObservers()
+        store.handleAction(.viewDidLoad)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        LocationDataManager.shared.start()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        LocationDataManager.shared.stop()
+    }
+    
+    private func setAnnotations(coordinates: [CLLocationCoordinate2D]) {
+        coordinates.forEach {
+            let annotation = MKPointAnnotation()
+            annotation.coordinate = $0
+            mapView.addAnnotation(annotation)
+        }
+    }
+    
+    private func centerToLocation(_ location: CLLocation,
+                                  regionRadius: CLLocationDistance = 1000) {
+        let coordinateRegion = MKCoordinateRegion(
+            center: location.coordinate,
+            latitudinalMeters: regionRadius,
+            longitudinalMeters: regionRadius)
+        mapView.setRegion(coordinateRegion, animated: true)
+    }
+    
+    private func presentPermissionDeniedAlert() {
+        let alert = UIAlertController(
+            title: "Для корректного отображения местоположения требуется:",
+            message: "Предоставить приложению доступ к геолокации в разделе Настройки - Конфиденциальность - Службы геолокации - Mapster - Разрешить доступ к геопозиции",
+            preferredStyle: .alert
+        )
+        alert.addAction(
+            .init(title: "Открыть настройки", style: .default) { _ in
+                guard let url = URL(string: UIApplication.openSettingsURLString) else { return }
+                UIApplication.shared.open(url)
+            }
+        )
+        alert.addAction(.init(title: "Отмена", style: .cancel))
+        present(alert, animated: true)
+    }
+    
+    private func configureObservers() {
+        bindStore(store) { [weak self ] event in
+            guard let self else { return }
+            switch event {
+            case let .advertisements(coordinates):
+                setAnnotations(coordinates: coordinates)
+            case let .showError(message):
+                showAlert(message: message)
+            case .loading:
+                activityIndicator.startAnimating()
+            case .loadingFinished:
+                activityIndicator.stopAnimating()
+            }
+        }
+        .store(in: &bag)
     }
     
     private func setupViews() {
         tabBarItem = .init(title: "Главная", image: .init(named: "home"), tag: 0)
         tabBarController?.selectedIndex = 0
         view.addSubview(mapView)
+        guard let location = LocationDataManager.shared.getCurrentLocation() else {
+            presentPermissionDeniedAlert()
+            return
+        }
+        centerToLocation(location)
     }
     
     private func setupConstraints() {
@@ -47,68 +112,8 @@ final class HomeViewController: UIViewController {
     }
 }
 
-// MARK: - CLLocationManagerDelegate
-
-extension HomeViewController: CLLocationManagerDelegate {
-    // Вызывается при изменений статуса разрешения на геолокацию
-    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-        switch status {
-        case .authorizedAlways, .authorizedWhenInUse, .authorized:
-            guard let location = manager.location else { return }
-            centerToLocation(location)
-        case .notDetermined:
-            break
-        default:
-            presentPermissionDeniedAlert()
-        }
-    }
-    
-    // Запросить доступ на разрешение геолокации
-    private func attemptLocationAccess() {
-        createLocationManager()
-        DispatchQueue.global().async { [weak self] in
-            if CLLocationManager.locationServicesEnabled() {
-                self?.locationManager?.requestWhenInUseAuthorization()
-            } else {
-                self?.presentPermissionDeniedAlert()
-            }
-        }
-    }
-    
-    // Создать менеджер локации
-    private func createLocationManager() {
-        let manager = CLLocationManager()
-        manager.delegate = self
-        manager.desiredAccuracy = kCLLocationAccuracyBest
-        locationManager = manager
-    }
-    
-    // Уведомление о доступе на геолокацию
-    private func presentPermissionDeniedAlert() {
-        let alert = UIAlertController(title: "Требуется доступ к геолокации",
-                                      message: "Для полной функциональности приложения требуется доступ к вашему местоположению.",
-                                      preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Открыть настройки", style: .default) { _ in
-            // Открывает настройки
-            if let url = URL(string: UIApplication.openSettingsURLString), UIApplication.shared.canOpenURL(url) {
-                UIApplication.shared.open(url, options: [:], completionHandler: nil)
-            }
-        })
-        alert.addAction(UIAlertAction(title: "Отмена", style: .cancel, handler: nil))
-        present(alert, animated: true, completion: nil)
-    }
-}
-
 // MARK: - MKMapViewDelegate
 
 extension HomeViewController: MKMapViewDelegate {
-    // Зум на текущую локацию
-    func centerToLocation(_ location: CLLocation,
-                          regionRadius: CLLocationDistance = 1000) {
-        let coordinateRegion = MKCoordinateRegion(
-            center: location.coordinate,
-            latitudinalMeters: regionRadius,
-            longitudinalMeters: regionRadius)
-        mapView.setRegion(coordinateRegion, animated: true)
-    }
+    
 }

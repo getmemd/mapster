@@ -26,6 +26,9 @@ extension FavouritesTableViewDelegateImpl: UITableViewDelegate {
     // Настройка отображения ячейки
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         switch rows[indexPath.row] {
+        case let .title(text):
+            guard let cell = cell as? TitleCell else { return }
+            cell.configure(title: text)
         case let .advertisement(advertisement):
             guard let cell = cell as? FavouritesCell else { return }
             cell.configure(with: .init(advertisement: advertisement))

@@ -88,7 +88,7 @@ final class OTPViewController: UIViewController {
         label.text = "Получить звонок еще раз"
         label.font = Font.mulish(name: .bold, size: 13)
         label.textAlignment = .center
-        label.textColor = UIColor(named: "TextHighlight")
+        label.textColor = .textField
         label.isUserInteractionEnabled = true
         let gesture = UITapGestureRecognizer(target: self, action: #selector(againDidTap))
         label.addGestureRecognizer(gesture)

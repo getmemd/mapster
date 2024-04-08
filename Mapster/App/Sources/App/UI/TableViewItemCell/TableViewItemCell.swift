@@ -10,7 +10,7 @@ import UIKit
 final class TableViewItemCell: UITableViewCell {
     private let contentBackgroundView: UIView = {
         let view = UIView()
-        view.backgroundColor = UIColor(named: "CellGray")
+        view.backgroundColor = .cellGray
         view.layer.cornerRadius = 10
         return view
     }()

@@ -15,11 +15,8 @@ final class ImageRepository {
         case unknownError
     }
     
-    func uploadImage(_ image: UIImage, to storagePath: String, completion: @escaping (Result<URL, Error>) -> Void) {
-        guard let imageData = image.jpegData(compressionQuality: 0.8) else {
-            return completion(.failure(ImageError.invalidImageData))
-        }
-        let storageRef = Storage.storage().reference().child(storagePath)
+    func uploadImage(_ imageData: Data, completion: @escaping (Result<URL, Error>) -> Void) {
+        let storageRef = Storage.storage().reference().child("gs://mapster-6fbed.appspot.com")
         storageRef.putData(imageData, metadata: nil) { metadata, error in
             guard let metadata = metadata else {
                 return completion(.failure(error ?? ImageError.unknownError))
