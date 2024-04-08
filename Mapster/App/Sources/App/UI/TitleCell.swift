@@ -2,7 +2,7 @@
 //  TitleCell.swift
 //  Mapster
 //
-//  Created by Adilkhan Medeuyev on 07.04.2024.
+//  Created by User on 07.04.2024.
 //
 
 import UIKit
