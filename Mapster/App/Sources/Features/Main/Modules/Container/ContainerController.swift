@@ -25,6 +25,6 @@ final class ContainerController: UITabBarController {
 
     private func setup() {
         tabBar.backgroundColor = .white
-        tabBar.tintColor = UIColor(named: "AccentColor")
+        tabBar.tintColor = .accent
     }
 }

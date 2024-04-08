@@ -18,4 +18,8 @@ final class Repositories: SharedContainer {
     var advertisementRepository: Dependency<AdvertisementRepository> {
         self { AdvertisementRepository() }
     }
+    
+    var imageRepository: Dependency<ImageRepository> {
+        self { ImageRepository() }
+    }
 }

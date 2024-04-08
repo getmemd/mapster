@@ -36,8 +36,8 @@ final class OnboardingViewController: UIViewController {
         let pageControl = UIPageControl()
         pageControl.isUserInteractionEnabled = false
         pageControl.numberOfPages = Constants.numberOfPages
-        pageControl.currentPageIndicatorTintColor = UIColor(named: "AccentColor")
-        pageControl.pageIndicatorTintColor = UIColor(named: "LightGreen")
+        pageControl.currentPageIndicatorTintColor = .accent
+        pageControl.pageIndicatorTintColor = .lightGreen
         return pageControl
     }()
     

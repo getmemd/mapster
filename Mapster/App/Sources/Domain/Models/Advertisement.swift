@@ -14,21 +14,19 @@ struct Advertisement {
     var description: String
     var category: String
     var date: Date
-    var longitude: Double
-    var latitude: Double
+    var geopoint: GeoPoint
     var images: [String]
     var personName: String
     var phoneNumber: String
     var address: String
     
-    init(name: String, price: Double, description: String, category: String, date: Date, longitude: Double, latitude: Double, images: [String], personName: String, phoneNumber: String, address: String) {
+    init(name: String, price: Double, description: String, category: String, date: Date, geopoint: GeoPoint, images: [String], personName: String, phoneNumber: String, address: String) {
         self.name = name
         self.price = price
         self.description = description
         self.category = category
         self.date = date
-        self.longitude = longitude
-        self.latitude = latitude
+        self.geopoint = geopoint
         self.images = images
         self.personName = personName
         self.phoneNumber = phoneNumber
@@ -41,8 +39,7 @@ struct Advertisement {
               let description = data["description"] as? String,
               let category = data["category"] as? String,
               let date = data["date"] as? Timestamp,
-              let longitude = data["longitude"] as? Double,
-              let latitude = data["latitude"] as? Double,
+              let geopoint = data["geopoint"] as? GeoPoint,
               let images = data["images"] as? [String],
               let personName = data["personName"] as? String,
               let phoneNumber = data["phoneNumber"] as? String,
@@ -52,8 +49,7 @@ struct Advertisement {
                   description: description,
                   category: category,
                   date: date.dateValue(),
-                  longitude: longitude,
-                  latitude: latitude,
+                  geopoint: geopoint,
                   images: images,
                   personName: personName,
                   phoneNumber: phoneNumber,
@@ -67,8 +63,7 @@ struct Advertisement {
             "description": description,
             "category": category,
             "date": date,
-            "longitude": longitude,
-            "latitude": latitude,
+            "geopoint": geopoint,
             "images": images,
             "personName": personName,
             "phoneNumber": phoneNumber,

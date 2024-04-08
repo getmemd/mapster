@@ -82,6 +82,20 @@
 		C5EF99F42BBFF0A500312987 /* ProfileTableViewDelegateImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5EF99F32BBFF0A500312987 /* ProfileTableViewDelegateImpl.swift */; };
 		C5EF99F92BBFF34500312987 /* SearchCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5EF99F82BBFF34500312987 /* SearchCellModel.swift */; };
 		C5EF99FC2BBFF3DE00312987 /* ProfileCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5EF99FB2BBFF3DE00312987 /* ProfileCellModel.swift */; };
+		C5EF9A052BC1F2C300312987 /* CreateStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5EF9A042BC1F2C300312987 /* CreateStore.swift */; };
+		C5EF9A072BC1F82D00312987 /* CreateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5EF9A062BC1F82D00312987 /* CreateViewController.swift */; };
+		C5EF9A0C2BC1F84300312987 /* CreateTableViewDataSourceImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5EF9A0B2BC1F84300312987 /* CreateTableViewDataSourceImpl.swift */; };
+		C5EF9A0E2BC2038500312987 /* TitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5EF9A0D2BC2038500312987 /* TitleCell.swift */; };
+		C5EF9A102BC20A4100312987 /* CreatePhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5EF9A0F2BC20A4100312987 /* CreatePhotoCell.swift */; };
+		C5EF9A122BC2A8F800312987 /* CreatePhotoEmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5EF9A112BC2A8F800312987 /* CreatePhotoEmptyView.swift */; };
+		C5EF9A142BC2B8AF00312987 /* CreatePhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5EF9A132BC2B8AF00312987 /* CreatePhotoView.swift */; };
+		C5EF9A162BC3171C00312987 /* CreateTextFieldCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5EF9A152BC3171C00312987 /* CreateTextFieldCell.swift */; };
+		C5EF9A182BC3196400312987 /* CreateTextFieldCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5EF9A172BC3196400312987 /* CreateTextFieldCellModel.swift */; };
+		C5EF9A1A2BC323E900312987 /* CreateTextViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5EF9A192BC323E900312987 /* CreateTextViewCell.swift */; };
+		C5EF9A1C2BC32D8200312987 /* CreateMapCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5EF9A1B2BC32D8200312987 /* CreateMapCell.swift */; };
+		C5EF9A212BC340D300312987 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5EF9A202BC340D300312987 /* MapViewController.swift */; };
+		C5EF9A232BC35B8800312987 /* LocationDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5EF9A222BC35B8800312987 /* LocationDataManager.swift */; };
+		C5EF9A282BC3898800312987 /* HomeStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5EF9A272BC3898800312987 /* HomeStore.swift */; };
 		C5F55BBF2B8772100053D5BB /* OTPViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5F55BBE2B8772100053D5BB /* OTPViewController.swift */; };
 		C5F55BC12B87D9810053D5BB /* OTPTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5F55BC02B87D9810053D5BB /* OTPTextField.swift */; };
 /* End PBXBuildFile section */
@@ -157,6 +171,20 @@
 		C5EF99F32BBFF0A500312987 /* ProfileTableViewDelegateImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableViewDelegateImpl.swift; sourceTree = "<group>"; };
 		C5EF99F82BBFF34500312987 /* SearchCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCellModel.swift; sourceTree = "<group>"; };
 		C5EF99FB2BBFF3DE00312987 /* ProfileCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCellModel.swift; sourceTree = "<group>"; };
+		C5EF9A042BC1F2C300312987 /* CreateStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateStore.swift; sourceTree = "<group>"; };
+		C5EF9A062BC1F82D00312987 /* CreateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateViewController.swift; sourceTree = "<group>"; };
+		C5EF9A0B2BC1F84300312987 /* CreateTableViewDataSourceImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTableViewDataSourceImpl.swift; sourceTree = "<group>"; };
+		C5EF9A0D2BC2038500312987 /* TitleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleCell.swift; sourceTree = "<group>"; };
+		C5EF9A0F2BC20A4100312987 /* CreatePhotoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePhotoCell.swift; sourceTree = "<group>"; };
+		C5EF9A112BC2A8F800312987 /* CreatePhotoEmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePhotoEmptyView.swift; sourceTree = "<group>"; };
+		C5EF9A132BC2B8AF00312987 /* CreatePhotoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePhotoView.swift; sourceTree = "<group>"; };
+		C5EF9A152BC3171C00312987 /* CreateTextFieldCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTextFieldCell.swift; sourceTree = "<group>"; };
+		C5EF9A172BC3196400312987 /* CreateTextFieldCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTextFieldCellModel.swift; sourceTree = "<group>"; };
+		C5EF9A192BC323E900312987 /* CreateTextViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTextViewCell.swift; sourceTree = "<group>"; };
+		C5EF9A1B2BC32D8200312987 /* CreateMapCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateMapCell.swift; sourceTree = "<group>"; };
+		C5EF9A202BC340D300312987 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		C5EF9A222BC35B8800312987 /* LocationDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationDataManager.swift; sourceTree = "<group>"; };
+		C5EF9A272BC3898800312987 /* HomeStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeStore.swift; sourceTree = "<group>"; };
 		C5F55BBE2B8772100053D5BB /* OTPViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTPViewController.swift; sourceTree = "<group>"; };
 		C5F55BC02B87D9810053D5BB /* OTPTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTPTextField.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -286,6 +314,7 @@
 			isa = PBXGroup;
 			children = (
 				C511A8282B811ED9002DB0E4 /* Font.swift */,
+				C5EF9A222BC35B8800312987 /* LocationDataManager.swift */,
 				C5D9DCDC2B8B3D36000B010C /* PasswordValidatationService.swift */,
 				C5142E072B835FE400384411 /* UITextField+ViewPadding.swift */,
 			);
@@ -306,6 +335,7 @@
 				C5EF99F62BBFF21500312987 /* TableViewItemCell */,
 				C5142E0D2B836DD200384411 /* ActionButton.swift */,
 				C5EF99ED2BBFE85D00312987 /* CircularView.swift */,
+				C5EF9A0D2BC2038500312987 /* TitleCell.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -537,10 +567,12 @@
 		C58190892B8CCBD2001BE36E /* Modules */ = {
 			isa = PBXGroup;
 			children = (
-				C5EF99E52BBFDD8A00312987 /* Profile */,
+				C5EF9A1D2BC33E8900312987 /* Map */,
 				C58190912B8CD1E5001BE36E /* Container */,
+				C5EF99FF2BC1F2A600312987 /* Create */,
 				C5E472212BB36C33002AA59B /* Favourites */,
 				C58190922B8CD26F001BE36E /* Home */,
+				C5EF99E52BBFDD8A00312987 /* Profile */,
 				C5105F242BB4803B000D5B28 /* Search */,
 			);
 			path = Modules;
@@ -567,6 +599,7 @@
 			isa = PBXGroup;
 			children = (
 				C58190932B8CD272001BE36E /* Controller */,
+				C5EF9A262BC3897C00312987 /* Store */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -736,6 +769,87 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
+		C5EF99FF2BC1F2A600312987 /* Create */ = {
+			isa = PBXGroup;
+			children = (
+				C5EF9A002BC1F2AF00312987 /* Controller */,
+				C5EF9A032BC1F2B800312987 /* Store */,
+				C5EF9A012BC1F2B200312987 /* View */,
+				C5EF9A022BC1F2B400312987 /* ViewModel */,
+			);
+			path = Create;
+			sourceTree = "<group>";
+		};
+		C5EF9A002BC1F2AF00312987 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				C5EF9A062BC1F82D00312987 /* CreateViewController.swift */,
+				C5EF9A082BC1F82F00312987 /* TableView */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		C5EF9A012BC1F2B200312987 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				C5EF9A1B2BC32D8200312987 /* CreateMapCell.swift */,
+				C5EF9A0F2BC20A4100312987 /* CreatePhotoCell.swift */,
+				C5EF9A112BC2A8F800312987 /* CreatePhotoEmptyView.swift */,
+				C5EF9A132BC2B8AF00312987 /* CreatePhotoView.swift */,
+				C5EF9A152BC3171C00312987 /* CreateTextFieldCell.swift */,
+				C5EF9A192BC323E900312987 /* CreateTextViewCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		C5EF9A022BC1F2B400312987 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				C5EF9A172BC3196400312987 /* CreateTextFieldCellModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		C5EF9A032BC1F2B800312987 /* Store */ = {
+			isa = PBXGroup;
+			children = (
+				C5EF9A042BC1F2C300312987 /* CreateStore.swift */,
+			);
+			path = Store;
+			sourceTree = "<group>";
+		};
+		C5EF9A082BC1F82F00312987 /* TableView */ = {
+			isa = PBXGroup;
+			children = (
+				C5EF9A0B2BC1F84300312987 /* CreateTableViewDataSourceImpl.swift */,
+			);
+			path = TableView;
+			sourceTree = "<group>";
+		};
+		C5EF9A1D2BC33E8900312987 /* Map */ = {
+			isa = PBXGroup;
+			children = (
+				C5EF9A1F2BC340C800312987 /* Controller */,
+			);
+			path = Map;
+			sourceTree = "<group>";
+		};
+		C5EF9A1F2BC340C800312987 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				C5EF9A202BC340D300312987 /* MapViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		C5EF9A262BC3897C00312987 /* Store */ = {
+			isa = PBXGroup;
+			children = (
+				C5EF9A272BC3898800312987 /* HomeStore.swift */,
+			);
+			path = Store;
+			sourceTree = "<group>";
+		};
 		C5F55BBB2B87718E0053D5BB /* OTP */ = {
 			isa = PBXGroup;
 			children = (
@@ -860,10 +974,13 @@
 				C5105F2B2BB4806F000D5B28 /* SearchTableViewDataSourceImpl.swift in Sources */,
 				C5142E0B2B83624800384411 /* AuthorizationCheckoxViewModel.swift in Sources */,
 				C5E4722F2BB36ECF002AA59B /* FavouritesEmptyCell.swift in Sources */,
+				C5EF9A142BC2B8AF00312987 /* CreatePhotoView.swift in Sources */,
 				C53BD2752B7E24E30078D28E /* AppCoordinator.swift in Sources */,
+				C5EF9A072BC1F82D00312987 /* CreateViewController.swift in Sources */,
 				C57523332B98EF4D00ECCDE3 /* Combine.swift in Sources */,
 				C5EF99FC2BBFF3DE00312987 /* ProfileCellModel.swift in Sources */,
 				C511A82D2B812474002DB0E4 /* OnboardingModuleFactory.swift in Sources */,
+				C5EF9A0E2BC2038500312987 /* TitleCell.swift in Sources */,
 				C511A8292B811ED9002DB0E4 /* Font.swift in Sources */,
 				C53BD2772B7E253D0078D28E /* Coordinator.swift in Sources */,
 				C57523442B99F33600ECCDE3 /* BaseViewController.swift in Sources */,
@@ -872,16 +989,23 @@
 				C5105F302BB481B6000D5B28 /* SearchStore.swift in Sources */,
 				C5E472362BB4150A002AA59B /* FavouritesCellModel.swift in Sources */,
 				C5E472272BB36D4F002AA59B /* FavouritesTableViewDataSourceImpl.swift in Sources */,
+				C5EF9A122BC2A8F800312987 /* CreatePhotoEmptyView.swift in Sources */,
 				C575232E2B98EEEB00ECCDE3 /* Store.swift in Sources */,
+				C5EF9A1C2BC32D8200312987 /* CreateMapCell.swift in Sources */,
 				C53BD2592B7E217D0078D28E /* AppDelegate.swift in Sources */,
 				C5D9DCDD2B8B3D36000B010C /* PasswordValidatationService.swift in Sources */,
+				C5EF9A212BC340D300312987 /* MapViewController.swift in Sources */,
+				C5EF9A282BC3898800312987 /* HomeStore.swift in Sources */,
 				C5E4723C2BB418C0002AA59B /* Advertisement.swift in Sources */,
 				C581908E2B8CCC53001BE36E /* MainCoordinator.swift in Sources */,
 				C53BD28A2B7E335F0078D28E /* OnboardingViewModel.swift in Sources */,
+				C5EF9A182BC3196400312987 /* CreateTextFieldCellModel.swift in Sources */,
 				C5EF99E92BBFDDB000312987 /* ProfileStore.swift in Sources */,
+				C5EF9A1A2BC323E900312987 /* CreateTextViewCell.swift in Sources */,
 				C581908B2B8CCBF0001BE36E /* ContainerController.swift in Sources */,
 				C5142E0E2B836DD200384411 /* ActionButton.swift in Sources */,
 				C5EF99F92BBFF34500312987 /* SearchCellModel.swift in Sources */,
+				C5EF9A052BC1F2C300312987 /* CreateStore.swift in Sources */,
 				C53BD27F2B7E27850078D28E /* OnboardingViewController.swift in Sources */,
 				C50597B52B8235C00058B519 /* AuthorizationCheckboxView.swift in Sources */,
 				C5EF99DF2BBFDAE900312987 /* ImageRepository.swift in Sources */,
@@ -891,7 +1015,9 @@
 				C5142E082B835FE400384411 /* UITextField+ViewPadding.swift in Sources */,
 				C5EF99F42BBFF0A500312987 /* ProfileTableViewDelegateImpl.swift in Sources */,
 				C50597B02B821CE90058B519 /* AuthorizationCoordinator.swift in Sources */,
+				C5EF9A102BC20A4100312987 /* CreatePhotoCell.swift in Sources */,
 				C5EF99DA2BBF0D1400312987 /* User.swift in Sources */,
+				C5EF9A232BC35B8800312987 /* LocationDataManager.swift in Sources */,
 				C5F55BBF2B8772100053D5BB /* OTPViewController.swift in Sources */,
 				C53BD2872B7E2EE80078D28E /* OnboardingView.swift in Sources */,
 				C50597AE2B821C9D0058B519 /* AuthorizationModuleFactory.swift in Sources */,
@@ -910,11 +1036,13 @@
 				C575232D2B98EEEB00ECCDE3 /* UIViewController+bindStore.swift in Sources */,
 				C5E472382BB41551002AA59B /* Double+NumberFormatter.swift in Sources */,
 				C53BD2792B7E258C0078D28E /* Router.swift in Sources */,
+				C5EF9A0C2BC1F84300312987 /* CreateTableViewDataSourceImpl.swift in Sources */,
 				C50597AC2B821C240058B519 /* AuthorizationViewController.swift in Sources */,
 				C5E472292BB36D5F002AA59B /* FavouritesTableViewDelegateImpl.swift in Sources */,
 				C57523312B98EF2600ECCDE3 /* Bag.swift in Sources */,
 				C5105F352BB482A4000D5B28 /* TableViewItemCell.swift in Sources */,
 				C5E472332BB41438002AA59B /* UITableView.swift in Sources */,
+				C5EF9A162BC3171C00312987 /* CreateTextFieldCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1063,9 +1191,9 @@
 				INFOPLIST_FILE = Mapster/App/Resources/Info.plist;
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Разрешить приложению использовать вашу геолокацию?";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1079,7 +1207,7 @@
 				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -1095,9 +1223,9 @@
 				INFOPLIST_FILE = Mapster/App/Resources/Info.plist;
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Разрешить приложению использовать вашу геолокацию?";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1111,7 +1239,7 @@
 				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

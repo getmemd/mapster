@@ -38,7 +38,7 @@ final class PasswordResetViewController: BaseViewController {
         textField.delegate = self
         textField.placeholder = "Пароль"
         textField.borderStyle = .roundedRect
-        textField.backgroundColor = UIColor(named: "TextField")
+        textField.backgroundColor = .textField
         textField.font = Font.mulish(name: .light, size: 14)
         textField.addPaddingAndIcon(.init(named: "lock"), padding: 20, isLeftView: false)
         textField.isSecureTextEntry = true
@@ -50,7 +50,7 @@ final class PasswordResetViewController: BaseViewController {
         textField.delegate = self
         textField.placeholder = "Повторите пароль"
         textField.borderStyle = .roundedRect
-        textField.backgroundColor = UIColor(named: "TextField")
+        textField.backgroundColor = .textField
         textField.font = Font.mulish(name: .light, size: 14)
         textField.addPaddingAndIcon(.init(named: "lock"), padding: 20, isLeftView: false)
         textField.isSecureTextEntry = true

@@ -11,7 +11,7 @@ import UIKit
 final class ActionButton: UIButton {
     public override var isEnabled: Bool {
         didSet {
-            backgroundColor = isEnabled ? UIColor(named: "AccentColor") : .darkGray
+            backgroundColor = isEnabled ? .accent : .darkGray
         }
     }
     
@@ -26,7 +26,7 @@ final class ActionButton: UIButton {
     
     private func setupUI() {
         layer.cornerRadius = 10
-        backgroundColor = UIColor(named: "AccentColor")
+        backgroundColor = .accent
         setTitleColor(.white, for: .normal)
         titleLabel?.font = Font.mulish(name: .semiBold, size: 20)
     }

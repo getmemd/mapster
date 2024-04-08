@@ -21,6 +21,7 @@ enum FavouritesAction {
 }
 
 enum FavouritesRows {
+    case title(text: String)
     case advertisement(advertisement: Advertisement)
     case empty
 }
@@ -40,7 +41,7 @@ final class FavouritesStore: Store<FavouritesEvent, FavouritesAction> {
             advertisements.remove(at: index)
             if advertisements.isEmpty {
                 configureRows()
-            }
+            }    
         }
     }
     
@@ -56,7 +57,7 @@ final class FavouritesStore: Store<FavouritesEvent, FavouritesAction> {
     }
     
     private func configureRows() {
-        var rows: [FavouritesRows] = []
+        var rows: [FavouritesRows] = [.title(text: "Избранное")]
         if advertisements.isEmpty {
             rows.append(.empty)
         } else {

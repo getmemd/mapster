@@ -35,7 +35,7 @@ final class AuthorizationViewController: BaseViewController {
         let label = UILabel()
         label.text = "Mapster"
         label.font = Font.mulish(name: .extraBold, size: 36)
-        label.textColor = UIColor(named: "AccentColor")
+        label.textColor = .accent
         label.numberOfLines = 0
         label.textAlignment = .center
         return label
@@ -57,7 +57,7 @@ final class AuthorizationViewController: BaseViewController {
         textField.keyboardType = .emailAddress
         textField.autocapitalizationType = .none
         textField.borderStyle = .roundedRect
-        textField.backgroundColor = UIColor(named: "TextField")
+        textField.backgroundColor = .textField
         textField.font = Font.mulish(name: .light, size: 14)
         textField.addPaddingAndIcon(.init(named: "user"), padding: 20, isLeftView: false)
         return textField
@@ -68,7 +68,7 @@ final class AuthorizationViewController: BaseViewController {
         textField.delegate = self
         textField.placeholder = "Пароль"
         textField.borderStyle = .roundedRect
-        textField.backgroundColor = UIColor(named: "TextField")
+        textField.backgroundColor = .textField
         textField.textContentType = .password
         textField.font = Font.mulish(name: .light, size: 14)
         textField.addPaddingAndIcon(.init(named: "lock"), padding: 20, isLeftView: false)
@@ -81,7 +81,7 @@ final class AuthorizationViewController: BaseViewController {
         textField.delegate = self
         textField.placeholder = "Повторите пароль"
         textField.borderStyle = .roundedRect
-        textField.backgroundColor = UIColor(named: "TextField")
+        textField.backgroundColor = .textField
         textField.textContentType = .password
         textField.font = Font.mulish(name: .light, size: 14)
         textField.addPaddingAndIcon(.init(named: "lock"), padding: 20, isLeftView: false)
@@ -119,7 +119,7 @@ final class AuthorizationViewController: BaseViewController {
         label.text = "Войти"
         label.font = Font.mulish(name: .bold, size: 13)
         label.textAlignment = .center
-        label.textColor = UIColor(named: "TextHighlight")
+        label.textColor = .textField
         label.isUserInteractionEnabled = true
         let gesture = UITapGestureRecognizer(target: self, action: #selector(loginDidTap))
         label.addGestureRecognizer(gesture)
