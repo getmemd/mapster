@@ -42,7 +42,7 @@ final class AuthorizationCheckboxView: UIView {
         textView.font = Font.mulish(name: .light, size: 12)
         textView.isScrollEnabled = false
         textView.textContainerInset = .zero
-        textView.tintColor = .textField
+        textView.tintColor = .textHighlight
         let attributedString = NSMutableAttributedString()
         attributedString.mutableString.setString("Я ознакомлен и согласен с условиями использования.")
         attributedString.addAttribute(.link,
@@ -57,7 +57,7 @@ final class AuthorizationCheckboxView: UIView {
         label.text = "Забыли пароль?"
         label.textAlignment = .right
         label.font = Font.mulish(name: .light, size: 12)
-        label.textColor = .textField
+        label.textColor = .textHighlight
         label.isUserInteractionEnabled = true
         let gesture = UITapGestureRecognizer(target: self, action: #selector(forgotPasswordDidTap))
         label.addGestureRecognizer(gesture)

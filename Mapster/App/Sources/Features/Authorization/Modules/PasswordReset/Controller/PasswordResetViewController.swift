@@ -13,7 +13,7 @@ protocol PasswordResetNavigationDelegate: AnyObject {
 }
 
 final class PasswordResetViewController: BaseViewController {
-    var navigationDelegate: PasswordResetNavigationDelegate?
+    weak var navigationDelegate: PasswordResetNavigationDelegate?
     private let store = PasswordResetStore()
     private var bag = Bag()
     
@@ -106,9 +106,9 @@ final class PasswordResetViewController: BaseViewController {
             case let .showError(errorMessage):
                 showAlert(message: errorMessage)
             case .loading:
-                activityIndicator.startAnimating()
+                ProgressHud.startAnimating()
             case .loadingFinished:
-                activityIndicator.stopAnimating()
+                ProgressHud.stopAnimating()
             case .passwordUpdated:
                 navigationDelegate?.didFinish(self)
             }

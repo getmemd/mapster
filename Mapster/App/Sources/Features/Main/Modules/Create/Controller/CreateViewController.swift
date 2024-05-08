@@ -13,7 +13,7 @@ protocol CreateNavigationDelegate: AnyObject {
 }
 
 final class CreateViewController: BaseViewController {
-    var navigationDelegate: CreateNavigationDelegate?
+    weak var navigationDelegate: CreateNavigationDelegate?
     private lazy var store = CreateStore()
     private var bag = Bag()
     private lazy var tableViewDataSourceImpl = CreateTableViewDataSourceImpl(store: store)
@@ -59,9 +59,9 @@ final class CreateViewController: BaseViewController {
             case let .showError(message):
                 showAlert(message: message)
             case .loading:
-                activityIndicator.startAnimating()
+                ProgressHud.startAnimating()
             case .loadingFinished:
-                activityIndicator.stopAnimating()
+                ProgressHud.stopAnimating()
             }
         }
         .store(in: &bag)
@@ -89,10 +89,11 @@ final class CreateViewController: BaseViewController {
 // MARK: - UIImagePickerControllerDelegate
 
 extension CreateViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+    func imagePickerController(_ picker: UIImagePickerController,
+                               didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         picker.dismiss(animated: true, completion: nil)
         if let image = info[.originalImage] as? UIImage {
-            guard let imageData = image.jpegData(compressionQuality: 1.0) else { return }
+            guard let imageData = image.jpegData(compressionQuality: 0.8) else { return }
             store.handleAction(.didPickedImage(data: imageData))
         }
     }

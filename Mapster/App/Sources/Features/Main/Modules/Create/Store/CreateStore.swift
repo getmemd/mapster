@@ -43,7 +43,7 @@ final class CreateStore: Store<CreateEvent, CreateAction> {
     @Injected(\Repositories.imageRepository) private var imageRepository
     
     private var photos: [Data] = []
-    private var imageUrls: [String] = []
+    private var imageUrls: [URL] = []
     private var headline: String?
     private var description: String? = "Расскажите о продукте..."
     private var reward: String?
@@ -79,28 +79,26 @@ final class CreateStore: Store<CreateEvent, CreateAction> {
             geopoint = .init(latitude: latitude, longitude: longitude)
             configureRows()
         case .didTapAction:
-            sendAdvertisement()
+            uploadImages()
         }
     }
     
-//    private func uploadImage() {
-//        sendEvent(.loading)
-//        photos.forEach {
-//            imageRepository.uploadImage($0) { [weak self] result in
-//                guard let self else { return }
-//                switch result {
-//                case let .success(url):
-//                    imageUrls.append(url.path())
-//                    if imageUrls.count == photos.count {
-//                        sendAdvertisement()
-//                    }
-//                case let .failure(error):
-//                    sendEvent(.showError(message: error.localizedDescription))
-//                    sendEvent(.loadingFinished)
-//                }
-//            }
-//        }
-//    }
+    private func uploadImages() {
+        sendEvent(.loading)
+        imageRepository.uploadImages(imagesData: photos) { [weak self] result in
+            guard let self else { return }
+            switch result {
+            case let .success(urls):
+                imageUrls = urls
+                if imageUrls.count == photos.count {
+                    sendAdvertisement()
+                }
+            case let .failure(error):
+                sendEvent(.showError(message: error.localizedDescription))
+                sendEvent(.loadingFinished)
+            }
+        }
+    }
     
     private func sendAdvertisement() {
         Task {
@@ -110,7 +108,11 @@ final class CreateStore: Store<CreateEvent, CreateAction> {
                       let price = Double(reward),
                       let description,
                       let geopoint,
-                      let address else { return }
+                      let address,
+                      let user = Auth.auth().currentUser else {
+                    sendEvent(.showError(message: "Unknown error"))
+                    return
+                }
                 let advertisement = Advertisement(
                   name: headline,
                   price: price,
@@ -118,11 +120,11 @@ final class CreateStore: Store<CreateEvent, CreateAction> {
                   category: "",
                   date: Date(),
                   geopoint: geopoint,
-                  images: [],
-                  personName: "",
-                  phoneNumber: "",
+                  images: imageUrls.compactMap { $0.absoluteString },
+                  personName: user.displayName,
+                  phoneNumber: user.phoneNumber,
                   address: address)
-                try await advertisementRepository.addAdvertisement(data: advertisement.dictionary)
+                try await advertisementRepository.addAdvertisement(advertisement: advertisement)
                 sendEvent(.loadingFinished)
             } catch {
                 sendEvent(.showError(message: error.localizedDescription))

@@ -13,7 +13,7 @@ protocol MapNavigationDelegate: AnyObject {
 }
 
 final class MapViewController: BaseViewController {
-    var navigationDelegate: MapNavigationDelegate?
+    weak var navigationDelegate: MapNavigationDelegate?
     private var locationManager: CLLocationManager?
     
     private var coordinate: CLLocationCoordinate2D?

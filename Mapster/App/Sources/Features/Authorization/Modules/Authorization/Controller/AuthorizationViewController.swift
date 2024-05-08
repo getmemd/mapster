@@ -13,7 +13,7 @@ protocol AuthorizationNavigationDelegate: AnyObject {
 }
 
 final class AuthorizationViewController: BaseViewController {
-    var navigationDelegate: AuthorizationNavigationDelegate?
+    weak var navigationDelegate: AuthorizationNavigationDelegate?
     private let store = AuthStore()
     private var bag = Bag()
     
@@ -82,7 +82,7 @@ final class AuthorizationViewController: BaseViewController {
         textField.placeholder = "Повторите пароль"
         textField.borderStyle = .roundedRect
         textField.backgroundColor = .textField
-        textField.textContentType = .password
+        textField.textContentType = .newPassword
         textField.font = Font.mulish(name: .light, size: 14)
         textField.addPaddingAndIcon(.init(named: "lock"), padding: 20, isLeftView: false)
         textField.isSecureTextEntry = true
@@ -119,7 +119,7 @@ final class AuthorizationViewController: BaseViewController {
         label.text = "Войти"
         label.font = Font.mulish(name: .bold, size: 13)
         label.textAlignment = .center
-        label.textColor = .textField
+        label.textColor = .textHighlight
         label.isUserInteractionEnabled = true
         let gesture = UITapGestureRecognizer(target: self, action: #selector(loginDidTap))
         label.addGestureRecognizer(gesture)
@@ -190,9 +190,9 @@ final class AuthorizationViewController: BaseViewController {
             guard let self else { return }
             switch event {
             case .loading:
-                activityIndicator.startAnimating()
+                ProgressHud.startAnimating()
             case .loadingFinished:
-                activityIndicator.stopAnimating()
+                ProgressHud.stopAnimating()
             case let .showAlert(title, message):
                 showAlert(title: title, message: message)
             case .success:

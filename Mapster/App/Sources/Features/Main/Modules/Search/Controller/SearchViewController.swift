@@ -12,7 +12,7 @@ protocol SearchNavigationDelegate: AnyObject {
 }
 
 final class SearchViewController: BaseViewController {
-    var navigationDelegate: SearchNavigationDelegate?
+    weak var navigationDelegate: SearchNavigationDelegate?
     private lazy var store = SearchStore()
     private var bag = Bag()
     private lazy var tableViewDataSourceImpl = SearchTableViewDataSourceImpl(store: store)

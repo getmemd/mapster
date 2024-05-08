@@ -40,6 +40,11 @@
 		C53BD2822B7E28720078D28E /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = C53BD2812B7E28720078D28E /* SnapKit */; };
 		C53BD2872B7E2EE80078D28E /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C53BD2862B7E2EE80078D28E /* OnboardingView.swift */; };
 		C53BD28A2B7E335F0078D28E /* OnboardingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C53BD2892B7E335F0078D28E /* OnboardingViewModel.swift */; };
+		C566A4462BE980AA00E84262 /* AdvertisementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C566A4452BE980AA00E84262 /* AdvertisementViewController.swift */; };
+		C566A4492BE980B900E84262 /* AdvertisementStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = C566A4482BE980B900E84262 /* AdvertisementStore.swift */; };
+		C573A5CA2BEA9569007AD64E /* ProgressHud.swift in Sources */ = {isa = PBXBuildFile; fileRef = C573A5C92BEA9569007AD64E /* ProgressHud.swift */; };
+		C573A5CC2BEA9585007AD64E /* ProgressHudContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C573A5CB2BEA9585007AD64E /* ProgressHudContainerView.swift */; };
+		C573A5CE2BEA9D26007AD64E /* UIWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = C573A5CD2BEA9D26007AD64E /* UIWindow.swift */; };
 		C57523242B98EC4D00ECCDE3 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = C57523232B98EC4D00ECCDE3 /* FirebaseAuth */; };
 		C57523292B98EE8A00ECCDE3 /* AuthStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = C57523282B98EE8A00ECCDE3 /* AuthStore.swift */; };
 		C575232D2B98EEEB00ECCDE3 /* UIViewController+bindStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = C575232B2B98EEEB00ECCDE3 /* UIViewController+bindStore.swift */; };
@@ -134,6 +139,12 @@
 		C53BD27E2B7E27850078D28E /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		C53BD2862B7E2EE80078D28E /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		C53BD2892B7E335F0078D28E /* OnboardingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewModel.swift; sourceTree = "<group>"; };
+		C566A4452BE980AA00E84262 /* AdvertisementViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdvertisementViewController.swift; sourceTree = "<group>"; };
+		C566A4482BE980B900E84262 /* AdvertisementStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdvertisementStore.swift; sourceTree = "<group>"; };
+		C573A5C92BEA9569007AD64E /* ProgressHud.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressHud.swift; sourceTree = "<group>"; };
+		C573A5CB2BEA9585007AD64E /* ProgressHudContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressHudContainerView.swift; sourceTree = "<group>"; };
+		C573A5CD2BEA9D26007AD64E /* UIWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIWindow.swift; sourceTree = "<group>"; };
+		C573A5CF2BEAE630007AD64E /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		C57523282B98EE8A00ECCDE3 /* AuthStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthStore.swift; sourceTree = "<group>"; };
 		C575232B2B98EEEB00ECCDE3 /* UIViewController+bindStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+bindStore.swift"; sourceTree = "<group>"; };
 		C575232C2B98EEEB00ECCDE3 /* Store.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Store.swift; sourceTree = "<group>"; };
@@ -332,6 +343,7 @@
 		C5142E0C2B836DBF00384411 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				C573A5C82BEA9555007AD64E /* ProgressHud */,
 				C5EF99F62BBFF21500312987 /* TableViewItemCell */,
 				C5142E0D2B836DD200384411 /* ActionButton.swift */,
 				C5EF99ED2BBFE85D00312987 /* CircularView.swift */,
@@ -441,9 +453,9 @@
 			isa = PBXGroup;
 			children = (
 				C53BD2742B7E24E30078D28E /* AppCoordinator.swift */,
+				C57523432B99F33600ECCDE3 /* BaseViewController.swift */,
 				C53BD2762B7E253D0078D28E /* Coordinator.swift */,
 				C53BD2782B7E258C0078D28E /* Router.swift */,
-				C57523432B99F33600ECCDE3 /* BaseViewController.swift */,
 			);
 			path = Navigation;
 			sourceTree = "<group>";
@@ -499,6 +511,48 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		C566A4412BE9807D00E84262 /* Advertisement */ = {
+			isa = PBXGroup;
+			children = (
+				C566A4422BE9809100E84262 /* Controller */,
+				C566A4432BE9809500E84262 /* Store */,
+				C566A4442BE9809800E84262 /* View */,
+			);
+			path = Advertisement;
+			sourceTree = "<group>";
+		};
+		C566A4422BE9809100E84262 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				C566A4452BE980AA00E84262 /* AdvertisementViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		C566A4432BE9809500E84262 /* Store */ = {
+			isa = PBXGroup;
+			children = (
+				C566A4482BE980B900E84262 /* AdvertisementStore.swift */,
+			);
+			path = Store;
+			sourceTree = "<group>";
+		};
+		C566A4442BE9809800E84262 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		C573A5C82BEA9555007AD64E /* ProgressHud */ = {
+			isa = PBXGroup;
+			children = (
+				C573A5C92BEA9569007AD64E /* ProgressHud.swift */,
+				C573A5CB2BEA9585007AD64E /* ProgressHudContainerView.swift */,
+			);
+			path = ProgressHud;
+			sourceTree = "<group>";
+		};
 		C57523272B98EE8000ECCDE3 /* Store */ = {
 			isa = PBXGroup;
 			children = (
@@ -520,10 +574,11 @@
 			isa = PBXGroup;
 			children = (
 				C57523302B98EF2600ECCDE3 /* Bag.swift */,
-				C57523322B98EF4D00ECCDE3 /* Combine.swift */,
-				C5E472322BB41438002AA59B /* UITableView.swift */,
-				C5E472372BB41551002AA59B /* Double+NumberFormatter.swift */,
 				C5105F362BB49311000D5B28 /* Collection+Safe.swift */,
+				C57523322B98EF4D00ECCDE3 /* Combine.swift */,
+				C5E472372BB41551002AA59B /* Double+NumberFormatter.swift */,
+				C5E472322BB41438002AA59B /* UITableView.swift */,
+				C573A5CD2BEA9D26007AD64E /* UIWindow.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -567,11 +622,12 @@
 		C58190892B8CCBD2001BE36E /* Modules */ = {
 			isa = PBXGroup;
 			children = (
-				C5EF9A1D2BC33E8900312987 /* Map */,
+				C566A4412BE9807D00E84262 /* Advertisement */,
 				C58190912B8CD1E5001BE36E /* Container */,
 				C5EF99FF2BC1F2A600312987 /* Create */,
 				C5E472212BB36C33002AA59B /* Favourites */,
 				C58190922B8CD26F001BE36E /* Home */,
+				C5EF9A1D2BC33E8900312987 /* Map */,
 				C5EF99E52BBFDD8A00312987 /* Profile */,
 				C5105F242BB4803B000D5B28 /* Search */,
 			);
@@ -921,11 +977,11 @@
 			};
 			buildConfigurationList = C53BD2502B7E217D0078D28E /* Build configuration list for PBXProject "Mapster" */;
 			compatibilityVersion = "Xcode 14.0";
-			developmentRegion = en;
+			developmentRegion = ru;
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				en,
 				Base,
+				ru,
 			);
 			mainGroup = C53BD24C2B7E217D0078D28E;
 			packageReferences = (
@@ -980,6 +1036,7 @@
 				C57523332B98EF4D00ECCDE3 /* Combine.swift in Sources */,
 				C5EF99FC2BBFF3DE00312987 /* ProfileCellModel.swift in Sources */,
 				C511A82D2B812474002DB0E4 /* OnboardingModuleFactory.swift in Sources */,
+				C573A5CC2BEA9585007AD64E /* ProgressHudContainerView.swift in Sources */,
 				C5EF9A0E2BC2038500312987 /* TitleCell.swift in Sources */,
 				C511A8292B811ED9002DB0E4 /* Font.swift in Sources */,
 				C53BD2772B7E253D0078D28E /* Coordinator.swift in Sources */,
@@ -998,6 +1055,7 @@
 				C5EF9A282BC3898800312987 /* HomeStore.swift in Sources */,
 				C5E4723C2BB418C0002AA59B /* Advertisement.swift in Sources */,
 				C581908E2B8CCC53001BE36E /* MainCoordinator.swift in Sources */,
+				C566A4462BE980AA00E84262 /* AdvertisementViewController.swift in Sources */,
 				C53BD28A2B7E335F0078D28E /* OnboardingViewModel.swift in Sources */,
 				C5EF9A182BC3196400312987 /* CreateTextFieldCellModel.swift in Sources */,
 				C5EF99E92BBFDDB000312987 /* ProfileStore.swift in Sources */,
@@ -1019,12 +1077,14 @@
 				C5EF99DA2BBF0D1400312987 /* User.swift in Sources */,
 				C5EF9A232BC35B8800312987 /* LocationDataManager.swift in Sources */,
 				C5F55BBF2B8772100053D5BB /* OTPViewController.swift in Sources */,
+				C573A5CE2BEA9D26007AD64E /* UIWindow.swift in Sources */,
 				C53BD2872B7E2EE80078D28E /* OnboardingView.swift in Sources */,
 				C50597AE2B821C9D0058B519 /* AuthorizationModuleFactory.swift in Sources */,
 				C511A82B2B81246B002DB0E4 /* OnboardingCoordinator.swift in Sources */,
 				C5EF99EE2BBFE85D00312987 /* CircularView.swift in Sources */,
 				C57523362B98F65900ECCDE3 /* AuthRepository.swift in Sources */,
 				C58190902B8CCDA6001BE36E /* MainModuleFactory.swift in Sources */,
+				C566A4492BE980B900E84262 /* AdvertisementStore.swift in Sources */,
 				C5EF99D82BBB2B2600312987 /* AdvertisementRepository.swift in Sources */,
 				C5EF99EB2BBFDE4000312987 /* ProfileViewController.swift in Sources */,
 				C5E4722C2BB36DD7002AA59B /* FavouritesStore.swift in Sources */,
@@ -1038,6 +1098,7 @@
 				C53BD2792B7E258C0078D28E /* Router.swift in Sources */,
 				C5EF9A0C2BC1F84300312987 /* CreateTableViewDataSourceImpl.swift in Sources */,
 				C50597AC2B821C240058B519 /* AuthorizationViewController.swift in Sources */,
+				C573A5CA2BEA9569007AD64E /* ProgressHud.swift in Sources */,
 				C5E472292BB36D5F002AA59B /* FavouritesTableViewDelegateImpl.swift in Sources */,
 				C57523312B98EF2600ECCDE3 /* Bag.swift in Sources */,
 				C5105F352BB482A4000D5B28 /* TableViewItemCell.swift in Sources */,
@@ -1053,6 +1114,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				C53BD2642B7E217F0078D28E /* Base */,
+				C573A5CF2BEAE630007AD64E /* ru */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -1065,6 +1127,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -1128,6 +1191,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -1189,11 +1253,12 @@
 				DEVELOPMENT_TEAM = 9RSGP9843T;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Mapster/App/Resources/Info.plist;
-				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Разрешить приложению использовать вашу геолокацию?";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Для лучшего опыта приложение запрашивает доступ к геолокации во время использования";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1221,11 +1286,12 @@
 				DEVELOPMENT_TEAM = 9RSGP9843T;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Mapster/App/Resources/Info.plist;
-				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Разрешить приложению использовать вашу геолокацию?";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Для лучшего опыта приложение запрашивает доступ к геолокации во время использования";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

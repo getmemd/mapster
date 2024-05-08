@@ -56,7 +56,9 @@ extension MainCoordinator: HomeNavigationDelegate {
 // MARK: - FavouritesNavigationDelegate
 
 extension MainCoordinator: FavouritesNavigationDelegate {
-    
+    func didTapAdvertisement(_ viewController: FavouritesViewController, advertisement: Advertisement) {
+        
+    }
 }
 
 // MARK: - SearchNavigationDelegate

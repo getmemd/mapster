@@ -8,11 +8,11 @@
 import UIKit
 
 protocol FavouritesNavigationDelegate: AnyObject {
-    
+    func didTapAdvertisement(_ viewController: FavouritesViewController, advertisement: Advertisement)
 }
 
 final class FavouritesViewController: BaseViewController {
-    var navigationDelegate: FavouritesNavigationDelegate?
+    weak var navigationDelegate: FavouritesNavigationDelegate?
     private lazy var store = FavouritesStore()
     private var bag = Bag()
     private lazy var tableViewDataSourceImpl = FavouritesTableViewDataSourceImpl(store: store)
@@ -49,9 +49,11 @@ final class FavouritesViewController: BaseViewController {
             case let .showError(message):
                 showAlert(message: message)
             case .loading:
-                activityIndicator.startAnimating()
+                ProgressHud.startAnimating()
             case .loadingFinished:
-                activityIndicator.stopAnimating()
+                ProgressHud.stopAnimating()
+            case let .advertisementSelected(advertisement):
+                navigationDelegate?.didTapAdvertisement(self, advertisement: advertisement)
             }
         }
         .store(in: &bag)

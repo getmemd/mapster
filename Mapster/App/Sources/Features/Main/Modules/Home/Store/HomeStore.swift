@@ -31,12 +31,17 @@ final class HomeStore: Store<HomeEvent, HomeAction> {
     }
     
     private func getAdvertisements() {
+        sendEvent(.loading)
         Task {
             do {
                 advertisements = try await advertisementRepository.getAdvertisements()
-                sendEvent(.advertisements(coordinates: advertisements.compactMap { .init(latitude: $0.geopoint.latitude, longitude: $0.geopoint.longitude) }))
+                sendEvent(.advertisements(coordinates: advertisements.compactMap {
+                    .init(latitude: $0.geopoint.latitude, longitude: $0.geopoint.longitude)
+                }))
+                sendEvent(.loadingFinished)
             } catch {
                 sendEvent(.showError(message: error.localizedDescription))
+                sendEvent(.loadingFinished)
             }
         }
     }

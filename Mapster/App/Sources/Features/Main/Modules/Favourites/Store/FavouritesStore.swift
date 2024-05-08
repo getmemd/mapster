@@ -12,6 +12,7 @@ enum FavouritesEvent {
     case showError(message: String)
     case loading
     case loadingFinished
+    case advertisementSelected(advertisement: Advertisement)
 }
 
 enum FavouritesAction {
@@ -36,7 +37,12 @@ final class FavouritesStore: Store<FavouritesEvent, FavouritesAction> {
             getAdvertisements()
             configureRows()
         case let .didSelectRow(row):
-            break
+            switch row {
+            case let .advertisement(advertisement):
+                sendEvent(.advertisementSelected(advertisement: advertisement))
+            default:
+                break
+            }
         case let .didDeleteRow(index):
             advertisements.remove(at: index)
             if advertisements.isEmpty {

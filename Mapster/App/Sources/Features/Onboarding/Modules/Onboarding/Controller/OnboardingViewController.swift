@@ -16,7 +16,7 @@ final class OnboardingViewController: UIViewController {
         static let numberOfPages = 3
     }
     
-    var navigationDelegate: OnboardingNavigationDelegate?
+    weak var navigationDelegate: OnboardingNavigationDelegate?
     
     private lazy var scrollView: UIScrollView = {
         let scrollView = UIScrollView()

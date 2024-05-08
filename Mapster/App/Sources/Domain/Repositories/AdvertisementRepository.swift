@@ -6,6 +6,7 @@
 //
 
 import Factory
+import Foundation
 
 final class AdvertisementRepository {
     @Injected(\.db) private var db
@@ -17,9 +18,20 @@ final class AdvertisementRepository {
         }
     }
     
-    func addAdvertisement(data: [String: Any]) async throws {
+    func addAdvertisement(advertisement: Advertisement) async throws {
+        let jsonData = try JSONEncoder().encode(advertisement)
+        guard let data = try JSONSerialization.jsonObject(
+            with: jsonData,
+            options: .allowFragments
+        ) as? [String: Any] else {
+            throw NSError(
+                domain: "AdvertisementError",
+                code: 0,
+                userInfo: [NSLocalizedDescriptionKey: "Failed to convert advertisement to dictionary"]
+            )
+        }
         let ref = try await db.collection("advertisements").addDocument(data: data)
-        print("success added with ID: \(ref.documentID)")
+        print("Advertisement successfully added with ID: \(ref.documentID)")
     }
     
     func getLikedAdvertisement() async throws {

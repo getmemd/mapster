@@ -19,7 +19,7 @@ final class OTPViewController: UIViewController {
         case passwordReset
     }
     
-    var navigationDelegate: OTPNavigationDelegate?
+    weak var navigationDelegate: OTPNavigationDelegate?
     private var viewState: ViewSate = .registration
     private var timer: Timer?
     private var countdown: Int = 61
@@ -76,7 +76,7 @@ final class OTPViewController: UIViewController {
         label.text = "Получить звонок еще раз"
         label.font = Font.mulish(name: .bold, size: 13)
         label.textAlignment = .center
-        label.textColor = .textField
+        label.textColor = .textHighlight
         label.isUserInteractionEnabled = true
         let gesture = UITapGestureRecognizer(target: self, action: #selector(againDidTap))
         label.addGestureRecognizer(gesture)

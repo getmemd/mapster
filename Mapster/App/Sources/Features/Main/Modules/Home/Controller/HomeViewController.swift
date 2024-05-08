@@ -15,7 +15,7 @@ protocol HomeNavigationDelegate: AnyObject {
 }
 
 final class HomeViewController: BaseViewController {
-    var navigationDelegate: HomeNavigationDelegate?
+    weak var navigationDelegate: HomeNavigationDelegate?
     private lazy var store = HomeStore()
     private var bag = Bag()
     
@@ -85,9 +85,9 @@ final class HomeViewController: BaseViewController {
             case let .showError(message):
                 showAlert(message: message)
             case .loading:
-                activityIndicator.startAnimating()
+                ProgressHud.startAnimating()
             case .loadingFinished:
-                activityIndicator.stopAnimating()
+                ProgressHud.stopAnimating()
             }
         }
         .store(in: &bag)
