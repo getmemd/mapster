@@ -9,25 +9,10 @@ import FirebaseAuth
 
 final class AuthRepository {
     func authorization(email: String, password: String, isRegistration: Bool) async throws -> AuthDataResult {
-        try await withCheckedThrowingContinuation { continuation in
-            let completion: ((AuthDataResult?, (any Error)?) -> Void)? = { authResult, error in
-                if let error = error {
-                    continuation.resume(throwing: error)
-                } else if let authResult = authResult {
-                    continuation.resume(returning: authResult)
-                } else {
-                    continuation.resume(throwing: NSError(
-                        domain: "AuthError",
-                        code: 0,
-                        userInfo: [NSLocalizedDescriptionKey: "Unknown authentication error"])
-                    )
-                }
-            }
-            if isRegistration {
-                Auth.auth().createUser(withEmail: email, password: password, completion: completion)
-            } else {
-                Auth.auth().signIn(withEmail: email, password: password, completion: completion)
-            }
+        if isRegistration {
+            try await Auth.auth().createUser(withEmail: email, password: password)
+        } else {
+            try await Auth.auth().signIn(withEmail: email, password: password)
         }
     }
     
