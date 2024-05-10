@@ -1,10 +1,3 @@
-//
-//  Repositories.swift
-//  Mapster
-//
-//  Created by User on 07.03.2024.
-//
-
 import Factory
 
 final class Repositories: SharedContainer {
@@ -22,5 +15,9 @@ final class Repositories: SharedContainer {
     
     var imageRepository: Dependency<ImageRepository> {
         self { ImageRepository() }
+    }
+    
+    var userRepository: Dependency<UserRepository> {
+        self { UserRepository() }
     }
 }

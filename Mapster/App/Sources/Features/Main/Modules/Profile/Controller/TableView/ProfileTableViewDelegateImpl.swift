@@ -1,10 +1,3 @@
-//
-//  ProfileTableViewDelegateImpl.swift
-//  Mapster
-//
-//  Created by User on 05.04.2024.
-//
-
 import UIKit
 
 final class ProfileTableViewDelegateImpl: NSObject {

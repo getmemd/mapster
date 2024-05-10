@@ -1,10 +1,3 @@
-//
-//  FavouritesEmptyCell.swift
-//  Mapster
-//
-//  Created by User on 27.03.2024.
-//
-
 import UIKit
 
 // Ячейка для отображения отсутствия объявлений

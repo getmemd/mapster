@@ -1,10 +1,3 @@
-//
-//  SearchViewController.swift
-//  Mapster
-//
-//  Created by User on 27.03.2024.
-//
-
 import UIKit
 
 protocol SearchNavigationDelegate: AnyObject {
@@ -12,7 +5,7 @@ protocol SearchNavigationDelegate: AnyObject {
 }
 
 final class SearchViewController: BaseViewController {
-    var navigationDelegate: SearchNavigationDelegate?
+    weak var navigationDelegate: SearchNavigationDelegate?
     private lazy var store = SearchStore()
     private var bag = Bag()
     // Настройка данных для таблицы
@@ -39,6 +32,7 @@ final class SearchViewController: BaseViewController {
         tableView.estimatedRowHeight = 50
         tableView.register(bridgingCellClass: TableViewItemCell.self)
         tableView.clipsToBounds = false
+        tableView.keyboardDismissMode = .onDrag
         return tableView
     }()
     
@@ -86,6 +80,6 @@ final class SearchViewController: BaseViewController {
 extension SearchViewController: UISearchBarDelegate {
     // Делегат срабатывает при изменении текста в строке поиска
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        
+        store.handleAction(.searchDidStart(searchText: searchText))
     }
 }

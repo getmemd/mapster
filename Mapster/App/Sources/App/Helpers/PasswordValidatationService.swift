@@ -1,10 +1,3 @@
-//
-//  PasswordValidatationService.swift
-//  Mapster
-//
-//  Created by User on 25.02.2024.
-//
-
 import Foundation
 import UIKit
 

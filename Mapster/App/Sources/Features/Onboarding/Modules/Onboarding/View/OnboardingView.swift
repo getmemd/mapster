@@ -1,10 +1,3 @@
-//
-//  OnboardingView.swift
-//  Mapster
-//
-//  Created by User on 15.02.2024.
-//
-
 import SnapKit
 import UIKit
 

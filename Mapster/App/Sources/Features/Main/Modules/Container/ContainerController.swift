@@ -1,10 +1,3 @@
-//
-//  ContainerController.swift
-//  Mapster
-//
-//  Created by User on 26.02.2024.
-//
-
 import UIKit
 
 final class ContainerController: UITabBarController {

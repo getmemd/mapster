@@ -1,10 +1,3 @@
-//
-//  ActionButton.swift
-//  Mapster
-//
-//  Created by User on 19.02.2024.
-//
-
 import SnapKit
 import UIKit
 

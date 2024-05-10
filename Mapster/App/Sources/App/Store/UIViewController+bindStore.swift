@@ -1,10 +1,3 @@
-//
-//  AuthStore.swift
-//  Mapster
-//
-//  Created by User on 06.03.2024.
-//
-
 import UIKit
 import Combine
 

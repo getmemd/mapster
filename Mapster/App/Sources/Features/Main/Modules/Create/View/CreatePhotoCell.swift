@@ -1,10 +1,3 @@
-//
-//  CreatePhotoCell.swift
-//  Mapster
-//
-//  Created by User on 07.04.2024.
-//
-
 import UIKit
 
 protocol CreatePhotoCellDelegate: AnyObject {

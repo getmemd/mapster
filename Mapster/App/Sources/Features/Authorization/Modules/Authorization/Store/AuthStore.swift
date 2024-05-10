@@ -1,82 +1,90 @@
-//
-//  AuthStore.swift
-//  Mapster
-//
-//  Created by User on 06.03.2024.
-//
-
 import Factory
+import Firebase
 
 enum AuthEvent {
-    case showAlert(title: String?, message: String?)
+    case showAlert(title: String?, message: String?, completion: ((UIAlertAction) -> Void)? = nil)
     case loading
     case loadingFinished
     case success
 }
 
 enum AuthAction {
-    case actionButtonDidTap(email: String, password: String)
+    case actionButtonDidTap(email: String, password: String, name: String? = nil, phoneNumber: String? = nil)
     case resetPasswordDidTap(email: String)
 }
 
 final class AuthStore: Store<AuthEvent, AuthAction> {
-    // Введенная зависимость репозитория
     @Injected(\Repositories.authRepository) private var authRepository
+    @Injected(\Repositories.userRepository) private var userRepository
     var isRegistration = true
     
-    // Обработка вызванных экшенов
     override func handleAction(_ action: AuthAction) {
         switch action {
-        case let .actionButtonDidTap(email, password):
-            authorization(email: email, password: password)
+        case let .actionButtonDidTap(email, password, name, phoneNumber):
+            authorization(email: email, password: password, name: name, phoneNumber: phoneNumber)
         case let .resetPasswordDidTap(email):
             sendPasswordReset(email: email)
         }
     }
     
-    // Вызов запроса авторизации/уведомления
-    private func authorization(email: String, password: String) {
+    private func authorization(email: String, password: String, name: String?, phoneNumber: String?) {
         sendEvent(.loading)
         Task {
+            defer {
+                sendEvent(.loadingFinished)
+            }
             do {
-                _ = try await authRepository.authorization(email: email,
-                                                           password: password,
-                                                           isRegistration: isRegistration)
-                if isRegistration {
-                    sendEmailVerifcation()
+                try await authRepository.authorization(email: email,
+                                                       password: password,
+                                                       isRegistration: isRegistration)
+                if let name {
+                    try await updateName(name: name)
                 }
-                sendEvent(.success)
-                sendEvent(.loadingFinished)
-            } catch let error {
+                if isRegistration {
+                    if let uid = Auth.auth().currentUser?.uid,
+                       let phoneNumber {
+                        try await userRepository.createUser(user:
+                                .init(uid: uid,
+                                      phoneNumber: phoneNumber,
+                                      favouriteAdvertisements: [])
+                        )
+                    }
+                    try await sendEmailVerifcation()
+                } else {
+                    sendEvent(.success)
+                }
+            } catch {
                 sendEvent(.showAlert(title: nil, message: error.localizedDescription))
-                sendEvent(.loadingFinished)
             }
         }
     }
     
-    // Вызов запроса отправки подтверждения почты
-    private func sendEmailVerifcation() {
-        sendEvent(.loading)
-        authRepository.sendEmailVerification { [weak self] error in
-            if let error {
-                self?.sendEvent(.showAlert(title: nil, message: error.localizedDescription))
-            }
-            self?.sendEvent(.loadingFinished)
-            self?.sendEvent(.showAlert(title: "Подтвердите Вашу почту",
-                                       message: "На Ваш email было отправлено письмо для подтверждения"))
-        }
+    private func updateName(name: String) async throws {
+        try await authRepository.updateUser(name: name)
     }
     
-    // Вызов запроса на сброс пароля
+    private func sendEmailVerifcation() async throws {
+        try await authRepository.sendEmailVerification()
+        sendEvent(.showAlert(title: "Подтвердите Вашу почту",
+                             message: "На Ваш email было отправлено письмо для подтверждения",
+                             completion: { [weak self] _ in
+            self?.sendEvent(.success)
+        }))
+    }
+    
     private func sendPasswordReset(email: String) {
         sendEvent(.loading)
-        authRepository.sendPasswordResetEmail(email: email) { [weak self] error in
-            if let error {
-                self?.sendEvent(.showAlert(title: nil, message: error.localizedDescription))
+        Task {
+            defer {
+                sendEvent(.loadingFinished)
             }
-            self?.sendEvent(.loadingFinished)
-            self?.sendEvent(.showAlert(title: "Восстановите пароль",
-                                       message: "На Ваш email было отправлено письмо для сброса пароля"))
+            do {
+                try await authRepository.sendPasswordResetEmail(email: email)
+                sendEvent(.showAlert(title: "Восстановите пароль",
+                                     message: "На Ваш email было отправлено письмо для сброса пароля"))
+            } catch {
+                sendEvent(.showAlert(title: nil, message: error.localizedDescription))
+            }
         }
     }
 }

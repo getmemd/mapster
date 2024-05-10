@@ -1,10 +1,3 @@
-//
-//  OnboardingModuleFactory.swift
-//  Mapster
-//
-//  Created by User on 17.02.2024.
-//
-
 import Foundation
 
 final class OnboardingModuleFactory {

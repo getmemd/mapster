@@ -1,31 +1,28 @@
-//
-//  FavouritesViewController.swift
-//  Mapster
-//
-//  Created by User on 27.03.2024.
-//
-
 import UIKit
 
 protocol FavouritesNavigationDelegate: AnyObject {
-    
+    func didTapAdvertisement(_ viewController: FavouritesViewController, advertisement: Advertisement)
 }
 
 final class FavouritesViewController: BaseViewController {
-    var navigationDelegate: FavouritesNavigationDelegate?
+    weak var navigationDelegate: FavouritesNavigationDelegate?
     private lazy var store = FavouritesStore()
     private var bag = Bag()
-    // Настройка данных для таблицы
     private lazy var tableViewDataSourceImpl = FavouritesTableViewDataSourceImpl(store: store)
-    // Настройка делегатов для таблицы
     private lazy var tableViewDelegateImpl = FavouritesTableViewDelegateImpl(store: store)
     
+    private lazy var refreshControl: UIRefreshControl = {
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(refreshData), for: .valueChanged)
+        return refreshControl
+    }()
+
     private lazy var tableView: UITableView = {
         let tableView = UITableView()
         tableView.dataSource = tableViewDataSourceImpl
         tableView.delegate = tableViewDelegateImpl
+        tableView.refreshControl = refreshControl
         tableView.separatorStyle = .none
-        tableView.allowsSelection = false
         tableView.estimatedRowHeight = 160
         tableView.register(bridgingCellClasses: TitleCell.self, FavouritesCell.self, FavouritesEmptyCell.self)
         tableView.clipsToBounds = false
@@ -40,7 +37,11 @@ final class FavouritesViewController: BaseViewController {
         store.handleAction(.viewDidLoad)
     }
     
-    // Настройка наблюдателей эвентов от стора
+    @objc 
+    private func refreshData() {
+        store.handleAction(.viewDidLoad)
+    }
+    
     private func configureObservers() {
         bindStore(store) { [weak self ] event in
             guard let self else { return }
@@ -49,12 +50,15 @@ final class FavouritesViewController: BaseViewController {
                 tableViewDataSourceImpl.rows = rows
                 tableViewDelegateImpl.rows = rows
                 tableView.reloadData()
+                refreshControl.endRefreshing()
             case let .showError(message):
                 showAlert(message: message)
             case .loading:
-                activityIndicator.startAnimating()
+                ProgressHud.startAnimating()
             case .loadingFinished:
-                activityIndicator.stopAnimating()
+                ProgressHud.stopAnimating()
+            case let .advertisementSelected(advertisement):
+                navigationDelegate?.didTapAdvertisement(self, advertisement: advertisement)
             }
         }
         .store(in: &bag)

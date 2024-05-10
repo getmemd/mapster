@@ -1,10 +1,3 @@
-//
-//  Font.swift
-//  Mapster
-//
-//  Created by User on 17.02.2024.
-//
-
 import UIKit
 
 enum Font {

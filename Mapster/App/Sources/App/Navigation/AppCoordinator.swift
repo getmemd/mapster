@@ -1,10 +1,3 @@
-//
-//  AppCoordinator.swift
-//  Mapster
-//
-//  Created by User on 15.02.2024.
-//
-
 import FirebaseAuth
 
 final class AppCoordinator: Coordinator {

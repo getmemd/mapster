@@ -1,10 +1,3 @@
-//
-//  OnboardingCoordinator.swift
-//  Mapster
-//
-//  Created by User on 17.02.2024.
-//
-
 import Foundation
 
 // Протокол делегата координатора онбординга

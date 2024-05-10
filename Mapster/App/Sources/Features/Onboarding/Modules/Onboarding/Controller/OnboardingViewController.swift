@@ -1,10 +1,3 @@
-//
-//  OnboardingViewController.swift
-//  Mapster
-//
-//  Created by User on 15.02.2024.
-//
-
 import UIKit
 
 // Протокол для делегата навигации в онбординге
@@ -17,7 +10,7 @@ final class OnboardingViewController: UIViewController {
         static let numberOfPages = 3 // Количество страниц в онбординге
     }
     
-    var navigationDelegate: OnboardingNavigationDelegate?
+    weak var navigationDelegate: OnboardingNavigationDelegate?
     
     // UIScrollView для прокрутки страниц
     private lazy var scrollView: UIScrollView = {

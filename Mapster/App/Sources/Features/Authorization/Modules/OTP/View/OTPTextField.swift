@@ -1,10 +1,3 @@
-//
-//  OTPTextField.swift
-//  Mapster
-//
-//  Created by User on 23.02.2024.
-//
-
 import SnapKit
 import UIKit
 

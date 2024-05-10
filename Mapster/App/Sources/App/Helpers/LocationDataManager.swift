@@ -1,10 +1,3 @@
-//
-//  LocationDataManager.swift
-//  Mapster
-//
-//  Created by User on 08.04.2024.
-//
-
 import CoreLocation
 import UIKit
 

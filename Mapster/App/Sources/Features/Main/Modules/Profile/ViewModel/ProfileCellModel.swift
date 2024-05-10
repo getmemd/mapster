@@ -1,10 +1,3 @@
-//
-//  ProfileCellModel.swift
-//  Mapster
-//
-//  Created by User on 05.04.2024.
-//
-
 import Foundation
 
 struct ProfileCellModel: TableViewItemCellModel {

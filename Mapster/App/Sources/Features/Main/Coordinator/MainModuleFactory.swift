@@ -1,10 +1,3 @@
-//
-//  MainModuleFactory.swift
-//  Mapster
-//
-//  Created by User on 26.02.2024.
-//
-
 import UIKit
 
 final class MainModuleFactory {
@@ -47,6 +40,12 @@ final class MainModuleFactory {
     
     func makeMap(delegate: MapNavigationDelegate) -> MapViewController {
         let viewController = MapViewController()
+        viewController.navigationDelegate = delegate
+        return viewController
+    }
+    
+    func makeAdvertisement(delegate: AdvertisementNavigationDelegate, advertisement: Advertisement) -> AdvertisementViewController {
+        let viewController = AdvertisementViewController(store: .init(advertisement: advertisement))
         viewController.navigationDelegate = delegate
         return viewController
     }

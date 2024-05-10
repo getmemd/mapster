@@ -1,10 +1,3 @@
-//
-//  Router.swift
-//  Mapster
-//
-//  Created by User on 15.02.2024.
-//
-
 import UIKit
 
 final class Router {

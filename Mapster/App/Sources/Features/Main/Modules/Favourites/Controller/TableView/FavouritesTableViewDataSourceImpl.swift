@@ -1,10 +1,3 @@
-//
-//  FavouritesTableViewDataSourceImpl.swift
-//  Mapster
-//
-//  Created by User on 27.03.2024.
-//
-
 import UIKit
 
 final class FavouritesTableViewDataSourceImpl: NSObject {

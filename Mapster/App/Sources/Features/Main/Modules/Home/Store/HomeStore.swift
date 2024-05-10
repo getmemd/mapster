@@ -1,22 +1,17 @@
-//
-//  HomeStore.swift
-//  Mapster
-//
-//  Created by User on 08.04.2024.
-//
-
 import Factory
 import CoreLocation
 
 enum HomeEvent {
-    case advertisements(coordinates: [CLLocationCoordinate2D])
+    case advertisements(viewModels: [HomeAnnotationViewModel])
     case showError(message: String)
     case loading
     case loadingFinished
+    case annotationSelected(advertisement: Advertisement)
 }
 
 enum HomeAction {
     case viewDidLoad
+    case didTapAnnotation(index: Int)
 }
 
 final class HomeStore: Store<HomeEvent, HomeAction> {
@@ -27,14 +22,21 @@ final class HomeStore: Store<HomeEvent, HomeAction> {
         switch action {
         case .viewDidLoad:
             getAdvertisements()
+        case let .didTapAnnotation(index):
+            guard let advertisement = advertisements[safe: index] else { return }
+            sendEvent(.annotationSelected(advertisement: advertisement))
         }
     }
     
     private func getAdvertisements() {
+        sendEvent(.loading)
         Task {
+            defer {
+                sendEvent(.loadingFinished)
+            }
             do {
                 advertisements = try await advertisementRepository.getAdvertisements()
-                sendEvent(.advertisements(coordinates: advertisements.compactMap { .init(latitude: $0.geopoint.latitude, longitude: $0.geopoint.longitude) }))
+                sendEvent(.advertisements(viewModels: advertisements.compactMap { .init(advertisement: $0) }))
             } catch {
                 sendEvent(.showError(message: error.localizedDescription))
             }

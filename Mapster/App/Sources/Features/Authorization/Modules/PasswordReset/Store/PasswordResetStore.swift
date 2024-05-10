@@ -1,10 +1,3 @@
-//
-//  PasswordResetStore.swift
-//  Mapster
-//
-//  Created by User on 12.03.2024.
-//
-
 import Factory
 
 enum PasswordResetEvent {
@@ -33,12 +26,16 @@ final class PasswordResetStore: Store<PasswordResetEvent, PasswordResetAction> {
     // Вызов запроса на обновление пароля
     private func updatePassword(password: String) {
         sendEvent(.loading)
-        authRepository.updatePassword(password: password) { [weak self] error in
-            if let error {
-                self?.sendEvent(.showError(errorMessage: error.localizedDescription))
+        Task {
+            defer {
+                sendEvent(.loadingFinished)
             }
-            self?.sendEvent(.passwordUpdated)
-            self?.sendEvent(.loadingFinished)
+            do {
+                try await authRepository.updatePassword(password: password)
+                sendEvent(.passwordUpdated)
+            } catch {
+                sendEvent(.showError(errorMessage: error.localizedDescription))
+            }
         }
     }
 }

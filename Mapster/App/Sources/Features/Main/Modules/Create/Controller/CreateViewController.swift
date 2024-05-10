@@ -1,10 +1,3 @@
-//
-//  CreateViewController.swift
-//  Mapster
-//
-//  Created by User on 07.04.2024.
-//
-
 import CoreLocation
 import UIKit
 
@@ -13,7 +6,7 @@ protocol CreateNavigationDelegate: AnyObject {
 }
 
 final class CreateViewController: BaseViewController {
-    var navigationDelegate: CreateNavigationDelegate?
+    weak var navigationDelegate: CreateNavigationDelegate?
     private lazy var store = CreateStore()
     private var bag = Bag()
     private lazy var tableViewDataSourceImpl = CreateTableViewDataSourceImpl(store: store)
@@ -26,6 +19,7 @@ final class CreateViewController: BaseViewController {
         tableView.estimatedRowHeight = 84
         tableView.register(bridgingCellClasses: TitleCell.self,
                            CreatePhotoCell.self,
+                           CreateDropDownCell.self,
                            CreateTextFieldCell.self,
                            CreateTextViewCell.self,
                            CreateMapCell.self)
@@ -42,7 +36,7 @@ final class CreateViewController: BaseViewController {
     }
     
     func didPickedLocation(latitude: Double, longitude: Double) {
-        store.handleAction(.didPickedLocation(latitude: latitude, longitude: longitude))
+        store.handleAction(.didPickLocation(latitude: latitude, longitude: longitude))
     }
     
     private func configureObservers() {
@@ -59,9 +53,9 @@ final class CreateViewController: BaseViewController {
             case let .showError(message):
                 showAlert(message: message)
             case .loading:
-                activityIndicator.startAnimating()
+                ProgressHud.startAnimating()
             case .loadingFinished:
-                activityIndicator.stopAnimating()
+                ProgressHud.stopAnimating()
             }
         }
         .store(in: &bag)
@@ -89,11 +83,12 @@ final class CreateViewController: BaseViewController {
 // MARK: - UIImagePickerControllerDelegate
 
 extension CreateViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+    func imagePickerController(_ picker: UIImagePickerController,
+                               didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         picker.dismiss(animated: true, completion: nil)
         if let image = info[.originalImage] as? UIImage {
-            guard let imageData = image.jpegData(compressionQuality: 1.0) else { return }
-            store.handleAction(.didPickedImage(data: imageData))
+            guard let imageData = image.jpegData(compressionQuality: 0.8) else { return }
+            store.handleAction(.didPickImage(data: imageData))
         }
     }
     

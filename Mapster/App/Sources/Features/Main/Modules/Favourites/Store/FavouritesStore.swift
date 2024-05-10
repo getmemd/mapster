@@ -1,10 +1,3 @@
-//
-//  FavouritesStore.swift
-//  Mapster
-//
-//  Created by User on 27.03.2024.
-//
-
 import Factory
 
 enum FavouritesEvent {
@@ -12,6 +5,7 @@ enum FavouritesEvent {
     case showError(message: String)
     case loading
     case loadingFinished
+    case advertisementSelected(advertisement: Advertisement)
 }
 
 enum FavouritesAction {
@@ -33,10 +27,15 @@ final class FavouritesStore: Store<FavouritesEvent, FavouritesAction> {
     override func handleAction(_ action: FavouritesAction) {
         switch action {
         case .viewDidLoad:
-            getAdvertisements()
             configureRows()
+            getAdvertisements()
         case let .didSelectRow(row):
-            break
+            switch row {
+            case let .advertisement(advertisement):
+                sendEvent(.advertisementSelected(advertisement: advertisement))
+            default:
+                break
+            }
         case let .didDeleteRow(index):
             advertisements.remove(at: index)
             if advertisements.isEmpty {
@@ -47,7 +46,11 @@ final class FavouritesStore: Store<FavouritesEvent, FavouritesAction> {
     
     // Запрос получения (пока что) всех объявлений
     private func getAdvertisements() {
+        sendEvent(.loading)
         Task {
+            defer {
+                sendEvent(.loadingFinished)
+            }
             do {
                 advertisements = try await advertisementRepository.getAdvertisements()
                 configureRows()

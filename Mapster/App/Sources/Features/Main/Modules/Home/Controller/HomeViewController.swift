@@ -1,21 +1,14 @@
-//
-//  HomeViewController.swift
-//  Mapster
-//
-//  Created by User on 26.02.2024.
-//
-
 import CoreLocation
 import MapKit
 import SnapKit
 import UIKit
 
 protocol HomeNavigationDelegate: AnyObject {
-    
+    func didTapAdvertisement(_ viewController: HomeViewController, advertisement: Advertisement)
 }
 
 final class HomeViewController: BaseViewController {
-    var navigationDelegate: HomeNavigationDelegate?
+    weak var navigationDelegate: HomeNavigationDelegate?
     private lazy var store = HomeStore()
     private var bag = Bag()
     
@@ -25,7 +18,26 @@ final class HomeViewController: BaseViewController {
         mapView.delegate = self
         mapView.showsUserLocation = true
         mapView.showsUserTrackingButton = true
+        mapView.register(HomeAnnotationView.self,
+                         forAnnotationViewWithReuseIdentifier: MKMapViewDefaultAnnotationViewReuseIdentifier)
         return mapView
+    }()
+    
+    private let refreshBackgroundView: UIView = {
+        let view = UIView()
+        view.layer.cornerRadius = 10
+        view.backgroundColor = .white
+        return view
+    }()
+    
+    private lazy var refreshImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = .init(systemName: "arrow.clockwise")
+        imageView.tintColor = .accent
+        imageView.isUserInteractionEnabled = true
+        let gesture = UITapGestureRecognizer(target: self, action: #selector(refreshButtonDidTap))
+        imageView.addGestureRecognizer(gesture)
+        return imageView
     }()
     
     override func viewDidLoad() {
@@ -44,10 +56,12 @@ final class HomeViewController: BaseViewController {
         LocationDataManager.shared.stop()
     }
     
-    private func setAnnotations(coordinates: [CLLocationCoordinate2D]) {
-        coordinates.forEach {
-            let annotation = MKPointAnnotation()
-            annotation.coordinate = $0
+    private func setAnnotations(viewModels: [HomeAnnotationViewModel]) {
+        viewModels.enumerated().forEach {
+            let annotation = HomePointAnnotation()
+            annotation.tag = $0
+            annotation.coordinate = $1.coordinates
+            annotation.pinIcon = UIImage(systemName: $1.icon)
             mapView.addAnnotation(annotation)
         }
     }
@@ -77,18 +91,25 @@ final class HomeViewController: BaseViewController {
         present(alert, animated: true)
     }
     
+    @objc 
+    private func refreshButtonDidTap() {
+        store.handleAction(.viewDidLoad)
+    }
+    
     private func configureObservers() {
         bindStore(store) { [weak self ] event in
             guard let self else { return }
             switch event {
-            case let .advertisements(coordinates):
-                setAnnotations(coordinates: coordinates)
+            case let .advertisements(viewModels):
+                setAnnotations(viewModels: viewModels)
             case let .showError(message):
                 showAlert(message: message)
             case .loading:
-                activityIndicator.startAnimating()
+                ProgressHud.startAnimating()
             case .loadingFinished:
-                activityIndicator.stopAnimating()
+                ProgressHud.stopAnimating()
+            case let .annotationSelected(advertisement):
+                navigationDelegate?.didTapAdvertisement(self, advertisement: advertisement)
             }
         }
         .store(in: &bag)
@@ -98,6 +119,8 @@ final class HomeViewController: BaseViewController {
         tabBarItem = .init(title: "Главная", image: .init(named: "home"), tag: 0)
         tabBarController?.selectedIndex = 0
         view.addSubview(mapView)
+        refreshBackgroundView.addSubview(refreshImageView)
+        view.addSubview(refreshBackgroundView)
         guard let location = LocationDataManager.shared.getCurrentLocation() else {
             presentPermissionDeniedAlert()
             return
@@ -109,11 +132,38 @@ final class HomeViewController: BaseViewController {
         mapView.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
+        refreshBackgroundView.snp.makeConstraints {
+            $0.size.equalTo(48)
+            $0.top.leading.equalTo(view.safeAreaLayoutGuide).offset(5)
+        }
+        refreshImageView.snp.makeConstraints {
+            $0.size.equalTo(24)
+            $0.center.equalToSuperview()
+        }
     }
 }
 
 // MARK: - MKMapViewDelegate
 
 extension HomeViewController: MKMapViewDelegate {
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        if annotation is MKUserLocation {
+            return nil
+        } else {
+            let identifier = "HomeAnnotation"
+            var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier)
+            if annotationView == nil {
+                annotationView = HomeAnnotationView(annotation: annotation, reuseIdentifier: identifier)
+            } else {
+                annotationView?.annotation = annotation
+            }
+            annotationView!.canShowCallout = true
+            return annotationView
+        }
+    }
     
+    func mapView(_ mapView: MKMapView, didSelect annotation: any MKAnnotation) {
+        guard let tag = (annotation as? HomePointAnnotation)?.tag else { return }
+        store.handleAction(.didTapAnnotation(index: tag))
+    }
 }

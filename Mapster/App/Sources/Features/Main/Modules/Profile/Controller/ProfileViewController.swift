@@ -1,10 +1,3 @@
-//
-//  ProfileViewController.swift
-//  Mapster
-//
-//  Created by User on 05.04.2024.
-//
-
 import UIKit
 
 protocol ProfileNavigationDelegate: AnyObject {
@@ -12,7 +5,7 @@ protocol ProfileNavigationDelegate: AnyObject {
 }
 
 final class ProfileViewController: BaseViewController {
-    var navigationDelegate: ProfileNavigationDelegate?
+    weak var navigationDelegate: ProfileNavigationDelegate?
     private lazy var store = ProfileStore()
     private var bag = Bag()
     private lazy var tableViewDataSourceImpl = ProfileTableViewDataSourceImpl(store: store)
@@ -27,6 +20,22 @@ final class ProfileViewController: BaseViewController {
         imageView.layer.cornerRadius = 60
         imageView.backgroundColor = .gray
         return imageView
+    }()
+    
+    private let nameLabel: UILabel = {
+        let label = UILabel()
+        label.textAlignment = .center
+        label.font = Font.mulish(name: .bold, size: 22)
+        label.numberOfLines = 0
+        return label
+    }()
+    
+    private let phoneNumberLabel: UILabel = {
+        let label = UILabel()
+        label.textAlignment = .center
+        label.font = Font.mulish(name: .regular, size: 14)
+        label.numberOfLines = 0
+        return label
     }()
     
     private lazy var tableView: UITableView = {
@@ -60,6 +69,8 @@ final class ProfileViewController: BaseViewController {
                 navigationDelegate?.didSignOut(self)
             case let .showError(message):
                 showAlert(message: message)
+            case let .profileLoaded(name):
+                nameLabel.text = name
             }
         }
         .store(in: &bag)
@@ -68,7 +79,7 @@ final class ProfileViewController: BaseViewController {
     private func setupViews() {
 //        navigationController?.navigationBar.topItem?.title = "Мой профиль"
         circularView.backgroundColor = UIColor.accent.withAlphaComponent(0.4)
-        [circularView, profileImageView, tableView].forEach { view.addSubview($0) }
+        [circularView, profileImageView, nameLabel, phoneNumberLabel, tableView].forEach { view.addSubview($0) }
         view.backgroundColor = .white
     }
     
@@ -82,8 +93,16 @@ final class ProfileViewController: BaseViewController {
             $0.centerX.equalToSuperview()
             $0.top.equalTo(view.safeAreaLayoutGuide).offset(20)
         }
+        nameLabel.snp.makeConstraints {
+            $0.top.equalTo(profileImageView.snp.bottom).offset(16)
+            $0.leading.trailing.equalToSuperview().inset(24)
+        }
+        phoneNumberLabel.snp.makeConstraints {
+            $0.top.equalTo(nameLabel.snp.bottom)
+            $0.leading.trailing.equalToSuperview().inset(24)
+        }
         tableView.snp.makeConstraints {
-            $0.top.equalTo(profileImageView.snp.bottom).offset(24)
+            $0.top.equalTo(phoneNumberLabel.snp.bottom).offset(24)
             $0.leading.trailing.bottom.equalTo(view.safeAreaLayoutGuide)
         }
     }

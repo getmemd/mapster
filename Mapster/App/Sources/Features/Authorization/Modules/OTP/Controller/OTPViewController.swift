@@ -1,10 +1,3 @@
-//
-//  OTPViewController.swift
-//  Mapster
-//
-//  Created by User on 22.02.2024.
-//
-
 import SnapKit
 import UIKit
 
@@ -22,7 +15,7 @@ final class OTPViewController: UIViewController {
         case passwordReset
     }
     
-    var navigationDelegate: OTPNavigationDelegate?
+    weak var navigationDelegate: OTPNavigationDelegate?
     private var viewState: ViewSate = .registration
     // Таймер
     private var timer: Timer?
@@ -88,7 +81,7 @@ final class OTPViewController: UIViewController {
         label.text = "Получить звонок еще раз"
         label.font = Font.mulish(name: .bold, size: 13)
         label.textAlignment = .center
-        label.textColor = .textField
+        label.textColor = .textHighlight
         label.isUserInteractionEnabled = true
         let gesture = UITapGestureRecognizer(target: self, action: #selector(againDidTap))
         label.addGestureRecognizer(gesture)

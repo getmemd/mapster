@@ -1,10 +1,3 @@
-//
-//  MapViewController.swift
-//  Mapster
-//
-//  Created by User on 08.04.2024.
-//
-
 import MapKit
 import UIKit
 
@@ -13,7 +6,7 @@ protocol MapNavigationDelegate: AnyObject {
 }
 
 final class MapViewController: BaseViewController {
-    var navigationDelegate: MapNavigationDelegate?
+    weak var navigationDelegate: MapNavigationDelegate?
     private var locationManager: CLLocationManager?
     
     private var coordinate: CLLocationCoordinate2D?

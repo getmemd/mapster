@@ -1,16 +1,11 @@
-//
-//  ProfileStore.swift
-//  Mapster
-//
-//  Created by User on 05.04.2024.
-//
-
 import Factory
+import Firebase
 
 enum ProfileEvent {
     case rows(rows: [ProfileRows])
     case signOutCompleted
     case showError(message: String)
+    case profileLoaded(name: String)
 }
 
 enum ProfileAction {
@@ -32,6 +27,9 @@ final class ProfileStore: Store<ProfileEvent, ProfileAction> {
         switch action {
         case .viewDidLoad:
             configureRows()
+            if let name = Auth.auth().currentUser?.displayName {
+                sendEvent(.profileLoaded(name: name))
+            }
         case let .didSelectRow(row):
             switch row {
             case .signOut:
