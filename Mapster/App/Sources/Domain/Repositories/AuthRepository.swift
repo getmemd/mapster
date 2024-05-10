@@ -8,7 +8,7 @@
 import FirebaseAuth
 
 final class AuthRepository {
-    func authorization(email: String, password: String, isRegistration: Bool) async throws -> AuthDataResult {
+    func authorization(email: String, password: String, isRegistration: Bool) async throws {
         if isRegistration {
             try await Auth.auth().createUser(withEmail: email, password: password)
         } else {
@@ -17,25 +17,24 @@ final class AuthRepository {
     }
     
     func signOut() throws {
-        let firebaseAuth = Auth.auth()
-        try firebaseAuth.signOut()
+        try Auth.auth().signOut()
     }
     
-    func sendEmailVerification(completion: @escaping (Error?) -> Void) {
-        Auth.auth().currentUser?.sendEmailVerification { error in
-            completion(error)
-        }
+    func sendEmailVerification() async throws {
+        try await Auth.auth().currentUser?.sendEmailVerification()
     }
     
-    func updatePassword(password: String, completion: @escaping (Error?) -> Void) {
-        Auth.auth().currentUser?.updatePassword(to: password) { error in
-            completion(error)
-        }
+    func updatePassword(password: String) async throws {
+        try await Auth.auth().currentUser?.updatePassword(to: password)
     }
     
-    func sendPasswordResetEmail(email: String, completion: @escaping (Error?) -> Void) {
-        Auth.auth().sendPasswordReset(withEmail: email) { error in
-            completion(error)
-        }
+    func sendPasswordResetEmail(email: String) async throws {
+        try await Auth.auth().sendPasswordReset(withEmail: email)
+    }
+    
+    func updateUser(name: String) async throws {
+        let changeRequest = Auth.auth().currentUser?.createProfileChangeRequest()
+        changeRequest?.displayName = name
+        try await changeRequest?.commitChanges()
     }
 }

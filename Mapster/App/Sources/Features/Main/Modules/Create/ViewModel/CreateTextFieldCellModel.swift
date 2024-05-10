@@ -16,6 +16,8 @@ struct CreateTextFieldCellModel {
             return "Вознаграждение"
         case .address:
             return "Адрес"
+        case .category:
+            return "Категория"
         default:
             return nil
         }
@@ -34,7 +36,7 @@ struct CreateTextFieldCellModel {
         }
     }
     
-    var keypboardType: UIKeyboardType {
+    var keyboardType: UIKeyboardType {
         switch rowType {
         case .reward:
             return .decimalPad

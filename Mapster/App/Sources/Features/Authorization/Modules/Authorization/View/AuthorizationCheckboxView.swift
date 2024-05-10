@@ -9,7 +9,6 @@ import SnapKit
 import UIKit
 
 protocol AuthorizationCheckboxViewDelegate: AnyObject {
-    func didTapCheckbox(_ view: AuthorizationCheckboxView, isSelected: Bool)
     func didTapForgotPassword(_ view: AuthorizationCheckboxView)
 }
 
@@ -88,7 +87,6 @@ final class AuthorizationCheckboxView: UIView {
     @objc
     private func checkBoxTapped(_ sender: UIButton) {
         sender.isSelected = !sender.isSelected
-        delegate?.didTapCheckbox(self, isSelected: sender.isSelected)
     }
     
     private func setupViews() {

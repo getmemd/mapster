@@ -8,72 +8,83 @@
 import Foundation
 import Firebase
 
-struct Advertisement: Codable {
+struct Advertisement {
+    var id: String
     var name: String
     var price: Double
+    var category: AdvertisementCategory
     var description: String
-    var category: String
-    var date: Date
+    var date: Timestamp
     var geopoint: GeoPoint
     var images: [String]
-    var personName: String?
-    var phoneNumber: String?
+    var personName: String
+    var phoneNumber: String
+    var uid: String
     var address: String
     
-    init(name: String,
+    init(id: String,
+         name: String,
          price: Double,
+         category: AdvertisementCategory,
          description: String,
-         category: String,
-         date: Date,
+         date: Timestamp,
          geopoint: GeoPoint,
          images: [String],
-         personName: String?,
-         phoneNumber: String?,
+         personName: String,
+         phoneNumber: String,
+         uid: String,
          address: String) {
+        self.id = id
         self.name = name
         self.price = price
-        self.description = description
         self.category = category
+        self.description = description
         self.date = date
         self.geopoint = geopoint
         self.images = images
         self.personName = personName
         self.phoneNumber = phoneNumber
+        self.uid = uid
         self.address = address
     }
     
-    init?(data: [String: Any]) {
+    init?(documentId: String, data: [String: Any]) {
         guard let name = data["name"] as? String,
               let price = data["price"] as? Double,
               let description = data["description"] as? String,
-              let category = data["category"] as? String,
               let date = data["date"] as? Timestamp,
               let geopoint = data["geopoint"] as? GeoPoint,
-              let images = data["images"] as? [String],
+              let personName = data["personName"] as? String,
+              let phoneNumber = data["phoneNumber"] as? String,
+              let uid = data["uid"] as? String,
               let address = data["address"] as? String else { return nil }
-        self.init(name: name,
+        self.init(id: documentId,
+                  name: name,
                   price: price,
+                  category: .init(rawValue: data["category"] as? String ?? "") ?? .other,
                   description: description,
-                  category: category,
-                  date: date.dateValue(),
+                  date: date,
                   geopoint: geopoint,
-                  images: images,
-                  personName: data["personName"] as? String,
-                  phoneNumber: data["phoneNumber"] as? String,
+                  images: data["images"] as? [String] ?? [],
+                  personName: personName,
+                  phoneNumber: phoneNumber,
+                  uid: uid,
                   address: address)
     }
     
-    var dictionary: [String: Any?] {
+    var dictionary: [String: Any] {
         [
+            "id": id,
             "name": name,
             "price": price,
+            "category": category.rawValue,
             "description": description,
-            "category": category,
             "date": date,
             "geopoint": geopoint,
             "images": images,
             "personName": personName,
             "phoneNumber": phoneNumber,
+            "uid": uid,
             "address": address
         ]
     }

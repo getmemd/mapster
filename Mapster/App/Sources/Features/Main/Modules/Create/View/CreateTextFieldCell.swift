@@ -42,7 +42,7 @@ final class CreateTextFieldCell: UITableViewCell {
     func configure(with cellModel: CreateTextFieldCellModel) {
         titleLabel.text = cellModel.title
         textField.placeholder = cellModel.placeholder
-        textField.keyboardType = cellModel.keypboardType
+        textField.keyboardType = cellModel.keyboardType
         textField.text = cellModel.value
     }
     

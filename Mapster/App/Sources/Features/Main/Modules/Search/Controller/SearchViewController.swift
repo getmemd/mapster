@@ -35,6 +35,7 @@ final class SearchViewController: BaseViewController {
         tableView.estimatedRowHeight = 50
         tableView.register(bridgingCellClass: TableViewItemCell.self)
         tableView.clipsToBounds = false
+        tableView.keyboardDismissMode = .onDrag
         return tableView
     }()
     
@@ -80,6 +81,6 @@ final class SearchViewController: BaseViewController {
 
 extension SearchViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        
+        store.handleAction(.searchDidStart(searchText: searchText))
     }
 }

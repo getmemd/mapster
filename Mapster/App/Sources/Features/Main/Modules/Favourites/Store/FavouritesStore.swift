@@ -34,8 +34,8 @@ final class FavouritesStore: Store<FavouritesEvent, FavouritesAction> {
     override func handleAction(_ action: FavouritesAction) {
         switch action {
         case .viewDidLoad:
-            getAdvertisements()
             configureRows()
+            getAdvertisements()
         case let .didSelectRow(row):
             switch row {
             case let .advertisement(advertisement):
@@ -52,7 +52,11 @@ final class FavouritesStore: Store<FavouritesEvent, FavouritesAction> {
     }
     
     private func getAdvertisements() {
+        sendEvent(.loading)
         Task {
+            defer {
+                sendEvent(.loadingFinished)
+            }
             do {
                 advertisements = try await advertisementRepository.getAdvertisements()
                 configureRows()

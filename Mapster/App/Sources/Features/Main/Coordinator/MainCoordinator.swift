@@ -45,26 +45,35 @@ final class MainCoordinator: Coordinator {
         let module = moduleFactory.makeMap(delegate: self)
         router.present(module, animated: true, modalPresentationStyle: .overFullScreen)
     }
+    
+    private func showAdvertisement(advertisement: Advertisement) {
+        let module = moduleFactory.makeAdvertisement(delegate: self, advertisement: advertisement)
+        router.push(module)
+    }
 }
 
 // MARK: - HomeNavigationDelegate
 
 extension MainCoordinator: HomeNavigationDelegate {
-    
+    func didTapAdvertisement(_ viewController: HomeViewController, advertisement: Advertisement) {
+        showAdvertisement(advertisement: advertisement)
+    }
 }
 
 // MARK: - FavouritesNavigationDelegate
 
 extension MainCoordinator: FavouritesNavigationDelegate {
     func didTapAdvertisement(_ viewController: FavouritesViewController, advertisement: Advertisement) {
-        
+        showAdvertisement(advertisement: advertisement)
     }
 }
 
 // MARK: - SearchNavigationDelegate
 
 extension MainCoordinator: SearchNavigationDelegate {
-    
+    func didTapAdvertisement(_ viewController: SearchViewController, advertisement: Advertisement) {
+        showAdvertisement(advertisement: advertisement)
+    }
 }
 
 // MARK: - ProfileNavigationDelegate
@@ -95,4 +104,11 @@ extension MainCoordinator: MapNavigationDelegate {
             viewController.didPickedLocation(latitude: latitude, longitude: longitude)
         }
     }
+}
+
+
+// MARK: - AdvertisementNavigationDelegate
+
+extension MainCoordinator: AdvertisementNavigationDelegate {
+    
 }

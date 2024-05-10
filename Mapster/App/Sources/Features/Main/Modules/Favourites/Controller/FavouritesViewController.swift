@@ -18,12 +18,18 @@ final class FavouritesViewController: BaseViewController {
     private lazy var tableViewDataSourceImpl = FavouritesTableViewDataSourceImpl(store: store)
     private lazy var tableViewDelegateImpl = FavouritesTableViewDelegateImpl(store: store)
     
+    private lazy var refreshControl: UIRefreshControl = {
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(refreshData), for: .valueChanged)
+        return refreshControl
+    }()
+
     private lazy var tableView: UITableView = {
         let tableView = UITableView()
         tableView.dataSource = tableViewDataSourceImpl
         tableView.delegate = tableViewDelegateImpl
+        tableView.refreshControl = refreshControl
         tableView.separatorStyle = .none
-        tableView.allowsSelection = false
         tableView.estimatedRowHeight = 160
         tableView.register(bridgingCellClasses: TitleCell.self, FavouritesCell.self, FavouritesEmptyCell.self)
         tableView.clipsToBounds = false
@@ -38,6 +44,11 @@ final class FavouritesViewController: BaseViewController {
         store.handleAction(.viewDidLoad)
     }
     
+    @objc 
+    private func refreshData() {
+        store.handleAction(.viewDidLoad)
+    }
+    
     private func configureObservers() {
         bindStore(store) { [weak self ] event in
             guard let self else { return }
@@ -46,6 +57,7 @@ final class FavouritesViewController: BaseViewController {
                 tableViewDataSourceImpl.rows = rows
                 tableViewDelegateImpl.rows = rows
                 tableView.reloadData()
+                refreshControl.endRefreshing()
             case let .showError(message):
                 showAlert(message: message)
             case .loading:

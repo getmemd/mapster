@@ -7,7 +7,6 @@
 
 import Foundation
 import FirebaseStorage
-import UIKit
 
 final class ImageRepository {
     func uploadImages(imagesData: [Data], completion: @escaping (Result<[URL], Error>) -> Void) {

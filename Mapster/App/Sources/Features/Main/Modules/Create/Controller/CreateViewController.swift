@@ -26,6 +26,7 @@ final class CreateViewController: BaseViewController {
         tableView.estimatedRowHeight = 84
         tableView.register(bridgingCellClasses: TitleCell.self,
                            CreatePhotoCell.self,
+                           CreateDropDownCell.self,
                            CreateTextFieldCell.self,
                            CreateTextViewCell.self,
                            CreateMapCell.self)
@@ -42,7 +43,7 @@ final class CreateViewController: BaseViewController {
     }
     
     func didPickedLocation(latitude: Double, longitude: Double) {
-        store.handleAction(.didPickedLocation(latitude: latitude, longitude: longitude))
+        store.handleAction(.didPickLocation(latitude: latitude, longitude: longitude))
     }
     
     private func configureObservers() {
@@ -94,7 +95,7 @@ extension CreateViewController: UIImagePickerControllerDelegate, UINavigationCon
         picker.dismiss(animated: true, completion: nil)
         if let image = info[.originalImage] as? UIImage {
             guard let imageData = image.jpegData(compressionQuality: 0.8) else { return }
-            store.handleAction(.didPickedImage(data: imageData))
+            store.handleAction(.didPickImage(data: imageData))
         }
     }
     

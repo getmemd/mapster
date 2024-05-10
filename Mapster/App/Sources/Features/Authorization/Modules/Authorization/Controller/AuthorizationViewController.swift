@@ -21,7 +21,9 @@ final class AuthorizationViewController: BaseViewController {
         let stackView = UIStackView(arrangedSubviews: [
             titleLabel,
             descriptionLabel,
+            nameTextField,
             emailTextField,
+            phoneNumberTextField,
             passwordTextField,
             repeatPasswordTextField,
             checkboxView
@@ -50,6 +52,19 @@ final class AuthorizationViewController: BaseViewController {
         return label
     }()
     
+    private lazy var nameTextField: UITextField = {
+        let textField = UITextField()
+        textField.delegate = self
+        textField.placeholder = "Имя"
+        textField.keyboardType = .namePhonePad
+        textField.autocapitalizationType = .words
+        textField.borderStyle = .roundedRect
+        textField.backgroundColor = .textField
+        textField.font = Font.mulish(name: .light, size: 14)
+        textField.addPaddingAndIcon(.init(named: "user"), padding: 20, isLeftView: false)
+        return textField
+    }()
+    
     private lazy var emailTextField: UITextField = {
         let textField = UITextField()
         textField.delegate = self
@@ -60,6 +75,18 @@ final class AuthorizationViewController: BaseViewController {
         textField.backgroundColor = .textField
         textField.font = Font.mulish(name: .light, size: 14)
         textField.addPaddingAndIcon(.init(named: "user"), padding: 20, isLeftView: false)
+        return textField
+    }()
+    
+    private lazy var phoneNumberTextField: UITextField = {
+        let textField = UITextField()
+        textField.delegate = self
+        textField.placeholder = "Телефон"
+        textField.keyboardType = .phonePad
+        textField.borderStyle = .roundedRect
+        textField.backgroundColor = .textField
+        textField.font = Font.mulish(name: .light, size: 14)
+        textField.addPaddingAndIcon(.init(named: "phone"), padding: 20, isLeftView: false)
         return textField
     }()
     
@@ -93,7 +120,6 @@ final class AuthorizationViewController: BaseViewController {
         let button = ActionButton()
         button.addTarget(self, action: #selector(actionButtonDidTap), for: .touchUpInside)
         button.setTitle("Зарегистрироваться", for: .normal)
-        button.isEnabled = false
         return button
     }()
     
@@ -135,24 +161,43 @@ final class AuthorizationViewController: BaseViewController {
     
     @objc
     private func actionButtonDidTap() {
-        guard checkValidity(),
-              let email = emailTextField.text,
-              let password = passwordTextField.text else { return }
+        guard checkValidity(), let email = emailTextField.text, let password = passwordTextField.text else {
+            showAlert(message: "Заполните все поля")
+            return
+        }
         if store.isRegistration {
-            guard let repeatPassword = repeatPasswordTextField.text else { return }
-            do {
-                try PasswordValidatationService.checkPasswordValidity(password: password, repeatPassword: repeatPassword)
-                store.handleAction(.actionButtonDidTap(email: email, password: password))
-            } catch let error as PasswordError {
-                showAlert(message: error.failureReason)
-            } catch {
+            guard let repeatPassword = repeatPasswordTextField.text else {
+                showAlert(message: "Необходимо повторить пароль")
                 return
             }
+            handleRegistration(email: email, password: password, repeatPassword: repeatPassword)
         } else {
-            store.handleAction(.actionButtonDidTap(email: email, password: password))
+            handleLogin(email: email, password: password)
         }
     }
-    
+
+    private func handleRegistration(email: String, password: String, repeatPassword: String) {
+        do {
+            try PasswordValidatationService.checkPasswordValidity(password: password, repeatPassword: repeatPassword)
+            store.handleAction(
+                .actionButtonDidTap(
+                    email: email,
+                    password: password,
+                    name: nameTextField.text,
+                    phoneNumber: phoneNumberTextField.text
+                )
+            )
+        } catch let error as PasswordError {
+            showAlert(message: error.failureReason)
+        } catch {
+            showAlert(message: "Произошла неизвестная ошибка")
+        }
+    }
+
+    private func handleLogin(email: String, password: String) {
+        store.handleAction(.actionButtonDidTap(email: email, password: password))
+    }
+
     @objc
     private func loginDidTap() {
         changeViewState()
@@ -160,6 +205,8 @@ final class AuthorizationViewController: BaseViewController {
     
     private func changeViewState() {
         store.isRegistration.toggle()
+        nameTextField.isHidden = !store.isRegistration
+        phoneNumberTextField.isHidden = !store.isRegistration
         repeatPasswordTextField.isHidden = !store.isRegistration
         checkboxView.configure(with: .init(isRegistration: store.isRegistration))
         actionButton.setTitle(store.isRegistration ? "Зарегистрироваться" : "Войти", for: .normal)
@@ -169,13 +216,22 @@ final class AuthorizationViewController: BaseViewController {
     
     private func checkValidity() -> Bool {
         if store.isRegistration {
-            return isValidEmail() &&
+            return !(nameTextField.text?.isEmpty ?? true) &&
+            checkPhoneNumberValidity() &&
+            isValidEmail() &&
             !(passwordTextField.text?.isEmpty ?? true) &&
             !(repeatPasswordTextField.text?.isEmpty ?? true) &&
             checkboxView.isSelected
         } else {
             return isValidEmail() && !(passwordTextField.text?.isEmpty ?? true)
         }
+    }
+    
+    private func checkPhoneNumberValidity() -> Bool {
+        let numericPhoneNumber = phoneNumberTextField.text?.components(separatedBy: CharacterSet.decimalDigits.inverted).joined()
+        let phoneNumberRegex = "^[0-9]{11}$"
+        let predicate = NSPredicate(format: "SELF MATCHES %@", phoneNumberRegex)
+        return predicate.evaluate(with: numericPhoneNumber)
     }
     
     private func isValidEmail() -> Bool {
@@ -193,8 +249,8 @@ final class AuthorizationViewController: BaseViewController {
                 ProgressHud.startAnimating()
             case .loadingFinished:
                 ProgressHud.stopAnimating()
-            case let .showAlert(title, message):
-                showAlert(title: title, message: message)
+            case let .showAlert(title, message, completion):
+                showAlert(title: title, message: message, completion: completion)
             case .success:
                 navigationDelegate?.didFinishAuthorization(self)
             }
@@ -213,7 +269,13 @@ final class AuthorizationViewController: BaseViewController {
             $0.centerY.equalToSuperview()
             $0.leading.trailing.equalToSuperview().inset(24)
         }
+        nameTextField.snp.makeConstraints {
+            $0.height.equalTo(50)
+        }
         emailTextField.snp.makeConstraints {
+            $0.height.equalTo(50)
+        }
+        phoneNumberTextField.snp.makeConstraints {
             $0.height.equalTo(50)
         }
         passwordTextField.snp.makeConstraints {
@@ -244,18 +306,36 @@ final class AuthorizationViewController: BaseViewController {
 // MARK: - UITextFieldDelegate
 
 extension AuthorizationViewController: UITextFieldDelegate {
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        actionButton.isEnabled = checkValidity()
+    func formattedNumber(number: String) -> String {
+        let cleanPhoneNumber = number.components(separatedBy: CharacterSet.decimalDigits.inverted).joined()
+        let mask = "+# (###) ### ####"
+        var result = ""
+        var index = cleanPhoneNumber.startIndex
+        for ch in mask where index < cleanPhoneNumber.endIndex {
+            if ch == "#" {
+                result.append(cleanPhoneNumber[index])
+                index = cleanPhoneNumber.index(after: index)
+            } else {
+                result.append(ch)
+            }
+        }
+        return result
+    }
+    
+    func textField(_ textField: UITextField,
+                   shouldChangeCharactersIn range: NSRange,
+                   replacementString string:  String) -> Bool {
+        guard textField == phoneNumberTextField else { return true }
+        guard let text = textField.text else { return false }
+        let newString = (text as NSString).replacingCharacters(in: range, with: string)
+        textField.text = formattedNumber(number: newString)
+        return false
     }
 }
 
 // MARK: - AuthorizationCheckboxViewDelegate
 
 extension AuthorizationViewController: AuthorizationCheckboxViewDelegate {
-    func didTapCheckbox(_ view: AuthorizationCheckboxView, isSelected: Bool) {
-        actionButton.isEnabled = checkValidity()
-    }
-    
     func didTapForgotPassword(_ view: AuthorizationCheckboxView) {
         guard let email = emailTextField.text, isValidEmail() else {
             showAlert(message: "Введите свой email")

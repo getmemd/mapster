@@ -30,12 +30,16 @@ final class PasswordResetStore: Store<PasswordResetEvent, PasswordResetAction> {
     
     private func updatePassword(password: String) {
         sendEvent(.loading)
-        authRepository.updatePassword(password: password) { [weak self] error in
-            if let error {
-                self?.sendEvent(.showError(errorMessage: error.localizedDescription))
+        Task {
+            defer {
+                sendEvent(.loadingFinished)
             }
-            self?.sendEvent(.passwordUpdated)
-            self?.sendEvent(.loadingFinished)
+            do {
+                try await authRepository.updatePassword(password: password)
+                sendEvent(.passwordUpdated)
+            } catch {
+                sendEvent(.showError(errorMessage: error.localizedDescription))
+            }
         }
     }
 }

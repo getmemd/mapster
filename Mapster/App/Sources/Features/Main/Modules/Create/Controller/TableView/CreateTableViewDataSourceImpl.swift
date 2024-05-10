@@ -41,6 +41,11 @@ extension CreateTableViewDataSourceImpl: UITableViewDataSource {
             cell.delegate = self
             cell.configure(with: .init(rowType: rows[indexPath.row], value: text))
             return cell
+        case let .category(category):
+            let cell: CreateDropDownCell = tableView.dequeueReusableCell(for: indexPath)
+            cell.delegate = self
+            cell.configure(with: .init(rowType: .category(category: category), value: category.displayName))
+            return cell
         case let .description(text):
             let cell: CreateTextViewCell = tableView.dequeueReusableCell(for: indexPath)
             cell.delegate = self
@@ -94,5 +99,13 @@ extension CreateTableViewDataSourceImpl: CreateMapCellDelegate {
     
     func didTapActionButton(_ cell: CreateMapCell) {
         store.handleAction(.didTapAction)
+    }
+}
+
+// MARK: - CreateDropDownCellDelegate
+
+extension CreateTableViewDataSourceImpl: CreateDropDownCellDelegate {
+    func didSelectCategory(_ cell: CreateDropDownCell, category: AdvertisementCategory) {
+        store.handleAction(.didPickCategory(category: category))
     }
 }

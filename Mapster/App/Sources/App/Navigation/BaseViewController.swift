@@ -8,11 +8,11 @@
 import UIKit
 
 class BaseViewController: UIViewController {
-    func showAlert(title: String? = nil, message: String?) {
+    func showAlert(title: String? = nil, message: String?, completion: ((UIAlertAction) -> Void)? = nil) {
         let alert = UIAlertController(title: title ?? "Ошибка",
                                       message: message,
                                       preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: completion))
         present(alert, animated: true, completion: nil)
     }
 }

@@ -29,6 +29,7 @@ final class ProfileViewController: BaseViewController {
     
     private let nameLabel: UILabel = {
         let label = UILabel()
+        label.textAlignment = .center
         label.font = Font.mulish(name: .bold, size: 22)
         label.numberOfLines = 0
         return label
@@ -36,6 +37,7 @@ final class ProfileViewController: BaseViewController {
     
     private let phoneNumberLabel: UILabel = {
         let label = UILabel()
+        label.textAlignment = .center
         label.font = Font.mulish(name: .regular, size: 14)
         label.numberOfLines = 0
         return label
@@ -72,6 +74,8 @@ final class ProfileViewController: BaseViewController {
                 navigationDelegate?.didSignOut(self)
             case let .showError(message):
                 showAlert(message: message)
+            case let .profileLoaded(name):
+                nameLabel.text = name
             }
         }
         .store(in: &bag)
