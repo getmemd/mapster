@@ -8,6 +8,7 @@
 import UIKit
 
 protocol ProfileNavigationDelegate: AnyObject {
+    func didTapEdit(_ viewController: ProfileViewController)
     func didSignOut(_ viewController: ProfileViewController)
 }
 
@@ -17,39 +18,14 @@ final class ProfileViewController: BaseViewController {
     private var bag = Bag()
     private lazy var tableViewDataSourceImpl = ProfileTableViewDataSourceImpl(store: store)
     private lazy var tableViewDelegateImpl = ProfileTableViewDelegateImpl(store: store)
-    
-    private let circularView = CircularView()
-    
-    private let profileImageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.layer.cornerRadius = 60
-        imageView.backgroundColor = .gray
-        return imageView
-    }()
-    
-    private let nameLabel: UILabel = {
-        let label = UILabel()
-        label.textAlignment = .center
-        label.font = Font.mulish(name: .bold, size: 22)
-        label.numberOfLines = 0
-        return label
-    }()
-    
-    private let phoneNumberLabel: UILabel = {
-        let label = UILabel()
-        label.textAlignment = .center
-        label.font = Font.mulish(name: .regular, size: 14)
-        label.numberOfLines = 0
-        return label
-    }()
-    
+
     private lazy var tableView: UITableView = {
         let tableView = UITableView()
         tableView.dataSource = tableViewDataSourceImpl
         tableView.delegate = tableViewDelegateImpl
         tableView.separatorStyle = .none
         tableView.estimatedRowHeight = 160
-        tableView.register(bridgingCellClasses: TableViewItemCell.self)
+        tableView.register(bridgingCellClasses: ProfileCell.self, TableViewItemCell.self)
         tableView.clipsToBounds = false
         return tableView
     }()
@@ -62,10 +38,18 @@ final class ProfileViewController: BaseViewController {
         store.handleAction(.viewDidLoad)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        store.handleAction(.viewDidLoad)
+    }
+    
     private func configureObservers() {
         bindStore(store) { [weak self ] event in
             guard let self else { return }
             switch event {
+            case .loading:
+                ProgressHud.startAnimating()
+            case .loadingFinished:
+                ProgressHud.stopAnimating()
             case let .rows(rows):
                 tableViewDataSourceImpl.rows = rows
                 tableViewDelegateImpl.rows = rows
@@ -74,41 +58,21 @@ final class ProfileViewController: BaseViewController {
                 navigationDelegate?.didSignOut(self)
             case let .showError(message):
                 showAlert(message: message)
-            case let .profileLoaded(name):
-                nameLabel.text = name
+            case .editProfileTapped:
+                navigationDelegate?.didTapEdit(self)
             }
         }
         .store(in: &bag)
     }
     
     private func setupViews() {
-//        navigationController?.navigationBar.topItem?.title = "Мой профиль"
-        circularView.backgroundColor = UIColor.accent.withAlphaComponent(0.4)
-        [circularView, profileImageView, nameLabel, phoneNumberLabel, tableView].forEach { view.addSubview($0) }
+        view.addSubview(tableView)
         view.backgroundColor = .white
     }
     
     private func setupConstraints() {
-        circularView.snp.makeConstraints {
-            $0.leading.top.trailing.equalToSuperview()
-            $0.height.equalTo(200)
-        }
-        profileImageView.snp.makeConstraints {
-            $0.size.equalTo(120)
-            $0.centerX.equalToSuperview()
-            $0.top.equalTo(view.safeAreaLayoutGuide).offset(20)
-        }
-        nameLabel.snp.makeConstraints {
-            $0.top.equalTo(profileImageView.snp.bottom).offset(16)
-            $0.leading.trailing.equalToSuperview().inset(24)
-        }
-        phoneNumberLabel.snp.makeConstraints {
-            $0.top.equalTo(nameLabel.snp.bottom)
-            $0.leading.trailing.equalToSuperview().inset(24)
-        }
         tableView.snp.makeConstraints {
-            $0.top.equalTo(phoneNumberLabel.snp.bottom).offset(24)
-            $0.leading.trailing.bottom.equalTo(view.safeAreaLayoutGuide)
+            $0.edges.equalTo(view.safeAreaLayoutGuide)
         }
     }
 }

@@ -50,6 +50,11 @@ final class MainCoordinator: Coordinator {
         let module = moduleFactory.makeAdvertisement(delegate: self, advertisement: advertisement)
         router.push(module)
     }
+    
+    private func showProfileEdit() {
+        let module = moduleFactory.makeProfileEdit(delegate: self)
+        router.push(module)
+    }
 }
 
 // MARK: - HomeNavigationDelegate
@@ -79,6 +84,10 @@ extension MainCoordinator: SearchNavigationDelegate {
 // MARK: - ProfileNavigationDelegate
 
 extension MainCoordinator: ProfileNavigationDelegate {
+    func didTapEdit(_ viewController: ProfileViewController) {
+        showProfileEdit()
+    }
+    
     func didSignOut(_ viewController: ProfileViewController) {
         delegate?.didFinish(self)
     }
@@ -111,4 +120,12 @@ extension MainCoordinator: MapNavigationDelegate {
 
 extension MainCoordinator: AdvertisementNavigationDelegate {
     
+}
+
+// MARK: - ProfileEditNavigationDelegate
+
+extension MainCoordinator: ProfileEditNavigationDelegate {
+    func didFinish(_ viewController: ProfileEditViewController) {
+        router.popModule()
+    }
 }

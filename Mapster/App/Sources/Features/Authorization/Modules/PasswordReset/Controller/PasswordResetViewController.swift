@@ -76,7 +76,7 @@ final class PasswordResetViewController: BaseViewController {
         guard let password = passwordTextField.text,
               let repeatPassword = repeatPasswordTextField.text else { return }
         do {
-            try PasswordValidatationService.checkPasswordValidity(password: password, repeatPassword: repeatPassword)
+            try ValidatationService.checkPasswordValidity(password: password, repeatPassword: repeatPassword)
             store.sendAction(.actionButtonDidTap(password: password))
         } catch let error as PasswordError {
             showPasswordAlert(message: error.failureReason)

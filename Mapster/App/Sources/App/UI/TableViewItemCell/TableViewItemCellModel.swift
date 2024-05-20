@@ -9,7 +9,7 @@ import Foundation
 
 protocol TableViewItemCellModel {
     var iconName: String? { get }
-    var title: String { get }
+    var title: String? { get }
 }
 
 extension TableViewItemCellModel {

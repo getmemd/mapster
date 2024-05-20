@@ -49,8 +49,15 @@ final class MainModuleFactory {
         return viewController
     }
     
-    func makeAdvertisement(delegate: AdvertisementNavigationDelegate, advertisement: Advertisement) -> AdvertisementViewController {
+    func makeAdvertisement(delegate: AdvertisementNavigationDelegate,
+                           advertisement: Advertisement) -> AdvertisementViewController {
         let viewController = AdvertisementViewController(store: .init(advertisement: advertisement))
+        viewController.navigationDelegate = delegate
+        return viewController
+    }
+    
+    func makeProfileEdit(delegate: ProfileEditNavigationDelegate) -> ProfileEditViewController {
+        let viewController = ProfileEditViewController()
         viewController.navigationDelegate = delegate
         return viewController
     }

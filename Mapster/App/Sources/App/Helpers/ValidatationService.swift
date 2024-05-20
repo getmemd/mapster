@@ -22,7 +22,7 @@ enum PasswordError: LocalizedError {
     }
 }
 
-final class PasswordValidatationService {
+final class ValidatationService {
     static func checkPasswordValidity(password: String, repeatPassword: String? = nil) throws {
         let passwordRegex = "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,}$"
         let predicate = NSPredicate(format: "SELF MATCHES %@", passwordRegex)
@@ -32,5 +32,12 @@ final class PasswordValidatationService {
         if let repeatPassword, password != repeatPassword {
             throw PasswordError.mismatch
         }
+    }
+    
+    static func checkPhoneNumberValidity(phoneNumber: String?) -> Bool {
+        let numericPhoneNumber = phoneNumber?.components(separatedBy: CharacterSet.decimalDigits.inverted).joined()
+        let phoneNumberRegex = "^[0-9]{11}$"
+        let predicate = NSPredicate(format: "SELF MATCHES %@", phoneNumberRegex)
+        return predicate.evaluate(with: numericPhoneNumber)
     }
 }

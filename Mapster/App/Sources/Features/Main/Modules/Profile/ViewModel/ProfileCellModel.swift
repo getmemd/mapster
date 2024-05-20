@@ -8,7 +8,7 @@
 import Foundation
 
 struct ProfileCellModel: TableViewItemCellModel {
-    var title: String {
+    var title: String? {
         switch row {
         case .editProfile:
             return "Редактировать профиль"
@@ -18,6 +18,8 @@ struct ProfileCellModel: TableViewItemCellModel {
             return "Часто задаваемые вопросы"
         case .signOut:
             return "Выйти"
+        default:
+            return nil
         }
     }
     

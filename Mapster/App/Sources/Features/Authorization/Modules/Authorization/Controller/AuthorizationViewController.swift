@@ -178,7 +178,7 @@ final class AuthorizationViewController: BaseViewController {
 
     private func handleRegistration(email: String, password: String, repeatPassword: String) {
         do {
-            try PasswordValidatationService.checkPasswordValidity(password: password, repeatPassword: repeatPassword)
+            try ValidatationService.checkPasswordValidity(password: password, repeatPassword: repeatPassword)
             store.handleAction(
                 .actionButtonDidTap(
                     email: email,
@@ -217,7 +217,7 @@ final class AuthorizationViewController: BaseViewController {
     private func checkValidity() -> Bool {
         if store.isRegistration {
             return !(nameTextField.text?.isEmpty ?? true) &&
-            checkPhoneNumberValidity() &&
+            ValidatationService.checkPhoneNumberValidity(phoneNumber: phoneNumberTextField.text) &&
             isValidEmail() &&
             !(passwordTextField.text?.isEmpty ?? true) &&
             !(repeatPasswordTextField.text?.isEmpty ?? true) &&
