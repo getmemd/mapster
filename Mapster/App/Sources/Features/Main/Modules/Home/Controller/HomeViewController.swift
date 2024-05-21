@@ -41,7 +41,7 @@ final class HomeViewController: BaseViewController {
         imageView.image = .init(systemName: "arrow.clockwise")
         imageView.tintColor = .accent
         imageView.isUserInteractionEnabled = true
-        let gesture = UITapGestureRecognizer(target: self, action: #selector(refreshButtonDidTap))
+        let gesture = UITapGestureRecognizer(target: self, action: #selector(refreshData))
         imageView.addGestureRecognizer(gesture)
         return imageView
     }()
@@ -51,7 +51,7 @@ final class HomeViewController: BaseViewController {
         setupViews()
         setupConstraints()
         configureObservers()
-        store.handleAction(.viewDidLoad)
+        store.handleAction(.loadData)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -95,11 +95,6 @@ final class HomeViewController: BaseViewController {
         )
         alert.addAction(.init(title: "Отмена", style: .cancel))
         present(alert, animated: true)
-    }
-    
-    @objc 
-    private func refreshButtonDidTap() {
-        store.handleAction(.viewDidLoad)
     }
     
     private func configureObservers() {
@@ -146,6 +141,15 @@ final class HomeViewController: BaseViewController {
             $0.size.equalTo(24)
             $0.center.equalToSuperview()
         }
+    }
+}
+
+// MARK: - Updatable
+
+extension HomeViewController: Updatable {
+    @objc
+    func refreshData() {
+        store.handleAction(.loadData)
     }
 }
 

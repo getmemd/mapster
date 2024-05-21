@@ -17,7 +17,7 @@ enum HomeEvent {
 }
 
 enum HomeAction {
-    case viewDidLoad
+    case loadData
     case didTapAnnotation(index: Int)
 }
 
@@ -27,7 +27,7 @@ final class HomeStore: Store<HomeEvent, HomeAction> {
     
     override func handleAction(_ action: HomeAction) {
         switch action {
-        case .viewDidLoad:
+        case .loadData:
             getAdvertisements()
         case let .didTapAnnotation(index):
             guard let advertisement = advertisements[safe: index] else { return }

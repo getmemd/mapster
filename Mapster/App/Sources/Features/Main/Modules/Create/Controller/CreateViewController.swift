@@ -10,6 +10,7 @@ import UIKit
 
 protocol CreateNavigationDelegate: AnyObject {
     func didTapMap(_ viewController: CreateViewController)
+    func didCreateAdvertisement(_ viewController: CreateViewController)
 }
 
 final class CreateViewController: BaseViewController {
@@ -57,8 +58,12 @@ final class CreateViewController: BaseViewController {
                 showImagePicker()
             case .showMapPicker:
                 navigationDelegate?.didTapMap(self)
+            case .success:
+                navigationDelegate?.didCreateAdvertisement(self)
             case let .showError(message):
                 showAlert(message: message)
+            case let .showToast(message):
+                showToast(message: message)
             case .loading:
                 ProgressHud.startAnimating()
             case .loadingFinished:

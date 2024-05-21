@@ -33,6 +33,8 @@
 		C53BB3142BFBB7E900C09F9D /* ProfileEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C53BB3132BFBB7E900C09F9D /* ProfileEditViewController.swift */; };
 		C53BB3162BFBB82200C09F9D /* ProfileEditStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = C53BB3152BFBB82200C09F9D /* ProfileEditStore.swift */; };
 		C53BB3192BFBDDE400C09F9D /* ProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C53BB3182BFBDDE400C09F9D /* ProfileCell.swift */; };
+		C53BB31C2BFBFB5900C09F9D /* CreateStoreDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C53BB31B2BFBFB5900C09F9D /* CreateStoreDataModel.swift */; };
+		C53BB31F2BFC0DBF00C09F9D /* Updatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C53BB31E2BFC0DBF00C09F9D /* Updatable.swift */; };
 		C53BD2592B7E217D0078D28E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C53BD2582B7E217D0078D28E /* AppDelegate.swift */; };
 		C53BD2622B7E217F0078D28E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C53BD2612B7E217F0078D28E /* Assets.xcassets */; };
 		C53BD2652B7E217F0078D28E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C53BD2632B7E217F0078D28E /* LaunchScreen.storyboard */; };
@@ -144,6 +146,8 @@
 		C53BB3132BFBB7E900C09F9D /* ProfileEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditViewController.swift; sourceTree = "<group>"; };
 		C53BB3152BFBB82200C09F9D /* ProfileEditStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditStore.swift; sourceTree = "<group>"; };
 		C53BB3182BFBDDE400C09F9D /* ProfileCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCell.swift; sourceTree = "<group>"; };
+		C53BB31B2BFBFB5900C09F9D /* CreateStoreDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateStoreDataModel.swift; sourceTree = "<group>"; };
+		C53BB31E2BFC0DBF00C09F9D /* Updatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Updatable.swift; sourceTree = "<group>"; };
 		C53BD2552B7E217D0078D28E /* Mapster.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Mapster.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C53BD2582B7E217D0078D28E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C53BD2612B7E217F0078D28E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -410,6 +414,22 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		C53BB31A2BFBFB4900C09F9D /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				C53BB31B2BFBFB5900C09F9D /* CreateStoreDataModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		C53BB31D2BFC0D9200C09F9D /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				C53BB31E2BFC0DBF00C09F9D /* Updatable.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
 		C53BD24C2B7E217D0078D28E = {
 			isa = PBXGroup;
 			children = (
@@ -501,6 +521,7 @@
 				C575232F2B98EF1400ECCDE3 /* Extensions */,
 				C511A8272B811ECB002DB0E4 /* Helpers */,
 				C53BD2732B7E24D30078D28E /* Navigation */,
+				C53BB31D2BFC0D9200C09F9D /* Protocols */,
 				C575232A2B98EED700ECCDE3 /* Store */,
 				C5142E0C2B836DBF00384411 /* UI */,
 			);
@@ -931,6 +952,7 @@
 			isa = PBXGroup;
 			children = (
 				C5EF9A002BC1F2AF00312987 /* Controller */,
+				C53BB31A2BFBFB4900C09F9D /* Model */,
 				C5EF9A032BC1F2B800312987 /* Store */,
 				C5EF9A012BC1F2B200312987 /* View */,
 				C5EF9A022BC1F2B400312987 /* ViewModel */,
@@ -1186,6 +1208,7 @@
 				C5142E082B835FE400384411 /* UITextField+ViewPadding.swift in Sources */,
 				C5EF99F42BBFF0A500312987 /* ProfileTableViewDelegateImpl.swift in Sources */,
 				C5A54C0E2BEC33D900C04705 /* AdvertisementInfoCell.swift in Sources */,
+				C53BB31F2BFC0DBF00C09F9D /* Updatable.swift in Sources */,
 				C50597B02B821CE90058B519 /* AuthorizationCoordinator.swift in Sources */,
 				C5EF9A102BC20A4100312987 /* CreatePhotoCell.swift in Sources */,
 				C5EF9A232BC35B8800312987 /* LocationDataManager.swift in Sources */,
@@ -1201,6 +1224,7 @@
 				C5EF99D82BBB2B2600312987 /* AdvertisementRepository.swift in Sources */,
 				C5EF99EB2BBFDE4000312987 /* ProfileViewController.swift in Sources */,
 				C5E4722C2BB36DD7002AA59B /* FavouritesStore.swift in Sources */,
+				C53BB31C2BFBFB5900C09F9D /* CreateStoreDataModel.swift in Sources */,
 				C5105F292BB4805C000D5B28 /* SearchViewController.swift in Sources */,
 				C5CFAFB82BEDB5DB00A77371 /* HomePointAnnotation.swift in Sources */,
 				C53BB3142BFBB7E900C09F9D /* ProfileEditViewController.swift in Sources */,

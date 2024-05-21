@@ -18,7 +18,7 @@ enum ProfileEvent {
 }
 
 enum ProfileAction {
-    case viewDidLoad
+    case loadData
     case didSelectRow(row: ProfileRows)
 }
 
@@ -37,7 +37,7 @@ final class ProfileStore: Store<ProfileEvent, ProfileAction> {
     
     override func handleAction(_ action: ProfileAction) {
         switch action {
-        case .viewDidLoad:
+        case .loadData:
             getUser()
         case let .didSelectRow(row):
             switch row {

@@ -13,7 +13,9 @@ enum CreateEvent {
     case rows(rows: [CreateRows])
     case showImagePicker
     case showMapPicker
+    case success
     case showError(message: String)
+    case showToast(message: String)
     case loading
     case loadingFinished
 }
@@ -45,57 +47,51 @@ final class CreateStore: Store<CreateEvent, CreateAction> {
     @Injected(\Repositories.imageRepository) private var imageRepository
     @Injected(\Repositories.userRepository) private var userRepository
     
-    private var photos: [Data] = []
-    private var imageUrls: [URL] = []
-    private var headline: String?
-    private var category: AdvertisementCategory = .other
-    private var description: String? = "Расскажите о продукте..."
-    private var reward: String?
-    private var address: String?
-    private var geopoint: GeoPoint?
+    private var data: CreateStoreDataModel = .init()
     
     override func handleAction(_ action: CreateAction) {
         switch action {
         case .viewDidLoad:
+            sendEvent(.showToast(message: "Тестовый тост"))
             configureRows()
         case .didTapAddPhoto:
             sendEvent(.showImagePicker)
         case let .didPickImage(data):
-            photos.append(data)
+            self.data.photos.append(data)
             configureRows()
         case let .didDeleteImage(index):
-            photos.remove(at: index)
+            data.photos.remove(at: index)
             configureRows()
         case let .didEndEditing(row, text):
             switch row {
             case .headline:
-                headline = text
+                data.headline = text
             case .description:
-                description = text
+                data.description = text
             case .reward:
-                reward = text
+                data.reward = text
             case .address:
-                address = text
+                data.address = text
             default:
                 break
             }
         case let .didPickLocation(latitude, longitude):
-            geopoint = .init(latitude: latitude, longitude: longitude)
+            data.geopoint = .init(latitude: latitude, longitude: longitude)
             configureRows()
         case .didTapAction:
             uploadImages()
         case let .didPickCategory(category):
-            self.category = category
+            data.category = category
         }
     }
     
     private func uploadImages() {
         sendEvent(.loading)
-        imageRepository.uploadImages(imagesData: photos) { [weak self] result in
+        imageRepository.uploadImages(imagesData: data.photos) { [weak self] result in
             guard let self else { return }
             switch result {
             case let .success(urls):
-                imageUrls = urls
+                data.imageUrls = urls
                 getUser()
             case let .failure(error):
                 sendEvent(.showError(message: error.localizedDescription))
@@ -123,12 +119,12 @@ final class CreateStore: Store<CreateEvent, CreateAction> {
     }
     
     private func sendAdvertisement(user: AppUser) async throws {
-        guard let headline,
-              let reward,
+        guard let headline = data.headline,
+              let reward = data.reward,
               let price = Double(reward),
-              let description,
-              let geopoint,
-              let address,
+              let description = data.description,
+              let geopoint = data.geopoint,
+              let address = data.address,
               let personName = Auth.auth().currentUser?.displayName else {
             throw NSError(domain: "UnknownError", code: 0, userInfo: [NSLocalizedDescriptionKey: "Unknown error"])
         }
@@ -136,29 +132,33 @@ final class CreateStore: Store<CreateEvent, CreateAction> {
             id: "mock",
             name: headline,
             price: price,
-            category: category,
+            category: data.category,
             description: description,
             date: Timestamp(date: Date()),
             geopoint: geopoint,
-            images: imageUrls.compactMap { $0.absoluteString },
+            images: data.imageUrls.compactMap { $0.absoluteString },
             personName: personName,
             phoneNumber: user.phoneNumber,
             uid: user.uid,
             address: address
         )
         try await advertisementRepository.createAdvertisement(advertisement: advertisement)
+        sendEvent(.showToast(message: "Успешно"))
+        sendEvent(.success)
+        data = .init()
+        configureRows()
     }
     
     private func configureRows() {
         let rows: [CreateRows] = [
             .title(text: "Создать объявление"),
-            .photos(data: photos),
-            .headline(text: headline),
-            .category(category: category),
-            .description(text: description),
-            .reward(text: reward),
-            .address(text: address),
-            .map(geopoint: geopoint)
+            .photos(data: data.photos),
+            .headline(text: data.headline),
+            .category(category: data.category),
+            .description(text: data.description),
+            .reward(text: data.reward),
+            .address(text: data.address),
+            .map(geopoint: data.geopoint)
         ]
         sendEvent(.rows(rows: rows))
     }

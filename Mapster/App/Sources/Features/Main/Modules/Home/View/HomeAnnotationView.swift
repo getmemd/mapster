@@ -31,6 +31,7 @@ final class HomeAnnotationView: MKAnnotationView {
     private lazy var iconView: UIImageView = {
         let imageView = UIImageView()
         imageView.tintColor = .white
+        imageView.contentMode = .scaleAspectFit
         return imageView
     }()
     

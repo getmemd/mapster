@@ -39,6 +39,10 @@ extension AdvertisementTableViewDataSourceImpl: UITableViewDataSource {
 // MARK: - AdvertisementInfoCellDelegate
 
 extension AdvertisementTableViewDataSourceImpl: AdvertisementInfoCellDelegate {
+    func didTapCallByPhone(_ cell: AdvertisementInfoCell) {
+        store.handleAction(.callByPhoneDidTap)
+    }
+    
     func didTapOpenInMap(_ cell: AdvertisementInfoCell, mapType: MapType) {
         store.handleAction(.openInMapDidTap(mapType: mapType))
     }

@@ -9,6 +9,7 @@ import UIKit
 
 protocol AdvertisementInfoCellDelegate: AnyObject {
     func didTapOpenInMap(_ cell: AdvertisementInfoCell, mapType: MapType)
+    func didTapCallByPhone(_ cell: AdvertisementInfoCell)
 }
 
 final class AdvertisementInfoCell: UITableViewCell {
@@ -72,16 +73,19 @@ final class AdvertisementInfoCell: UITableViewCell {
         return label
     }()
     
-    private let contactBackgroundView: UIView = {
+    private lazy var contactBackgroundView: UIView = {
         let view = UIView()
         view.backgroundColor = UIColor.cellGray
         view.layer.cornerRadius = 10
+        view.isUserInteractionEnabled = true
+        let gesture = UITapGestureRecognizer(target: self, action: #selector(callByPhone))
+        view.addGestureRecognizer(gesture)
         return view
     }()
     
     private let nameLabel: UILabel = {
         let label = UILabel()
-        label.font = Font.mulish(name: .regular, size: 14)
+        label.font = Font.mulish(name: .semiBold, size: 18)
         label.numberOfLines = 0
         return label
     }()
@@ -136,6 +140,11 @@ final class AdvertisementInfoCell: UITableViewCell {
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    @objc
+    private func callByPhone() {
+        delegate?.didTapCallByPhone(self)
     }
     
     @objc

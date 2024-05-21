@@ -10,11 +10,13 @@ import Foundation
 enum AdvertisementEvent {
     case rows(rows: [AdvertisementRows])
     case openInMap(mapType: MapType, latitude: Double, longitude: Double)
+    case callByPhone(phoneNumber: String)
 }
 
 enum AdvertisementAction {
     case viewDidLoad
     case openInMapDidTap(mapType: MapType)
+    case callByPhoneDidTap
 }
 
 enum AdvertisementRows {
@@ -42,6 +44,8 @@ final class AdvertisementStore: Store<AdvertisementEvent, AdvertisementAction> {
             sendEvent(.openInMap(mapType: mapType,
                                  latitude: advertisement.geopoint.latitude,
                                  longitude: advertisement.geopoint.longitude))
+        case .callByPhoneDidTap:
+            sendEvent(.callByPhone(phoneNumber: advertisement.phoneNumber))
         }
     }
     

@@ -16,7 +16,7 @@ enum FavouritesEvent {
 }
 
 enum FavouritesAction {
-    case viewDidLoad
+    case loadData
     case didSelectRow(row: FavouritesRows)
     case didDeleteRow(index: Int)
 }
@@ -33,7 +33,7 @@ final class FavouritesStore: Store<FavouritesEvent, FavouritesAction> {
     
     override func handleAction(_ action: FavouritesAction) {
         switch action {
-        case .viewDidLoad:
+        case .loadData:
             configureRows()
             getAdvertisements()
         case let .didSelectRow(row):

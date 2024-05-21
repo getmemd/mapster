@@ -29,6 +29,7 @@ final class CreateTextViewCell: UITableViewCell {
         textView.layer.cornerRadius = 10
         textView.textContainerInset = .init(top: 16, left: 16, bottom: 16, right: 16)
         textView.text = "Расскажите о продукте..."
+        textView.textColor = UIColor.lightGray
         return textView
     }()
     
@@ -77,8 +78,12 @@ final class CreateTextViewCell: UITableViewCell {
 
 extension CreateTextViewCell: UITextViewDelegate {
     func textViewDidChange(_ textView: UITextView) {
-        let count = textView.text.count
-        counterLabel.text = "\(count)/9000"
+        if textView.textColor == UIColor.lightGray {
+            counterLabel.text = "0/9000"
+        } else {
+            let count = textView.text.count
+            counterLabel.text = "\(count)/9000"
+        }
     }
     
     func textViewShouldBeginEditing(_ textView: UITextView) -> Bool {
@@ -86,6 +91,17 @@ extension CreateTextViewCell: UITextViewDelegate {
     }
     
     func textViewDidEndEditing(_ textView: UITextView) {
+        if textView.text.isEmpty {
+            textView.text = "Расскажите о продукте..."
+            textView.textColor = UIColor.lightGray
+        }
         delegate?.didEndEditing(self, text: textView.text)
+    }
+    
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        if textView.textColor == UIColor.lightGray {
+            textView.text = nil
+            textView.textColor = UIColor.black
+        }
     }
 }

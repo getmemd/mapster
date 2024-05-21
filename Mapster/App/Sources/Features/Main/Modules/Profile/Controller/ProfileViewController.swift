@@ -35,11 +35,11 @@ final class ProfileViewController: BaseViewController {
         setupViews()
         setupConstraints()
         configureObservers()
-        store.handleAction(.viewDidLoad)
+        store.handleAction(.loadData)
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        store.handleAction(.viewDidLoad)
+    func refreshData() {
+        store.handleAction(.loadData)
     }
     
     private func configureObservers() {

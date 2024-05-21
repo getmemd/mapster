@@ -57,6 +57,11 @@ final class AdvertisementViewController: BaseViewController {
         UIApplication.shared.open(url)
     }
     
+    private func callByPhone(phoneNumber: String) {
+        guard let url = URL(string: "tel://\(phoneNumber)") else { return }
+        UIApplication.shared.open(url)
+    }
+    
     private func configureObservers() {
         bindStore(store) { [weak self ] event in
             guard let self else { return }
@@ -66,6 +71,8 @@ final class AdvertisementViewController: BaseViewController {
                 tableView.reloadData()
             case let .openInMap(mapType, latitude, longitude):
                 openInMap(mapType: mapType, latitude: latitude, longitude: longitude)
+            case let .callByPhone(phoneNumber):
+                callByPhone(phoneNumber: phoneNumber)
             }
         }
         .store(in: &bag)

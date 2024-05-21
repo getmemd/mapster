@@ -57,8 +57,8 @@ final class CreateMapCell: UITableViewCell {
     }
     
     func configure(geopoint: GeoPoint?) {
-        guard let geopoint else { return }
         mapView.removeAnnotations(mapView.annotations)
+        guard let geopoint else { return }
         let location = CLLocationCoordinate2D(latitude: geopoint.latitude, longitude: geopoint.longitude)
         let annotation = MKPointAnnotation()
         annotation.coordinate = location

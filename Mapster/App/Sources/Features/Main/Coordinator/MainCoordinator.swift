@@ -99,6 +99,14 @@ extension MainCoordinator: CreateNavigationDelegate {
     func didTapMap(_ viewController: CreateViewController) {
         showMap()
     }
+    
+    func didCreateAdvertisement(_ viewController: CreateViewController) {
+        guard let container = router.navigationController.viewControllers
+            .compactMap({ $0 as? ContainerController }).first,
+              let viewControllers = container.viewControllers?
+            .compactMap({ $0 as? Updatable }) else { return }
+        viewControllers.forEach { $0.refreshData() }
+    }
 }
 
 // MARK: - MapNavigationDelegate

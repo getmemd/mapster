@@ -41,12 +41,7 @@ final class FavouritesViewController: BaseViewController {
         setupViews()
         setupConstraints()
         configureObservers()
-        store.handleAction(.viewDidLoad)
-    }
-    
-    @objc 
-    private func refreshData() {
-        store.handleAction(.viewDidLoad)
+        store.handleAction(.loadData)
     }
     
     private func configureObservers() {
@@ -80,5 +75,14 @@ final class FavouritesViewController: BaseViewController {
         tableView.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
+    }
+}
+
+// MARK: - Updatable
+
+extension FavouritesViewController: Updatable {
+    @objc
+    func refreshData() {
+        store.handleAction(.loadData)
     }
 }
