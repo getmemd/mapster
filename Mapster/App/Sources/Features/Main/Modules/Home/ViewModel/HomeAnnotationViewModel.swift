@@ -16,6 +16,14 @@ struct HomeAnnotationViewModel {
         advertisement.category.icon
     }
     
+    var title: String {
+        advertisement.name
+    }
+    
+    var subtitle: String {
+        advertisement.description
+    }
+    
     private var advertisement: Advertisement
     
     init(advertisement: Advertisement) {

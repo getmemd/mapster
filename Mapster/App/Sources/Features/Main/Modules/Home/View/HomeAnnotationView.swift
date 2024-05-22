@@ -7,8 +7,18 @@
 
 import MapKit
 
+protocol HomeAnnotationViewDelegate: AnyObject {
+    func didTapCalloutButton(_ view: HomeAnnotationView)
+}
+
 final class HomeAnnotationView: MKAnnotationView {
-    override var annotation: MKAnnotation? { didSet { configure(for: annotation) } }
+    weak var delegate: HomeAnnotationViewDelegate?
+    
+    override var annotation: MKAnnotation? {
+        didSet {
+            configure(for: annotation)
+        }
+    }
     
     override init(annotation: (any MKAnnotation)?, reuseIdentifier: String?) {
         super.init(annotation: annotation, reuseIdentifier: reuseIdentifier)
@@ -35,14 +45,26 @@ final class HomeAnnotationView: MKAnnotationView {
         return imageView
     }()
     
+    @objc
+    private func didTapCalloutButton() {
+        delegate?.didTapCalloutButton(self)
+    }
+    
     private func configure(for annotation: MKAnnotation?) {
         iconView.image = (annotation as? HomePointAnnotation)?.pinIcon
+    }
+    
+    private func setupCalloutButton() {
+        let button = UIButton(type: .detailDisclosure)
+        button.addTarget(self, action: #selector(didTapCalloutButton), for: .touchUpInside)
+        rightCalloutAccessoryView = button
     }
     
     private func setupView() {
         canShowCallout = true
         addSubview(circleView)
         circleView.addSubview(iconView)
+        setupCalloutButton()
     }
     
     private func setupConstraints() {

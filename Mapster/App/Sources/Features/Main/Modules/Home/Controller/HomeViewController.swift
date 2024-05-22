@@ -63,13 +63,17 @@ final class HomeViewController: BaseViewController {
     }
     
     private func setAnnotations(viewModels: [HomeAnnotationViewModel]) {
-        viewModels.enumerated().forEach {
+        mapView.removeAnnotations(mapView.annotations)
+        let annotations = viewModels.enumerated().map { index, viewModel -> HomePointAnnotation in
             let annotation = HomePointAnnotation()
-            annotation.tag = $0
-            annotation.coordinate = $1.coordinates
-            annotation.pinIcon = UIImage(systemName: $1.icon)
-            mapView.addAnnotation(annotation)
+            annotation.tag = index
+            annotation.coordinate = viewModel.coordinates
+            annotation.pinIcon = UIImage(systemName: viewModel.icon)
+            annotation.title = viewModel.title
+            annotation.subtitle = viewModel.subtitle
+            return annotation
         }
+        mapView.addAnnotations(annotations)
     }
     
     private func centerToLocation(_ location: CLLocation,
@@ -157,23 +161,23 @@ extension HomeViewController: Updatable {
 
 extension HomeViewController: MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-        if annotation is MKUserLocation {
-            return nil
-        } else {
-            let identifier = "HomeAnnotation"
-            var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier)
-            if annotationView == nil {
-                annotationView = HomeAnnotationView(annotation: annotation, reuseIdentifier: identifier)
-            } else {
-                annotationView?.annotation = annotation
-            }
-            annotationView!.canShowCallout = true
-            return annotationView
-        }
+        guard !(annotation is MKUserLocation) else { return nil }
+        let annotationView: HomeAnnotationView? = mapView.dequeueReusableAnnotationView(
+            withIdentifier: "HomeAnnotation"
+        ) as? HomeAnnotationView ?? HomeAnnotationView(
+            annotation: annotation,
+            reuseIdentifier: "HomeAnnotation"
+        )
+        annotationView?.delegate = self
+        return annotationView
     }
-    
-    func mapView(_ mapView: MKMapView, didSelect annotation: any MKAnnotation) {
-        guard let tag = (annotation as? HomePointAnnotation)?.tag else { return }
+}
+
+// MARK: - HomeAnnotationViewDelegate
+
+extension HomeViewController: HomeAnnotationViewDelegate {
+    func didTapCalloutButton(_ view: HomeAnnotationView) {
+        guard let tag = (view.annotation as? HomePointAnnotation)?.tag else { return }
         store.handleAction(.didTapAnnotation(index: tag))
     }
 }
