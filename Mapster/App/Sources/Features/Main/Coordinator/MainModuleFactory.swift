@@ -25,8 +25,9 @@ final class MainModuleFactory {
         return viewController
     }
     
-    func makeFavourites(delegate: FavouritesNavigationDelegate) -> FavouritesViewController {
-        let viewController = FavouritesViewController()
+    func makeAdvertisementsList(viewState: AdvertisementsListViewState,
+                                delegate: AdvertisementsListNavigationDelegate) -> AdvertisementsListViewController {
+        let viewController = AdvertisementsListViewController(store: .init(viewState: viewState))
         viewController.navigationDelegate = delegate
         return viewController
     }

@@ -1,5 +1,5 @@
 //
-//  FavouritesTableViewDelegateImpl.swift
+//  AdvertisementsListTableViewDelegateImpl.swift
 //  Mapster
 //
 //  Created by Adilkhan Medeuyev on 27.03.2024.
@@ -7,16 +7,16 @@
 
 import UIKit
 
-final class FavouritesTableViewDelegateImpl: NSObject {
-    var rows: [FavouritesRows] = []
-    private let store: FavouritesStore
+final class AdvertisementsListTableViewDelegateImpl: NSObject {
+    var rows: [AdvertisementsListRows] = []
+    private let store: AdvertisementsListStore
 
-    init(store: FavouritesStore) {
+    init(store: AdvertisementsListStore) {
         self.store = store
     }
 }
 
-extension FavouritesTableViewDelegateImpl: UITableViewDelegate {
+extension AdvertisementsListTableViewDelegateImpl: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         store.handleAction(.didSelectRow(row: rows[indexPath.row]))
@@ -28,7 +28,7 @@ extension FavouritesTableViewDelegateImpl: UITableViewDelegate {
             guard let cell = cell as? TitleCell else { return }
             cell.configure(title: text)
         case let .advertisement(advertisement):
-            guard let cell = cell as? FavouritesCell else { return }
+            guard let cell = cell as? AdvertisementsListCell else { return }
             cell.configure(with: .init(advertisement: advertisement))
         default:
             break

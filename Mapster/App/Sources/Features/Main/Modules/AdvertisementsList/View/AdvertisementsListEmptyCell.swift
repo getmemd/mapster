@@ -1,5 +1,5 @@
 //
-//  FavouritesEmptyCell.swift
+//  AdvertisementsListEmptyCell.swift
 //  Mapster
 //
 //  Created by Adilkhan Medeuyev on 27.03.2024.
@@ -7,10 +7,10 @@
 
 import UIKit
 
-final class FavouritesEmptyCell: UITableViewCell {
-    private let favouritesImageView: UIImageView = {
+final class AdvertisementsListEmptyCell: UITableViewCell {
+    private let iconImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = .init(named: "favourites-empty")
+        imageView.contentMode = .scaleAspectFit
         return imageView
     }()
     
@@ -23,9 +23,8 @@ final class FavouritesEmptyCell: UITableViewCell {
         return label
     }()
     
-    private let descriptionLabel: UILabel = {
+    private let subtitleLabel: UILabel = {
         let label = UILabel()
-        label.text = "Сохраняйте объявления, которые вас заинтересовало, и мы сохраним его здесь."
         label.font = Font.mulish(name: .regular, size: 14)
         label.textAlignment = .center
         label.numberOfLines = 0
@@ -42,20 +41,26 @@ final class FavouritesEmptyCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    func configure(with cellModel: AdvertisementsListEmptyCellModel) {
+        iconImageView.image = .init(named: cellModel.iconName)
+        titleLabel.text = cellModel.title
+        subtitleLabel.text = cellModel.subtitle
+    }
+    
     private func setupViews() {
         backgroundColor = .clear
-        [favouritesImageView, titleLabel, descriptionLabel].forEach { contentView.addSubview($0) }
+        [iconImageView, titleLabel, subtitleLabel].forEach { contentView.addSubview($0) }
     }
 
     private func setupConstraints() {
-        favouritesImageView.snp.makeConstraints {
+        iconImageView.snp.makeConstraints {
             $0.top.leading.trailing.equalToSuperview().inset(24)
         }
         titleLabel.snp.makeConstraints {
-            $0.top.equalTo(favouritesImageView.snp.bottom).offset(24)
+            $0.top.equalTo(iconImageView.snp.bottom).offset(24)
             $0.leading.trailing.equalToSuperview().inset(24)
         }
-        descriptionLabel.snp.makeConstraints {
+        subtitleLabel.snp.makeConstraints {
             $0.top.equalTo(titleLabel.snp.bottom).offset(20)
             $0.leading.trailing.bottom.equalToSuperview().inset(24)
         }

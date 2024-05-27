@@ -12,6 +12,8 @@ struct ProfileCellModel: TableViewItemCellModel {
         switch row {
         case .editProfile:
             return "Редактировать профиль"
+        case .myAdvertisements:
+            return "Мои объявления"
         case .policy:
             return "Политика конфиденциальности"
         case .faq:

@@ -6,6 +6,7 @@
 //
 
 import Factory
+import Firebase
 import Foundation
 
 enum UserRepositoryError: Error {
@@ -31,22 +32,30 @@ final class UserRepository {
     }
     
     func getUser(uid: String) async throws -> AppUser {
-        let usersRef = db.collection("users")
-        let query = usersRef.whereField("uid", isEqualTo: uid)
-        let snapshot = try await query.getDocuments()
-        guard let data = snapshot.documents.first?.data(), let user = AppUser(data: data) else {
+        let document = try await getUserDocument(uid: uid)
+        guard let user = AppUser(data: document.data()) else {
             throw UserRepositoryError.unableToConvertUser
         }
         return user
     }
     
     func editUser(uid: String, phoneNumber: String) async throws {
+        let document = try await getUserDocument(uid: uid)
+        try await document.reference.updateData(["phoneNumber": phoneNumber])
+    }
+    
+    func editFavourites(uid: String, favouriteAdvertisementsIds: [String]) async throws {
+        let document = try await getUserDocument(uid: uid)
+        try await document.reference.updateData(["favouriteAdvertisementsIds": favouriteAdvertisementsIds])
+    }
+    
+    private func getUserDocument(uid: String) async throws -> QueryDocumentSnapshot {
         let usersRef = db.collection("users")
         let query = usersRef.whereField("uid", isEqualTo: uid)
         let snapshot = try await query.getDocuments()
         guard let document = snapshot.documents.first else {
             throw UserRepositoryError.userNotFound
         }
-        try await document.reference.updateData(["phoneNumber": phoneNumber])
+        return document
     }
 }

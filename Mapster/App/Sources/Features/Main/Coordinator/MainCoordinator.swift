@@ -31,7 +31,7 @@ final class MainCoordinator: Coordinator {
         searchModule.tabBarItem = .init(title: "Поиск", image: .init(named: "search"), tag: 1)
         let createModule = moduleFactory.makeCreate(delegate: self)
         createModule.tabBarItem = .init(title: "Создать", image: .init(named: "create"), tag: 2)
-        let favouriteModule = moduleFactory.makeFavourites(delegate: self)
+        let favouriteModule = moduleFactory.makeAdvertisementsList(viewState: .favourites, delegate: self)
         favouriteModule.tabBarItem = .init(title: "Избранные", image: .init(named: "bookmark"), tag: 3)
         let profileModule = moduleFactory.makeProfile(delegate: self)
         profileModule.tabBarItem = .init(title: "Профиль", image: .init(named: "profile"), tag: 4)
@@ -55,6 +55,19 @@ final class MainCoordinator: Coordinator {
         let module = moduleFactory.makeProfileEdit(delegate: self)
         router.push(module)
     }
+    
+    private func showMyAdvertisements() {
+        let module = moduleFactory.makeAdvertisementsList(viewState: .myAdvertisements, delegate: self)
+        router.push(module)
+    }
+    
+    private func updateData() {
+        guard let container = router.navigationController.viewControllers
+            .compactMap({ $0 as? ContainerController }).first,
+              let viewControllers = container.viewControllers?
+            .compactMap({ $0 as? Updatable }) else { return }
+        viewControllers.forEach { $0.refreshData() }
+    }
 }
 
 // MARK: - HomeNavigationDelegate
@@ -65,11 +78,15 @@ extension MainCoordinator: HomeNavigationDelegate {
     }
 }
 
-// MARK: - FavouritesNavigationDelegate
+// MARK: - AdvertisementsListNavigationDelegate
 
-extension MainCoordinator: FavouritesNavigationDelegate {
-    func didTapAdvertisement(_ viewController: FavouritesViewController, advertisement: Advertisement) {
+extension MainCoordinator: AdvertisementsListNavigationDelegate {
+    func didTapAdvertisement(_ viewController: AdvertisementsListViewController, advertisement: Advertisement) {
         showAdvertisement(advertisement: advertisement)
+    }
+    
+    func didDeleteAdvertisement(_ viewController: AdvertisementsListViewController) {
+        updateData()
     }
 }
 
@@ -84,8 +101,15 @@ extension MainCoordinator: SearchNavigationDelegate {
 // MARK: - ProfileNavigationDelegate
 
 extension MainCoordinator: ProfileNavigationDelegate {
-    func didTapEdit(_ viewController: ProfileViewController) {
-        showProfileEdit()
+    func didTapRow(_ viewController: ProfileViewController, row: ProfileRows) {
+        switch row {
+        case .editProfile:
+            showProfileEdit()
+        case .myAdvertisements:
+            showMyAdvertisements()
+        default:
+            return
+        }
     }
     
     func didSignOut(_ viewController: ProfileViewController) {
@@ -101,11 +125,7 @@ extension MainCoordinator: CreateNavigationDelegate {
     }
     
     func didCreateAdvertisement(_ viewController: CreateViewController) {
-        guard let container = router.navigationController.viewControllers
-            .compactMap({ $0 as? ContainerController }).first,
-              let viewControllers = container.viewControllers?
-            .compactMap({ $0 as? Updatable }) else { return }
-        viewControllers.forEach { $0.refreshData() }
+        updateData()
     }
 }
 
@@ -122,7 +142,6 @@ extension MainCoordinator: MapNavigationDelegate {
         }
     }
 }
-
 
 // MARK: - AdvertisementNavigationDelegate
 

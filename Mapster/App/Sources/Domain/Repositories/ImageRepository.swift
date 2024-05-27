@@ -5,12 +5,14 @@
 //  Created by Adilkhan Medeuyev on 05.04.2024.
 //
 
+import Factory
 import Foundation
-import FirebaseStorage
 
 final class ImageRepository {
+    @Injected(\.storage) private var storage
+    
     func uploadImages(imagesData: [Data], completion: @escaping (Result<[URL], Error>) -> Void) {
-        let storageRef = Storage.storage().reference()
+        let storageRef = storage.reference()
         let dispatchGroup = DispatchGroup()
         var urls = [URL]()
         var errors = [Error]()

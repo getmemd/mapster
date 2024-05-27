@@ -28,7 +28,7 @@ extension ProfileTableViewDataSourceImpl: UITableViewDataSource {
             let cell: ProfileCell = tableView.dequeueReusableCell(for: indexPath)
             cell.configure(name: name, phoneNumber: phoneNumber)
             return cell
-        case .editProfile, .faq, .policy, .signOut:   
+        case .editProfile, .myAdvertisements, .faq, .policy, .signOut:   
             let cell: TableViewItemCell = tableView.dequeueReusableCell(for: indexPath)
             return cell
         }

@@ -5,7 +5,7 @@
 //  Created by Adilkhan Medeuyev on 27.03.2024.
 //
 
-import Foundation
+import Factory
 
 enum SearchEvent {
     case rows(cellModels: [SearchCellModel])
@@ -17,6 +17,7 @@ enum SearchAction {
 }
 
 final class SearchStore: Store<SearchEvent, SearchAction> {
+    @Injected(\Repositories.advertisementRepository) private var advertisementRepository
     var searchText: String = ""
     
     override func handleAction(_ action: SearchAction) {

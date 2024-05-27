@@ -8,7 +8,7 @@
 import UIKit
 
 protocol ProfileNavigationDelegate: AnyObject {
-    func didTapEdit(_ viewController: ProfileViewController)
+    func didTapRow(_ viewController: ProfileViewController, row: ProfileRows)
     func didSignOut(_ viewController: ProfileViewController)
 }
 
@@ -58,8 +58,8 @@ final class ProfileViewController: BaseViewController {
                 navigationDelegate?.didSignOut(self)
             case let .showError(message):
                 showAlert(message: message)
-            case .editProfileTapped:
-                navigationDelegate?.didTapEdit(self)
+            case let .rowTapped(row):
+                navigationDelegate?.didTapRow(self, row: row)
             }
         }
         .store(in: &bag)

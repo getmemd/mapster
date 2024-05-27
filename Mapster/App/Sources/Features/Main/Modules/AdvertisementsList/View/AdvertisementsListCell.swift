@@ -1,5 +1,5 @@
 //
-//  FavouritesCell.swift
+//  AdvertisementsListCell.swift
 //  Mapster
 //
 //  Created by Adilkhan Medeuyev on 27.03.2024.
@@ -8,7 +8,7 @@
 import Kingfisher
 import UIKit
 
-final class FavouritesCell: UITableViewCell {
+final class AdvertisementsListCell: UITableViewCell {
     private let contentBackgroundView: UIView = {
         let view = UIView()
         view.layer.cornerRadius = 10
@@ -57,7 +57,7 @@ final class FavouritesCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configure(with cellModel: FavouritesCellModel) {
+    func configure(with cellModel: AdvertisementsListCellModel) {
         titleLabel.text = cellModel.title
         priceLabel.text = cellModel.priceFormatted
         descriptionLabel.text = cellModel.description

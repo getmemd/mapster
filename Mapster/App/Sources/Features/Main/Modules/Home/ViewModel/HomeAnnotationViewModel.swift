@@ -21,7 +21,7 @@ struct HomeAnnotationViewModel {
     }
     
     var subtitle: String {
-        advertisement.description
+        advertisement.price.formatAsCurrency()
     }
     
     private var advertisement: Advertisement

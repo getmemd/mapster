@@ -1,5 +1,5 @@
 //
-//  FavouritesTableViewDataSourceImpl.swift
+//  AdvertisementsListTableViewDataSourceImpl.swift
 //  Mapster
 //
 //  Created by Adilkhan Medeuyev on 27.03.2024.
@@ -7,16 +7,16 @@
 
 import UIKit
 
-final class FavouritesTableViewDataSourceImpl: NSObject {
-    var rows: [FavouritesRows] = []
-    private let store: FavouritesStore
+final class AdvertisementsListTableViewDataSourceImpl: NSObject {
+    var rows: [AdvertisementsListRows] = []
+    private let store: AdvertisementsListStore
 
-    init(store: FavouritesStore) {
+    init(store: AdvertisementsListStore) {
         self.store = store
     }
 }
 
-extension FavouritesTableViewDataSourceImpl: UITableViewDataSource {
+extension AdvertisementsListTableViewDataSourceImpl: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         rows.count
     }
@@ -26,11 +26,12 @@ extension FavouritesTableViewDataSourceImpl: UITableViewDataSource {
         case .title:
             let cell: TitleCell = tableView.dequeueReusableCell(for: indexPath)
             return cell
-        case .empty:
-            let cell: FavouritesEmptyCell = tableView.dequeueReusableCell(for: indexPath)
+        case let .empty(viewState):
+            let cell: AdvertisementsListEmptyCell = tableView.dequeueReusableCell(for: indexPath)
+            cell.configure(with: .init(viewState: viewState))
             return cell
         case .advertisement:
-            let cell: FavouritesCell = tableView.dequeueReusableCell(for: indexPath)
+            let cell: AdvertisementsListCell = tableView.dequeueReusableCell(for: indexPath)
             return cell
         }
     }
@@ -38,8 +39,6 @@ extension FavouritesTableViewDataSourceImpl: UITableViewDataSource {
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             store.handleAction(.didDeleteRow(index: indexPath.row - 1))
-            rows.remove(at: indexPath.row)
-            tableView.deleteRows(at: [indexPath], with: .fade)
         }
     }
     

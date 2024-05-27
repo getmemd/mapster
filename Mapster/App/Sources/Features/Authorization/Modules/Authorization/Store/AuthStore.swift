@@ -53,7 +53,7 @@ final class AuthStore: Store<AuthEvent, AuthAction> {
                         try await userRepository.createUser(user:
                                 .init(uid: uid,
                                       phoneNumber: phoneNumber,
-                                      favouriteAdvertisements: [])
+                                      favouriteAdvertisementsIds: [])
                         )
                     }
                     try await sendEmailVerifcation()

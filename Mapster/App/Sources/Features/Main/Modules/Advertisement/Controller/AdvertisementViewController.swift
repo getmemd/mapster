@@ -45,6 +45,20 @@ final class AdvertisementViewController: BaseViewController {
         store.handleAction(.viewDidLoad)
     }
     
+    @objc
+    private func favouriteDidTap() {
+        store.sendAction(.favouriteDidTap)
+    }
+    
+    private func configureRightBarButton(isFavourite: Bool) {
+        navigationItem.rightBarButtonItem = UIBarButtonItem(
+            image: .init(systemName: isFavourite ? "heart.fill" : "heart"),
+            style: .plain,
+            target: self,
+            action: #selector(favouriteDidTap)
+        )
+    }
+    
     private func openInMap(mapType: MapType, latitude: Double, longitude: Double) {
         var link: String
         switch mapType {
@@ -69,6 +83,14 @@ final class AdvertisementViewController: BaseViewController {
             case let .rows(rows):
                 tableViewDataSourceImpl.rows = rows
                 tableView.reloadData()
+            case let .showError(message):
+                showAlert(message: message)
+            case .loading:
+                ProgressHud.startAnimating()
+            case .loadingFinished:
+                ProgressHud.stopAnimating()
+            case let .userLoaded(isFavourite):
+                configureRightBarButton(isFavourite: isFavourite)
             case let .openInMap(mapType, latitude, longitude):
                 openInMap(mapType: mapType, latitude: latitude, longitude: longitude)
             case let .callByPhone(phoneNumber):
@@ -81,6 +103,7 @@ final class AdvertisementViewController: BaseViewController {
     private func setupViews() {
         view.addSubview(tableView)
         view.backgroundColor = .white
+        configureRightBarButton(isFavourite: false)
     }
     
     private func setupConstraints() {

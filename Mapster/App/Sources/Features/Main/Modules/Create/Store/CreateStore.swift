@@ -52,7 +52,6 @@ final class CreateStore: Store<CreateEvent, CreateAction> {
     override func handleAction(_ action: CreateAction) {
         switch action {
         case .viewDidLoad:
-            sendEvent(.showToast(message: "Тестовый тост"))
             configureRows()
         case .didTapAddPhoto:
             sendEvent(.showImagePicker)
@@ -79,6 +78,13 @@ final class CreateStore: Store<CreateEvent, CreateAction> {
             data.geopoint = .init(latitude: latitude, longitude: longitude)
             configureRows()
         case .didTapAction:
+            guard data.headline != nil,
+                  data.description != nil,
+                  data.address != nil,
+                  data.geopoint != nil else {
+                sendEvent(.showError(message: "Заполните все поля"))
+                return
+            }
             uploadImages()
         case let .didPickCategory(category):
             data.category = category

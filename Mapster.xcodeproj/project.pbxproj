@@ -35,6 +35,7 @@
 		C53BB3192BFBDDE400C09F9D /* ProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C53BB3182BFBDDE400C09F9D /* ProfileCell.swift */; };
 		C53BB31C2BFBFB5900C09F9D /* CreateStoreDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C53BB31B2BFBFB5900C09F9D /* CreateStoreDataModel.swift */; };
 		C53BB31F2BFC0DBF00C09F9D /* Updatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C53BB31E2BFC0DBF00C09F9D /* Updatable.swift */; };
+		C53BB3232BFEC33400C09F9D /* AdvertisementsListEmptyCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C53BB3222BFEC33400C09F9D /* AdvertisementsListEmptyCellModel.swift */; };
 		C53BD2592B7E217D0078D28E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C53BD2582B7E217D0078D28E /* AppDelegate.swift */; };
 		C53BD2622B7E217F0078D28E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C53BD2612B7E217F0078D28E /* Assets.xcassets */; };
 		C53BD2652B7E217F0078D28E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C53BD2632B7E217F0078D28E /* LaunchScreen.storyboard */; };
@@ -81,14 +82,14 @@
 		C5CFAFBB2BEDB68900A77371 /* HomeAnnotationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5CFAFBA2BEDB68900A77371 /* HomeAnnotationViewModel.swift */; };
 		C5D9DCDB2B8B3842000B010C /* PasswordResetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5D9DCDA2B8B3842000B010C /* PasswordResetViewController.swift */; };
 		C5D9DCDD2B8B3D36000B010C /* ValidatationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5D9DCDC2B8B3D36000B010C /* ValidatationService.swift */; };
-		C5E472252BB36C63002AA59B /* FavouritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5E472242BB36C63002AA59B /* FavouritesViewController.swift */; };
-		C5E472272BB36D4F002AA59B /* FavouritesTableViewDataSourceImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5E472262BB36D4F002AA59B /* FavouritesTableViewDataSourceImpl.swift */; };
-		C5E472292BB36D5F002AA59B /* FavouritesTableViewDelegateImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5E472282BB36D5F002AA59B /* FavouritesTableViewDelegateImpl.swift */; };
-		C5E4722C2BB36DD7002AA59B /* FavouritesStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5E4722B2BB36DD7002AA59B /* FavouritesStore.swift */; };
-		C5E4722F2BB36ECF002AA59B /* FavouritesEmptyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5E4722E2BB36ECF002AA59B /* FavouritesEmptyCell.swift */; };
-		C5E472312BB370E5002AA59B /* FavouritesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5E472302BB370E5002AA59B /* FavouritesCell.swift */; };
+		C5E472252BB36C63002AA59B /* AdvertisementsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5E472242BB36C63002AA59B /* AdvertisementsListViewController.swift */; };
+		C5E472272BB36D4F002AA59B /* AdvertisementsListTableViewDataSourceImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5E472262BB36D4F002AA59B /* AdvertisementsListTableViewDataSourceImpl.swift */; };
+		C5E472292BB36D5F002AA59B /* AdvertisementsListTableViewDelegateImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5E472282BB36D5F002AA59B /* AdvertisementsListTableViewDelegateImpl.swift */; };
+		C5E4722C2BB36DD7002AA59B /* AdvertisementsListStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5E4722B2BB36DD7002AA59B /* AdvertisementsListStore.swift */; };
+		C5E4722F2BB36ECF002AA59B /* AdvertisementsListEmptyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5E4722E2BB36ECF002AA59B /* AdvertisementsListEmptyCell.swift */; };
+		C5E472312BB370E5002AA59B /* AdvertisementsListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5E472302BB370E5002AA59B /* AdvertisementsListCell.swift */; };
 		C5E472332BB41438002AA59B /* UITableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5E472322BB41438002AA59B /* UITableView.swift */; };
-		C5E472362BB4150A002AA59B /* FavouritesCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5E472352BB4150A002AA59B /* FavouritesCellModel.swift */; };
+		C5E472362BB4150A002AA59B /* AdvertisementsListCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5E472352BB4150A002AA59B /* AdvertisementsListCellModel.swift */; };
 		C5E472382BB41551002AA59B /* Double+NumberFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5E472372BB41551002AA59B /* Double+NumberFormatter.swift */; };
 		C5E4723C2BB418C0002AA59B /* Advertisement.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5E4723B2BB418C0002AA59B /* Advertisement.swift */; };
 		C5EF99D62BBB297400312987 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = C5EF99D52BBB297400312987 /* FirebaseFirestore */; };
@@ -148,6 +149,7 @@
 		C53BB3182BFBDDE400C09F9D /* ProfileCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCell.swift; sourceTree = "<group>"; };
 		C53BB31B2BFBFB5900C09F9D /* CreateStoreDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateStoreDataModel.swift; sourceTree = "<group>"; };
 		C53BB31E2BFC0DBF00C09F9D /* Updatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Updatable.swift; sourceTree = "<group>"; };
+		C53BB3222BFEC33400C09F9D /* AdvertisementsListEmptyCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdvertisementsListEmptyCellModel.swift; sourceTree = "<group>"; };
 		C53BD2552B7E217D0078D28E /* Mapster.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Mapster.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C53BD2582B7E217D0078D28E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C53BD2612B7E217F0078D28E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -194,14 +196,14 @@
 		C5CFAFBA2BEDB68900A77371 /* HomeAnnotationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeAnnotationViewModel.swift; sourceTree = "<group>"; };
 		C5D9DCDA2B8B3842000B010C /* PasswordResetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordResetViewController.swift; sourceTree = "<group>"; };
 		C5D9DCDC2B8B3D36000B010C /* ValidatationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidatationService.swift; sourceTree = "<group>"; };
-		C5E472242BB36C63002AA59B /* FavouritesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouritesViewController.swift; sourceTree = "<group>"; };
-		C5E472262BB36D4F002AA59B /* FavouritesTableViewDataSourceImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouritesTableViewDataSourceImpl.swift; sourceTree = "<group>"; };
-		C5E472282BB36D5F002AA59B /* FavouritesTableViewDelegateImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouritesTableViewDelegateImpl.swift; sourceTree = "<group>"; };
-		C5E4722B2BB36DD7002AA59B /* FavouritesStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouritesStore.swift; sourceTree = "<group>"; };
-		C5E4722E2BB36ECF002AA59B /* FavouritesEmptyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouritesEmptyCell.swift; sourceTree = "<group>"; };
-		C5E472302BB370E5002AA59B /* FavouritesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouritesCell.swift; sourceTree = "<group>"; };
+		C5E472242BB36C63002AA59B /* AdvertisementsListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdvertisementsListViewController.swift; sourceTree = "<group>"; };
+		C5E472262BB36D4F002AA59B /* AdvertisementsListTableViewDataSourceImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdvertisementsListTableViewDataSourceImpl.swift; sourceTree = "<group>"; };
+		C5E472282BB36D5F002AA59B /* AdvertisementsListTableViewDelegateImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdvertisementsListTableViewDelegateImpl.swift; sourceTree = "<group>"; };
+		C5E4722B2BB36DD7002AA59B /* AdvertisementsListStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdvertisementsListStore.swift; sourceTree = "<group>"; };
+		C5E4722E2BB36ECF002AA59B /* AdvertisementsListEmptyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdvertisementsListEmptyCell.swift; sourceTree = "<group>"; };
+		C5E472302BB370E5002AA59B /* AdvertisementsListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdvertisementsListCell.swift; sourceTree = "<group>"; };
 		C5E472322BB41438002AA59B /* UITableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITableView.swift; sourceTree = "<group>"; };
-		C5E472352BB4150A002AA59B /* FavouritesCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouritesCellModel.swift; sourceTree = "<group>"; };
+		C5E472352BB4150A002AA59B /* AdvertisementsListCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdvertisementsListCellModel.swift; sourceTree = "<group>"; };
 		C5E472372BB41551002AA59B /* Double+NumberFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+NumberFormatter.swift"; sourceTree = "<group>"; };
 		C5E4723B2BB418C0002AA59B /* Advertisement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Advertisement.swift; sourceTree = "<group>"; };
 		C5EF99D72BBB2B2600312987 /* AdvertisementRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdvertisementRepository.swift; sourceTree = "<group>"; };
@@ -711,7 +713,7 @@
 				C566A4412BE9807D00E84262 /* Advertisement */,
 				C58190912B8CD1E5001BE36E /* Container */,
 				C5EF99FF2BC1F2A600312987 /* Create */,
-				C5E472212BB36C33002AA59B /* Favourites */,
+				C5E472212BB36C33002AA59B /* AdvertisementsList */,
 				C58190922B8CD26F001BE36E /* Home */,
 				C5EF9A1D2BC33E8900312987 /* Map */,
 				C5EF99E52BBFDD8A00312987 /* Profile */,
@@ -806,7 +808,7 @@
 			path = Controller;
 			sourceTree = "<group>";
 		};
-		C5E472212BB36C33002AA59B /* Favourites */ = {
+		C5E472212BB36C33002AA59B /* AdvertisementsList */ = {
 			isa = PBXGroup;
 			children = (
 				C5E472222BB36C3B002AA59B /* Controller */,
@@ -814,13 +816,13 @@
 				C5E4722D2BB36EB8002AA59B /* View */,
 				C5E472342BB414F9002AA59B /* ViewModel */,
 			);
-			path = Favourites;
+			path = AdvertisementsList;
 			sourceTree = "<group>";
 		};
 		C5E472222BB36C3B002AA59B /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				C5E472242BB36C63002AA59B /* FavouritesViewController.swift */,
+				C5E472242BB36C63002AA59B /* AdvertisementsListViewController.swift */,
 				C5E472232BB36C42002AA59B /* TableView */,
 			);
 			path = Controller;
@@ -829,8 +831,8 @@
 		C5E472232BB36C42002AA59B /* TableView */ = {
 			isa = PBXGroup;
 			children = (
-				C5E472262BB36D4F002AA59B /* FavouritesTableViewDataSourceImpl.swift */,
-				C5E472282BB36D5F002AA59B /* FavouritesTableViewDelegateImpl.swift */,
+				C5E472262BB36D4F002AA59B /* AdvertisementsListTableViewDataSourceImpl.swift */,
+				C5E472282BB36D5F002AA59B /* AdvertisementsListTableViewDelegateImpl.swift */,
 			);
 			path = TableView;
 			sourceTree = "<group>";
@@ -838,7 +840,7 @@
 		C5E4722A2BB36DC6002AA59B /* Store */ = {
 			isa = PBXGroup;
 			children = (
-				C5E4722B2BB36DD7002AA59B /* FavouritesStore.swift */,
+				C5E4722B2BB36DD7002AA59B /* AdvertisementsListStore.swift */,
 			);
 			path = Store;
 			sourceTree = "<group>";
@@ -846,8 +848,8 @@
 		C5E4722D2BB36EB8002AA59B /* View */ = {
 			isa = PBXGroup;
 			children = (
-				C5E472302BB370E5002AA59B /* FavouritesCell.swift */,
-				C5E4722E2BB36ECF002AA59B /* FavouritesEmptyCell.swift */,
+				C5E472302BB370E5002AA59B /* AdvertisementsListCell.swift */,
+				C5E4722E2BB36ECF002AA59B /* AdvertisementsListEmptyCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -855,7 +857,8 @@
 		C5E472342BB414F9002AA59B /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				C5E472352BB4150A002AA59B /* FavouritesCellModel.swift */,
+				C5E472352BB4150A002AA59B /* AdvertisementsListCellModel.swift */,
+				C53BB3222BFEC33400C09F9D /* AdvertisementsListEmptyCellModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -1150,13 +1153,13 @@
 			files = (
 				C5EF99F12BBFF09600312987 /* ProfileTableViewDataSourceImpl.swift in Sources */,
 				C53BB3162BFBB82200C09F9D /* ProfileEditStore.swift in Sources */,
-				C5E472252BB36C63002AA59B /* FavouritesViewController.swift in Sources */,
+				C5E472252BB36C63002AA59B /* AdvertisementsListViewController.swift in Sources */,
 				C58190952B8CD27B001BE36E /* HomeViewController.swift in Sources */,
 				C5105F372BB49311000D5B28 /* Collection+Safe.swift in Sources */,
 				C54B03032BED916C00740895 /* UIColor.swift in Sources */,
 				C5105F2B2BB4806F000D5B28 /* SearchTableViewDataSourceImpl.swift in Sources */,
 				C5142E0B2B83624800384411 /* AuthorizationCheckoxViewModel.swift in Sources */,
-				C5E4722F2BB36ECF002AA59B /* FavouritesEmptyCell.swift in Sources */,
+				C5E4722F2BB36ECF002AA59B /* AdvertisementsListEmptyCell.swift in Sources */,
 				C5CFAFBB2BEDB68900A77371 /* HomeAnnotationViewModel.swift in Sources */,
 				C5EF9A142BC2B8AF00312987 /* CreatePhotoView.swift in Sources */,
 				C53BD2752B7E24E30078D28E /* AppCoordinator.swift in Sources */,
@@ -1172,8 +1175,8 @@
 				C5F55BC12B87D9810053D5BB /* OTPTextField.swift in Sources */,
 				C575233E2B98F95A00ECCDE3 /* Repositories.swift in Sources */,
 				C5105F302BB481B6000D5B28 /* SearchStore.swift in Sources */,
-				C5E472362BB4150A002AA59B /* FavouritesCellModel.swift in Sources */,
-				C5E472272BB36D4F002AA59B /* FavouritesTableViewDataSourceImpl.swift in Sources */,
+				C5E472362BB4150A002AA59B /* AdvertisementsListCellModel.swift in Sources */,
+				C5E472272BB36D4F002AA59B /* AdvertisementsListTableViewDataSourceImpl.swift in Sources */,
 				C5EF9A122BC2A8F800312987 /* CreatePhotoEmptyView.swift in Sources */,
 				C575232E2B98EEEB00ECCDE3 /* Store.swift in Sources */,
 				C5CFAFB42BEDB14A00A77371 /* HomeAnnotationView.swift in Sources */,
@@ -1218,19 +1221,20 @@
 				C53BD2872B7E2EE80078D28E /* OnboardingView.swift in Sources */,
 				C50597AE2B821C9D0058B519 /* AuthorizationModuleFactory.swift in Sources */,
 				C511A82B2B81246B002DB0E4 /* OnboardingCoordinator.swift in Sources */,
+				C53BB3232BFEC33400C09F9D /* AdvertisementsListEmptyCellModel.swift in Sources */,
 				C57523362B98F65900ECCDE3 /* AuthRepository.swift in Sources */,
 				C58190902B8CCDA6001BE36E /* MainModuleFactory.swift in Sources */,
 				C566A4492BE980B900E84262 /* AdvertisementStore.swift in Sources */,
 				C5EF99D82BBB2B2600312987 /* AdvertisementRepository.swift in Sources */,
 				C5EF99EB2BBFDE4000312987 /* ProfileViewController.swift in Sources */,
-				C5E4722C2BB36DD7002AA59B /* FavouritesStore.swift in Sources */,
+				C5E4722C2BB36DD7002AA59B /* AdvertisementsListStore.swift in Sources */,
 				C53BB31C2BFBFB5900C09F9D /* CreateStoreDataModel.swift in Sources */,
 				C5105F292BB4805C000D5B28 /* SearchViewController.swift in Sources */,
 				C5CFAFB82BEDB5DB00A77371 /* HomePointAnnotation.swift in Sources */,
 				C53BB3142BFBB7E900C09F9D /* ProfileEditViewController.swift in Sources */,
 				C5105F332BB48259000D5B28 /* TableViewItemCellModel.swift in Sources */,
 				C5105F2D2BB48167000D5B28 /* SearchTableViewDelegateImpl.swift in Sources */,
-				C5E472312BB370E5002AA59B /* FavouritesCell.swift in Sources */,
+				C5E472312BB370E5002AA59B /* AdvertisementsListCell.swift in Sources */,
 				C57523292B98EE8A00ECCDE3 /* AuthStore.swift in Sources */,
 				C575232D2B98EEEB00ECCDE3 /* UIViewController+bindStore.swift in Sources */,
 				C5E472382BB41551002AA59B /* Double+NumberFormatter.swift in Sources */,
@@ -1239,7 +1243,7 @@
 				C5EF9A0C2BC1F84300312987 /* CreateTableViewDataSourceImpl.swift in Sources */,
 				C50597AC2B821C240058B519 /* AuthorizationViewController.swift in Sources */,
 				C573A5CA2BEA9569007AD64E /* ProgressHud.swift in Sources */,
-				C5E472292BB36D5F002AA59B /* FavouritesTableViewDelegateImpl.swift in Sources */,
+				C5E472292BB36D5F002AA59B /* AdvertisementsListTableViewDelegateImpl.swift in Sources */,
 				C57523312B98EF2600ECCDE3 /* Bag.swift in Sources */,
 				C5105F352BB482A4000D5B28 /* TableViewItemCell.swift in Sources */,
 				C5E472332BB41438002AA59B /* UITableView.swift in Sources */,

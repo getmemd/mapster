@@ -14,7 +14,7 @@ enum ProfileEvent {
     case rows(rows: [ProfileRows])
     case signOutCompleted
     case showError(message: String)
-    case editProfileTapped
+    case rowTapped(row: ProfileRows)
 }
 
 enum ProfileAction {
@@ -25,6 +25,7 @@ enum ProfileAction {
 enum ProfileRows {
     case info(name: String?, phoneNumber: String?)
     case editProfile
+    case myAdvertisements
     case policy
     case faq
     case signOut
@@ -41,12 +42,10 @@ final class ProfileStore: Store<ProfileEvent, ProfileAction> {
             getUser()
         case let .didSelectRow(row):
             switch row {
-            case .editProfile:
-                sendEvent(.editProfileTapped)
             case .signOut:
                 signOut()
             default:
-                break
+                sendEvent(.rowTapped(row: row))
             }
         }
     }
@@ -81,6 +80,7 @@ final class ProfileStore: Store<ProfileEvent, ProfileAction> {
         sendEvent(.rows(rows: [.info(name: Auth.auth().currentUser?.displayName,
                                      phoneNumber: phoneNumber),
                                .editProfile,
+                               .myAdvertisements,
                                .policy,
                                .faq,
                                .signOut]))

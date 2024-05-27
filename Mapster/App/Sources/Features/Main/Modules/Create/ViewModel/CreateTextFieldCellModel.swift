@@ -17,7 +17,7 @@ struct CreateTextFieldCellModel {
         case .address:
             return "Адрес"
         case .category:
-            return "Категория"
+            return "Категория*"
         default:
             return nil
         }

@@ -10,12 +10,12 @@ import Foundation
 struct AppUser {
     let uid: String
     let phoneNumber: String
-    let favouriteAdvertisementsIds: [String]
+    var favouriteAdvertisementsIds: [String]
     
-    init(uid: String, phoneNumber: String, favouriteAdvertisements: [String]) {
+    init(uid: String, phoneNumber: String, favouriteAdvertisementsIds: [String]) {
         self.uid = uid
         self.phoneNumber = phoneNumber
-        self.favouriteAdvertisementsIds = favouriteAdvertisements
+        self.favouriteAdvertisementsIds = favouriteAdvertisementsIds
     }
     
     init?(data: [String: Any]) {
@@ -23,7 +23,7 @@ struct AppUser {
               let phoneNumber = data["phoneNumber"] as? String else { return nil }
         self.init(uid: uid,
                   phoneNumber: phoneNumber,
-                  favouriteAdvertisements: data["favouriteAdvertisements"] as? [String] ?? [])
+                  favouriteAdvertisementsIds: data["favouriteAdvertisementsIds"] as? [String] ?? [])
     }
     
     var dictionary: [String: Any] {
