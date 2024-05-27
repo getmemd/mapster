@@ -27,7 +27,7 @@ final class MainCoordinator: Coordinator {
     
     private func showTabBar() {
         let homeModule = moduleFactory.makeHome(delegate: self)
-        let searchModule = moduleFactory.makeSearch(delegate: self)
+        let searchModule = moduleFactory.makeSearch(delegate: self, viewState: .category, category: nil)
         searchModule.tabBarItem = .init(title: "Поиск", image: .init(named: "search"), tag: 1)
         let createModule = moduleFactory.makeCreate(delegate: self)
         createModule.tabBarItem = .init(title: "Создать", image: .init(named: "create"), tag: 2)
@@ -58,6 +58,11 @@ final class MainCoordinator: Coordinator {
     
     private func showMyAdvertisements() {
         let module = moduleFactory.makeAdvertisementsList(viewState: .myAdvertisements, delegate: self)
+        router.push(module)
+    }
+    
+    private func showSearch(category: AdvertisementCategory) {
+        let module = moduleFactory.makeSearch(delegate: self, viewState: .advertisements, category: category)
         router.push(module)
     }
     
@@ -93,6 +98,10 @@ extension MainCoordinator: AdvertisementsListNavigationDelegate {
 // MARK: - SearchNavigationDelegate
 
 extension MainCoordinator: SearchNavigationDelegate {
+    func didTapCategory(_ viewController: SearchViewController, category: AdvertisementCategory) {
+        showSearch(category: category)
+    }
+    
     func didTapAdvertisement(_ viewController: SearchViewController, advertisement: Advertisement) {
         showAdvertisement(advertisement: advertisement)
     }

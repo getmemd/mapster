@@ -23,8 +23,9 @@ extension AdvertisementsListTableViewDataSourceImpl: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch rows[indexPath.row] {
-        case .title:
+        case let .title(text):
             let cell: TitleCell = tableView.dequeueReusableCell(for: indexPath)
+            cell.configure(title: text)
             return cell
         case let .empty(viewState):
             let cell: AdvertisementsListEmptyCell = tableView.dequeueReusableCell(for: indexPath)

@@ -19,8 +19,10 @@ final class MainModuleFactory {
         return viewController
     }
     
-    func makeSearch(delegate: SearchNavigationDelegate) -> SearchViewController {
-        let viewController = SearchViewController()
+    func makeSearch(delegate: SearchNavigationDelegate,
+                    viewState: SearchViewState,
+                    category: AdvertisementCategory?) -> SearchViewController {
+        let viewController = SearchViewController(store: SearchStore(viewState: viewState, selectedCategory: category))
         viewController.navigationDelegate = delegate
         return viewController
     }
