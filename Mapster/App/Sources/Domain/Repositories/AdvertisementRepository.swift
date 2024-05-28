@@ -46,8 +46,7 @@ final class AdvertisementRepository {
     }
     
     func createAdvertisement(advertisement: Advertisement) async throws {
-        let ref = try await db.collection("advertisements").addDocument(data: advertisement.dictionary)
-        print("Advertisement successfully added with ID: \(ref.documentID)")
+        try await db.collection("advertisements").addDocument(data: advertisement.dictionary)
     }
     
     func deleteAdvertisement(advertisement: Advertisement) async throws {

@@ -44,6 +44,11 @@ final class ProfileCoordinator: Coordinator {
         let module = moduleFactory.makeAdvertisement(delegate: self, advertisement: advertisement)
         router.push(module)
     }
+    
+    private func showPolicy() {
+        let module = moduleFactory.makePolicy(delegate: self)
+        router.present(module)
+    }
 }
 
 // MARK: - ProfileNavigationDelegate
@@ -55,6 +60,8 @@ extension ProfileCoordinator: ProfileNavigationDelegate {
             showProfileEdit()
         case .myAdvertisements:
             showMyAdvertisements()
+        case .policy:
+            showPolicy()
         default:
             return
         }
@@ -89,4 +96,12 @@ extension ProfileCoordinator: AdvertisementsListNavigationDelegate {
 
 extension ProfileCoordinator: AdvertisementNavigationDelegate {
     
+}
+
+// MARK: - InfoNavigationDelegate
+
+extension ProfileCoordinator: InfoNavigationDelegate {
+    func didTapClose(_ viewController: InfoViewController) {
+        router.dismissModule()
+    }
 }

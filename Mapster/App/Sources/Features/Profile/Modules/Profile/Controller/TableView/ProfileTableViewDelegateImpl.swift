@@ -24,7 +24,7 @@ extension ProfileTableViewDelegateImpl: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         switch rows[indexPath.row] {
-        case .editProfile, .myAdvertisements, .faq, .policy, .signOut:
+        case .editProfile, .myAdvertisements, .policy, .signOut:
             guard let row = rows[safe: indexPath.row],
                   let cell = cell as? TableViewItemCell else { return }
             cell.configure(with: ProfileCellModel(row: row))

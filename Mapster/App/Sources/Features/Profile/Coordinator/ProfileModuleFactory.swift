@@ -32,4 +32,10 @@ final class ProfileModuleFactory {
         viewController.navigationDelegate = delegate
         return viewController
     }
+    
+    func makePolicy(delegate: InfoNavigationDelegate) -> InfoViewController {
+        let viewController = InfoViewController()
+        viewController.navigationDelegate = delegate
+        return viewController
+    }
 }

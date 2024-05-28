@@ -19,7 +19,6 @@ final class ImageRepository {
 
         for imageData in imagesData {
             let imageName = UUID().uuidString
-            print(imageName)
             let ref = storageRef.child("images/\(imageName).jpeg")
 
             dispatchGroup.enter()

@@ -27,8 +27,7 @@ final class UserRepository {
     @Injected(\.db) private var db
     
     func createUser(user: AppUser) async throws {
-        let ref = try await db.collection("users").addDocument(data: user.dictionary)
-        print("User successfully added with ID: \(ref.documentID)")
+        try await db.collection("users").addDocument(data: user.dictionary)
     }
     
     func getUser(uid: String) async throws -> AppUser {

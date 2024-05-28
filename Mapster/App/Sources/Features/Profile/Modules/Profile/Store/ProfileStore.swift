@@ -27,7 +27,6 @@ enum ProfileRows {
     case editProfile
     case myAdvertisements
     case policy
-    case faq
     case signOut
 }
 
@@ -82,7 +81,6 @@ final class ProfileStore: Store<ProfileEvent, ProfileAction> {
                                .editProfile,
                                .myAdvertisements,
                                .policy,
-                               .faq,
                                .signOut]))
     }
 }

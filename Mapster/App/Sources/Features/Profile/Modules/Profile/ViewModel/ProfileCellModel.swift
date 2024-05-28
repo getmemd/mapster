@@ -16,8 +16,6 @@ struct ProfileCellModel: TableViewItemCellModel {
             return "Мои объявления"
         case .policy:
             return "Политика конфиденциальности"
-        case .faq:
-            return "Часто задаваемые вопросы"
         case .signOut:
             return "Выйти"
         default:

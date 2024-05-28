@@ -67,6 +67,7 @@
 		C56FAE102C0566E700E0E948 /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C56FAE0F2C0566E700E0E948 /* MainCoordinator.swift */; };
 		C56FAE122C0566F000E0E948 /* MainCoordinatorFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = C56FAE112C0566F000E0E948 /* MainCoordinatorFactory.swift */; };
 		C56FAE142C0566FA00E0E948 /* MainModuleFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = C56FAE132C0566FA00E0E948 /* MainModuleFactory.swift */; };
+		C56FAE182C05755100E0E948 /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C56FAE172C05755000E0E948 /* InfoViewController.swift */; };
 		C573A5CA2BEA9569007AD64E /* ProgressHud.swift in Sources */ = {isa = PBXBuildFile; fileRef = C573A5C92BEA9569007AD64E /* ProgressHud.swift */; };
 		C573A5CC2BEA9585007AD64E /* ProgressHudContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C573A5CB2BEA9585007AD64E /* ProgressHudContainerView.swift */; };
 		C573A5CE2BEA9D26007AD64E /* UIWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = C573A5CD2BEA9D26007AD64E /* UIWindow.swift */; };
@@ -194,6 +195,7 @@
 		C56FAE0F2C0566E700E0E948 /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
 		C56FAE112C0566F000E0E948 /* MainCoordinatorFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinatorFactory.swift; sourceTree = "<group>"; };
 		C56FAE132C0566FA00E0E948 /* MainModuleFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainModuleFactory.swift; sourceTree = "<group>"; };
+		C56FAE172C05755000E0E948 /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
 		C573A5C92BEA9569007AD64E /* ProgressHud.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressHud.swift; sourceTree = "<group>"; };
 		C573A5CB2BEA9585007AD64E /* ProgressHudContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressHudContainerView.swift; sourceTree = "<group>"; };
 		C573A5CD2BEA9D26007AD64E /* UIWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIWindow.swift; sourceTree = "<group>"; };
@@ -477,6 +479,7 @@
 		C53BB3262C053E0600C09F9D /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				C56FAE152C05752100E0E948 /* Info */,
 				C5EF99E52BBFDD8A00312987 /* Profile */,
 				C53BB30F2BFBB7BD00C09F9D /* ProfileEdit */,
 			);
@@ -808,6 +811,22 @@
 				C56FAE132C0566FA00E0E948 /* MainModuleFactory.swift */,
 			);
 			path = Coordinator;
+			sourceTree = "<group>";
+		};
+		C56FAE152C05752100E0E948 /* Info */ = {
+			isa = PBXGroup;
+			children = (
+				C56FAE162C05754A00E0E948 /* Controller */,
+			);
+			path = Info;
+			sourceTree = "<group>";
+		};
+		C56FAE162C05754A00E0E948 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				C56FAE172C05755000E0E948 /* InfoViewController.swift */,
+			);
+			path = Controller;
 			sourceTree = "<group>";
 		};
 		C573A5C82BEA9555007AD64E /* ProgressHud */ = {
@@ -1349,6 +1368,7 @@
 				C5EF9A1C2BC32D8200312987 /* CreateMapCell.swift in Sources */,
 				C53BD2592B7E217D0078D28E /* AppDelegate.swift in Sources */,
 				C5D9DCDD2B8B3D36000B010C /* ValidatationService.swift in Sources */,
+				C56FAE182C05755100E0E948 /* InfoViewController.swift in Sources */,
 				C54B02FF2BED4CB800740895 /* UserRepository.swift in Sources */,
 				C5EF9A212BC340D300312987 /* MapViewController.swift in Sources */,
 				C53BB3442C05503000C09F9D /* SearchCoordinator.swift in Sources */,
