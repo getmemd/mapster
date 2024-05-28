@@ -52,9 +52,7 @@ extension CreateCoordinator: CreateNavigationDelegate {
 extension CreateCoordinator: MapNavigationDelegate {
     func didTapActionButton(_ viewController: MapViewController, latitude: Double, longitude: Double) {
         router.dismissModule { [weak self] in
-            guard let container = self?.router.navigationController.viewControllers
-                .compactMap({ $0 as? ContainerController }).first,
-                  let viewController = container.viewControllers?
+            guard let viewController = self?.router.navigationController.viewControllers
                 .compactMap({ $0 as? CreateViewController }).first else { return }
             viewController.didPickedLocation(latitude: latitude, longitude: longitude)
         }

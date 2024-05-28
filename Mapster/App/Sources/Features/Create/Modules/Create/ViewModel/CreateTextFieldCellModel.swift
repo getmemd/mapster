@@ -11,13 +11,13 @@ struct CreateTextFieldCellModel {
     var title: String? {
         switch rowType {
         case .headline:
-            return "Заголовок объявления*"
+            return "Заголовок объявления"
         case .reward:
             return "Вознаграждение"
         case .address:
             return "Адрес"
         case .category:
-            return "Категория*"
+            return "Категория"
         default:
             return nil
         }

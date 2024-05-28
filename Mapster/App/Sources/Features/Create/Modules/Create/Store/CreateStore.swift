@@ -81,7 +81,8 @@ final class CreateStore: Store<CreateEvent, CreateAction> {
             guard data.headline != nil,
                   data.description != nil,
                   data.address != nil,
-                  data.geopoint != nil else {
+                  data.geopoint != nil,
+                  data.reward != nil else {
                 sendEvent(.showError(message: "Заполните все поля"))
                 return
             }
