@@ -14,6 +14,7 @@ import UIKit
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
+    private var applicationCoordinator: AppCoordinator?
     
     func application(
         _: UIApplication,
@@ -27,14 +28,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     private func setupCoordinator() {
-        let container = AppContainer.shared
         let navigationController = UINavigationController()
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.makeKeyAndVisible()
         window?.rootViewController = navigationController
-        container.appCoordinator.register {
-            AppCoordinator(router: .init(navigationController: navigationController))
-        }
-        container.appCoordinator().start()
+        applicationCoordinator = AppCoordinator(router: .init(navigationController: navigationController))
+        applicationCoordinator?.start()
     }
 }

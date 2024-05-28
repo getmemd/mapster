@@ -121,7 +121,6 @@ final class HomeViewController: BaseViewController {
     }
     
     private func setupViews() {
-        tabBarItem = .init(title: "Главная", image: .init(named: "home"), tag: 0)
         tabBarController?.selectedIndex = 0
         view.addSubview(mapView)
         refreshBackgroundView.addSubview(refreshImageView)

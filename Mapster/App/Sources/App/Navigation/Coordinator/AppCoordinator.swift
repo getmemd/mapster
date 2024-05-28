@@ -6,8 +6,11 @@
 //
 
 import FirebaseAuth
+import UIKit
 
 final class AppCoordinator: Coordinator {
+    private let coordinatorFactory: CoordinatorFactory = .init()
+    
     override func start() {
         if isFirstLaunch() {
             runOnboardingFlow()
@@ -33,19 +36,19 @@ final class AppCoordinator: Coordinator {
     }
     
     private func runMainFlow() {
-        let coordinator = MainCoordinator(router: router, delegate: self)
+        let coordinator = coordinatorFactory.makeMain(router: router, delegate: self)
         addDependency(coordinator)
         coordinator.start()
     }
     
     private func runOnboardingFlow() {
-        let coordinator = OnboardingCoordinator(router: router, delegate: self)
+        let coordinator = coordinatorFactory.makeOnboarding(router: router, delegate: self)
         addDependency(coordinator)
         coordinator.start()
     }
     
     private func runAuthorizationFlow() {
-        let coordinator = AuthorizationCoordinator(router: router, delegate: self)
+        let coordinator = coordinatorFactory.makeAuthorization(router: router, delegate: self)
         addDependency(coordinator)
         coordinator.start()
     }
@@ -55,8 +58,8 @@ final class AppCoordinator: Coordinator {
 
 extension AppCoordinator: MainCoordinatorDelegate {
     func didFinish(_ coordinator: MainCoordinator) {
-        removeDependency(coordinator)
         UserDefaults.standard.set(false, forKey: "hasLaunchedBefore")
+        removeDependency(coordinator)
         runOnboardingFlow()
     }
 }
