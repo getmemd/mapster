@@ -46,6 +46,36 @@ final class HomeViewController: BaseViewController {
         return imageView
     }()
     
+    private let filterBackgroundView: UIView = {
+        let view = UIView()
+        view.layer.cornerRadius = 10
+        view.backgroundColor = .white
+        return view
+    }()
+    
+    private lazy var filterImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = .init(systemName: "slider.horizontal.3")
+        imageView.tintColor = .accent
+        imageView.isUserInteractionEnabled = true
+        let gesture = UITapGestureRecognizer(target: self, action: #selector(didTapFilter))
+        imageView.addGestureRecognizer(gesture)
+        return imageView
+    }()
+    
+    private lazy var dummyTextField: UITextField = {
+        let textField = UITextField()
+        textField.inputView = pickerView
+        return textField
+    }()
+    
+    private lazy var pickerView: UIPickerView = {
+        let pickerView = UIPickerView()
+        pickerView.dataSource = self
+        pickerView.delegate = self
+        return pickerView
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
@@ -60,6 +90,11 @@ final class HomeViewController: BaseViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         LocationDataManager.shared.stop()
+    }
+    
+    @objc
+    private func didTapFilter() {
+        store.handleAction(.didTapFilter)
     }
     
     private func setAnnotations(viewModels: [HomeAnnotationViewModel]) {
@@ -115,6 +150,11 @@ final class HomeViewController: BaseViewController {
                 ProgressHud.stopAnimating()
             case let .annotationSelected(advertisement):
                 navigationDelegate?.didTapAdvertisement(self, advertisement: advertisement)
+            case .showCategoryPicker:
+                dummyTextField.becomeFirstResponder()
+            case .resetFilter:
+                filterImageView.image = .init(systemName: "slider.horizontal.3")
+                pickerView.reloadAllComponents()
             }
         }
         .store(in: &bag)
@@ -124,7 +164,8 @@ final class HomeViewController: BaseViewController {
         tabBarController?.selectedIndex = 0
         view.addSubview(mapView)
         refreshBackgroundView.addSubview(refreshImageView)
-        view.addSubview(refreshBackgroundView)
+        filterBackgroundView.addSubview(filterImageView)
+        [refreshBackgroundView, filterBackgroundView, dummyTextField].forEach { view.addSubview($0) }
         guard let location = LocationDataManager.shared.getCurrentLocation() else {
             presentPermissionDeniedAlert()
             return
@@ -141,6 +182,15 @@ final class HomeViewController: BaseViewController {
             $0.top.leading.equalTo(view.safeAreaLayoutGuide).offset(5)
         }
         refreshImageView.snp.makeConstraints {
+            $0.size.equalTo(24)
+            $0.center.equalToSuperview()
+        }
+        filterBackgroundView.snp.makeConstraints {
+            $0.size.equalTo(48)
+            $0.top.equalTo(refreshBackgroundView.snp.bottom).offset(5)
+            $0.leading.equalTo(view.safeAreaLayoutGuide).offset(5)
+        }
+        filterImageView.snp.makeConstraints {
             $0.size.equalTo(24)
             $0.center.equalToSuperview()
         }
@@ -178,5 +228,27 @@ extension HomeViewController: HomeAnnotationViewDelegate {
     func didTapCalloutButton(_ view: HomeAnnotationView) {
         guard let tag = (view.annotation as? HomePointAnnotation)?.tag else { return }
         store.handleAction(.didTapAnnotation(index: tag))
+    }
+}
+
+// MARK: - UIPickerView DataSource and Delegate
+
+extension HomeViewController: UIPickerViewDataSource, UIPickerViewDelegate {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return AdvertisementCategory.allCases.count
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return AdvertisementCategory.allCases[row].displayName
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        let category = AdvertisementCategory.allCases[row]
+        store.handleAction(.didSelectCategory(category: category))
+        filterImageView.image = .init(systemName: "xmark")
     }
 }
