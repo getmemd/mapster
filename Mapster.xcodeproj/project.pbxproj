@@ -59,7 +59,6 @@
 		C53BD28A2B7E335F0078D28E /* OnboardingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C53BD2892B7E335F0078D28E /* OnboardingViewModel.swift */; };
 		C54B02FD2BED4C3A00740895 /* AppUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54B02FC2BED4C3A00740895 /* AppUser.swift */; };
 		C54B02FF2BED4CB800740895 /* UserRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54B02FE2BED4CB800740895 /* UserRepository.swift */; };
-		C54B03032BED916C00740895 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54B03022BED916C00740895 /* UIColor.swift */; };
 		C54B03052BED9D6E00740895 /* AdvertisementCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54B03042BED9D6E00740895 /* AdvertisementCategory.swift */; };
 		C54B03072BEDA31800740895 /* CreateDropDownCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54B03062BEDA31800740895 /* CreateDropDownCell.swift */; };
 		C566A4462BE980AA00E84262 /* AdvertisementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C566A4452BE980AA00E84262 /* AdvertisementViewController.swift */; };
@@ -187,7 +186,6 @@
 		C53BD2892B7E335F0078D28E /* OnboardingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewModel.swift; sourceTree = "<group>"; };
 		C54B02FC2BED4C3A00740895 /* AppUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppUser.swift; sourceTree = "<group>"; };
 		C54B02FE2BED4CB800740895 /* UserRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRepository.swift; sourceTree = "<group>"; };
-		C54B03022BED916C00740895 /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		C54B03042BED9D6E00740895 /* AdvertisementCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdvertisementCategory.swift; sourceTree = "<group>"; };
 		C54B03062BEDA31800740895 /* CreateDropDownCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateDropDownCell.swift; sourceTree = "<group>"; };
 		C566A4452BE980AA00E84262 /* AdvertisementViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdvertisementViewController.swift; sourceTree = "<group>"; };
@@ -862,7 +860,6 @@
 				C5105F362BB49311000D5B28 /* Collection+Safe.swift */,
 				C57523322B98EF4D00ECCDE3 /* Combine.swift */,
 				C5E472372BB41551002AA59B /* Double+NumberFormatter.swift */,
-				C54B03022BED916C00740895 /* UIColor.swift */,
 				C5E472322BB41438002AA59B /* UITableView.swift */,
 				C573A5CD2BEA9D26007AD64E /* UIWindow.swift */,
 			);
@@ -1339,7 +1336,6 @@
 				C5E472252BB36C63002AA59B /* AdvertisementsListViewController.swift in Sources */,
 				C58190952B8CD27B001BE36E /* HomeViewController.swift in Sources */,
 				C5105F372BB49311000D5B28 /* Collection+Safe.swift in Sources */,
-				C54B03032BED916C00740895 /* UIColor.swift in Sources */,
 				C5105F2B2BB4806F000D5B28 /* SearchTableViewDataSourceImpl.swift in Sources */,
 				C5142E0B2B83624800384411 /* AuthorizationCheckoxViewModel.swift in Sources */,
 				C5E4722F2BB36ECF002AA59B /* AdvertisementsListEmptyCell.swift in Sources */,

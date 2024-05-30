@@ -1,6 +1,8 @@
 import UIKit
 
+// Базовый класс для ViewController
 class BaseViewController: UIViewController {
+    // Показать алерт
     func showAlert(title: String? = nil, message: String?, completion: ((UIAlertAction) -> Void)? = nil) {
         let alert = UIAlertController(title: title ?? "Ошибка",
                                       message: message,
@@ -9,7 +11,8 @@ class BaseViewController: UIViewController {
         present(alert, animated: true, completion: nil)
     }
     
-    func showToast(message : String) {
+    // Показать тост-сообщение
+    func showToast(message: String) {
         let toastLabel = UILabel(frame: CGRect(x: self.view.frame.size.width / 2 - 75,
                                                y: self.view.frame.size.height - 150,
                                                width: 150,
@@ -17,10 +20,10 @@ class BaseViewController: UIViewController {
         toastLabel.backgroundColor = UIColor.black.withAlphaComponent(0.6)
         toastLabel.textColor = UIColor.white
         toastLabel.font = Font.mulish(name: .semiBold, size: 14)
-        toastLabel.textAlignment = .center;
+        toastLabel.textAlignment = .center
         toastLabel.text = message
         toastLabel.alpha = 1.0
-        toastLabel.layer.cornerRadius = 10;
+        toastLabel.layer.cornerRadius = 10
         toastLabel.clipsToBounds = true
         self.view.addSubview(toastLabel)
         UIView.animate(withDuration: 4.0, delay: 0.1, options: .curveEaseOut) {
@@ -28,6 +31,5 @@ class BaseViewController: UIViewController {
         } completion: { isCompleted in
             toastLabel.removeFromSuperview()
         }
-
     }
 }

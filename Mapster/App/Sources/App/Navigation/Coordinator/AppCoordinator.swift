@@ -1,9 +1,12 @@
 import FirebaseAuth
 import UIKit
 
+// Основной координатор приложения
 final class AppCoordinator: Coordinator {
+    // Фабрика координаторов
     private let coordinatorFactory: CoordinatorFactory = .init()
     
+    // Запуск координатора
     override func start() {
         if isFirstLaunch() {
             runOnboardingFlow()
@@ -14,6 +17,7 @@ final class AppCoordinator: Coordinator {
         }
     }
     
+    // Проверка первого запуска приложения
     private func isFirstLaunch() -> Bool {
         let hasLaunchedBefore = UserDefaults.standard.bool(forKey: "hasLaunchedBefore")
         if hasLaunchedBefore {
@@ -24,22 +28,26 @@ final class AppCoordinator: Coordinator {
         }
     }
     
+    // Проверка авторизации пользователя
     private func isUserAuthorized() -> Bool {
         return Auth.auth().currentUser != nil
     }
     
+    // Запуск основного потока
     private func runMainFlow() {
         let coordinator = coordinatorFactory.makeMain(router: router, delegate: self)
         addDependency(coordinator)
         coordinator.start()
     }
     
+    // Запуск онбординга
     private func runOnboardingFlow() {
         let coordinator = coordinatorFactory.makeOnboarding(router: router, delegate: self)
         addDependency(coordinator)
         coordinator.start()
     }
     
+    // Запуск авторизации
     private func runAuthorizationFlow() {
         let coordinator = coordinatorFactory.makeAuthorization(router: router, delegate: self)
         addDependency(coordinator)
@@ -49,6 +57,7 @@ final class AppCoordinator: Coordinator {
 
 // MARK: - MainCoordinatorDelegate
 
+// Расширение для обработки событий основного координатора
 extension AppCoordinator: MainCoordinatorDelegate {
     func didFinish(_ coordinator: MainCoordinator) {
         UserDefaults.standard.set(false, forKey: "hasLaunchedBefore")
@@ -59,6 +68,7 @@ extension AppCoordinator: MainCoordinatorDelegate {
 
 // MARK: - OnboardingCoordinatorDelegate
 
+// Расширение для обработки событий координатора онбординга
 extension AppCoordinator: OnboardingCoordinatorDelegate {
     func didFinish(_ coordinator: OnboardingCoordinator) {
         removeDependency(coordinator)
@@ -68,6 +78,7 @@ extension AppCoordinator: OnboardingCoordinatorDelegate {
 
 // MARK: - AuthorizationCoordinatorDelegate
 
+// Расширение для обработки событий координатора авторизации
 extension AppCoordinator: AuthorizationCoordinatorDelegate {
     func didFinish(_ coordinator: AuthorizationCoordinator) {
         removeDependency(coordinator)

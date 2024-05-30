@@ -1,16 +1,20 @@
 import UIKit
 
+// Константы для ProgressHud
 private enum Constants {
     static let animationDuration: TimeInterval = 0.25
 }
 
+// Финальный класс для ProgressHud
 final class ProgressHud {
+    // Контейнер для ProgressHud
     private static var containerView: ProgressHudContainerView = {
         let containerView = ProgressHudContainerView()
         containerView.alpha = 1.0
         return containerView
     }()
     
+    // Запуск анимации
     static func startAnimating() {
         guard let window = UIApplication
             .shared
@@ -27,6 +31,7 @@ final class ProgressHud {
                        completion: { _ in self.containerView.startAnimating() })
     }
     
+    // Остановка анимации
     static func stopAnimating() {
         let completion: (Bool) -> Void = { _ in
             self.containerView.removeFromSuperview()
@@ -37,6 +42,7 @@ final class ProgressHud {
                        completion: completion)
     }
     
+    // Добавление контейнера на окно
     private static func addContainerView(to window: UIWindow) {
         containerView.frame = CGRect(origin: .zero, size: window.frame.size)
         window.addSubview(containerView)
