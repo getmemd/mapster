@@ -1,10 +1,3 @@
-//
-//  PasswordResetViewController.swift
-//  Mapster
-//
-//  Created by Adilkhan Medeuyev on 25.02.2024.
-//
-
 import SnapKit
 import UIKit
 

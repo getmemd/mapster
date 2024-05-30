@@ -1,10 +1,3 @@
-//
-//  AdvertisementInfoCellModel.swift
-//  Mapster
-//
-//  Created by Adilkhan Medeuyev on 09.05.2024.
-//
-
 import Foundation
 
 struct AdvertisementInfoCellModel {

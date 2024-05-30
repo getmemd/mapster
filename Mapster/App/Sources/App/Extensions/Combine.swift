@@ -1,10 +1,3 @@
-//
-//  Combine.swift
-//  Mapster
-//
-//  Created by Adilkhan Medeuyev on 06.03.2024.
-//
-
 import Combine
 import Dispatch
 

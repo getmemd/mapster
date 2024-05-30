@@ -1,10 +1,3 @@
-//
-//  AdvertisementStore.swift
-//  Mapster
-//
-//  Created by Adilkhan Medeuyev on 07.05.2024.
-//
-
 import Factory
 import Firebase
 import Foundation

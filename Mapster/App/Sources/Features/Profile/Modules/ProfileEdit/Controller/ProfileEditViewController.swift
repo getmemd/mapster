@@ -1,10 +1,3 @@
-//
-//  ProfileEditViewController.swift
-//  Mapster
-//
-//  Created by Adilkhan Medeuyev on 20.05.2024.
-//
-
 import UIKit
 
 protocol ProfileEditNavigationDelegate: AnyObject {

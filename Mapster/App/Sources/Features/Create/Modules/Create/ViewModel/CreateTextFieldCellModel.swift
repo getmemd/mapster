@@ -1,10 +1,3 @@
-//
-//  CreateTextFieldCellModel.swift
-//  Mapster
-//
-//  Created by Adilkhan Medeuyev on 07.04.2024.
-//
-
 import UIKit
 
 struct CreateTextFieldCellModel {

@@ -1,10 +1,3 @@
-//
-//  HomeViewController.swift
-//  Mapster
-//
-//  Created by Adilkhan Medeuyev on 26.02.2024.
-//
-
 import CoreLocation
 import MapKit
 import SnapKit

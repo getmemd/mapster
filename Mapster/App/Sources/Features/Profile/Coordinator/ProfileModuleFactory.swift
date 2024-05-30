@@ -1,10 +1,3 @@
-//
-//  ProfileModuleFactory.swift
-//  Mapster
-//
-//  Created by Adilkhan Medeuyev on 28.05.2024.
-//
-
 import Foundation
 
 final class ProfileModuleFactory {

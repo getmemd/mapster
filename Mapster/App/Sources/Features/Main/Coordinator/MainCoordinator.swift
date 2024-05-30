@@ -1,10 +1,3 @@
-//
-//  MainCoordinator.swift
-//  Mapster
-//
-//  Created by Adilkhan Medeuyev on 28.05.2024.
-//
-
 import UIKit
 
 protocol MainCoordinatorDelegate: AnyObject {

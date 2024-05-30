@@ -1,10 +1,3 @@
-//
-//  AdvertisementImagesCell.swift
-//  Mapster
-//
-//  Created by Adilkhan Medeuyev on 09.05.2024.
-//
-
 import UIKit
 
 final class AdvertisementImagesCell: UITableViewCell {

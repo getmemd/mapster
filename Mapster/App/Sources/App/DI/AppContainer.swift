@@ -1,10 +1,3 @@
-//
-//  AppContainer.swift
-//  Mapster
-//
-//  Created by Adilkhan Medeuyev on 07.03.2024.
-//
-
 import Factory
 import FirebaseFirestore
 import FirebaseStorage

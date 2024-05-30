@@ -1,10 +1,3 @@
-//
-//  AdvertisementCategory.swift
-//  Mapster
-//
-//  Created by Adilkhan Medeuyev on 10.05.2024.
-//
-
 enum AdvertisementCategory: String, CaseIterable {
     case cars
     case realEstate

@@ -1,10 +1,3 @@
-//
-//  AdvertisementRepository.swift
-//  Mapster
-//
-//  Created by Adilkhan Medeuyev on 01.04.2024.
-//
-
 import Factory
 import Firebase
 

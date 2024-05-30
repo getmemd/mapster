@@ -1,10 +1,3 @@
-//
-//  HomeStore.swift
-//  Mapster
-//
-//  Created by Adilkhan Medeuyev on 08.04.2024.
-//
-
 import Factory
 import CoreLocation
 

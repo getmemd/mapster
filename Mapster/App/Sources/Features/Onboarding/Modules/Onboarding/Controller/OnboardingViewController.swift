@@ -1,10 +1,3 @@
-//
-//  OnboardingViewController.swift
-//  Mapster
-//
-//  Created by Адиль Медеуев on 15.02.2024.
-//
-
 import UIKit
 
 protocol OnboardingNavigationDelegate: AnyObject {

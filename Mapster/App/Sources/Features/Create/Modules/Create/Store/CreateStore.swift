@@ -1,10 +1,3 @@
-//
-//  CreateStore.swift
-//  Mapster
-//
-//  Created by Adilkhan Medeuyev on 07.04.2024.
-//
-
 import Factory
 import Foundation
 import Firebase

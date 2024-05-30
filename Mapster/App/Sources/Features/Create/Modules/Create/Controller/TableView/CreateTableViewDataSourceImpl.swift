@@ -1,10 +1,3 @@
-//
-//  CreateTableViewDataSourceImpl.swift
-//  Mapster
-//
-//  Created by Adilkhan Medeuyev on 07.04.2024.
-//
-
 import UIKit
 
 final class CreateTableViewDataSourceImpl: NSObject {

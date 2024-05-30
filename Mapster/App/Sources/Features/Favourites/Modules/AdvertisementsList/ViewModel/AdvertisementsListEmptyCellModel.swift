@@ -1,10 +1,3 @@
-//
-//  AdvertisementsListEmptyCellModel.swift
-//  Mapster
-//
-//  Created by Adilkhan Medeuyev on 23.05.2024.
-//
-
 import Foundation
 
 struct AdvertisementsListEmptyCellModel {

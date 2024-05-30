@@ -1,10 +1,3 @@
-//
-//  AuthRepository.swift
-//  Mapster
-//
-//  Created by Adilkhan Medeuyev on 07.03.2024.
-//
-
 import FirebaseAuth
 
 final class AuthRepository {

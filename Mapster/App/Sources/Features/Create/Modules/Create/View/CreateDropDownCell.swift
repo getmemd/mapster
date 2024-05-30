@@ -1,10 +1,3 @@
-//
-//  CreateDropDownCell.swift
-//  Mapster
-//
-//  Created by Adilkhan Medeuyev on 10.05.2024.
-//
-
 import UIKit
 
 protocol CreateDropDownCellDelegate: AnyObject {

@@ -1,10 +1,3 @@
-//
-//  AdvertisementViewController.swift
-//  Mapster
-//
-//  Created by Adilkhan Medeuyev on 07.05.2024.
-//
-
 import UIKit
 
 protocol AdvertisementNavigationDelegate: AnyObject {

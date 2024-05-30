@@ -1,10 +1,3 @@
-//
-//  UIColor.swift
-//  Mapster
-//
-//  Created by Adilkhan Medeuyev on 10.05.2024.
-//
-
 import UIKit
 
 extension UIColor {

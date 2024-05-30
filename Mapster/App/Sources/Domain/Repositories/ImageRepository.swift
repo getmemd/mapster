@@ -1,10 +1,3 @@
-//
-//  ImageRepository.swift
-//  Mapster
-//
-//  Created by Adilkhan Medeuyev on 05.04.2024.
-//
-
 import Factory
 import Foundation
 

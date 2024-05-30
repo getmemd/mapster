@@ -1,10 +1,3 @@
-//
-//  Collection+Safe.swift
-//  Mapster
-//
-//  Created by Adilkhan Medeuyev on 27.03.2024.
-//
-
 import Foundation
 
 extension Collection {
