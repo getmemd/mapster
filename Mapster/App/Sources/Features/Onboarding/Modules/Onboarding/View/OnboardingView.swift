@@ -1,14 +1,17 @@
 import SnapKit
 import UIKit
 
+// Представление для отображения страницы онбординга
 final class OnboardingView: UIView {
     private var contentView = UIView()
     
+    // Изображение для отображения на странице онбординга
     private var imageView: UIImageView = {
         let imageView = UIImageView()
         return imageView
     }()
     
+    // Заголовок для страницы онбординга
     private var titleLabel: UILabel = {
         let label = UILabel()
         label.font = Font.mulish(name: .extraBold, size: 36)
@@ -16,6 +19,7 @@ final class OnboardingView: UIView {
         return label
     }()
     
+    // Описание для страницы онбординга
     private var descriptionLabel: UILabel = {
         let label = UILabel()
         label.font = Font.mulish(name: .light, size: 24)
@@ -23,6 +27,7 @@ final class OnboardingView: UIView {
         return label
     }()
     
+    // Инициализация представления
     init() {
         super.init(frame: .zero)
         setupViews()
@@ -33,17 +38,20 @@ final class OnboardingView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // Конфигурация представления с использованием viewModel
     func configure(with viewModel: OnboardingViewModel) {
         imageView.image = UIImage(named: viewModel.imageName)
         titleLabel.text = viewModel.title
         descriptionLabel.text = viewModel.description
     }
     
+    // Настройка представлений
     private func setupViews() {
         addSubview(contentView)
         [imageView, titleLabel, descriptionLabel].forEach { contentView.addSubview($0) }
     }
     
+    // Настройка ограничений для представлений
     private func setupConstraints() {
         contentView.snp.makeConstraints {
             $0.edges.equalToSuperview()

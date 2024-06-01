@@ -1,5 +1,6 @@
 import Factory
 
+// События, отправляемые SearchStore
 enum SearchEvent {
     case rows(rows: [SearchRows])
     case loading
@@ -9,22 +10,26 @@ enum SearchEvent {
     case didSelectAdvertisement(advertisement: Advertisement)
 }
 
+// Действия, которые могут быть выполнены в SearchStore
 enum SearchAction {
     case viewDidLoad
     case didStartSearch(searchText: String)
     case didSelectRow(index: Int)
 }
 
+// Типы строк в таблице поиска
 enum SearchRows {
     case title(text: String)
     case row(cellModel: SearchCellModel)
 }
 
+// Состояния вида поиска
 enum SearchViewState {
     case category
     case advertisements
 }
 
+// Хранилище для управления состоянием и действиями поиска
 final class SearchStore: Store<SearchEvent, SearchAction> {
     @Injected(\Repositories.advertisementRepository) private var advertisementRepository
     private let viewState: SearchViewState
@@ -32,11 +37,13 @@ final class SearchStore: Store<SearchEvent, SearchAction> {
     private var selectedCategory: AdvertisementCategory?
     private var filteredAdvertisements: [Advertisement] = []
     
+    // Инициализация с состоянием вида и выбранной категорией
     init(viewState: SearchViewState, selectedCategory: AdvertisementCategory?) {
         self.viewState = viewState
         self.selectedCategory = selectedCategory
     }
     
+    // Обработка действий
     override func handleAction(_ action: SearchAction) {
         switch action {
         case .viewDidLoad:
@@ -61,6 +68,7 @@ final class SearchStore: Store<SearchEvent, SearchAction> {
         }
     }
     
+    // Получение объявлений по категории
     private func getAdvertisementsByCategory() {
         Task {
             defer {
@@ -71,13 +79,13 @@ final class SearchStore: Store<SearchEvent, SearchAction> {
                 guard let selectedCategory else { return }
                 filteredAdvertisements = try await advertisementRepository.advertisementsByCategory(category: selectedCategory)
                 configureRows()
-            }
-            catch {
+            } catch {
                 sendEvent(.showError(message: error.localizedDescription))
             }
         }
     }
     
+    // Конфигурация строк таблицы поиска
     private func configureRows() {
         var rows: [SearchRows] = []
         switch viewState {

@@ -1,21 +1,25 @@
 import UIKit
 
+// Финальный класс для реализации источника данных таблицы
 final class CreateTableViewDataSourceImpl: NSObject {
     var tableView: UITableView?
     var rows: [CreateRows] = []
     
     private let store: CreateStore
-
+    
     init(store: CreateStore) {
         self.store = store
     }
 }
 
+// Расширение для соответствия протоколу UITableViewDataSource
 extension CreateTableViewDataSourceImpl: UITableViewDataSource {
+    // Количество строк в секции
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         rows.count
     }
     
+    // Настройка ячейки для строки в таблице
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch rows[indexPath.row] {
         case let .title(text):
@@ -55,6 +59,7 @@ extension CreateTableViewDataSourceImpl: UITableViewDataSource {
 
 // MARK: - CreatePhotoCellDelegate
 
+// Расширение для обработки делегата ячейки фото
 extension CreateTableViewDataSourceImpl: CreatePhotoCellDelegate {
     func didTapAddPhoto(_ cell: CreatePhotoCell) {
         store.handleAction(.didTapAddPhoto)
@@ -67,6 +72,7 @@ extension CreateTableViewDataSourceImpl: CreatePhotoCellDelegate {
 
 // MARK: - CreateTextFieldCellDelegate
 
+// Расширение для обработки делегата ячейки текстового поля
 extension CreateTableViewDataSourceImpl: CreateTextFieldCellDelegate {
     func didEndEditing(_ cell: CreateTextFieldCell, text: String?) {
         guard let indexPath = tableView?.indexPath(for: cell) else { return }
@@ -76,6 +82,7 @@ extension CreateTableViewDataSourceImpl: CreateTextFieldCellDelegate {
 
 // MARK: - CreateTextViewCellDelegate
 
+// Расширение для обработки делегата ячейки текстового вида
 extension CreateTableViewDataSourceImpl: CreateTextViewCellDelegate {
     func didEndEditing(_ cell: CreateTextViewCell, text: String?) {
         guard let indexPath = tableView?.indexPath(for: cell) else { return }
@@ -85,6 +92,7 @@ extension CreateTableViewDataSourceImpl: CreateTextViewCellDelegate {
 
 // MARK: - CreateMapCellDelegate
 
+// Расширение для обработки делегата ячейки карты
 extension CreateTableViewDataSourceImpl: CreateMapCellDelegate {
     func didTapMap(_ cell: CreateMapCell) {
         store.sendEvent(.showMapPicker)
@@ -97,6 +105,7 @@ extension CreateTableViewDataSourceImpl: CreateMapCellDelegate {
 
 // MARK: - CreateDropDownCellDelegate
 
+// Расширение для обработки делегата ячейки выпадающего списка
 extension CreateTableViewDataSourceImpl: CreateDropDownCellDelegate {
     func didSelectCategory(_ cell: CreateDropDownCell, category: AdvertisementCategory) {
         store.handleAction(.didPickCategory(category: category))

@@ -1,15 +1,18 @@
 import UIKit
 import SnapKit
 
+// Протокол делегата для навигации авторизации
 protocol AuthorizationNavigationDelegate: AnyObject {
     func didFinishAuthorization(_ viewController: AuthorizationViewController)
 }
 
+// Финальный класс для контроллера авторизации
 final class AuthorizationViewController: BaseViewController {
     weak var navigationDelegate: AuthorizationNavigationDelegate?
     private let store = AuthStore()
     private var bag = Bag()
     
+    // Стек для размещения содержимого
     private lazy var contentStackView: UIStackView = {
         let stackView = UIStackView(arrangedSubviews: [
             titleLabel,
@@ -26,6 +29,7 @@ final class AuthorizationViewController: BaseViewController {
         return stackView
     }()
     
+    // Заголовок
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.text = "Mapster"
@@ -36,6 +40,7 @@ final class AuthorizationViewController: BaseViewController {
         return label
     }()
     
+    // Описание
     private let descriptionLabel: UILabel = {
         let label = UILabel()
         label.text = "Войдите в систему для доступа к своему аккаунту"
@@ -45,6 +50,7 @@ final class AuthorizationViewController: BaseViewController {
         return label
     }()
     
+    // Поле для ввода имени
     private lazy var nameTextField: UITextField = {
         let textField = UITextField()
         textField.delegate = self
@@ -58,6 +64,7 @@ final class AuthorizationViewController: BaseViewController {
         return textField
     }()
     
+    // Поле для ввода email
     private lazy var emailTextField: UITextField = {
         let textField = UITextField()
         textField.delegate = self
@@ -71,6 +78,7 @@ final class AuthorizationViewController: BaseViewController {
         return textField
     }()
     
+    // Поле для ввода телефона
     private lazy var phoneNumberTextField: UITextField = {
         let textField = UITextField()
         textField.delegate = self
@@ -83,6 +91,7 @@ final class AuthorizationViewController: BaseViewController {
         return textField
     }()
     
+    // Поле для ввода пароля
     private lazy var passwordTextField: UITextField = {
         let textField = UITextField()
         textField.delegate = self
@@ -96,6 +105,7 @@ final class AuthorizationViewController: BaseViewController {
         return textField
     }()
     
+    // Поле для повторного ввода пароля
     private lazy var repeatPasswordTextField: UITextField = {
         let textField = UITextField()
         textField.delegate = self
@@ -109,6 +119,7 @@ final class AuthorizationViewController: BaseViewController {
         return textField
     }()
     
+    // Кнопка действия
     private lazy var actionButton: ActionButton = {
         let button = ActionButton()
         button.addTarget(self, action: #selector(actionButtonDidTap), for: .touchUpInside)
@@ -116,6 +127,7 @@ final class AuthorizationViewController: BaseViewController {
         return button
     }()
     
+    // Вид для чекбокса авторизации
     private lazy var checkboxView: AuthorizationCheckboxView = {
         let checkboxView = AuthorizationCheckboxView()
         checkboxView.delegate = self
@@ -125,6 +137,7 @@ final class AuthorizationViewController: BaseViewController {
     
     private let bottomTextView = UIView()
     
+    // Метка для текста "Уже есть аккаунт?"
     private let accountLabel: UILabel = {
         let label = UILabel()
         label.text = "Уже есть аккаунт?"
@@ -133,6 +146,7 @@ final class AuthorizationViewController: BaseViewController {
         return label
     }()
     
+    // Метка для текста "Войти"
     private lazy var loginLabel: UILabel = {
         let label = UILabel()
         label.text = "Войти"
@@ -145,6 +159,7 @@ final class AuthorizationViewController: BaseViewController {
         return label
     }()
     
+    // Метод viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
         configureObservers()
@@ -152,6 +167,7 @@ final class AuthorizationViewController: BaseViewController {
         setupConstraints()
     }
     
+    // Обработка нажатия кнопки действия
     @objc
     private func actionButtonDidTap() {
         guard checkValidity(), let email = emailTextField.text, let password = passwordTextField.text else {
@@ -169,9 +185,10 @@ final class AuthorizationViewController: BaseViewController {
         }
     }
 
+    // Обработка регистрации
     private func handleRegistration(email: String, password: String, repeatPassword: String) {
         do {
-            try ValidatationService.checkPasswordValidity(password: password, repeatPassword: repeatPassword)
+            try ValidationService.checkPasswordValidity(password: password, repeatPassword: repeatPassword)
             store.handleAction(
                 .actionButtonDidTap(
                     email: email,
@@ -187,15 +204,18 @@ final class AuthorizationViewController: BaseViewController {
         }
     }
 
+    // Обработка входа
     private func handleLogin(email: String, password: String) {
         store.handleAction(.actionButtonDidTap(email: email, password: password))
     }
 
+    // Обработка нажатия на метку "Войти"
     @objc
     private func loginDidTap() {
         changeViewState()
     }
     
+    // Изменение состояния представления
     private func changeViewState() {
         store.isRegistration.toggle()
         nameTextField.isHidden = !store.isRegistration
@@ -207,10 +227,11 @@ final class AuthorizationViewController: BaseViewController {
         loginLabel.text = store.isRegistration ? "Войти?" : "Зарегистрироваться"
     }
     
+    // Проверка валидности полей ввода
     private func checkValidity() -> Bool {
         if store.isRegistration {
             return !(nameTextField.text?.isEmpty ?? true) &&
-            ValidatationService.checkPhoneNumberValidity(phoneNumber: phoneNumberTextField.text) &&
+            ValidationService.checkPhoneNumberValidity(phoneNumber: phoneNumberTextField.text) &&
             isValidEmail() &&
             !(passwordTextField.text?.isEmpty ?? true) &&
             !(repeatPasswordTextField.text?.isEmpty ?? true) &&
@@ -220,6 +241,7 @@ final class AuthorizationViewController: BaseViewController {
         }
     }
     
+    // Проверка валидности номера телефона
     private func checkPhoneNumberValidity() -> Bool {
         let numericPhoneNumber = phoneNumberTextField.text?.components(separatedBy: CharacterSet.decimalDigits.inverted).joined()
         let phoneNumberRegex = "^[0-9]{11}$"
@@ -227,6 +249,7 @@ final class AuthorizationViewController: BaseViewController {
         return predicate.evaluate(with: numericPhoneNumber)
     }
     
+    // Проверка валидности email
     private func isValidEmail() -> Bool {
         guard let email = emailTextField.text else { return false }
         let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
@@ -234,6 +257,7 @@ final class AuthorizationViewController: BaseViewController {
         return emailPred.evaluate(with: email)
     }
     
+    // Настройка наблюдателей
     private func configureObservers() {
         bindStore(store) { [weak self ] event in
             guard let self else { return }
@@ -251,12 +275,14 @@ final class AuthorizationViewController: BaseViewController {
         .store(in: &bag)
     }
     
+    // Настройка видов
     private func setupViews() {
         [contentStackView, actionButton, bottomTextView].forEach { view.addSubview($0) }
         [accountLabel, loginLabel].forEach { bottomTextView.addSubview($0) }
         view.backgroundColor = .white
     }
     
+    // Настройка ограничений для видов
     private func setupConstraints() {
         contentStackView.snp.makeConstraints {
             $0.centerY.equalToSuperview()
@@ -299,6 +325,7 @@ final class AuthorizationViewController: BaseViewController {
 // MARK: - UITextFieldDelegate
 
 extension AuthorizationViewController: UITextFieldDelegate {
+    // Форматирование номера телефона
     func formattedNumber(number: String) -> String {
         let cleanPhoneNumber = number.components(separatedBy: CharacterSet.decimalDigits.inverted).joined()
         let mask = "+# (###) ### ####"
@@ -315,6 +342,7 @@ extension AuthorizationViewController: UITextFieldDelegate {
         return result
     }
     
+    // Обработка изменения текста в текстовом поле
     func textField(_ textField: UITextField,
                    shouldChangeCharactersIn range: NSRange,
                    replacementString string:  String) -> Bool {
@@ -329,6 +357,7 @@ extension AuthorizationViewController: UITextFieldDelegate {
 // MARK: - AuthorizationCheckboxViewDelegate
 
 extension AuthorizationViewController: AuthorizationCheckboxViewDelegate {
+    // Обработка нажатия на кнопку "Забыли пароль"
     func didTapForgotPassword(_ view: AuthorizationCheckboxView) {
         guard let email = emailTextField.text, isValidEmail() else {
             showAlert(message: "Введите свой email")

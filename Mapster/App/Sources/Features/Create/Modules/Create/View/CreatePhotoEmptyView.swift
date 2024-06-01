@@ -1,6 +1,8 @@
 import UIKit
 
+// Финальный класс для представления пустого состояния добавления фото
 final class CreatePhotoEmptyView: UIView {
+    // Фоновой вид для содержимого
     private let contentBackgroundView: UIView = {
         let view = UIView()
         view.backgroundColor = .cellGray
@@ -8,6 +10,7 @@ final class CreatePhotoEmptyView: UIView {
         return view
     }()
     
+    // Изображение иконки
     private let iconImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(systemName: "plus.app")
@@ -15,6 +18,7 @@ final class CreatePhotoEmptyView: UIView {
         return imageView
     }()
     
+    // Метка заголовка
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.font = Font.mulish(name: .regular, size: 13)
@@ -23,21 +27,25 @@ final class CreatePhotoEmptyView: UIView {
         return label
     }()
 
+    // Инициализация представления
     init() {
         super.init(frame: .zero)
         setupViews()
         setupConstraints()
     }
     
+    // Инициализация из storyboard или xib не поддерживается
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // Настройка видов
     private func setupViews() {
         addSubview(contentBackgroundView)
         [iconImageView, titleLabel].forEach { contentBackgroundView.addSubview($0) }
     }
     
+    // Настройка ограничений для видов
     private func setupConstraints() {
         contentBackgroundView.snp.makeConstraints {
             $0.edges.equalToSuperview()

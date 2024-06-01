@@ -1,5 +1,6 @@
 import Foundation
 
+// Модель представления для чекбокса авторизации
 struct AuthorizationCheckoxViewModel {
     let isRegistration: Bool
     

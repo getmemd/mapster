@@ -1,12 +1,15 @@
 import UIKit
 
+// Ячейка для отображения сообщения о пустом списке объявлений
 final class AdvertisementsListEmptyCell: UITableViewCell {
+    // Изображение иконки
     private let iconImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
         return imageView
     }()
     
+    // Заголовок сообщения
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.text = "Нет избранных"
@@ -16,6 +19,7 @@ final class AdvertisementsListEmptyCell: UITableViewCell {
         return label
     }()
     
+    // Подзаголовок сообщения
     private let subtitleLabel: UILabel = {
         let label = UILabel()
         label.font = Font.mulish(name: .regular, size: 14)
@@ -24,6 +28,7 @@ final class AdvertisementsListEmptyCell: UITableViewCell {
         return label
     }()
     
+    // Инициализация ячейки
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupViews()
@@ -34,17 +39,20 @@ final class AdvertisementsListEmptyCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // Настройка ячейки с моделью данных
     func configure(with cellModel: AdvertisementsListEmptyCellModel) {
         iconImageView.image = .init(named: cellModel.iconName)
         titleLabel.text = cellModel.title
         subtitleLabel.text = cellModel.subtitle
     }
     
+    // Настройка представлений ячейки
     private func setupViews() {
         backgroundColor = .clear
         [iconImageView, titleLabel, subtitleLabel].forEach { contentView.addSubview($0) }
     }
 
+    // Установка ограничений для представлений ячейки
     private func setupConstraints() {
         iconImageView.snp.makeConstraints {
             $0.top.leading.trailing.equalToSuperview().inset(24)

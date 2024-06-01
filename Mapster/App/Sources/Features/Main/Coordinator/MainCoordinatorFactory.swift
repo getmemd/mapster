@@ -1,6 +1,8 @@
 import UIKit
 
+// Фабрика для создания координаторов и модулей
 final class MainCoordinatorFactory {
+    // Создание координатора и модуля для Home
     func makeHome() -> (coordinator: Coordinator, module: UIViewController) {
         let navigationController = UINavigationController()
         navigationController.tabBarItem.title = "Главная"
@@ -9,6 +11,7 @@ final class MainCoordinatorFactory {
         return (coordinator, navigationController)
     }
     
+    // Создание координатора и модуля для Search
     func makeSearch() -> (coordinator: Coordinator, module: UIViewController) {
         let navigationController = UINavigationController()
         navigationController.tabBarItem.title = "Поиск"
@@ -17,6 +20,7 @@ final class MainCoordinatorFactory {
         return (coordinator, navigationController)
     }
     
+    // Создание координатора и модуля для Create
     func makeCreate(delegate: CreateCoordinatorDelegate) -> (coordinator: Coordinator, module: UIViewController) {
         let navigationController = UINavigationController()
         navigationController.tabBarItem.title = "Создать"
@@ -26,6 +30,7 @@ final class MainCoordinatorFactory {
         return (coordinator, navigationController)
     }
     
+    // Создание координатора и модуля для Favourites
     func makeFavourites(delegate: FavouritesCoordinatorDelegate) -> (coordinator: Coordinator, module: UIViewController) {
         let navigationController = UINavigationController()
         navigationController.tabBarItem.title = "Избранные"
@@ -35,6 +40,7 @@ final class MainCoordinatorFactory {
         return (coordinator, navigationController)
     }
     
+    // Создание координатора и модуля для Profile
     func makeProfile(delegate: ProfileCoordinatorDelegate) -> (coordinator: Coordinator, module: UIViewController) {
         let navigationController = UINavigationController()
         navigationController.tabBarItem.title = "Профиль"

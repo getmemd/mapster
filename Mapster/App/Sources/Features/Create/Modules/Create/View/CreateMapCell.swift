@@ -2,14 +2,17 @@ import Firebase
 import MapKit
 import UIKit
 
+// Протокол делегата для ячейки карты
 protocol CreateMapCellDelegate: AnyObject {
     func didTapActionButton(_ cell: CreateMapCell)
     func didTapMap(_ cell: CreateMapCell)
 }
 
+// Финальный класс для ячейки карты
 final class CreateMapCell: UITableViewCell {
     weak var delegate: CreateMapCellDelegate?
     
+    // Карта
     private lazy var mapView: MKMapView = {
         let mapView = MKMapView()
         mapView.layer.cornerRadius = 10
@@ -22,6 +25,7 @@ final class CreateMapCell: UITableViewCell {
         return mapView
     }()
     
+    // Кнопка действия
     private lazy var actionButton: ActionButton = {
         let button = ActionButton()
         button.addTarget(self, action: #selector(actionButtonDidTap), for: .touchUpInside)
@@ -29,26 +33,31 @@ final class CreateMapCell: UITableViewCell {
         return button
     }()
     
+    // Инициализация ячейки
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupViews()
         setupConstraints()
     }
 
+    // Инициализация из storyboard или xib не поддерживается
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // Обработка нажатия кнопки действия
     @objc
     private func actionButtonDidTap() {
         delegate?.didTapActionButton(self)
     }
     
+    // Обработка нажатия на карту
     @objc
     private func mapDidTap() {
         delegate?.didTapMap(self)
     }
     
+    // Конфигурация ячейки с геопозицией
     func configure(geopoint: GeoPoint?) {
         mapView.removeAnnotations(mapView.annotations)
         guard let geopoint else { return }
@@ -60,12 +69,14 @@ final class CreateMapCell: UITableViewCell {
         mapView.setRegion(coordinateRegion, animated: true)
     }
     
+    // Настройка видов
     private func setupViews() {
         backgroundColor = .clear
         [mapView, actionButton].forEach { contentView.addSubview($0) }
     }
     
-    private func setupConstraints() { 
+    // Настройка ограничений для видов
+    private func setupConstraints() {
         mapView.snp.makeConstraints {
             $0.top.equalToSuperview()
             $0.height.equalTo(200)

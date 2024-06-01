@@ -1,13 +1,16 @@
 import UIKit
 
+// Протокол делегата ячейки информации объявления
 protocol AdvertisementInfoCellDelegate: AnyObject {
     func didTapOpenInMap(_ cell: AdvertisementInfoCell, mapType: MapType)
     func didTapCallByPhone(_ cell: AdvertisementInfoCell)
 }
 
+// Финальный класс для ячейки информации объявления
 final class AdvertisementInfoCell: UITableViewCell {
     weak var delegate: AdvertisementInfoCellDelegate?
     
+    // Лейбл для даты
     private let dateLabel: UILabel = {
         let label = UILabel()
         label.font = Font.mulish(name: .regular, size: 14)
@@ -15,6 +18,7 @@ final class AdvertisementInfoCell: UITableViewCell {
         return label
     }()
     
+    // Лейбл для заголовка
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.font = Font.mulish(name: .semiBold, size: 16)
@@ -22,6 +26,7 @@ final class AdvertisementInfoCell: UITableViewCell {
         return label
     }()
     
+    // Лейбл для категории
     private let categoryLabel: UILabel = {
         let label = UILabel()
         label.font = Font.mulish(name: .regular, size: 14)
@@ -29,6 +34,7 @@ final class AdvertisementInfoCell: UITableViewCell {
         return label
     }()
     
+    // Лейбл для цены
     private let priceLabel: UILabel = {
         let label = UILabel()
         label.font = Font.mulish(name: .bold, size: 22)
@@ -36,6 +42,7 @@ final class AdvertisementInfoCell: UITableViewCell {
         return label
     }()
     
+    // Лейбл для описания
     private let descriptionLabel: UILabel = {
         let label = UILabel()
         label.text = "Описание"
@@ -44,6 +51,7 @@ final class AdvertisementInfoCell: UITableViewCell {
         return label
     }()
     
+    // Фон для описания
     private let descriptionBackgroundView: UIView = {
         let view = UIView()
         view.backgroundColor = UIColor.cellGray
@@ -51,6 +59,7 @@ final class AdvertisementInfoCell: UITableViewCell {
         return view
     }()
     
+    // Лейбл для текста описания
     private let descriptionTextLabel: UILabel = {
         let label = UILabel()
         label.font = Font.mulish(name: .regular, size: 14)
@@ -58,6 +67,7 @@ final class AdvertisementInfoCell: UITableViewCell {
         return label
     }()
     
+    // Лейбл для контактов
     private let contactLabel: UILabel = {
         let label = UILabel()
         label.text = "Контакты"
@@ -66,6 +76,7 @@ final class AdvertisementInfoCell: UITableViewCell {
         return label
     }()
     
+    // Фон для контактов
     private lazy var contactBackgroundView: UIView = {
         let view = UIView()
         view.backgroundColor = UIColor.cellGray
@@ -76,6 +87,7 @@ final class AdvertisementInfoCell: UITableViewCell {
         return view
     }()
     
+    // Лейбл для имени
     private let nameLabel: UILabel = {
         let label = UILabel()
         label.font = Font.mulish(name: .semiBold, size: 18)
@@ -83,6 +95,7 @@ final class AdvertisementInfoCell: UITableViewCell {
         return label
     }()
     
+    // Лейбл для телефона
     private let phoneLabel: UILabel = {
         let label = UILabel()
         label.font = Font.mulish(name: .regular, size: 14)
@@ -90,6 +103,7 @@ final class AdvertisementInfoCell: UITableViewCell {
         return label
     }()
     
+    // Лейбл для местонахождения
     private let locationLabel: UILabel = {
         let label = UILabel()
         label.text = "Местонахождение"
@@ -98,6 +112,7 @@ final class AdvertisementInfoCell: UITableViewCell {
         return label
     }()
     
+    // Лейбл для адреса
     private let addressLabel: UILabel = {
         let label = UILabel()
         label.font = Font.mulish(name: .regular, size: 14)
@@ -105,6 +120,7 @@ final class AdvertisementInfoCell: UITableViewCell {
         return label
     }()
     
+    // Кнопка для открытия адреса в 2GIS
     private lazy var doubleGisButton: UIButton = {
         let button = UIButton()
         button.layer.cornerRadius = 10
@@ -115,6 +131,7 @@ final class AdvertisementInfoCell: UITableViewCell {
         return button
     }()
     
+    // Кнопка для открытия адреса в Яндекс.Картах
     private lazy var yandexMapButton: UIButton = {
         let button = UIButton()
         button.layer.cornerRadius = 10
@@ -125,31 +142,37 @@ final class AdvertisementInfoCell: UITableViewCell {
         return button
     }()
     
+    // Инициализация ячейки
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupViews()
         setupConstraints()
     }
 
+    // Инициализация из storyboard или xib не поддерживается
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // Обработка нажатия для звонка по телефону
     @objc
     private func callByPhone() {
         delegate?.didTapCallByPhone(self)
     }
     
+    // Обработка нажатия для открытия адреса в 2GIS
     @objc
     private func doubleGisDidTap() {
         delegate?.didTapOpenInMap(self, mapType: .doubleGis)
     }
     
+    // Обработка нажатия для открытия адреса в Яндекс.Картах
     @objc
     private func yandexMapDidTap() {
         delegate?.didTapOpenInMap(self, mapType: .yandexMap)
     }
     
+    // Конфигурация ячейки с моделью данных
     func configure(with cellModel: AdvertisementInfoCellModel) {
         dateLabel.text = cellModel.date
         titleLabel.text = cellModel.title
@@ -161,6 +184,7 @@ final class AdvertisementInfoCell: UITableViewCell {
         addressLabel.text = cellModel.address
     }
     
+    // Настройка видов
     private func setupViews() {
         backgroundColor = .clear
         descriptionBackgroundView.backgroundColor = UIColor.cellGray
@@ -185,6 +209,7 @@ final class AdvertisementInfoCell: UITableViewCell {
         }
     }
 
+    // Настройка ограничений для видов
     private func setupConstraints() {
         dateLabel.snp.makeConstraints {
             $0.top.equalToSuperview().offset(10)

@@ -1,6 +1,7 @@
 import Factory
 import Firebase
 
+// События профиля, отправляемые ProfileStore
 enum ProfileEvent {
     case loading
     case loadingFinished
@@ -10,11 +11,13 @@ enum ProfileEvent {
     case rowTapped(row: ProfileRows)
 }
 
+// Действия, которые могут быть выполнены в ProfileStore
 enum ProfileAction {
     case loadData
     case didSelectRow(row: ProfileRows)
 }
 
+// Типы строк в таблице профиля
 enum ProfileRows {
     case info(name: String?, phoneNumber: String?)
     case editProfile
@@ -23,11 +26,13 @@ enum ProfileRows {
     case signOut
 }
 
+// Хранилище для управления состоянием и действиями профиля
 final class ProfileStore: Store<ProfileEvent, ProfileAction> {
     @Injected(\Repositories.authRepository) private var authRepository
     @Injected(\Repositories.userRepository) private var userRepository
     private var phoneNumber: String?
     
+    // Обработка действий
     override func handleAction(_ action: ProfileAction) {
         switch action {
         case .loadData:
@@ -42,6 +47,7 @@ final class ProfileStore: Store<ProfileEvent, ProfileAction> {
         }
     }
     
+    // Получение данных пользователя
     private func getUser() {
         Task {
             defer {
@@ -59,6 +65,7 @@ final class ProfileStore: Store<ProfileEvent, ProfileAction> {
         }
     }
     
+    // Выход из аккаунта
     private func signOut() {
         do {
             try authRepository.signOut()
@@ -68,6 +75,7 @@ final class ProfileStore: Store<ProfileEvent, ProfileAction> {
         }
     }
     
+    // Конфигурация строк таблицы профиля
     private func configureRows() {
         sendEvent(.rows(rows: [.info(name: Auth.auth().currentUser?.displayName,
                                      phoneNumber: phoneNumber),

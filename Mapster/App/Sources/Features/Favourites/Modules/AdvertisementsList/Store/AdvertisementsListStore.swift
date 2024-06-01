@@ -1,6 +1,7 @@
 import Factory
 import Firebase
 
+// События для списка объявлений
 enum AdvertisementsListEvent {
     case rows(rows: [AdvertisementsListRows])
     case showError(message: String)
@@ -8,27 +9,30 @@ enum AdvertisementsListEvent {
     case loadingFinished
     case advertisementSelected(advertisement: Advertisement)
     case advertisementDeleted
-    case confirmAdvertisementDeletion(viewState: AdvertisementsListViewState,
-                                      completion: (() -> Void))
+    case confirmAdvertisementDeletion(viewState: AdvertisementsListViewState, completion: (() -> Void))
 }
 
+// Действия для списка объявлений
 enum AdvertisementsListAction {
     case loadData
     case didSelectRow(row: AdvertisementsListRows)
     case didDeleteRow(index: Int)
 }
 
+// Состояние просмотра объявлений
 enum AdvertisementsListViewState {
     case favourites
     case myAdvertisements
 }
 
+// Строки таблицы для списка объявлений
 enum AdvertisementsListRows {
     case title(text: String)
     case advertisement(advertisement: Advertisement)
     case empty(viewState: AdvertisementsListViewState)
 }
 
+// Хранилище для управления состоянием и действиями списка объявлений
 final class AdvertisementsListStore: Store<AdvertisementsListEvent, AdvertisementsListAction> {
     @Injected(\Repositories.advertisementRepository) private var advertisementRepository
     @Injected(\Repositories.userRepository) private var userRepository
@@ -36,10 +40,12 @@ final class AdvertisementsListStore: Store<AdvertisementsListEvent, Advertisemen
     private var user: AppUser?
     private var advertisements: [Advertisement] = []
     
+    // Инициализация с состоянием просмотра
     init(viewState: AdvertisementsListViewState) {
         self.viewState = viewState
     }
     
+    // Обработка действий
     override func handleAction(_ action: AdvertisementsListAction) {
         switch action {
         case .loadData:
@@ -59,11 +65,13 @@ final class AdvertisementsListStore: Store<AdvertisementsListEvent, Advertisemen
         }
     }
     
+    // Получение текущего пользователя
     private func getUser() async throws -> AppUser? {
         guard let uid = Auth.auth().currentUser?.uid else { return nil }
         return try await userRepository.getUser(uid: uid)
     }
     
+    // Получение объявлений в зависимости от состояния просмотра
     private func getAdvertisements() {
         Task {
             defer {
@@ -76,9 +84,7 @@ final class AdvertisementsListStore: Store<AdvertisementsListEvent, Advertisemen
                     user = try await getUser()
                     let favouriteAdvertisementsIds = user?.favouriteAdvertisementsIds
                     if let favouriteAdvertisementsIds, !favouriteAdvertisementsIds.isEmpty {
-                        advertisements = try await advertisementRepository.getFavouriteAdvertisements(
-                            ids: favouriteAdvertisementsIds
-                        )
+                        advertisements = try await advertisementRepository.getFavouriteAdvertisements(ids: favouriteAdvertisementsIds)
                     }
                 case .myAdvertisements:
                     if let uid = Auth.auth().currentUser?.uid {
@@ -92,6 +98,7 @@ final class AdvertisementsListStore: Store<AdvertisementsListEvent, Advertisemen
         }
     }
     
+    // Удаление объявления
     private func deleteAdvertisement(index: Int) {
         Task {
             defer {
@@ -116,6 +123,7 @@ final class AdvertisementsListStore: Store<AdvertisementsListEvent, Advertisemen
         }
     }
     
+    // Редактирование избранных объявлений
     private func editFavourite(id: String) {
         Task {
             defer {
@@ -129,10 +137,7 @@ final class AdvertisementsListStore: Store<AdvertisementsListEvent, Advertisemen
                     user?.favouriteAdvertisementsIds.append(id)
                 }
                 guard let user else { return }
-                try await userRepository.editFavourites(
-                    uid: user.uid,
-                    favouriteAdvertisementsIds: user.favouriteAdvertisementsIds
-                )
+                try await userRepository.editFavourites(uid: user.uid, favouriteAdvertisementsIds: user.favouriteAdvertisementsIds)
                 getAdvertisements()
             }
             catch {
@@ -141,6 +146,7 @@ final class AdvertisementsListStore: Store<AdvertisementsListEvent, Advertisemen
         }
     }
     
+    // Настройка строк для таблицы
     private func configureRows() {
         var rows: [AdvertisementsListRows] = [.title(text: viewState == .favourites ? "Избранное" : "Мои объявления")]
         if advertisements.isEmpty {

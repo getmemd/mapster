@@ -1,23 +1,28 @@
 import SnapKit
 import UIKit
 
+// Протокол делегата для представления чекбокса авторизации
 protocol AuthorizationCheckboxViewDelegate: AnyObject {
     func didTapForgotPassword(_ view: AuthorizationCheckboxView)
 }
 
+// Финальный класс для представления чекбокса авторизации
 final class AuthorizationCheckboxView: UIView {
     weak var delegate: AuthorizationCheckboxViewDelegate?
     
+    // Свойство для проверки, выбран ли чекбокс
     var isSelected: Bool {
         checkBoxButton.isSelected
     }
     
+    // Стек для размещения содержимого
     private lazy var contentStackView: UIStackView = {
         let stackView = UIStackView(arrangedSubviews: [checkBoxButton, textView, forgotPasswordLabel])
         stackView.spacing = 4
         return stackView
     }()
     
+    // Кнопка чекбокса
     private lazy var checkBoxButton: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(named: "checkbox_unchecked"), for: .normal)
@@ -26,6 +31,7 @@ final class AuthorizationCheckboxView: UIView {
         return button
     }()
     
+    // Текстовое поле с условиями использования
     private let textView: UITextView = {
         let textView = UITextView()
         textView.isUserInteractionEnabled = true
@@ -44,6 +50,7 @@ final class AuthorizationCheckboxView: UIView {
         return textView
     }()
     
+    // Метка для текста "Забыли пароль?"
     private lazy var forgotPasswordLabel: UILabel = {
         let label = UILabel()
         label.text = "Забыли пароль?"
@@ -56,36 +63,43 @@ final class AuthorizationCheckboxView: UIView {
         return label
     }()
     
+    // Инициализация представления
     init() {
         super.init(frame: .zero)
         setupViews()
         setupConstraints()
     }
     
+    // Инициализация из storyboard или xib не поддерживается
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // Конфигурация представления с моделью
     func configure(with viewModel: AuthorizationCheckoxViewModel) {
         textView.isHidden = !viewModel.isRegistration
         checkBoxButton.isHidden = !viewModel.isRegistration
         forgotPasswordLabel.isHidden = viewModel.isRegistration
     }
     
+    // Обработка нажатия на метку "Забыли пароль?"
     @objc
     private func forgotPasswordDidTap() {
         delegate?.didTapForgotPassword(self)
     }
     
+    // Обработка нажатия на кнопку чекбокса
     @objc
     private func checkBoxTapped(_ sender: UIButton) {
         sender.isSelected = !sender.isSelected
     }
     
+    // Настройка видов
     private func setupViews() {
         addSubview(contentStackView)
     }
     
+    // Настройка ограничений для видов
     private func setupConstraints() {
         contentStackView.snp.makeConstraints {
             $0.edges.equalToSuperview()

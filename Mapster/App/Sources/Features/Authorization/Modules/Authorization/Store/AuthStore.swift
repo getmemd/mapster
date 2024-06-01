@@ -1,6 +1,7 @@
 import Factory
 import Firebase
 
+// Перечисление событий аутентификации
 enum AuthEvent {
     case showAlert(title: String?, message: String?, completion: ((UIAlertAction) -> Void)? = nil)
     case loading
@@ -8,16 +9,19 @@ enum AuthEvent {
     case success
 }
 
+// Перечисление действий аутентификации
 enum AuthAction {
     case actionButtonDidTap(email: String, password: String, name: String? = nil, phoneNumber: String? = nil)
     case resetPasswordDidTap(email: String)
 }
 
+// Финальный класс для хранилища аутентификации
 final class AuthStore: Store<AuthEvent, AuthAction> {
     @Injected(\Repositories.authRepository) private var authRepository
     @Injected(\Repositories.userRepository) private var userRepository
     var isRegistration = true
     
+    // Обработка действий
     override func handleAction(_ action: AuthAction) {
         switch action {
         case let .actionButtonDidTap(email, password, name, phoneNumber):
@@ -27,6 +31,7 @@ final class AuthStore: Store<AuthEvent, AuthAction> {
         }
     }
     
+    // Метод для авторизации
     private func authorization(email: String, password: String, name: String?, phoneNumber: String?) {
         sendEvent(.loading)
         Task {
@@ -59,10 +64,12 @@ final class AuthStore: Store<AuthEvent, AuthAction> {
         }
     }
     
+    // Метод для обновления имени пользователя
     private func updateName(name: String) async throws {
         try await authRepository.updateUser(name: name)
     }
     
+    // Метод для отправки письма подтверждения email
     private func sendEmailVerifcation() async throws {
         try await authRepository.sendEmailVerification()
         sendEvent(.showAlert(title: "Подтвердите Вашу почту",
@@ -72,6 +79,7 @@ final class AuthStore: Store<AuthEvent, AuthAction> {
         }))
     }
     
+    // Метод для отправки письма сброса пароля
     private func sendPasswordReset(email: String) {
         sendEvent(.loading)
         Task {

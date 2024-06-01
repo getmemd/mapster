@@ -1,6 +1,7 @@
 import Factory
 import CoreLocation
 
+// События, отправляемые HomeStore
 enum HomeEvent {
     case advertisements(viewModels: [HomeAnnotationViewModel])
     case showError(message: String)
@@ -11,6 +12,7 @@ enum HomeEvent {
     case resetFilter
 }
 
+// Действия, которые могут быть выполнены в HomeStore
 enum HomeAction {
     case loadData
     case didTapAnnotation(index: Int)
@@ -18,11 +20,13 @@ enum HomeAction {
     case didTapFilter
 }
 
+// HomeStore для управления состоянием и действиями
 final class HomeStore: Store<HomeEvent, HomeAction> {
     @Injected(\Repositories.advertisementRepository) private var advertisementRepository
     private var advertisements: [Advertisement] = []
     private var selectedCategory: AdvertisementCategory?
     
+    // Обработка действий
     override func handleAction(_ action: HomeAction) {
         switch action {
         case .loadData:
@@ -44,6 +48,7 @@ final class HomeStore: Store<HomeEvent, HomeAction> {
         }
     }
     
+    // Получение объявлений
     private func getAdvertisements() {
         sendEvent(.loading)
         Task {
@@ -59,6 +64,7 @@ final class HomeStore: Store<HomeEvent, HomeAction> {
         }
     }
     
+    // Настройка аннотаций на карте
     private func configureAnnotations() {
         var filteredAdvertisements = advertisements
         if selectedCategory != nil {
@@ -69,4 +75,3 @@ final class HomeStore: Store<HomeEvent, HomeAction> {
         sendEvent(.advertisements(viewModels: filteredAdvertisements.compactMap { .init(advertisement: $0) }))
     }
 }
-

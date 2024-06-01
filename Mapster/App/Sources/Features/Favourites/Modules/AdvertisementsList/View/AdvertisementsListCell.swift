@@ -1,7 +1,9 @@
 import Kingfisher
 import UIKit
 
+// Ячейка для отображения объявлений
 final class AdvertisementsListCell: UITableViewCell {
+    // Фоновое представление для содержимого ячейки
     private let contentBackgroundView: UIView = {
         let view = UIView()
         view.layer.cornerRadius = 10
@@ -10,6 +12,7 @@ final class AdvertisementsListCell: UITableViewCell {
         return view
     }()
     
+    // Изображение для объявления
     private let itemImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.backgroundColor = .gray
@@ -19,6 +22,7 @@ final class AdvertisementsListCell: UITableViewCell {
         return imageView
     }()
     
+    // Заголовок объявления
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.font = Font.mulish(name: .semiBold, size: 14)
@@ -26,6 +30,7 @@ final class AdvertisementsListCell: UITableViewCell {
         return label
     }()
     
+    // Цена объявления
     private let priceLabel: UILabel = {
         let label = UILabel()
         label.font = Font.mulish(name: .bold, size: 16)
@@ -33,6 +38,7 @@ final class AdvertisementsListCell: UITableViewCell {
         return label
     }()
     
+    // Описание объявления
     private let descriptionLabel: UILabel = {
         let label = UILabel()
         label.font = Font.mulish(name: .regular, size: 12)
@@ -40,6 +46,7 @@ final class AdvertisementsListCell: UITableViewCell {
         return label
     }()
     
+    // Инициализация ячейки
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupViews()
@@ -50,6 +57,7 @@ final class AdvertisementsListCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // Настройка ячейки с моделью данных
     func configure(with cellModel: AdvertisementsListCellModel) {
         titleLabel.text = cellModel.title
         priceLabel.text = cellModel.priceFormatted
@@ -57,6 +65,7 @@ final class AdvertisementsListCell: UITableViewCell {
         itemImageView.kf.setImage(with: cellModel.imageUrl)
     }
     
+    // Настройка представлений ячейки
     private func setupViews() {
         backgroundColor = .clear
         [itemImageView, titleLabel, priceLabel, descriptionLabel].forEach {
@@ -65,6 +74,7 @@ final class AdvertisementsListCell: UITableViewCell {
         contentView.addSubview(contentBackgroundView)
     }
 
+    // Установка ограничений для представлений ячейки
     private func setupConstraints() {
         contentBackgroundView.snp.makeConstraints {
             $0.top.equalToSuperview()

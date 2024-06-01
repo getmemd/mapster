@@ -1,5 +1,6 @@
 import UIKit
 
+// Кастомная ячейка для отображения информации профиля
 final class ProfileCell: UITableViewCell {
     private let nameLabel: UILabel = {
         let label = UILabel()
@@ -15,6 +16,7 @@ final class ProfileCell: UITableViewCell {
         return label
     }()
     
+    // Инициализация ячейки с указанным стилем и идентификатором
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupViews()
@@ -25,16 +27,19 @@ final class ProfileCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // Конфигурация ячейки с данными
     func configure(name: String?, phoneNumber: String?) {
         nameLabel.text = name
         phoneNumberLabel.text = phoneNumber
     }
     
+    // Настройка представлений ячейки
     private func setupViews() {
         backgroundColor = .clear
         [nameLabel, phoneNumberLabel].forEach { contentView.addSubview($0) }
     }
     
+    // Настройка ограничений для представлений
     private func setupConstraints() {
         nameLabel.snp.makeConstraints {
             $0.top.equalToSuperview()

@@ -2,6 +2,7 @@ import Factory
 import Foundation
 import Firebase
 
+// Перечисление событий для CreateStore
 enum CreateEvent {
     case rows(rows: [CreateRows])
     case showImagePicker
@@ -13,6 +14,7 @@ enum CreateEvent {
     case loadingFinished
 }
 
+// Перечисление действий для CreateStore
 enum CreateAction {
     case viewDidLoad
     case didTapAddPhoto
@@ -24,6 +26,7 @@ enum CreateAction {
     case didPickCategory(category: AdvertisementCategory)
 }
 
+// Перечисление строк для таблицы CreateStore
 enum CreateRows {
     case title(text: String)
     case photos(data: [Data])
@@ -35,6 +38,7 @@ enum CreateRows {
     case map(geopoint: GeoPoint?)
 }
 
+// Финальный класс для хранилища CreateStore
 final class CreateStore: Store<CreateEvent, CreateAction> {
     @Injected(\Repositories.advertisementRepository) private var advertisementRepository
     @Injected(\Repositories.imageRepository) private var imageRepository
@@ -42,6 +46,7 @@ final class CreateStore: Store<CreateEvent, CreateAction> {
     
     private var data: CreateStoreDataModel = .init()
     
+    // Обработка действий
     override func handleAction(_ action: CreateAction) {
         switch action {
         case .viewDidLoad:
@@ -85,6 +90,7 @@ final class CreateStore: Store<CreateEvent, CreateAction> {
         }
     }
     
+    // Загрузка изображений
     private func uploadImages() {
         sendEvent(.loading)
         imageRepository.uploadImages(imagesData: data.photos) { [weak self] result in
@@ -100,6 +106,7 @@ final class CreateStore: Store<CreateEvent, CreateAction> {
         }
     }
     
+    // Получение пользователя
     private func getUser() {
         Task {
             defer {
@@ -118,6 +125,7 @@ final class CreateStore: Store<CreateEvent, CreateAction> {
         }
     }
     
+    // Отправка объявления
     private func sendAdvertisement(user: AppUser) async throws {
         guard let headline = data.headline,
               let reward = data.reward,
@@ -149,6 +157,7 @@ final class CreateStore: Store<CreateEvent, CreateAction> {
         configureRows()
     }
     
+    // Конфигурация таблицы
     private func configureRows() {
         let rows: [CreateRows] = [
             .title(text: "Создать объявление"),

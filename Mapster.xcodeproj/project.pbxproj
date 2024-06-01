@@ -523,8 +523,8 @@
 		C53BB3382C0544A000C09F9D /* Coordinator */ = {
 			isa = PBXGroup;
 			children = (
-				C53BB33A2C0544B700C09F9D /* FavouritesModuleFactory.swift */,
 				C53BB33C2C05458900C09F9D /* FavouritesCoordinator.swift */,
+				C53BB33A2C0544B700C09F9D /* FavouritesModuleFactory.swift */,
 			);
 			path = Coordinator;
 			sourceTree = "<group>";

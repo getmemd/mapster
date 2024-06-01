@@ -1,15 +1,18 @@
 import UIKit
 
+// Протокол делегата для навигации по объявлению
 protocol AdvertisementNavigationDelegate: AnyObject {
     
 }
 
+// Финальный класс для контроллера объявления
 final class AdvertisementViewController: BaseViewController {
     weak var navigationDelegate: AdvertisementNavigationDelegate?
     private let store: AdvertisementStore
     private var bag = Bag()
     private lazy var tableViewDataSourceImpl = AdvertisementTableViewDataSourceImpl(store: store)
     
+    // Таблица для отображения данных объявления
     private lazy var tableView: UITableView = {
         let tableView = UITableView()
         tableView.dataSource = tableViewDataSourceImpl
@@ -21,15 +24,18 @@ final class AdvertisementViewController: BaseViewController {
         return tableView
     }()
     
+    // Инициализация контроллера с хранилищем данных
     init(store: AdvertisementStore) {
         self.store = store
         super.init(nibName: nil, bundle: nil)
     }
     
+    // Инициализация из storyboard или xib не поддерживается
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // Загрузка вида
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
@@ -38,11 +44,13 @@ final class AdvertisementViewController: BaseViewController {
         store.handleAction(.viewDidLoad)
     }
     
+    // Обработка нажатия на кнопку избранного
     @objc
     private func favouriteDidTap() {
         store.sendAction(.favouriteDidTap)
     }
     
+    // Настройка правой кнопки в навигационной панели
     private func configureRightBarButton(isFavourite: Bool) {
         navigationItem.rightBarButtonItem = UIBarButtonItem(
             image: .init(systemName: isFavourite ? "heart.fill" : "heart"),
@@ -52,6 +60,7 @@ final class AdvertisementViewController: BaseViewController {
         )
     }
     
+    // Открытие координат в карте
     private func openInMap(mapType: MapType, latitude: Double, longitude: Double) {
         var link: String
         switch mapType {
@@ -64,11 +73,13 @@ final class AdvertisementViewController: BaseViewController {
         UIApplication.shared.open(url)
     }
     
+    // Звонок по номеру телефона
     private func callByPhone(phoneNumber: String) {
         guard let url = URL(string: "tel://\(phoneNumber)") else { return }
         UIApplication.shared.open(url)
     }
     
+    // Настройка наблюдателей для событий
     private func configureObservers() {
         bindStore(store) { [weak self ] event in
             guard let self else { return }
@@ -93,12 +104,14 @@ final class AdvertisementViewController: BaseViewController {
         .store(in: &bag)
     }
     
+    // Настройка видов
     private func setupViews() {
         view.addSubview(tableView)
         view.backgroundColor = .white
         configureRightBarButton(isFavourite: false)
     }
     
+    // Настройка ограничений для видов
     private func setupConstraints() {
         tableView.snp.makeConstraints {
             $0.edges.equalToSuperview()

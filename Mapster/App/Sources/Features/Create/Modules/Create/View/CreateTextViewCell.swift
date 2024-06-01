@@ -1,12 +1,15 @@
 import UIKit
 
+// Протокол делегата для ячейки текстового вида
 protocol CreateTextViewCellDelegate: AnyObject {
     func didEndEditing(_ cell: CreateTextViewCell, text: String?)
 }
 
+// Финальный класс для ячейки текстового вида
 final class CreateTextViewCell: UITableViewCell {
     weak var delegate: CreateTextViewCellDelegate?
     
+    // Метка для заголовка
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.font = Font.mulish(name: .semiBold, size: 16)
@@ -14,6 +17,7 @@ final class CreateTextViewCell: UITableViewCell {
         return label
     }()
     
+    // Текстовый вид
     private lazy var textView: UITextView = {
         let textView = UITextView()
         textView.delegate = self
@@ -26,6 +30,7 @@ final class CreateTextViewCell: UITableViewCell {
         return textView
     }()
     
+    // Метка для счетчика символов
     private let counterLabel: UILabel = {
         let label = UILabel()
         label.font = Font.mulish(name: .regular, size: 14)
@@ -33,25 +38,30 @@ final class CreateTextViewCell: UITableViewCell {
         return label
     }()
     
+    // Инициализация ячейки
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupViews()
         setupConstraints()
     }
 
+    // Инициализация из storyboard или xib не поддерживается
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // Конфигурация ячейки с текстом
     func configure(text: String?) {
         textView.text = text
     }
     
+    // Настройка видов
     private func setupViews() {
         backgroundColor = .clear
         [titleLabel, textView, counterLabel].forEach { contentView.addSubview($0) }
     }
     
+    // Настройка ограничений для видов
     private func setupConstraints() {
         titleLabel.snp.makeConstraints {
             $0.top.equalToSuperview()
@@ -69,7 +79,11 @@ final class CreateTextViewCell: UITableViewCell {
     }
 }
 
+// MARK: - UITextViewDelegate
+
+// Расширение для обработки делегата текстового вида
 extension CreateTextViewCell: UITextViewDelegate {
+    // Обработка изменения текста
     func textViewDidChange(_ textView: UITextView) {
         if textView.textColor == UIColor.lightGray {
             counterLabel.text = "0/9000"
@@ -79,10 +93,12 @@ extension CreateTextViewCell: UITextViewDelegate {
         }
     }
     
+    // Проверка возможности начала редактирования
     func textViewShouldBeginEditing(_ textView: UITextView) -> Bool {
-        textView.text.count < 9000
+        return textView.text.count < 9000
     }
     
+    // Обработка завершения редактирования
     func textViewDidEndEditing(_ textView: UITextView) {
         if textView.text.isEmpty {
             textView.text = "Расскажите о продукте..."
@@ -91,6 +107,7 @@ extension CreateTextViewCell: UITextViewDelegate {
         delegate?.didEndEditing(self, text: textView.text)
     }
     
+    // Обработка начала редактирования
     func textViewDidBeginEditing(_ textView: UITextView) {
         if textView.textColor == UIColor.lightGray {
             textView.text = nil

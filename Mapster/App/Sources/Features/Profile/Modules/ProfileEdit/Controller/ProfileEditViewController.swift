@@ -1,14 +1,17 @@
 import UIKit
 
+// Протокол делегата для навигации в ProfileEditViewController
 protocol ProfileEditNavigationDelegate: AnyObject {
     func didFinish(_ viewController: ProfileEditViewController)
 }
 
+// Контроллер для редактирования профиля пользователя
 final class ProfileEditViewController: BaseViewController {
     weak var navigationDelegate: ProfileEditNavigationDelegate?
     private lazy var store = ProfileEditStore()
     private var bag = Bag()
     
+    // Стек для размещения заголовка и текстовых полей
     private lazy var contentStackView: UIStackView = {
         let stackView = UIStackView(arrangedSubviews: [titleLabel, nameTextField, phoneNumberTextField])
         stackView.axis = .vertical
@@ -16,6 +19,7 @@ final class ProfileEditViewController: BaseViewController {
         return stackView
     }()
     
+    // Заголовок экрана
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.text = "Редактировать профиль"
@@ -24,6 +28,7 @@ final class ProfileEditViewController: BaseViewController {
         return label
     }()
     
+    // Текстовое поле для имени
     private lazy var nameTextField: UITextField = {
         let textField = UITextField()
         textField.delegate = self
@@ -35,6 +40,7 @@ final class ProfileEditViewController: BaseViewController {
         return textField
     }()
     
+    // Текстовое поле для номера телефона
     private lazy var phoneNumberTextField: UITextField = {
         let textField = UITextField()
         textField.delegate = self
@@ -47,6 +53,7 @@ final class ProfileEditViewController: BaseViewController {
         return textField
     }()
     
+    // Кнопка для подтверждения изменений
     private lazy var actionButton: ActionButton = {
         let button = ActionButton()
         button.addTarget(self, action: #selector(actionButtonDidTap), for: .touchUpInside)
@@ -54,6 +61,7 @@ final class ProfileEditViewController: BaseViewController {
         return button
     }()
     
+    // Настройка представлений после загрузки
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
@@ -61,19 +69,21 @@ final class ProfileEditViewController: BaseViewController {
         configureObservers()
     }
     
+    // Обработка нажатия на кнопку подтверждения
     @objc
     private func actionButtonDidTap() {
         guard phoneNumberTextField.text?.isEmpty == true ||
                 (!(phoneNumberTextField.text?.isEmpty ?? true) &&
-                 ValidatationService.checkPhoneNumberValidity(phoneNumber: phoneNumberTextField.text)) else {
+                 ValidationService.checkPhoneNumberValidity(phoneNumber: phoneNumberTextField.text)) else {
             showAlert(message: "Введите правильный номер")
             return
         }
         store.handleAction(.actionButtonDidTap(name: nameTextField.text, phoneNumber: phoneNumberTextField.text))
     }
     
+    // Настройка наблюдателей для обработки событий из store
     private func configureObservers() {
-        bindStore(store) { [weak self ] event in
+        bindStore(store) { [weak self] event in
             guard let self else { return }
             switch event {
             case let .showError(message):
@@ -89,11 +99,13 @@ final class ProfileEditViewController: BaseViewController {
         .store(in: &bag)
     }
     
+    // Настройка всех представлений
     private func setupViews() {
         [contentStackView, actionButton].forEach { view.addSubview($0) }
         view.backgroundColor = .white
     }
     
+    // Настройка ограничений для представлений
     private func setupConstraints() {
         contentStackView.snp.makeConstraints {
             $0.top.leading.trailing.equalTo(view.safeAreaLayoutGuide).inset(24)
@@ -113,7 +125,10 @@ final class ProfileEditViewController: BaseViewController {
 
 // MARK: - UITextFieldDelegate
 
+// Расширение для обработки событий UITextFieldDelegate
 extension ProfileEditViewController: UITextFieldDelegate {
+    
+    // Форматирование номера телефона
     func formattedNumber(number: String) -> String {
         let cleanPhoneNumber = number.components(separatedBy: CharacterSet.decimalDigits.inverted).joined()
         let mask = "+# (###) ### ####"
@@ -130,9 +145,10 @@ extension ProfileEditViewController: UITextFieldDelegate {
         return result
     }
     
+    // Обработка изменения текста в текстовом поле
     func textField(_ textField: UITextField,
                    shouldChangeCharactersIn range: NSRange,
-                   replacementString string:  String) -> Bool {
+                   replacementString string: String) -> Bool {
         guard textField == phoneNumberTextField else { return true }
         guard let text = textField.text else { return false }
         let newString = (text as NSString).replacingCharacters(in: range, with: string)

@@ -1,17 +1,21 @@
 import UIKit
 
+// Протокол делегата для навигации в InfoViewController
 protocol InfoNavigationDelegate: AnyObject {
     func didTapClose(_ viewController: InfoViewController)
 }
 
+// Контроллер для отображения информации о политике конфиденциальности
 final class InfoViewController: BaseViewController {
     weak var navigationDelegate: InfoNavigationDelegate?
     
+    // Прокручиваемое представление для размещения контента
     private lazy var scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         return scrollView
     }()
     
+    // Кнопка закрытия экрана
     private lazy var closeButton: UIButton = {
         let button = UIButton()
         button.setImage(.init(systemName: "xmark"), for: .normal)
@@ -19,6 +23,7 @@ final class InfoViewController: BaseViewController {
         return button
     }()
     
+    // Заголовок экрана
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.font = Font.mulish(name: .bold, size: 18)
@@ -27,6 +32,7 @@ final class InfoViewController: BaseViewController {
         return label
     }()
     
+    // Текстовое поле для отображения содержания политики конфиденциальности
     private let textView: UITextView = {
         let textView = UITextView()
         textView.isEditable = false
@@ -84,23 +90,27 @@ final class InfoViewController: BaseViewController {
         return textView
     }()
     
+    // Настройка представлений после загрузки
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
         setupConstraints()
     }
     
+    // Обработка нажатия на кнопку закрытия
     @objc
     private func didTapClose() {
         navigationDelegate?.didTapClose(self)
     }
     
+    // Настройка всех представлений
     private func setupViews() {
         view.backgroundColor = .white
         view.addSubview(scrollView)
         [closeButton, titleLabel, textView].forEach { scrollView.addSubview($0) }
     }
     
+    // Настройка ограничений для представлений
     private func setupConstraints() {
         scrollView.snp.makeConstraints {
             $0.edges.equalToSuperview().inset(24)

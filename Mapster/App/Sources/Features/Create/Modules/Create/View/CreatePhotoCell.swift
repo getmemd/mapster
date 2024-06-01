@@ -1,13 +1,16 @@
 import UIKit
 
+// Протокол делегата для ячейки фото
 protocol CreatePhotoCellDelegate: AnyObject {
     func didTapAddPhoto(_ cell: CreatePhotoCell)
     func didDeleteImage(_ cell: CreatePhotoCell, index: Int)
 }
 
+// Финальный класс для ячейки фото
 final class CreatePhotoCell: UITableViewCell {
     weak var delegate: CreatePhotoCellDelegate?
     
+    // Метка для заголовка
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.font = Font.mulish(name: .semiBold, size: 16)
@@ -15,6 +18,7 @@ final class CreatePhotoCell: UITableViewCell {
         return label
     }()
     
+    // Скролл-вью для отображения фото
     private let scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.showsHorizontalScrollIndicator = false
@@ -22,6 +26,7 @@ final class CreatePhotoCell: UITableViewCell {
         return scrollView
     }()
     
+    // Стек для размещения фото
     private lazy var photoStackView: UIStackView = {
         let stack = UIStackView()
         stack.spacing = 20
@@ -29,16 +34,19 @@ final class CreatePhotoCell: UITableViewCell {
         return stack
     }()
     
+    // Инициализация ячейки
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupViews()
         setupConstraints()
     }
 
+    // Инициализация из storyboard или xib не поддерживается
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // Конфигурация ячейки с изображениями
     func configure(images: [Data]) {
         photoStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
         configureEmptyView()
@@ -53,11 +61,13 @@ final class CreatePhotoCell: UITableViewCell {
         }
     }
     
+    // Обработка нажатия на добавление фото
     @objc
     private func didTapAddPhoto() {
         delegate?.didTapAddPhoto(self)
     }
     
+    // Конфигурация пустого представления для добавления фото
     private func configureEmptyView() {
         let emptyView = CreatePhotoEmptyView()
         emptyView.isUserInteractionEnabled = true
@@ -66,12 +76,14 @@ final class CreatePhotoCell: UITableViewCell {
         photoStackView.addArrangedSubview(emptyView)
     }
     
+    // Настройка видов
     private func setupViews() {
         backgroundColor = .clear
         [titleLabel, scrollView].forEach { contentView.addSubview($0) }
         scrollView.addSubview(photoStackView)
     }
     
+    // Настройка ограничений для видов
     private func setupConstraints() {
         titleLabel.snp.makeConstraints {
             $0.top.equalToSuperview()
@@ -91,6 +103,7 @@ final class CreatePhotoCell: UITableViewCell {
 
 // MARK: - CreatePhotoViewDelegate
 
+// Расширение для обработки делегата представления фото
 extension CreatePhotoCell: CreatePhotoViewDelegate {
     func didTapDelete(_ view: CreatePhotoView) {
         delegate?.didDeleteImage(self, index: view.tag)

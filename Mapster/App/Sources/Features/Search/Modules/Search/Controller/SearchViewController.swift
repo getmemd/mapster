@@ -1,10 +1,12 @@
 import UIKit
 
+// Протокол делегата для навигации в SearchViewController
 protocol SearchNavigationDelegate: AnyObject {
     func didTapCategory(_ viewController: SearchViewController, category: AdvertisementCategory)
     func didTapAdvertisement(_ viewController: SearchViewController, advertisement: Advertisement)
 }
 
+// Контроллер для управления поисковым процессом
 final class SearchViewController: BaseViewController {
     weak var navigationDelegate: SearchNavigationDelegate?
     private let store: SearchStore
@@ -12,6 +14,7 @@ final class SearchViewController: BaseViewController {
     private lazy var tableViewDataSourceImpl = SearchTableViewDataSourceImpl(store: store)
     private lazy var tableViewDelegateImpl = SearchTableViewDelegateImpl(store: store)
     
+    // Настройка строки поиска
     private lazy var searchBar: UISearchBar = {
         let searchBar = UISearchBar()
         searchBar.delegate = self
@@ -20,6 +23,7 @@ final class SearchViewController: BaseViewController {
         return searchBar
     }()
     
+    // Настройка таблицы для отображения результатов поиска
     private lazy var tableView: UITableView = {
         let tableView = UITableView()
         tableView.dataSource = tableViewDataSourceImpl
@@ -32,6 +36,7 @@ final class SearchViewController: BaseViewController {
         return tableView
     }()
     
+    // Инициализация контроллера с хранилищем данных поиска
     init(store: SearchStore) {
         self.store = store
         super.init(nibName: nil, bundle: nil)
@@ -41,6 +46,7 @@ final class SearchViewController: BaseViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // Настройка представлений после загрузки
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
@@ -49,8 +55,9 @@ final class SearchViewController: BaseViewController {
         store.handleAction(.viewDidLoad)
     }
     
+    // Настройка наблюдателей для обработки событий из store
     private func configureObservers() {
-        bindStore(store) { [weak self ] event in
+        bindStore(store) { [weak self] event in
             guard let self else { return }
             switch event {
             case let .rows(rows):
@@ -72,11 +79,13 @@ final class SearchViewController: BaseViewController {
         .store(in: &bag)
     }
     
+    // Настройка всех представлений
     private func setupViews() {
         [searchBar, tableView].forEach { view.addSubview($0) }
         view.backgroundColor = .white
     }
     
+    // Настройка ограничений для представлений
     private func setupConstraints() {
         searchBar.snp.makeConstraints {
             $0.top.equalTo(view.safeAreaLayoutGuide)
@@ -91,6 +100,7 @@ final class SearchViewController: BaseViewController {
 
 // MARK: - UISearchBarDelegate
 
+// Расширение для обработки событий UISearchBarDelegate
 extension SearchViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         store.handleAction(.didStartSearch(searchText: searchText))

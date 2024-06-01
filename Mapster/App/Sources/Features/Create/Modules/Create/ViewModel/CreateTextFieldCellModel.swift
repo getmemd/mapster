@@ -1,6 +1,8 @@
 import UIKit
 
+// Структура модели ячейки текстового поля
 struct CreateTextFieldCellModel {
+    // Заголовок в зависимости от типа строки
     var title: String? {
         switch rowType {
         case .headline:
@@ -16,6 +18,7 @@ struct CreateTextFieldCellModel {
         }
     }
     
+    // Заполнитель (placeholder) в зависимости от типа строки
     var placeholder: String? {
         switch rowType {
         case .headline:
@@ -29,6 +32,7 @@ struct CreateTextFieldCellModel {
         }
     }
     
+    // Тип клавиатуры в зависимости от типа строки
     var keyboardType: UIKeyboardType {
         switch rowType {
         case .reward:

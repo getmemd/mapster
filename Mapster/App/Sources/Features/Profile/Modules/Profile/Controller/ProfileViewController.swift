@@ -1,10 +1,12 @@
 import UIKit
 
+// Протокол делегата для навигации в ProfileViewController
 protocol ProfileNavigationDelegate: AnyObject {
     func didTapRow(_ viewController: ProfileViewController, row: ProfileRows)
     func didSignOut(_ viewController: ProfileViewController)
 }
 
+// Контроллер для отображения профиля пользователя
 final class ProfileViewController: BaseViewController {
     weak var navigationDelegate: ProfileNavigationDelegate?
     private lazy var store = ProfileStore()
@@ -12,6 +14,7 @@ final class ProfileViewController: BaseViewController {
     private lazy var tableViewDataSourceImpl = ProfileTableViewDataSourceImpl(store: store)
     private lazy var tableViewDelegateImpl = ProfileTableViewDelegateImpl(store: store)
 
+    // Настройка таблицы для отображения данных профиля
     private lazy var tableView: UITableView = {
         let tableView = UITableView()
         tableView.dataSource = tableViewDataSourceImpl
@@ -23,6 +26,7 @@ final class ProfileViewController: BaseViewController {
         return tableView
     }()
     
+    // Настройка представлений после загрузки
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
@@ -31,12 +35,14 @@ final class ProfileViewController: BaseViewController {
         store.handleAction(.loadData)
     }
     
+    // Обновление данных
     func refreshData() {
         store.handleAction(.loadData)
     }
     
+    // Настройка наблюдателей для обработки событий из store
     private func configureObservers() {
-        bindStore(store) { [weak self ] event in
+        bindStore(store) { [weak self] event in
             guard let self else { return }
             switch event {
             case .loading:
@@ -58,11 +64,13 @@ final class ProfileViewController: BaseViewController {
         .store(in: &bag)
     }
     
+    // Настройка всех представлений
     private func setupViews() {
         view.addSubview(tableView)
         view.backgroundColor = .white
     }
     
+    // Настройка ограничений для представлений
     private func setupConstraints() {
         tableView.snp.makeConstraints {
             $0.edges.equalTo(view.safeAreaLayoutGuide)

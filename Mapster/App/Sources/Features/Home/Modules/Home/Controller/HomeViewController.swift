@@ -3,15 +3,18 @@ import MapKit
 import SnapKit
 import UIKit
 
+// Протокол делегата для обработки событий навигации из HomeViewController
 protocol HomeNavigationDelegate: AnyObject {
     func didTapAdvertisement(_ viewController: HomeViewController, advertisement: Advertisement)
 }
 
+// Главный контроллер для отображения карты с объявлениями
 final class HomeViewController: BaseViewController {
     weak var navigationDelegate: HomeNavigationDelegate?
     private lazy var store = HomeStore()
     private var bag = Bag()
     
+    // Инициализация карты
     private lazy var mapView: MKMapView = {
         let mapView = MKMapView()
         mapView.delegate = self
@@ -22,6 +25,7 @@ final class HomeViewController: BaseViewController {
         return mapView
     }()
     
+    // Инициализация фона для кнопки обновления
     private let refreshBackgroundView: UIView = {
         let view = UIView()
         view.layer.cornerRadius = 10
@@ -29,6 +33,7 @@ final class HomeViewController: BaseViewController {
         return view
     }()
     
+    // Инициализация кнопки обновления
     private lazy var refreshImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = .init(systemName: "arrow.clockwise")
@@ -39,6 +44,7 @@ final class HomeViewController: BaseViewController {
         return imageView
     }()
     
+    // Инициализация фона для кнопки фильтрации
     private let filterBackgroundView: UIView = {
         let view = UIView()
         view.layer.cornerRadius = 10
@@ -46,6 +52,7 @@ final class HomeViewController: BaseViewController {
         return view
     }()
     
+    // Инициализация кнопки фильтрации
     private lazy var filterImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = .init(systemName: "slider.horizontal.3")
@@ -56,12 +63,14 @@ final class HomeViewController: BaseViewController {
         return imageView
     }()
     
+    // Инициализация пустого текстового поля для отображения pickerView
     private lazy var dummyTextField: UITextField = {
         let textField = UITextField()
         textField.inputView = pickerView
         return textField
     }()
     
+    // Инициализация pickerView для выбора категории
     private lazy var pickerView: UIPickerView = {
         let pickerView = UIPickerView()
         pickerView.dataSource = self
@@ -90,6 +99,7 @@ final class HomeViewController: BaseViewController {
         store.handleAction(.didTapFilter)
     }
     
+    // Установка аннотаций на карте
     private func setAnnotations(viewModels: [HomeAnnotationViewModel]) {
         mapView.removeAnnotations(mapView.annotations)
         let annotations = viewModels.enumerated().map { index, viewModel -> HomePointAnnotation in
@@ -104,6 +114,7 @@ final class HomeViewController: BaseViewController {
         mapView.addAnnotations(annotations)
     }
     
+    // Центрирование карты на определенной локации
     private func centerToLocation(_ location: CLLocation,
                                   regionRadius: CLLocationDistance = 1000) {
         let coordinateRegion = MKCoordinateRegion(
@@ -113,6 +124,7 @@ final class HomeViewController: BaseViewController {
         mapView.setRegion(coordinateRegion, animated: true)
     }
     
+    // Отображение алерта при отказе в разрешении на доступ к геолокации
     private func presentPermissionDeniedAlert() {
         let alert = UIAlertController(
             title: "Для корректного отображения местоположения требуется:",
@@ -129,8 +141,9 @@ final class HomeViewController: BaseViewController {
         present(alert, animated: true)
     }
     
+    // Настройка наблюдателей для обработки событий из store
     private func configureObservers() {
-        bindStore(store) { [weak self ] event in
+        bindStore(store) { [weak self] event in
             guard let self else { return }
             switch event {
             case let .advertisements(viewModels):
@@ -153,6 +166,7 @@ final class HomeViewController: BaseViewController {
         .store(in: &bag)
     }
     
+    // Настройка вьюх
     private func setupViews() {
         tabBarController?.selectedIndex = 0
         view.addSubview(mapView)
@@ -166,6 +180,7 @@ final class HomeViewController: BaseViewController {
         centerToLocation(location)
     }
     
+    // Настройка ограничений для вьюх
     private func setupConstraints() {
         mapView.snp.makeConstraints {
             $0.edges.equalToSuperview()
@@ -190,8 +205,7 @@ final class HomeViewController: BaseViewController {
     }
 }
 
-// MARK: - Updatable
-
+// Реализация обновления данных
 extension HomeViewController: Updatable {
     @objc
     func refreshData() {
@@ -199,8 +213,7 @@ extension HomeViewController: Updatable {
     }
 }
 
-// MARK: - MKMapViewDelegate
-
+// Делегат для обработки событий карты
 extension HomeViewController: MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         guard !(annotation is MKUserLocation) else { return nil }
@@ -215,8 +228,7 @@ extension HomeViewController: MKMapViewDelegate {
     }
 }
 
-// MARK: - HomeAnnotationViewDelegate
-
+// Делегат для обработки нажатия на аннотацию
 extension HomeViewController: HomeAnnotationViewDelegate {
     func didTapCalloutButton(_ view: HomeAnnotationView) {
         guard let tag = (view.annotation as? HomePointAnnotation)?.tag else { return }
@@ -224,8 +236,7 @@ extension HomeViewController: HomeAnnotationViewDelegate {
     }
 }
 
-// MARK: - UIPickerView DataSource and Delegate
-
+// Источник данных и делегат для pickerView
 extension HomeViewController: UIPickerViewDataSource, UIPickerViewDelegate {
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1

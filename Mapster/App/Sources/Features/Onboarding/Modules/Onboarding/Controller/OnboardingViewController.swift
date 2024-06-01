@@ -1,9 +1,11 @@
 import UIKit
 
+// Протокол делегата для навигации в OnboardingViewController
 protocol OnboardingNavigationDelegate: AnyObject {
     func didFinishOnboarding(_ viewController: OnboardingViewController)
 }
 
+// Контроллер для отображения процесса онбординга
 final class OnboardingViewController: UIViewController {
     enum Constants {
         static let numberOfPages = 3
@@ -11,6 +13,7 @@ final class OnboardingViewController: UIViewController {
     
     weak var navigationDelegate: OnboardingNavigationDelegate?
     
+    // Настройка прокручиваемого представления для страниц онбординга
     private lazy var scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.delegate = self
@@ -19,12 +22,14 @@ final class OnboardingViewController: UIViewController {
         return scrollView
     }()
     
+    // Стек для размещения страниц онбординга
     private var contentStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.distribution = .fillEqually
         return stackView
     }()
     
+    // Контроллер страниц для отображения текущей страницы
     private let pageControl: UIPageControl = {
         let pageControl = UIPageControl()
         pageControl.isUserInteractionEnabled = false
@@ -34,6 +39,7 @@ final class OnboardingViewController: UIViewController {
         return pageControl
     }()
     
+    // Кнопка для перехода на следующую страницу
     private lazy var nextButtonImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = .init(named: "next_button")
@@ -43,12 +49,14 @@ final class OnboardingViewController: UIViewController {
         return imageView
     }()
     
+    // Настройка представлений после загрузки
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
         setupConstraints()
     }
     
+    // Обработка нажатия на кнопку перехода на следующую страницу
     @objc
     private func didTapNextButton() {
         guard Constants.numberOfPages > pageControl.currentPage + 1 else {
@@ -61,6 +69,7 @@ final class OnboardingViewController: UIViewController {
         scrollView.scrollRectToVisible(targetRect, animated: true)
     }
     
+    // Настройка всех представлений
     private func setupViews() {
         [scrollView, pageControl, nextButtonImageView].forEach { view.addSubview($0) }
         scrollView.addSubview(contentStackView)
@@ -72,6 +81,7 @@ final class OnboardingViewController: UIViewController {
         }
     }
     
+    // Настройка ограничений для представлений
     private func setupConstraints() {
         scrollView.snp.makeConstraints {
             $0.leading.trailing.equalToSuperview()
@@ -93,9 +103,9 @@ final class OnboardingViewController: UIViewController {
     }
 }
 
-
 // MARK: - UIScrollViewDelegate
 
+// Расширение для обработки прокрутки UIScrollView
 extension OnboardingViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let pageIndex = round(scrollView.contentOffset.x / view.frame.width)

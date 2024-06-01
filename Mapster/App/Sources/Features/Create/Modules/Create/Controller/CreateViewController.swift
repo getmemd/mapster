@@ -1,17 +1,20 @@
 import CoreLocation
 import UIKit
 
+// Протокол делегата для навигации создания
 protocol CreateNavigationDelegate: AnyObject {
     func didTapMap(_ viewController: CreateViewController)
     func didCreateAdvertisement(_ viewController: CreateViewController)
 }
 
+// Финальный класс для контроллера создания
 final class CreateViewController: BaseViewController {
     weak var navigationDelegate: CreateNavigationDelegate?
     private lazy var store = CreateStore()
     private var bag = Bag()
     private lazy var tableViewDataSourceImpl = CreateTableViewDataSourceImpl(store: store)
     
+    // Таблица для отображения содержимого
     private lazy var tableView: UITableView = {
         let tableView = UITableView()
         tableView.dataSource = tableViewDataSourceImpl
@@ -28,6 +31,7 @@ final class CreateViewController: BaseViewController {
         return tableView
     }()
     
+    // Метод viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
@@ -36,10 +40,12 @@ final class CreateViewController: BaseViewController {
         store.handleAction(.viewDidLoad)
     }
     
+    // Обработка выбранного местоположения
     func didPickedLocation(latitude: Double, longitude: Double) {
         store.handleAction(.didPickLocation(latitude: latitude, longitude: longitude))
     }
     
+    // Настройка наблюдателей
     private func configureObservers() {
         bindStore(store) { [weak self ] event in
             guard let self else { return }
@@ -66,6 +72,7 @@ final class CreateViewController: BaseViewController {
         .store(in: &bag)
     }
     
+    // Показ выбора изображения
     private func showImagePicker() {
         let imagePicker = UIImagePickerController()
         imagePicker.delegate = self
@@ -73,11 +80,13 @@ final class CreateViewController: BaseViewController {
         present(imagePicker, animated: true)
     }
     
+    // Настройка видов
     private func setupViews() {
         view.addSubview(tableView)
         tableViewDataSourceImpl.tableView = tableView
     }
     
+    // Настройка ограничений для видов
     private func setupConstraints() {
         tableView.snp.makeConstraints {
             $0.edges.equalToSuperview()
@@ -87,6 +96,7 @@ final class CreateViewController: BaseViewController {
 
 // MARK: - UIImagePickerControllerDelegate
 
+// Расширение для обработки выбора изображений
 extension CreateViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController,
                                didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
