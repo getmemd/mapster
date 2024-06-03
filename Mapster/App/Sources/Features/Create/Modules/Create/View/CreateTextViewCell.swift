@@ -17,7 +17,7 @@ final class CreateTextViewCell: UITableViewCell {
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.font = Font.mulish(name: .semiBold, size: 16)
-        label.text = "Описание*"
+        label.text = "Описание"
         return label
     }()
     
