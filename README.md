@@ -11,6 +11,17 @@ Welcome to **Mapster** – an innovative platform that allows users to register 
 - **Categorized Listings**: Filter ads by categories to find relevant listings quickly.
 - **Detailed Ad Information**: Each ad includes a title, category, photos, price, description, address, and map pointer for complete information.
 
+## Screenshots
+
+<p align="center">
+   <img src="Screenshots/Screenshot1.png" alt="Screenshot 1" width="300"/>
+   <img src="Screenshots/Screenshot2.png" alt="Screenshot 2" width="300"/>
+   <img src="Screenshots/Screenshot3.png" alt="Screenshot 3" width="300"/>
+   <img src="Screenshots/Screenshot4.png" alt="Screenshot 4" width="300"/>
+   <img src="Screenshots/Screenshot5.png" alt="Screenshot 5" width="300"/>
+   <img src="Screenshots/Screenshot6.png" alt="Screenshot 6" width="300"/>
+</p>
+
 ## Installation
 
 To get started with Mapster, follow these steps:
@@ -30,4 +41,4 @@ To get started with Mapster, follow these steps:
 
 ## Contact
 
-For any questions or feedback, please open an issue on GitHub or contact me at a.medeuyev@icloud.com.
+For any questions or feedback, please open an issue on GitHub or contact me at [a.medeuyev@icloud.com](mailto:a.medeuyev@icloud.com).
